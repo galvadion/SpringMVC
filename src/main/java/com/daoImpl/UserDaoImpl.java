@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public Users getUserByName(String username) {
-		return (Users) session.getCurrentSession().createQuery("from users where username="+username).uniqueResult();
+		return (Users) session.getCurrentSession().createQuery("from Users where username="+username).uniqueResult();
 	}
 	
 }

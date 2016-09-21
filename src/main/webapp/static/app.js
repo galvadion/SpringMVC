@@ -3,7 +3,7 @@
 
 
     /***App Module Definition***/
-
+    console.log("piwi puto");
     angular
         .module('app', ['ngRoute', 'ngCookies','jkuri.datepicker','angularFileUpload','angular-confirm','ui.bootstrap','ngDialog','ngAnimate'/*,'simpleGrid','googlechart','datatables','datatables.buttons'*/])
         .config(config)
@@ -39,7 +39,7 @@
 
             .when('/login', {
                 controller: 'LoginController',
-                templateUrl: 'pages/login/login.html',
+                templateUrl: 'login/login',
                 title: 'Demo - Login',
                 controllerAs: 'vm'
             })

@@ -18,9 +18,10 @@
 
         function Login(username, password, callback) {
 
-            var data = {email: username , password:password};
-            $http.post('/login/login', data)
+            var data = {username: username , password:password};
+            $http.post('login/login', data)
                 .success(function (response) {
+                	console.log(response);
                 callback(response);
             });
             

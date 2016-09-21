@@ -20,9 +20,15 @@ public class UserController {
 	@Autowired
 	UserServices userServices;
 	
-	@RequestMapping(value="/page",method =RequestMethod.GET)
+	@RequestMapping(value="/login",method =RequestMethod.GET)
 	public ModelAndView getPage(){
-		ModelAndView view=new ModelAndView("hello");
+		ModelAndView view=new ModelAndView("login/login");
+		return view;
+	}
+	
+	@RequestMapping(value="/page",method =RequestMethod.GET)
+	public ModelAndView getPageUser(){
+		ModelAndView view=new ModelAndView("login");
 		return view;
 	}
 	

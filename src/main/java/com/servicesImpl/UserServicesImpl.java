@@ -31,9 +31,13 @@ public class UserServicesImpl implements UserServices{
 	}
 
 	public boolean validateLogin(String username, String password) {
+		try{
 		Users user=userDao.getUserByName(username);
 		if(user.getPassword().equals(password)) return true;
 		return false;
+		}catch(NullPointerException e){
+			return false;
+		}
 	}
 	
 }
