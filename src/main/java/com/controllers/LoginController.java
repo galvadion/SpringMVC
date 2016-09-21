@@ -1,5 +1,7 @@
 package com.controllers;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.services.UserServices;
+
 
 @Controller
 @RequestMapping(value="login")
@@ -28,27 +32,32 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<String> logInUser(){
-		String username= Request.getParameter("username");
-		boolean log= userService.validateLogin(username(), password());
+	public ResponseEntity<LogInResonseBody> logInUser(@RequestBody LogInRequestBody user,    UriComponentsBuilder ucBuilder){
+		boolean log= userService.validateLogin(user.getUsername(), user.getPassword());
+		LogInResonseBody response = new LogInResonseBody();
 		if(log){
-			return new ResponseEntity<String>(HttpStatus.ACCEPTED);
+			
+			response.setIs_logged_in(true);
+			return new ResponseEntity<LogInResonseBody>(response,HttpStatus.OK);
 		}else{
-			return new ResponseEntity<String>(HttpStatus.CONFLICT);
+			response.setIs_logged_in(false);
+			return new ResponseEntity<LogInResonseBody>(response,HttpStatus.CONFLICT);
 		}
 	}
 	
-/*	public class LogInResponseBody{
+	public static class LogInRequestBody implements Serializable{
 		private String username;
 		private String password;
 		
-		public LogInResponseBody(String username, String password) {
+		public LogInRequestBody(String username, String password) {
 			super();
 			this.username = username;
 			this.password = password;
 		}
 
-		public LogInResponseBody(){};
+		public LogInRequestBody(){
+			
+		};
 		
 		public String getUsername() {
 			return username;
@@ -62,8 +71,19 @@ public class LoginController {
 		public void setPassword(String password) {
 			this.password = password;
 		}
+	}
+	
+	public static class LogInResonseBody{
+		Boolean is_logged_in;
+
+		public Boolean getIs_logged_in() {
+			return is_logged_in;
+		}
+
+		public void setIs_logged_in(Boolean is_logged_in) {
+			this.is_logged_in = is_logged_in;
+		}
 		
-		
-		
-	}*/
+		public LogInResonseBody(){};
+	}
 }

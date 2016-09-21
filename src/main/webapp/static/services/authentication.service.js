@@ -21,7 +21,7 @@
             var data = {username: username , password:password};
             $http.post('login/login', data)
                 .success(function (response) {
-                	console.log(response);
+                	console.log(response+"Llego el response, pero esta nulo");
                 callback(response);
             });
             

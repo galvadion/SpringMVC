@@ -24,7 +24,7 @@
             vm.dataLoading = true;
             NProgress.start();
             AuthenticationService.Login(vm.emailAddress, vm.password, function (response) {
-            	console.log(response);
+            	console.log(response +"aca tmb llego");
                 if (response.is_logged_in) {
                     AuthenticationService.SetCredentials(vm.emailAddress, vm.password ,response.id,response.rol[0].role_id,response.avatarURL);
                     NProgress.done();
