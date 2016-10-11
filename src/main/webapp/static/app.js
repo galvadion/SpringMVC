@@ -26,7 +26,20 @@
         $routeProvider
             .when('/home', {
                 controller: 'HomeController',
-                templateUrl: 'pages/home/home.view.html',
+                templateUrl: 'home/home',
+                title: 'Demo - Dashboard',
+                /*resolve:{
+                    'AllAdvertiserData':
+                        ['$http', function($http) { return $http.get('/adv/adv'); }],
+                    'EmptyData':
+                        ['$http', function($http) { return ''; }],
+                },*/
+                controllerAs: 'vm'            
+             })
+             
+             .when('/', {
+                controller: 'HomeController',
+                templateUrl: 'home/home',
                 title: 'Demo - Dashboard',
                 /*resolve:{
                     'AllAdvertiserData':
@@ -46,34 +59,34 @@
 
             .when('/register', {
                 controller: 'RegisterController',
-                templateUrl: 'pages/register/register.html',
+                templateUrl: 'login/register',
                 title: 'Demo - Register',
                 controllerAs: 'vm'
             })
 
             .when('/forgot', {
                 controller: 'ForgotController',
-                templateUrl: 'pages/forgot/forgot.html',
+                templateUrl: 'login/forgot',
                 title: 'Demo - Forgot Password',
                 controllerAs: 'vm'
             })
 
             .when('/user', {
                 controller: 'UserController',
-                templateUrl: 'pages/user/user.html',
+                templateUrl: 'user/user',
                 title: 'Demo - Profile',
                 controllerAs: 'vm'
             })
 
             .when('/profile/:userId', {
                 controller: 'UserController',
-                templateUrl: 'pages/user/user.html',
+                templateUrl: 'user/user',
                 title: 'Demo - Profile',
                 controllerAs: 'vm'
             })
 
             .when('/terms', {
-                templateUrl: 'pages/terms/terms.html',
+                templateUrl: 'login/terms',
                 title: 'Demo - Terms & Conditions'
             })
 
@@ -100,7 +113,7 @@
             var restrictedPage = $location.path();
             var loggedIn = $rootScope.globals.currentUser;
             if(restrictedPage.indexOf('/login') == -1 && restrictedPage.indexOf('/register') == -1 && restrictedPage.indexOf('/forgot') == -1 && restrictedPage.indexOf('/terms') == -1 && !loggedIn) {
-                $location.path('/login');
+                //$location.path('/login');
             }
         });
 

@@ -5,13 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
-@RequestMapping(value="user")
-public class UserController {
+@RequestMapping(value="home")
+public class HomeController {
 	
-	@RequestMapping(value="/user",method =RequestMethod.GET)
+	@RequestMapping(value="/home",method =RequestMethod.GET)
 	public ModelAndView getPage(){
-		ModelAndView view=new ModelAndView("user/user");
+		ModelAndView view=new ModelAndView("home/home");
 		return view;
 	}
 }
