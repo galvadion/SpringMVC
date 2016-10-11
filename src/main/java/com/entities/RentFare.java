@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class rentFare {
+public class RentFare {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

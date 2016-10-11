@@ -47,7 +47,7 @@ public class Rent {
 	@Column(name ="final_amount")
 	private Float finalAmount;
 	
-	@OneToMany(mappedBy="rent_line")
+	@OneToMany(mappedBy="rent")
 	private List<RentLine> rentLine;
 	
 	@ManyToOne
@@ -59,12 +59,15 @@ public class Rent {
 	private BranchOffice endBranchOffice;
 	
 	@ManyToOne
-	@JoinColumn(name="rent_fare")
-	private Vehicule vehicules;
+	@JoinColumn(name="vehicule_id")
+	private Vehicule vehicule;
 	
 	@ManyToOne
 	@JoinColumn(name ="client_id")
 	private Client client;
+	
+	@Column(name="status_at_return")
+	private String statusAtReturn;
 
 	public Integer getId() {
 		return id;
@@ -154,12 +157,12 @@ public class Rent {
 		this.endBranchOffice = endBranchOffice;
 	}
 
-	public Vehicule getVehicules() {
-		return vehicules;
+	public Vehicule getVehicule() {
+		return vehicule;
 	}
 
-	public void setVehicules(Vehicule vehicules) {
-		this.vehicules = vehicules;
+	public void setVehicule(Vehicule vehicule) {
+		this.vehicule = vehicule;
 	}
 
 	public Client getClient() {
@@ -168,6 +171,14 @@ public class Rent {
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	public String getStatusAtReturn() {
+		return statusAtReturn;
+	}
+
+	public void setStatusAtReturn(String statusAtReturn) {
+		this.statusAtReturn = statusAtReturn;
 	}
 
 	

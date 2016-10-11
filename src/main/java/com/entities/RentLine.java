@@ -2,6 +2,7 @@ package com.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
@@ -21,7 +22,7 @@ public class RentLine {
 	private rentLinePK rentLinePK;
 	
 	@ManyToOne
-	@JoinColumn(name="rent_id")
+	@JoinColumn(name="rent_id",referencedColumnName="id" ,insertable =false, updatable=false)
 	private Rent rent;
 	
 	private Float amount;
@@ -66,15 +67,19 @@ public class RentLine {
 @Embeddable
 class rentLinePK implements Serializable{
 	
+	@Basic(optional =false)
 	@Column(name="rent_line_id")
 	private Integer rentLineId;
 	
+	@Basic(optional =false)
 	@Column(name="rent_id")
 	private Integer rentId;
 
 	public Integer getRentLineId() {
 		return rentLineId;
 	}
+	
+	public rentLinePK(){}
 
 	public void setRentLineId(Integer rentLineId) {
 		this.rentLineId = rentLineId;

@@ -31,6 +31,12 @@ public class LoginController {
 		return view;
 	}
 	
+	@RequestMapping(value="/forget",method =RequestMethod.GET)
+	public ModelAndView getForgetPage(){
+		ModelAndView view=new ModelAndView("forget/forgot");
+		return view;
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<LogInResonseBody> logInUser(@RequestBody LogInRequestBody user,    UriComponentsBuilder ucBuilder){
 		boolean log= userService.validateLogin(user.getUsername(), user.getPassword());

@@ -2,11 +2,11 @@ package com.services;
 
 import java.util.List;
 
-import com.entities.Users;
+import com.entities.User;
 
 public interface UserServices {
-	public boolean saveOrUpdate(Users users);
-	public List<Users> list();
-	public boolean delete(Users users);
+	public boolean saveOrUpdate(User users);
+	public List<User> list();
+	public boolean delete(User users);
 	public boolean validateLogin(String username, String password);
 }

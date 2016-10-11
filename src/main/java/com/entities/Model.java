@@ -22,6 +22,8 @@ public class Model {
 	@Column(name = "name", nullable=false)
 	private String modelName;
 	
+	@ManyToOne
+	@JoinColumn(name="brand_id")
 	private Brand brand;
 
 	private int year;
@@ -34,13 +36,13 @@ public class Model {
 	
 	private boolean airConditioner;
 	
-	@OneToMany(mappedBy="vehicules")
+	@OneToMany(mappedBy="model")
 	private List<Vehicule> vehicules;
 	
 	private String transmission;
 	
 	@ManyToOne
-    @JoinColumn(name="brand_Id", nullable=false)
+    @JoinColumn(name="model", nullable=false)
     public Brand getBrand() { return brand; }
 
 	
