@@ -4,11 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -22,7 +25,8 @@ public class BranchOffice {
 	
 	private String name;
 	
-	private String location;
+	@Embedded
+	private Location location;
 	
 	private String city;
 	
@@ -36,12 +40,14 @@ public class BranchOffice {
 	@Temporal(TemporalType.TIME)
 	private Date closingHour;
 	
-	@OneToMany(mappedBy="origin_branch_office")
+	@OneToMany(mappedBy="originBranchOffice")
 	private List<Rent> rentEndsLists;
 	
-	@OneToMany(mappedBy="end_branch_office")
+	@OneToMany(mappedBy="endBranchOffice")
 	private List<Rent> rentOriginsLists;
 
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -58,11 +64,11 @@ public class BranchOffice {
 		this.name = name;
 	}
 
-	public String getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(Location location) {
 		this.location = location;
 	}
 

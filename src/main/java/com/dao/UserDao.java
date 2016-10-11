@@ -2,11 +2,11 @@ package com.dao;
 
 import java.util.List;
 
-import com.entities.Users;
+import com.entities.User;
 
 public interface UserDao {
-	public boolean saveOrUpdate(Users users);
-	public List<Users> list();
-	public boolean delete(Users users);
-	public Users getUserByName(String username);
+	public boolean saveOrUpdate(User users);
+	public List<User> list();
+	public boolean delete(User users);
+	public User getUserByName(String username);
 }

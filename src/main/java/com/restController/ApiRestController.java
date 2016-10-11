@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.entities.Users;
+import com.entities.User;
 import com.services.UserServices;
 
 
@@ -27,7 +27,7 @@ public class ApiRestController {
 	UserServices userService;
 	
 	@RequestMapping(value="/api/allUsers",method =RequestMethod.GET)
-	public List<Users> getPage(){
+	public List<User> getPage(){
 		
 		return userService.list();
 	}

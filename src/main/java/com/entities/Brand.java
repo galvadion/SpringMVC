@@ -20,7 +20,7 @@ public class Brand {
 	@Column(name = "name", nullable=false)
 	private String name;
 	
-	@OneToMany(mappedBy="model")
+	@OneToMany(mappedBy="brand")
 	public List<Model> Models;
 
 	public Integer getId() {

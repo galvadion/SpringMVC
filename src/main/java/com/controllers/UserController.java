@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.entities.Users;
+import com.entities.User;
 import com.services.UserServices;
 
 @Controller
@@ -33,7 +33,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/saveOrUpdate", method=RequestMethod.POST)
-	public @ResponseBody Map<String,Object> getSaved(Users users){
+	public @ResponseBody Map<String,Object> getSaved(User users){
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		if(userServices.saveOrUpdate(users)){
@@ -46,10 +46,10 @@ public class UserController {
 	
 	
 	@RequestMapping(value="/list", method=RequestMethod.POST)
-	public @ResponseBody Map<String,Object> getAll(Users users){
+	public @ResponseBody Map<String,Object> getAll(User users){
 		Map<String,Object> map = new HashMap<String,Object>();
 	
-			List<Users> list = userServices.list();
+			List<User> list = userServices.list();
 			
 			if (list != null){
 				map.put("status","200");
@@ -66,7 +66,7 @@ public class UserController {
 	
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public @ResponseBody Map<String,Object> delete(Users users){
+	public @ResponseBody Map<String,Object> delete(User users){
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		if(userServices.delete(users)){

@@ -58,13 +58,13 @@ public class Vehicule {
 	
 	@ManyToOne
 	@JoinColumn(name="rent_fare", nullable=false)
-	private rentFare rentFare;
+	private RentFare rentFare;
 	
-	@OneToMany(mappedBy="rent")
+	@OneToMany(mappedBy="vehicule")
 	private List<Rent> rent;
 	
-	@OneToMany(mappedBy="statesInDate")
-	private List<StateInDate> statesInDates;
+	@OneToMany(mappedBy="vehicule")
+	private List<StatusInDate> statusInDates;
 
 	public Integer getId() {
 		return id;
@@ -162,11 +162,11 @@ public class Vehicule {
 		this.category = category;
 	}
 
-	public rentFare getRentFare() {
+	public RentFare getRentFare() {
 		return rentFare;
 	}
 
-	public void setRentFare(rentFare rentFare) {
+	public void setrentFare(RentFare rentFare) {
 		this.rentFare = rentFare;
 	}
 
@@ -178,12 +178,12 @@ public class Vehicule {
 		this.rent = rent;
 	}
 
-	public List<StateInDate> getStatesInDates() {
-		return statesInDates;
+	public List<StatusInDate> getStatusInDates() {
+		return statusInDates;
 	}
 
-	public void setStatesInDates(List<StateInDate> statesInDates) {
-		this.statesInDates = statesInDates;
+	public void setStatusInDates(List<StatusInDate> statesInDates) {
+		this.statusInDates = statesInDates;
 	}
 	
 	
