@@ -39,6 +39,9 @@ public class Model {
 	@OneToMany(mappedBy="model")
 	private List<Vehicule> vehicules;
 	
+	@OneToMany(mappedBy="model")
+	private List<Booked> booked;
+	
 	private String transmission;
 	
 	@ManyToOne
@@ -103,6 +106,16 @@ public class Model {
 
 	public void setBrand(Brand brand) {
 		this.brand = brand;
+	}
+
+
+	public List<Booked> getBooked() {
+		return booked;
+	}
+
+
+	public void setBooked(List<Booked> booked) {
+		this.booked = booked;
 	}
 	
 	

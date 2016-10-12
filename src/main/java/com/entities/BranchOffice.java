@@ -45,9 +45,20 @@ public class BranchOffice {
 	
 	@OneToMany(mappedBy="endBranchOffice")
 	private List<Rent> rentOriginsLists;
+	
+	@OneToMany(mappedBy="branchOffice")
+	private List<Vehicule> vehicules;
 
 	
 	
+	public List<Vehicule> getVehicules() {
+		return vehicules;
+	}
+
+	public void setVehicules(List<Vehicule> vehicules) {
+		this.vehicules = vehicules;
+	}
+
 	public Integer getId() {
 		return id;
 	}

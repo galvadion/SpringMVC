@@ -63,11 +63,14 @@ public class Vehicule {
 	@JoinColumn(name="rent_fare", nullable=false)
 	private RentFare rentFare;
 	
-	@OneToMany(mappedBy="vehicule")
-	private List<Rent> rent;
+	@ManyToOne
+	@JoinColumn(name="branch_office", nullable=false)
+	private BranchOffice branchOffice;
 	
 	@OneToMany(mappedBy="vehicule")
-	private List<StatusInDate> statusInDates;
+	private List<Rent> rent;
+
+	
 
 	public Integer getId() {
 		return id;
@@ -181,13 +184,6 @@ public class Vehicule {
 		this.rent = rent;
 	}
 
-	public List<StatusInDate> getStatusInDates() {
-		return statusInDates;
-	}
-
-	public void setStatusInDates(List<StatusInDate> statesInDates) {
-		this.statusInDates = statesInDates;
-	}
 
 	public Integer getKilometers() {
 		return kilometers;
@@ -200,6 +196,15 @@ public class Vehicule {
 	public void setRentFare(RentFare rentFare) {
 		this.rentFare = rentFare;
 	}
+
+	public BranchOffice getBranchOffice() {
+		return branchOffice;
+	}
+
+	public void setBranchOffice(BranchOffice branchOffice) {
+		this.branchOffice = branchOffice;
+	}
+
 	
 	
 }

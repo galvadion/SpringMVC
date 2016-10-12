@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -68,6 +69,9 @@ public class Rent {
 	
 	@Column(name="status_at_return")
 	private String statusAtReturn;
+	
+    @OneToOne(optional=false, mappedBy="rent")
+    private Booked booked;
 
 	public Integer getId() {
 		return id;
@@ -179,6 +183,14 @@ public class Rent {
 
 	public void setStatusAtReturn(String statusAtReturn) {
 		this.statusAtReturn = statusAtReturn;
+	}
+
+	public Booked getBooked() {
+		return booked;
+	}
+
+	public void setBooked(Booked booked) {
+		this.booked = booked;
 	}
 
 	
