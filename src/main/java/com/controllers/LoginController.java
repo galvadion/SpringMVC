@@ -31,9 +31,21 @@ public class LoginController {
 		return view;
 	}
 	
-	@RequestMapping(value="/forget",method =RequestMethod.GET)
-	public ModelAndView getForgetPage(){
-		ModelAndView view=new ModelAndView("forget/forgot");
+	@RequestMapping(value="/forgot",method =RequestMethod.GET)
+	public ModelAndView getForgotPage(){
+		ModelAndView view=new ModelAndView("forgot/forgot");
+		return view;
+	}
+	
+	@RequestMapping(value="/register",method =RequestMethod.GET)
+	public ModelAndView getRegisterPage(){
+		ModelAndView view=new ModelAndView("register/register");
+		return view;
+	}
+	
+	@RequestMapping(value="/terms",method =RequestMethod.GET)
+	public ModelAndView getTermsPage(){
+		ModelAndView view=new ModelAndView("register/terms");
 		return view;
 	}
 	

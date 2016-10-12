@@ -1,36 +1,27 @@
 package com.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.entities.User;
-import com.services.UserServices;
 
 @Controller
-@RequestMapping(value="users")
+@RequestMapping(value="user")
 public class UserController {
 	
+<<<<<<< HEAD
 	@Autowired(required = true)
 	private UserServices userServices;
 	
 	@RequestMapping(value="/login",method =RequestMethod.GET)
+=======
+	@RequestMapping(value="/user",method =RequestMethod.GET)
+>>>>>>> refs/remotes/origin/master
 	public ModelAndView getPage(){
-		ModelAndView view=new ModelAndView("login/login");
+		ModelAndView view=new ModelAndView("user/user");
 		return view;
 	}
-	
-	@RequestMapping(value="/page",method =RequestMethod.GET)
-	public ModelAndView getPageUser(){
-		ModelAndView view=new ModelAndView("login");
-		return view;
-	}
+<<<<<<< HEAD
 	
 	@RequestMapping(value="/saveOrUpdate", method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> getSaved(User users){
@@ -78,3 +69,6 @@ public class UserController {
 	}
 	
 }
+=======
+}
+>>>>>>> refs/remotes/origin/master
