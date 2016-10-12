@@ -17,8 +17,8 @@ import com.services.UserServices;
 @RequestMapping(value="users")
 public class UserController {
 	
-	@Autowired
-	UserServices userServices;
+	@Autowired(required = true)
+	private UserServices userServices;
 	
 	@RequestMapping(value="/login",method =RequestMethod.GET)
 	public ModelAndView getPage(){
@@ -36,10 +36,10 @@ public class UserController {
 	public @ResponseBody Map<String,Object> getSaved(User users){
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		if(userServices.saveOrUpdate(users)){
+		userServices.saveOrUpdate(users);
 			map.put("status","200");
 			map.put("message","Your record have been saved successfully");
-		}
+		
 		
 		return map;
 	}
@@ -49,7 +49,7 @@ public class UserController {
 	public @ResponseBody Map<String,Object> getAll(User users){
 		Map<String,Object> map = new HashMap<String,Object>();
 	
-			List<User> list = userServices.list();
+			List<User> list = userServices.getAll();
 			
 			if (list != null){
 				map.put("status","200");
@@ -69,10 +69,10 @@ public class UserController {
 	public @ResponseBody Map<String,Object> delete(User users){
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		if(userServices.delete(users)){
+		userServices.remove(users);
 			map.put("status","200");
 			map.put("message","Your record have been deleted successfully");
-		}
+		
 		
 		return map;
 	}

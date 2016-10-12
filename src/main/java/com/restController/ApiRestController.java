@@ -29,7 +29,7 @@ public class ApiRestController {
 	@RequestMapping(value="/api/allUsers",method =RequestMethod.GET)
 	public List<User> getPage(){
 		
-		return userService.list();
+		return userService.getAll();
 	}
 	
 

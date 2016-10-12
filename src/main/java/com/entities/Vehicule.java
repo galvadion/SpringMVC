@@ -1,5 +1,6 @@
 package com.entities;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class Vehicule {
 	
 	@Column(name = "motor_number")
 	private String motorNr;
+
+	private Integer kilometers;
 	
 	@ManyToOne
 	@JoinColumn(name="model_id", nullable=false)
@@ -184,6 +187,18 @@ public class Vehicule {
 
 	public void setStatusInDates(List<StatusInDate> statesInDates) {
 		this.statusInDates = statesInDates;
+	}
+
+	public Integer getKilometers() {
+		return kilometers;
+	}
+
+	public void setKilometers(Integer kilometers) {
+		this.kilometers = kilometers;
+	}
+
+	public void setRentFare(RentFare rentFare) {
+		this.rentFare = rentFare;
 	}
 	
 	

@@ -3,32 +3,28 @@ package com.servicesImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.dao.GenericDao;
 import com.dao.UserDao;
 import com.entities.User;
 import com.services.UserServices;
 
 @Service
-public class UserServicesImpl implements UserServices{
+public class UserServicesImpl extends GenericServiceImpl<User, Integer> implements UserServices{
 
-	@Autowired
-	UserDao userDao;
+	private UserDao userDao;
+	public UserServicesImpl(){
+		
+	}
 	
-	public boolean saveOrUpdate(User users) {
-		// TODO Auto-generated method stub
-		return userDao.saveOrUpdate(users);
-	}
-
-	public List<User> list() {
-		// TODO Auto-generated method stub
-		return userDao.list();
-	}
-
-	public boolean delete(User users) {
-		// TODO Auto-generated method stub
-		return userDao.delete(users);
-	}
+    @Autowired
+    public UserServicesImpl(
+            @Qualifier("userDaoImpl") GenericDao<User, Integer> genericDao) {
+        super(genericDao);
+        this.userDao = (UserDao) genericDao;
+    }
 
 	public boolean validateLogin(String username, String password) {
 		try{

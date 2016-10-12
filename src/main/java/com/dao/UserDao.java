@@ -4,9 +4,6 @@ import java.util.List;
 
 import com.entities.User;
 
-public interface UserDao {
-	public boolean saveOrUpdate(User users);
-	public List<User> list();
-	public boolean delete(User users);
+public interface UserDao extends GenericDao<User, Integer>{
 	public User getUserByName(String username);
 }
