@@ -39,6 +39,7 @@ public class Booked {
 	@Temporal(TemporalType.DATE)
 	private Date transactionDate;
 	
+	
 	@OneToOne
 	 @JoinColumn(
 		        name="rent_id", unique=true, nullable=true, updatable=true)
