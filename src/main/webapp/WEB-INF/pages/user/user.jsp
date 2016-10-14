@@ -1,4 +1,5 @@
-<ng-include src="'/blocks/header.html'"></ng-include>
+<ng-include src="'blocks/header'"></ng-include>
+
 <section id="content">
 
 	<div class="page page-dashboard">

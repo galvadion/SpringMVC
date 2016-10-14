@@ -554,7 +554,6 @@ html.boxed-layout .appWrapper.header-fixed.aside-static #header {
     text-align: center;
     padding: 20px;
     font-weight: 500;
-    font-size: 18px;
   }
   .hz-menu #navigation > li > a .badge {
     left: 5px;
@@ -3405,7 +3404,6 @@ html.boxed-layout .appWrapper.header-fixed.aside-static #header {
   -webkit-overflow-scrolling: touch;
   -webkit-overflow-scrolling: -blackberry-touch;
   list-style: none;
-  background-color: #768692;
 }
 
 #navigation > li > a > i {
@@ -3486,10 +3484,12 @@ html.boxed-layout .appWrapper.header-fixed.aside-static #header {
 }
 
 #navigation > li > a {
-  font-weight: 700;
+  font-size: 22px;
+  margin:0;
+  font-weight: 500;
   position: relative;
   display: block;
-  padding: 12px 15px;
+  padding: 25px 15px;
 }
 
 #navigation > li > a > .badge {
@@ -18177,4 +18177,42 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 .breadcrumb>li {
   color: #fff;
+}
+
+
+.nav-navigation > li > a {
+  font-size: 22px;
+  margin:0;
+  font-weight: 500;
+  position: relative;
+  display: block;
+  padding: 25px 15px;
+}
+
+.nav-navigation > li > a > .badge {
+  position: absolute;
+  top: 7px;
+  left: 25px;
+}
+
+.nav-navigation > li > a > .label {
+  position: absolute;
+  top: 13px;
+  right: 10px;
+}
+
+.nav-navigation .dropdown > a > i:last-of-type {
+  font-size: 10px;
+  position: absolute;
+  top: 17px;
+  right: 0px;
+}
+
+.nav-custom-font {
+	font-weight: 500 !important;
+    font-size: 18px !important;
+}
+
+.nav-custom {
+	background-color: white !important;
 }

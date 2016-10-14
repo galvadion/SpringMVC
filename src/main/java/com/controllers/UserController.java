@@ -14,21 +14,15 @@ import com.entities.User;
 import com.services.UserServices;
 
 @Controller
-@RequestMapping(value="users")
+@RequestMapping(value="user")
 public class UserController {
 	
 	@Autowired(required = true)
 	private UserServices userServices;
 	
-	@RequestMapping(value="/login",method =RequestMethod.GET)
+	@RequestMapping(value="/user",method =RequestMethod.GET)
 	public ModelAndView getPage(){
-		ModelAndView view=new ModelAndView("login/login");
-		return view;
-	}
-	
-	@RequestMapping(value="/page",method =RequestMethod.GET)
-	public ModelAndView getPageUser(){
-		ModelAndView view=new ModelAndView("login");
+		ModelAndView view=new ModelAndView("user/user");
 		return view;
 	}
 	

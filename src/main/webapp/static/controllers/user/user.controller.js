@@ -133,7 +133,7 @@
 
         function initController(){
             NProgress.start();
-            SessionService.initService();
+            /*SessionService.initService();
             $rootScope.checkCurrentRol();
 
                 UserService.GetAll().then(function (response) {
@@ -156,7 +156,7 @@
                      getRolByUserId(vm.user.id);
                   }
                   vm.auxuser = angular.copy(vm.user);
-               });                
+               });*/
                NProgress.done();
             }
 

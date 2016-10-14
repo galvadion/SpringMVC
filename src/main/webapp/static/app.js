@@ -3,7 +3,6 @@
 
 
     /***App Module Definition***/
-    console.log("piwi puto");
     angular
         .module('app', ['ngRoute', 'ngCookies','jkuri.datepicker','angularFileUpload','angular-confirm','ui.bootstrap','ngDialog','ngAnimate'/*,'simpleGrid','googlechart','datatables','datatables.buttons'*/])
         .config(config)
@@ -27,7 +26,7 @@
             .when('/home', {
                 controller: 'HomeController',
                 templateUrl: 'home/home',
-                title: 'Demo - Dashboard',
+                title: 'Demo - Inicio',
                 /*resolve:{
                     'AllAdvertiserData':
                         ['$http', function($http) { return $http.get('/adv/adv'); }],
@@ -40,57 +39,51 @@
              .when('/', {
                 controller: 'HomeController',
                 templateUrl: 'home/home',
-                title: 'Demo - Dashboard',
-                /*resolve:{
-                    'AllAdvertiserData':
-                        ['$http', function($http) { return $http.get('/adv/adv'); }],
-                    'EmptyData':
-                        ['$http', function($http) { return ''; }],
-                },*/
+                title: 'Demo - Inicio',
                 controllerAs: 'vm'            
              })
 
             .when('/login', {
                 controller: 'LoginController',
                 templateUrl: 'login/login',
-                title: 'Demo - Login',
+                title: 'Demo - Ingresar',
                 controllerAs: 'vm'
             })
 
             .when('/register', {
                 controller: 'RegisterController',
                 templateUrl: 'login/register',
-                title: 'Demo - Register',
+                title: 'Demo - Registrarse',
                 controllerAs: 'vm'
             })
 
             .when('/forgot', {
                 controller: 'ForgotController',
                 templateUrl: 'login/forgot',
-                title: 'Demo - Forgot Password',
+                title: 'Demo - Recuperar Contraseña',
                 controllerAs: 'vm'
             })
 
-            .when('/user', {
+            .when('/profile', {
                 controller: 'UserController',
                 templateUrl: 'user/user',
-                title: 'Demo - Profile',
+                title: 'Demo - Perfil',
                 controllerAs: 'vm'
             })
 
-            .when('/profile/:userId', {
+            /*.when('/profile/:userId', {
                 controller: 'UserController',
                 templateUrl: 'user/user',
-                title: 'Demo - Profile',
+                title: 'Demo - Perfil',
                 controllerAs: 'vm'
-            })
+            })*/
 
             .when('/terms', {
                 templateUrl: 'login/terms',
-                title: 'Demo - Terms & Conditions'
+                title: 'Demo - Terminos & Condiciones'
             })
 
-            .otherwise({ redirectTo: '/login' });
+            .otherwise({ redirectTo: '/' });
     }
 
 
@@ -112,7 +105,7 @@
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             var restrictedPage = $location.path();
             var loggedIn = $rootScope.globals.currentUser;
-            if(restrictedPage.indexOf('/login') == -1 && restrictedPage.indexOf('/register') == -1 && restrictedPage.indexOf('/forgot') == -1 && restrictedPage.indexOf('/terms') == -1 && !loggedIn) {
+            if(restrictedPage.indexOf('/profile') == 0 && !loggedIn) {
                 //$location.path('/login');
             }
         });

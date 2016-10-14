@@ -59,6 +59,7 @@
         <script src="static/controllers/login/login.controller.js"></script>
         <script src="static/controllers/register/register.controller.js"></script>
         <script src="static/controllers/user/user.controller.js"></script>
+        <script src="static/controllers/home/home.controller.js"></script>
 
         <div id="wrap">
           <div ng-view></div>
