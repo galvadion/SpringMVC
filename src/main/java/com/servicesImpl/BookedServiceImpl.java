@@ -21,7 +21,7 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 	
     @Autowired
     public BookedServiceImpl(
-            @Qualifier("BookedDaoImpl") GenericDao<Booked, Integer> genericDao) {
+            @Qualifier("bookedDaoImpl") GenericDao<Booked, Integer> genericDao) {
         super(genericDao);
         this.BookedDao = (BookedDao) genericDao;
     }

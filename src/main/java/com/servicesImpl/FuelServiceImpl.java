@@ -21,7 +21,7 @@ public class FuelServiceImpl extends GenericServiceImpl<Fuel, Integer> implement
 	
     @Autowired
     public FuelServiceImpl(
-            @Qualifier("FuelDaoImpl") GenericDao<Fuel, Integer> genericDao) {
+            @Qualifier("fuelDaoImpl") GenericDao<Fuel, Integer> genericDao) {
         super(genericDao);
         this.FuelDao = (FuelDao) genericDao;
     }

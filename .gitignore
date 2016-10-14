@@ -17,3 +17,6 @@ local.properties
 *.launch
 .buildpath
 target/
+target/*
+target/**
+target/**/*

@@ -21,7 +21,7 @@ public class BranchOfficeServiceImpl extends GenericServiceImpl<BranchOffice, In
 	
     @Autowired
     public BranchOfficeServiceImpl(
-            @Qualifier("BranchOfficeDaoImpl") GenericDao<BranchOffice, Integer> genericDao) {
+            @Qualifier("branchOfficeDaoImpl") GenericDao<BranchOffice, Integer> genericDao) {
         super(genericDao);
         this.BranchOfficeDao = (BranchOfficeDao) genericDao;
     }

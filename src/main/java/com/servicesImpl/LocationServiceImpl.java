@@ -21,7 +21,7 @@ public class LocationServiceImpl extends GenericServiceImpl<Location, Integer> i
 	
     @Autowired
     public LocationServiceImpl(
-            @Qualifier("LocationDaoImpl") GenericDao<Location, Integer> genericDao) {
+            @Qualifier("locationDaoImpl") GenericDao<Location, Integer> genericDao) {
         super(genericDao);
         this.LocationDao = (LocationDao) genericDao;
     }

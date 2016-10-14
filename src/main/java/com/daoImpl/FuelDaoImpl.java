@@ -13,13 +13,13 @@ import com.entities.Fuel;
 
 @Repository
 @Transactional
-public class FueDaoImpl extends GenericDaoImpl<Fuel, Integer> implements FuelDao {
+public class FuelDaoImpl extends GenericDaoImpl<Fuel, Integer> implements FuelDao {
 
-	public FueDaoImpl(){
+	public FuelDaoImpl(){
 		super(null);
 	}
 	
-	public FueDaoImpl(Class<Fuel> entityClass) {
+	public FuelDaoImpl(Class<Fuel> entityClass) {
 		super(entityClass);
 		// TODO Auto-generated constructor stub
 	}

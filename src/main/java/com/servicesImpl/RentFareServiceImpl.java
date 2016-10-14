@@ -21,7 +21,7 @@ public class RentFareServiceImpl extends GenericServiceImpl<RentFare, Integer> i
 	
     @Autowired
     public RentFareServiceImpl(
-            @Qualifier("RentFareDaoImpl") GenericDao<RentFare, Integer> genericDao) {
+            @Qualifier("rentFareDaoImpl") GenericDao<RentFare, Integer> genericDao) {
         super(genericDao);
         this.RentFareDao = (RentFareDao) genericDao;
     }

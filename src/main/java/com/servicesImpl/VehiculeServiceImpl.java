@@ -21,7 +21,7 @@ public class VehiculeServiceImpl extends GenericServiceImpl<Vehicule, Integer> i
 	
     @Autowired
     public VehiculeServiceImpl(
-            @Qualifier("VehiculeDaoImpl") GenericDao<Vehicule, Integer> genericDao) {
+            @Qualifier("vehiculeDaoImpl") GenericDao<Vehicule, Integer> genericDao) {
         super(genericDao);
         this.VehiculeDao = (VehiculeDao) genericDao;
     }

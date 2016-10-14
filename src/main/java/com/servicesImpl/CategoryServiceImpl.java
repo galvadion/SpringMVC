@@ -21,7 +21,7 @@ public class CategoryServiceImpl extends GenericServiceImpl<Category, Integer> i
 	
     @Autowired
     public CategoryServiceImpl(
-            @Qualifier("CategoryDaoImpl") GenericDao<Category, Integer> genericDao) {
+            @Qualifier("categoryDaoImpl") GenericDao<Category, Integer> genericDao) {
         super(genericDao);
         this.CategoryDao = (CategoryDao) genericDao;
     }
