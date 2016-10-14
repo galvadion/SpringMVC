@@ -1,7 +1,7 @@
     <!-- ===============================================
         ================= HEADER Content ===================
         ================================================ -->
-        <section id="header" style="background-color: white" class="row">
+        <section id="header" style="background-color: white; max-height: 70px !important;" class="row">
 
             <header class="clearfix">
 

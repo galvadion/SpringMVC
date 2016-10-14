@@ -47,20 +47,7 @@
                 <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Contraseña es requerida</span>
 
             </div>
-
-            <div  ng-class="{ 'has-error': form.rol.$dirty && form.rol.$error.required }">
-
-                <select name="rol" id="rol" ng-model="vm.user.rol" class="form-control mb-10" required>
-                    <option value=""> Por favor selecciona el Rol</option> 
-                    <!--<option value="1">Admin</option>-->
-                    <option value="2">Rol1</option>
-                    <option value="3">Rol2</option>
-                </select>
-
-
-                <span ng-show="form.rol.$dirty && form.rol.$error.required" class="help-block">Rol es requerido</span>
-
-            </div>
+            
 
             <div class="text-left">
 
