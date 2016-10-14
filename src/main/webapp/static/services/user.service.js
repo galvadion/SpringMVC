@@ -13,7 +13,8 @@
         service.GetAll = GetAll;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
-        service.Create = Create;
+        service.CreateUser = CreateUser;
+        service.CreateClient = CreateClient;
         service.Update = Update;
         service.Delete = Delete;
         service.ValidateUser = ValidateUser;
@@ -54,9 +55,12 @@
             
         }
 
-        function Create(name,lastname,email,pass,address,avatar,rol,register) {
-            var user = {name:name,lastname:lastname,email:email,password:pass,address:address,avatarURL:avatar,rol:rol,register:register};
-                return $http.post('/users/users', user).then(handleSuccess, handleError('Error creating user'));
+        function CreateClient(client) {
+            return $http.post('/SpringMVC/client/register', client).then(handleSuccess, handleError('Error creating client'));
+        }
+        
+        function CreateUser(client) {
+            return $http.post('/users/users', JSON.stringify(client)).then(handleSuccess, handleError('Error creating client'));
         }
 
         function Update(user) {

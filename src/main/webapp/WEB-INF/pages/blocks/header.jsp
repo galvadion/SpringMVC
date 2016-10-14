@@ -1,7 +1,7 @@
     <!-- ===============================================
         ================= HEADER Content ===================
         ================================================ -->
-        <section id="header" style="background-color: white; max-height: 70px !important;" class="row">
+        <section id="header" style="background-color: #EDEDED;" class="row">
 
             <header class="clearfix">
 
@@ -67,9 +67,9 @@
 						    <div class="collapse navbar-collapse" id="myNavbar">
 							    <ul class="nav navbar-nav nav-navigation" id="">
 							      <li ng-class=getClass('#/home') class="active"><a href="#/home"><span class="nav-custom-font">Inicio</span></a></li>
-							      <li ng-class=getClass('/') class=""><a href="#/home"><span class="nav-custom-font">Opcion 2</span></a></li>
-							      <li ng-class=getClass('/') class=""><a href="#/home"><span class="nav-custom-font">Opcion 3</span></a></li>
-							      <li ng-class=getClass('/') class=""><a href="#/home"><span class="nav-custom-font">Opcion 4</span></a></li>
+							      <li ng-class=getClass('/') class=""><a href="#/home"><span class="nav-custom-font">Coches</span></a></li>
+							      <li ng-class=getClass('/') class=""><a href="#/home"><span class="nav-custom-font">Sucursales</span></a></li>
+							      <li ng-class=getClass('/') class=""><a href="#/home"><span class="nav-custom-font">Nosotros</span></a></li>
 							    </ul>
 							    <ul class="nav navbar-nav navbar-right nav-navigation">
 							        <li>
