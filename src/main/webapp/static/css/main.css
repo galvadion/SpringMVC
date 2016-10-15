@@ -18210,7 +18210,8 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 
 .nav-custom-font {
 	font-weight: 500 !important;
-    font-size: 18px !important;
+    font-size: 20px !important;
+    color: #4371A4;
 }
 
 .nav-custom {
