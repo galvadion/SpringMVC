@@ -12,10 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@Table(name = "branch_offices")
 public class BranchOffice {
 
 	@Id
@@ -49,7 +51,9 @@ public class BranchOffice {
 	@OneToMany(mappedBy="branchOffice")
 	private List<Vehicule> vehicules;
 
-	
+	@OneToMany(mappedBy="branchOffice")
+	private List<StatusBetweenDates> statusDates;
+
 	
 	public List<Vehicule> getVehicules() {
 		return vehicules;
@@ -130,6 +134,15 @@ public class BranchOffice {
 	public void setRentOriginsLists(List<Rent> rentOriginsLists) {
 		this.rentOriginsLists = rentOriginsLists;
 	}
+
+	public List<StatusBetweenDates> getStatusDates() {
+		return statusDates;
+	}
+
+	public void setStatusDates(List<StatusBetweenDates> originStatus) {
+		this.statusDates = originStatus;
+	}
+
 	
 	
 }

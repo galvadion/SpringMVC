@@ -24,7 +24,7 @@ public class Fuel {
 	private Float fuelPrice;
 	
 	@OneToMany(mappedBy="fuel")
-	private List<Vehicule> vehicules;
+	private List<Model> model;
 
 	public Integer getId() {
 		return id;
@@ -50,12 +50,12 @@ public class Fuel {
 		this.fuelPrice = fuelPrice;
 	}
 
-	public List<Vehicule> getVehicules() {
-		return vehicules;
+	public List<Model> getModel() {
+		return model;
 	}
 
-	public void setVehicules(List<Vehicule> vehicules) {
-		this.vehicules = vehicules;
+	public void setModel(List<Model> vehicules) {
+		this.model = vehicules;
 	}
 	
 	

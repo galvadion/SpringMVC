@@ -17,6 +17,9 @@ public class User {
 
 	@Column(name = "name", nullable=false)
 	private String name;
+	
+	@Column(name = "last_name", nullable=false)
+	private String lastName;
 
 	@Column(name = "email", nullable=false)
 	private String email;
@@ -41,13 +44,6 @@ public class User {
 		this.user_id = user_id;
 	}
 
-	public String getUser_name() {
-		return user_name;
-	}
-
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
-	}
 
 	public String getEmail() {
 		return email;
@@ -87,6 +83,22 @@ public class User {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	

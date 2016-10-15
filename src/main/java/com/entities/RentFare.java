@@ -19,13 +19,7 @@ public class RentFare {
 	
 	private Float gps;
 	
-	private Float insurance;
-	
-	@Column(name= "full_tank")
-	private Float fullTank;
-	
-	@OneToMany(mappedBy="rentFare")
-	private List<Vehicule> vehicules;
+
 
 	public Integer getId() {
 		return id;
@@ -43,29 +37,7 @@ public class RentFare {
 		this.gps = gps;
 	}
 
-	public Float getInsurance() {
-		return insurance;
-	}
 
-	public void setInsurance(Float insurance) {
-		this.insurance = insurance;
-	}
-
-	public Float getFullTank() {
-		return fullTank;
-	}
-
-	public void setFullTank(Float fullTank) {
-		this.fullTank = fullTank;
-	}
-
-	public List<Vehicule> getVehicules() {
-		return vehicules;
-	}
-
-	public void setVehicules(List<Vehicule> vehicules) {
-		this.vehicules = vehicules;
-	}
 	
 	
 }

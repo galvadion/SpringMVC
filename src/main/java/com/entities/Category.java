@@ -20,6 +20,9 @@ public class Category {
 	@Column(name="base_price")
 	private float basePrice;
 
+	@OneToMany(mappedBy="category")
+	public List<Model> Models;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -32,19 +35,17 @@ public class Category {
 		return basePrice;
 	}
 
-	@OneToMany(mappedBy="category")
-	private List<Vehicule> vehicules;
 	
 	public void setBasePrice(float basePrice) {
 		this.basePrice = basePrice;
 	}
 
-	public List<Vehicule> getVehicules() {
-		return vehicules;
+	public List<Model> getModels() {
+		return Models;
 	}
 
-	public void setVehicules(List<Vehicule> vehicules) {
-		this.vehicules = vehicules;
+	public void setModels(List<Model> Models) {
+		this.Models = Models;
 	}
 	
 	
