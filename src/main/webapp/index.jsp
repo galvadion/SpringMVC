@@ -7,7 +7,7 @@
         <meta name="description" content="">
         
         <!--Page Data-->
-        <link rel="icon" type="image/png" href="assets/images/favicon.png">
+        <link rel="icon" type="image/png" href="static/images/favicon.png">
         <title ng-bind="title">Angular Demo</title>
 
         <!--Styles-->
@@ -22,6 +22,8 @@
         <link rel="stylesheet" type="text/css" href="static/css/autocomplete.css">
         <link rel="stylesheet" type="text/css" href="static/css/main.css">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic">
+        <link rel="stylesheet" type="text/css" href="static/fonts/font-awesome/css/font-awesome.min.css">
+        
 
     </head>
     <body>

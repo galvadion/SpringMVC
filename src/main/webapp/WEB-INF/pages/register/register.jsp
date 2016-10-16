@@ -35,7 +35,7 @@
 		
 		            <div class="form-group" ng-class="{ 'has-error': form.email.$dirty &&  form.email.$error.required }">
 		
-		                <input type="email" class="form-control underline-input" id="email" name="email" ng-model="vm.user.email" ng-readonly="vm.edit" required  placeholder="Email" />
+		                <input type="email" class="form-control underline-input" id="email" name="email" ng-model="vm.user.email" required  placeholder="Email" />
 		
 		                <span ng-show="form.addresss.$dirty && form.addresss.$error.required" class="help-block">Email es requerido</span>
 		                 <span class="error" ng-show="form.email.$error.email">
@@ -79,13 +79,15 @@
 		            </div>
 		            
 		
-		            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-		
-		                <input type="password" name="password" id="password" placeholder="Password" class="form-control underline-input" ng-model="vm.user.password" required />
-		
-		                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Contraseña es requerida</span>
-		
-		            </div>
+		            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty &&  vm.user.password.length <= 1 }">
+						<input type="password"  name="password" id="password" placeholder="Contraseña" class="form-control underline-input" ng-model="vm.user.password" ng-keyup="checkPaswords()" >
+						<span ng-show="form.password.$dirty && vm.user.password.length <= 1 " class="help-block">Contraseña es requerida</span>
+					</div>
+
+					<div class="form-group" ng-class="{ 'has-error': form.newpassword.$dirty && vm.user.password != vm.newpassword }">
+						<input type="password"  name="newpassword" id="newpassword" placeholder="Confirmar Contraseña" class="form-control underline-input" ng-model="vm.newpassword" ng-disabled="vm.user.id > 0" ng-keyup="checkPaswords()">										
+						<span ng-show="form.newpassword.$dirty && vm.user.password != vm.newpassword" class="help-block">Contraseñas no concuerdan</span>
+					</div>
 		            
 		
 		            <div class="text-left">

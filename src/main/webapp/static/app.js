@@ -141,20 +141,6 @@
 
         };
 
-        $rootScope.checkCurrentRol = function() {
-            $rootScope.getLoggedRol();
-            var id = $rootScope.globals.currentUser.id;
-            UserService.RolByUserId(id).then(function (rol) {
-                //console.log($rootScope.loggedRol+'||'+rol.data[0].id);
-                if(rol.data){
-                    if(rol.data[0].id != $rootScope.loggedRol){
-                        $rootScope.doFlashMessage('Something changed, please relog.','','error', 4000, true);
-                        AuthenticationService.ClearCredentials();
-                    }
-                }
-            });
-        };
-
         $rootScope.getLoggedRol = function() {
             var c = document.cookie.split('; ');
             var cookies = {};
@@ -172,6 +158,15 @@
                 setTimeout(function()  { $rootScope.getLoggedRol();},1000) ;
             } 
         };
+        
+        $rootScope.getClass = function (path) {
+        	if($location.path() == path){
+        		return 'custom-active';
+        	}
+        	else{
+        		return '';
+        	}
+       }
 
     }
 

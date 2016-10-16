@@ -3913,17 +3913,6 @@ html.boxed-layout .appWrapper.header-fixed.aside-static #header {
   display: inline-block;
 }
 
-.pageheader .page-bar .page-breadcrumb > li:before {
-  display: inline-block;
-  font-family: "FontAwesome";
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  content: "\f105";
-  color: #95a2a9;
-}
 
 .pageheader .page-bar .page-breadcrumb > li:first-child {
   background-color: #768692;
@@ -3938,9 +3927,7 @@ html.boxed-layout .appWrapper.header-fixed.aside-static #header {
   color: white;
 }
 
-.pageheader .page-bar .page-breadcrumb > li:first-child:before {
-  content: "";
-}
+
 
 .pageheader .page-bar .page-toolbar {
   display: inline-block;
@@ -6381,16 +6368,7 @@ fieldset[disabled] .twitter-typeahead .tt-input {
 }
 
 
-.breadcrumb > li + li:before {
-  content: "\f105";
-  display: inline-block;
-  font-family: "FontAwesome";
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+
 .breadcrumb > li a{
   color: #fff;
   font-weight: bold;
@@ -18214,6 +18192,19 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
     color: #4371A4;
 }
 
+.custom-active {
+	background-color: #3b5998 !important;
+	color: white !important;
+}
+
+.custom-active a span {
+	color: white !important;
+}
+
 .nav-custom {
 	background-color: white !important;
+}
+
+.breadcrumb-active {
+	content: none !important;
 }
