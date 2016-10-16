@@ -1,5 +1,6 @@
 package com.entities;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,12 @@ import com.models.Vehicule_Status;
 
 
 @Entity
-public class Vehicule {
+public class Vehicule implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

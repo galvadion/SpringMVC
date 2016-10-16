@@ -1,5 +1,6 @@
 package com.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,8 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
-public class Fuel {
+public class Fuel implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,6 +31,7 @@ public class Fuel {
 	@Column(name="fuel_price")
 	private Float fuelPrice;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="fuel")
 	private List<Model> model;
 

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.VehiculeDao;
 import com.entities.Vehicule;
-import com.models.Filters;
+import com.models.SearchFilter;
 import com.models.Vehicule_Status;
 
 @Repository
@@ -24,13 +24,7 @@ public class VehiculeDaoImpl extends GenericDaoImpl<Vehicule, Integer> implement
 		super(entityClass);
 		// TODO Auto-generated constructor stub
 	}
-	public List<Vehicule> vehiculesAvailablesInDates(Filters filter) {
-		Query query=currentSession().createQuery("from Vehicule v where v.StatusBetweenDates.id not in (Select s.id from StatusBetweenDates s where :beginDate between s.beginDate and s.endDate =:endDate and :endDate between s.beginDate and s.endDate =:endDate)");
-		query.setParameter("beginDate", filter.getBeginDate());
-		query.setParameter("endDate", filter.getEndDate());
-		//query.setParameter("status", Vehicule_Status.Available);
-		return query.list();
-	}
+
 
 	
 }

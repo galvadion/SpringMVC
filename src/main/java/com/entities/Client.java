@@ -1,5 +1,6 @@
 package com.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,7 +9,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Client extends User {
+public class Client extends User implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Column(name= "birth_date")
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;

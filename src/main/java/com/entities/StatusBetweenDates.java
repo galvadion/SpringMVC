@@ -1,5 +1,6 @@
 package com.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,7 +20,12 @@ import com.models.Vehicule_Status;
 
 @Entity
 @Table(name = "status_in_dates")
-public class StatusBetweenDates {
+public class StatusBetweenDates implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

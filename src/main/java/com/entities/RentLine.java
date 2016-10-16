@@ -14,7 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class RentLine {
+public class RentLine implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	@GeneratedValue(strategy = GenerationType.AUTO)
