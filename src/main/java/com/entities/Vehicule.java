@@ -67,8 +67,9 @@ public class Vehicule implements Serializable{
 	@JoinColumn(name="branch_office_id", nullable=false)
 	private BranchOffice branchOffice;
 	
+	
 	@OneToMany(mappedBy="vehicule")
-	private List<Rent> rent;
+	private List<Booked> booked;
 
 	@OneToMany(mappedBy="vehicule")
 	private List<StatusBetweenDates> status;
@@ -172,15 +173,6 @@ public class Vehicule implements Serializable{
 	}
 
 
-	public List<Rent> getRent() {
-		return rent;
-	}
-
-	public void setRent(List<Rent> rent) {
-		this.rent = rent;
-	}
-
-
 	public Integer getKilometers() {
 		return kilometers;
 	}
@@ -196,6 +188,18 @@ public class Vehicule implements Serializable{
 
 	public void setBranchOffice(BranchOffice branchOffice) {
 		this.branchOffice = branchOffice;
+	}
+
+	public List<Booked> getBooked() {
+		return booked;
+	}
+
+	public void setBooked(List<Booked> booked) {
+		this.booked = booked;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	

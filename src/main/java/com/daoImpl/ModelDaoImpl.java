@@ -2,7 +2,7 @@ package com.daoImpl;
 
 import java.util.List;
 
-import org.hibernate.Query;
+import javax.persistence.*;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,7 +49,7 @@ public class ModelDaoImpl extends GenericDaoImpl<Model, Integer> implements Mode
 		query.setParameter("endDate", filter.getEndDate());
 		query.setParameter("status", Vehicule_Status.Available);
 		query.setParameter("branchId", filter.getBranchId());
-		return query.list();
+		return query.getResultList();
 	}
 	
 

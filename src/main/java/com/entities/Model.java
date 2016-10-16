@@ -59,9 +59,6 @@ public class Model implements Serializable {
 	@OneToMany(mappedBy="model")
 	private List<Vehicule> vehicules;
 	
-	@OneToMany(mappedBy="model")
-	private List<Booked> booked;
-	
 	private String transmission;
 	
 	private Float insurance;
@@ -131,14 +128,6 @@ public class Model implements Serializable {
 		this.brand = brand;
 	}
 
-	public List<Booked> getBooked() {
-		return booked;
-	}
-
-
-	public void setBooked(List<Booked> booked) {
-		this.booked = booked;
-	}
 
 	public Fuel getFuel() {
 		return fuel;

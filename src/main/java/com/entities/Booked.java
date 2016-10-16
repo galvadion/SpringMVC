@@ -1,6 +1,7 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -28,12 +29,10 @@ public class Booked implements Serializable{
 	private Integer id;
 	
 	@Column(name= "begin_booked_date")
-	@Temporal(TemporalType.DATE)
-	private Date beginbookedDate;
+	private LocalDate beginbookedDate;
 	
 	@Column(name= "last_booked_date")
-	@Temporal(TemporalType.DATE)
-	private Date lastbookedDate;
+	private LocalDate lastbookedDate;
 	
 	@Column(name = "transaction_number")
 	private String transactionNr;
@@ -42,9 +41,16 @@ public class Booked implements Serializable{
 	private Float initialAmount;
 	
 	@Column(name= "transaction_date")
-	@Temporal(TemporalType.DATE)
-	private Date transactionDate;
+	private LocalDate transactionDate;
 	
+	@Column(name="with_gps")
+	private boolean withGps;
+	
+	@Column(name="with_insurance")
+	private boolean withInsurance;
+	
+	@Column(name="with_full_tank")
+	private boolean withFullTank;
 	
 	@OneToOne
 	 @JoinColumn(
@@ -52,8 +58,20 @@ public class Booked implements Serializable{
 	private Rent rent;
 	
 	@ManyToOne
-	@JoinColumn(name="model_id", nullable=false)
-	private Model model;
+	@JoinColumn(name="vehicule_id", nullable=false)
+	private Vehicule vehicule;
+	
+	@ManyToOne
+	@JoinColumn(name="origin_office_id", nullable=false)
+	private BranchOffice originOffice;
+	
+	@ManyToOne
+	@JoinColumn(name="end_office_id", nullable=false)
+	private BranchOffice endOffice;
+	
+	@ManyToOne
+	@JoinColumn(name="client_id", nullable=false)
+	private Client client;
 
 	public Integer getId() {
 		return id;
@@ -63,28 +81,28 @@ public class Booked implements Serializable{
 		this.id = id;
 	}
 
-	public Date getBeginbookedDate() {
+	public LocalDate getBeginbookedDate() {
 		return beginbookedDate;
 	}
 
-	public void setBeginbookedDate(Date beginbookedDate) {
+	public void setBeginbookedDate(LocalDate beginbookedDate) {
 		this.beginbookedDate = beginbookedDate;
 	}
 
-	public Date getLastbookedDate() {
+	public LocalDate getLastbookedDate() {
 		return lastbookedDate;
 	}
 
-	public void setLastbookedDate(Date lastbookedDate) {
+	public void setLastbookedDate(LocalDate lastbookedDate) {
 		this.lastbookedDate = lastbookedDate;
 	}
 
-	public Model getmodel() {
-		return model;
+	public Vehicule getVehicule() {
+		return vehicule;
 	}
 
-	public void setmodel(Model model) {
-		this.model = model;
+	public void setVehicule(Vehicule model) {
+		this.vehicule = model;
 	}
 
 	public String getTransactionNr() {
@@ -103,11 +121,11 @@ public class Booked implements Serializable{
 		this.initialAmount = initialAmount;
 	}
 
-	public Date getTransactionDate() {
+	public LocalDate getTransactionDate() {
 		return transactionDate;
 	}
 
-	public void setTransactionDate(Date transactionDate) {
+	public void setTransactionDate(LocalDate transactionDate) {
 		this.transactionDate = transactionDate;
 	}
 
@@ -119,13 +137,57 @@ public class Booked implements Serializable{
 		this.rent = rent;
 	}
 
-	public Model getModel() {
-		return model;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setModel(Model model) {
-		this.model = model;
+	public void setClient(Client client) {
+		this.client = client;
 	}
-	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public boolean isWithGps() {
+		return withGps;
+	}
+
+	public void setWithGps(boolean withGps) {
+		this.withGps = withGps;
+	}
+
+	public boolean isWithInsurance() {
+		return withInsurance;
+	}
+
+	public void setWithInsurance(boolean withInsurance) {
+		this.withInsurance = withInsurance;
+	}
+
+	public boolean isWithFullTank() {
+		return withFullTank;
+	}
+
+	public void setWithFullTank(boolean withFullTank) {
+		this.withFullTank = withFullTank;
+	}
+
+	public BranchOffice getOriginOffice() {
+		return originOffice;
+	}
+
+	public void setOriginOffice(BranchOffice originOffice) {
+		this.originOffice = originOffice;
+	}
+
+	public BranchOffice getEndOffice() {
+		return endOffice;
+	}
+
+	public void setEndOffice(BranchOffice endOffice) {
+		this.endOffice = endOffice;
+	}
+
 	
 }

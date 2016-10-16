@@ -1,6 +1,7 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -33,12 +34,10 @@ public class StatusBetweenDates implements Serializable{
 	private Integer id;
 	
 	@Column(name= "begin_date")
-	@Temporal(TemporalType.DATE)
-	private Date beginDate;
+	private LocalDate beginDate;
 	
 	@Column(name= "end_date")
-	@Temporal(TemporalType.DATE)
-	private Date endDate;
+	private LocalDate endDate;
 	
 	@Enumerated(EnumType.STRING)
 	private Vehicule_Status status;
@@ -61,19 +60,19 @@ public class StatusBetweenDates implements Serializable{
 		this.id = id;
 	}
 
-	public Date getBeginDate() {
+	public LocalDate getBeginDate() {
 		return beginDate;
 	}
 
-	public void setBeginDate(Date beginDate) {
+	public void setBeginDate(LocalDate beginDate) {
 		this.beginDate = beginDate;
 	}
 
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 

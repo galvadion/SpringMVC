@@ -1,6 +1,7 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -41,18 +42,16 @@ public class BranchOffice implements Serializable{
 	private String address;
 	
 	@Column(name= "aperture_hour")
-	@Temporal(TemporalType.TIME)
-	private Date apertureHour;
+	private LocalTime apertureHour;
 	
 	@Column(name= "closing_hour")
-	@Temporal(TemporalType.TIME)
-	private Date closingHour;
+	private LocalTime closingHour;
 	
-	@OneToMany(mappedBy="originBranchOffice")
-	private List<Rent> rentEndsLists;
+	@OneToMany(mappedBy="originOffice")
+	private List<Booked> BookedEndsLists;
 	
-	@OneToMany(mappedBy="endBranchOffice")
-	private List<Rent> rentOriginsLists;
+	@OneToMany(mappedBy="endOffice")
+	private List<Booked> BookedOriginsLists;
 	
 	@OneToMany(mappedBy="branchOffice")
 	private List<Vehicule> vehicules;
@@ -109,36 +108,42 @@ public class BranchOffice implements Serializable{
 		this.address = address;
 	}
 
-	public Date getApertureHour() {
+	public LocalTime getApertureHour() {
 		return apertureHour;
 	}
 
-	public void setApertureHour(Date apertureHour) {
+	public void setApertureHour(LocalTime apertureHour) {
 		this.apertureHour = apertureHour;
 	}
 
-	public Date getClosingHour() {
+	public LocalTime getClosingHour() {
 		return closingHour;
 	}
 
-	public void setClosingHour(Date closingHour) {
+	public void setClosingHour(LocalTime closingHour) {
 		this.closingHour = closingHour;
 	}
 
-	public List<Rent> getRentEndsLists() {
-		return rentEndsLists;
+	
+
+	public List<Booked> getBookedEndsLists() {
+		return BookedEndsLists;
 	}
 
-	public void setRentEndsLists(List<Rent> rentEndsLists) {
-		this.rentEndsLists = rentEndsLists;
+	public void setBookedEndsLists(List<Booked> bookedEndsLists) {
+		BookedEndsLists = bookedEndsLists;
 	}
 
-	public List<Rent> getRentOriginsLists() {
-		return rentOriginsLists;
+	public List<Booked> getBookedOriginsLists() {
+		return BookedOriginsLists;
 	}
 
-	public void setRentOriginsLists(List<Rent> rentOriginsLists) {
-		this.rentOriginsLists = rentOriginsLists;
+	public void setBookedOriginsLists(List<Booked> bookedOriginsLists) {
+		BookedOriginsLists = bookedOriginsLists;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public List<StatusBetweenDates> getStatusDates() {
