@@ -5,7 +5,7 @@
 	<div class="page page-dashboard">
 
 		<div class="pageheader">
-			<h2><i class="fa fa-user"></i> Perfil</h2>
+			<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Perfil </strong></h1>
 			<ol class="breadcrumb">
 				<li><a href="#/home">Inicio</a></li>
 				<li class="breadcrumb-active">Perfil</li>
@@ -20,7 +20,7 @@
 				<section class="tile tile-simple">
 
 					<div class="tile-header dvd dvd-btm">
-						<h1 class="custom-font legend"><strong>Perfil</strong> Ajustes</h1>
+						<h1 class="custom-font legend"><strong>Ajustes</strong> de perfil</h1>
 					</div>
 					<!-- tile body -->
 					<div class="tile-body" >

@@ -55,6 +55,7 @@
         <script src="static/services/flash.service.js"></script>
         <script src="static/services/session.service.js"></script>
         <script src="static/services/user.service.js"></script>
+        <script src="static/services/vehicle.service.js"></script>
 
         <!--Controllers-->
         <script src="static/controllers/forgot/forgot.controller.js"></script>
@@ -62,6 +63,7 @@
         <script src="static/controllers/register/register.controller.js"></script>
         <script src="static/controllers/user/user.controller.js"></script>
         <script src="static/controllers/home/home.controller.js"></script>
+        <script src="static/controllers/vehicle/vehicle.controller.js"></script>
 
         <div id="wrap">
           <div ng-view></div>

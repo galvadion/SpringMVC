@@ -6,9 +6,7 @@
     <div class="page page-dashboard">
 
         <div class="pageheader">
-
-            <h2><i class="fa fa-dashboard"></i>  Inicio </h2> banner?
-
+			<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Inicio </strong></h1> banner?
         </div>
 
         <div class="row">

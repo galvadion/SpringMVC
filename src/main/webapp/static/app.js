@@ -4,13 +4,12 @@
 
     /***App Module Definition***/
     angular
-        .module('app', ['ngRoute', 'ngCookies','jkuri.datepicker','angularFileUpload','angular-confirm','ui.bootstrap','ngDialog','ngAnimate'/*,'simpleGrid','googlechart','datatables','datatables.buttons'*/])
+        .module('app', ['ngRoute', 'ngCookies','jkuri.datepicker','angularFileUpload','angular-confirm','ui.bootstrap','ngDialog','ngAnimate'])
         .config(config)
         .run(run)
         .run(['$location', '$rootScope', function($location, $rootScope) {
             $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
                 if (current.hasOwnProperty('$$route')) {
-                    //console.log(current.$$route.title);
                     $rootScope.title = current.$$route.title;
                 }
             });
@@ -71,12 +70,12 @@
                 controllerAs: 'vm'
             })
 
-            /*.when('/profile/:userId', {
-                controller: 'UserController',
-                templateUrl: 'user/user',
-                title: 'Demo - Perfil',
+            .when('/vehicle/list', {
+                controller: 'VehicleController',
+                templateUrl: 'vehicle/list',
+                title: 'Demo - Vehicles',
                 controllerAs: 'vm'
-            })*/
+            })
 
             .when('/terms', {
                 templateUrl: 'login/terms',
@@ -160,12 +159,13 @@
         };
         
         $rootScope.getClass = function (path) {
-        	if($location.path() == '/'){
-        		if((path == '/home') || (path == '/')){
+        	var currentLocation = $location.path().split('/',2);
+        	if(currentLocation[1] == ''){
+        		if(path == 'home'){
         			return 'custom-active';
         		} 
         	}
-        	else if($location.path() == path){
+        	else if(currentLocation[1] == path){
         		return 'custom-active';
         	}
         	else{

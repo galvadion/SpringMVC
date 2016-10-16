@@ -5,11 +5,17 @@
         .module('app')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService', '$scope'];
-    function RegisterController(UserService, $location, $rootScope, FlashService, $scope) {
+    RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService', '$scope', 'AuthenticationService'];
+    function RegisterController(UserService, $location, $rootScope, FlashService, $scope, AuthenticationService) {
         var vm = this;
         vm.register = register;
 
+        NProgress.start();
+        (function initController() {
+            AuthenticationService.ClearCredentials();
+            NProgress.done();
+        })();
+        
         function register() {
             NProgress.start();
             

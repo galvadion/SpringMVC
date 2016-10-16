@@ -24,13 +24,13 @@
 						    </div>
 						    <div class="collapse navbar-collapse" id="myNavbar">
 							    <ul class="nav navbar-nav nav-navigation" id="">
-							      <li ng-class=getClass('/home') class=""><a href="#/home"><span class="nav-custom-font">Inicio</span></a></li>
-							      <li ng-class=getClass('/vehicles') class=""><a href="#/vehicles"><span class="nav-custom-font">Coches</span></a></li>
-							      <li ng-class=getClass('/offices') class=""><a href="#/offices"><span class="nav-custom-font">Sucursales</span></a></li>
-							      <li ng-class=getClass('/about') class=""><a href="#/about"><span class="nav-custom-font">Nosotros</span></a></li>
+							      <li ng-class=getClass('home') class=""><a href="#/home"><span class="nav-custom-font">Inicio</span></a></li>
+							      <li ng-class=getClass('vehicle') class=""><a href="#/vehicle/list"><span class="nav-custom-font">Coches</span></a></li>
+							      <li ng-class=getClass('offices') class=""><a href="#/offices"><span class="nav-custom-font">Sucursales</span></a></li>
+							      <li ng-class=getClass('about') class=""><a href="#/about"><span class="nav-custom-font">Nosotros</span></a></li>
 							    </ul>
 							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="1==1">
-							        <li ng-class=getClass('/profile') class="dropdown">
+							        <li ng-class=getClass('profile') class="dropdown">
 							        	<a class="dropdown-toggle" data-toggle="dropdown" href="">
 							        		<span class="nav-custom-font">Pepe{{globals.currentUser.username}} </span>
 	                                		<img src="static/images/avatar.png" alt="" class="img-circle" style="height: 22px; width: 22px;">

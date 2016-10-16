@@ -5,10 +5,17 @@
         .module('app')
         .controller('ForgotController', ForgotController);
 
-    ForgotController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
-    function ForgotController(UserService, $location, $rootScope, FlashService) {
+    ForgotController.$inject = ['UserService', '$location', '$rootScope', 'FlashService', 'AuthenticationService'];
+    function ForgotController(UserService, $location, $rootScope, FlashService, AuthenticationService) {
         var vm = this;
         vm.forgot = forgot;
+        
+        NProgress.start();
+        (function initController() {
+            AuthenticationService.ClearCredentials();
+            NProgress.done();
+        })();
+        
         function forgot() {
             vm.dataLoading = true;
              UserService.ValidateUser(vm.username)
