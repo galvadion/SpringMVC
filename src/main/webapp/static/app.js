@@ -160,7 +160,12 @@
         };
         
         $rootScope.getClass = function (path) {
-        	if($location.path() == path){
+        	if($location.path() == '/'){
+        		if((path == '/home') || (path == '/')){
+        			return 'custom-active';
+        		} 
+        	}
+        	else if($location.path() == path){
         		return 'custom-active';
         	}
         	else{

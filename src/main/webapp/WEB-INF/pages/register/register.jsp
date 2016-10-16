@@ -9,8 +9,8 @@
 
 
         <div class="row page-login">
-            <div class="container w-420 p-15 text-center" style="background-color: white; width: 500px !Important;">
-
+            <div class="container w-420 p-15 text-center" style="background-color: white; width: 600px !Important;">
+				<h1 class="logo"><img src="static/images/logo.png" alt="Rent-UY" ></h1>
 		        <h3 class="text-light text-primary ">Registrarse</h3>
 		
 		        <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
@@ -109,8 +109,8 @@
 		        </form>
 		        
 		        <div class="lt wrap-reset mt-10">
-		        <a href="#/login" class="b-0 text-uppercase">Atras</a>
-		    </div>
+		        	<a href="#/login" class="b-0 text-uppercase">Atras</a>
+		    	</div>
 		    </div>
 		    
 		<!-- /row -->
