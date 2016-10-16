@@ -45,12 +45,13 @@ public class ApiRestController {
 		SearchFilter filter=new SearchFilter();
 		filter.setBeginDate(new Date());
 		Date finalDate=new Date();
-		finalDate.setDate(19);
+		finalDate.setDate(17);
 		filter.setEndDate(finalDate);
 		filter.setAirConditioner(true);
 		filter.setLuggage(1);
 		filter.setPassangers(0);
 		filter.setTransmission("-");
+		filter.setBranchId(1);
 		return new ResponseEntity<List<Model>>(modelService.getModelsBetweenFilter(filter,false,filter.getFuelTypeId()),HttpStatus.OK);
 	}
 	

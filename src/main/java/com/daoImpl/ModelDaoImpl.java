@@ -36,7 +36,7 @@ public class ModelDaoImpl extends GenericDaoImpl<Model, Integer> implements Mode
 		}if(byFuel){
 			fuelqry=" And fuel =: fuel";
 		}
-		Query query=currentSession().createQuery("Select distinct m from Model m join m.vehicules v join v.status s where passangers>= :passangers and luggage >= :luggage and airConditioner = :air "+transqry+fuelqry+ " and s.id in (Select s.id from StatusBetweenDates s join s.branchOffice where :beginDate >= s.beginDate and :endDate <= s.endDate and s.status =:status and b.id=:branchId)");
+		Query query=currentSession().createQuery("Select distinct m from Model m join m.vehicules v join v.status s where passangers>= :passangers and luggage >= :luggage and airConditioner = :air "+transqry+fuelqry+ " and s.id in (Select s.id from StatusBetweenDates s join s.branchOffice b where :beginDate >= s.beginDate and :endDate <= s.endDate and s.status =:status and b.id =:branchId)");
 		query.setParameter("passangers",filter.getPassangers());
 		query.setParameter("luggage", filter.getLuggage());
 		query.setParameter("air",filter.isAirConditioner());
@@ -49,7 +49,6 @@ public class ModelDaoImpl extends GenericDaoImpl<Model, Integer> implements Mode
 		query.setParameter("endDate", filter.getEndDate());
 		query.setParameter("status", Vehicule_Status.Available);
 		query.setParameter("branchId", filter.getBranchId());
-		System.out.println(query.list());
 		return query.list();
 	}
 	

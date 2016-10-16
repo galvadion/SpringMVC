@@ -47,7 +47,6 @@ public class ModelServiceImpl extends GenericServiceImpl<Model, Integer> impleme
 	public List<Model> getModelsBetweenFilter(SearchFilter filter,boolean byFuel,int fuelId) {
     	Fuel fuel=fuelDao.getById(fuelId);
 		List<Model> models=modelDao.modelInFilter(filter, fuel, byFuel);
-		System.out.println(models);
 		return models;
 	}
 
