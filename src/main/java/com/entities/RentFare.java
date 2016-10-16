@@ -1,5 +1,6 @@
 package com.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,7 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class RentFare {
+public class RentFare implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,13 +25,7 @@ public class RentFare {
 	
 	private Float gps;
 	
-	private Float insurance;
-	
-	@Column(name= "full_tank")
-	private Float fullTank;
-	
-	@OneToMany(mappedBy="rentFare")
-	private List<Vehicule> vehicules;
+
 
 	public Integer getId() {
 		return id;
@@ -43,29 +43,7 @@ public class RentFare {
 		this.gps = gps;
 	}
 
-	public Float getInsurance() {
-		return insurance;
-	}
 
-	public void setInsurance(Float insurance) {
-		this.insurance = insurance;
-	}
-
-	public Float getFullTank() {
-		return fullTank;
-	}
-
-	public void setFullTank(Float fullTank) {
-		this.fullTank = fullTank;
-	}
-
-	public List<Vehicule> getVehicules() {
-		return vehicules;
-	}
-
-	public void setVehicules(List<Vehicule> vehicules) {
-		this.vehicules = vehicules;
-	}
 	
 	
 }

@@ -1,5 +1,6 @@
 package com.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,7 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Category {
+public class Category implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +26,9 @@ public class Category {
 	@Column(name="base_price")
 	private float basePrice;
 
+	@OneToMany(mappedBy="category")
+	public List<Model> Models;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -32,19 +41,17 @@ public class Category {
 		return basePrice;
 	}
 
-	@OneToMany(mappedBy="category")
-	private List<Vehicule> vehicules;
 	
 	public void setBasePrice(float basePrice) {
 		this.basePrice = basePrice;
 	}
 
-	public List<Vehicule> getVehicules() {
-		return vehicules;
+	public List<Model> getModels() {
+		return Models;
 	}
 
-	public void setVehicules(List<Vehicule> vehicules) {
-		this.vehicules = vehicules;
+	public void setModels(List<Model> Models) {
+		this.Models = Models;
 	}
 	
 	

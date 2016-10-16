@@ -52,6 +52,7 @@ public class User {
 		this.name = name;
 	}
 
+
 	public String getEmail() {
 		return email;
 	}

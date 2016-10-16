@@ -1,5 +1,6 @@
 package com.entities;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -15,9 +16,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.models.Vehicule_Status;
+
 
 @Entity
-public class Vehicule {
+public class Vehicule implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,7 +43,7 @@ public class Vehicule {
 	private Date licensePlateExpirationDate;
 	
 	@Enumerated(EnumType.STRING)
-	private Vehicule_State state;
+	private Vehicule_Status state;
 	
 	private String color;
 	
@@ -56,21 +64,24 @@ public class Vehicule {
 	private Fuel fuel;
 	
 	@ManyToOne
-	@JoinColumn(name="category_id", nullable=false)
-	private Category category;
-	
-	@ManyToOne
-	@JoinColumn(name="rent_fare", nullable=false)
-	private RentFare rentFare;
-	
-	@ManyToOne
-	@JoinColumn(name="branch_office", nullable=false)
+	@JoinColumn(name="branch_office_id", nullable=false)
 	private BranchOffice branchOffice;
 	
 	@OneToMany(mappedBy="vehicule")
 	private List<Rent> rent;
 
+	@OneToMany(mappedBy="vehicule")
+	private List<StatusBetweenDates> status;
 	
+	
+	
+	public List<StatusBetweenDates> getStatus() {
+		return status;
+	}
+
+	public void setStatus(List<StatusBetweenDates> status) {
+		this.status = status;
+	}
 
 	public Integer getId() {
 		return id;
@@ -112,11 +123,11 @@ public class Vehicule {
 		this.licensePlateExpirationDate = licensePlateExpirationDate;
 	}
 
-	public Vehicule_State getState() {
+	public Vehicule_Status getState() {
 		return state;
 	}
 
-	public void setState(Vehicule_State state) {
+	public void setState(Vehicule_Status state) {
 		this.state = state;
 	}
 
@@ -160,21 +171,6 @@ public class Vehicule {
 		this.fuel = fuel;
 	}
 
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public RentFare getRentFare() {
-		return rentFare;
-	}
-
-	public void setrentFare(RentFare rentFare) {
-		this.rentFare = rentFare;
-	}
 
 	public List<Rent> getRent() {
 		return rent;
@@ -193,9 +189,6 @@ public class Vehicule {
 		this.kilometers = kilometers;
 	}
 
-	public void setRentFare(RentFare rentFare) {
-		this.rentFare = rentFare;
-	}
 
 	public BranchOffice getBranchOffice() {
 		return branchOffice;
@@ -207,9 +200,4 @@ public class Vehicule {
 
 	
 	
-}
-
-
-enum Vehicule_State {
-	Available, Unavailable, Maintenance
 }

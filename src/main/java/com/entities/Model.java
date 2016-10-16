@@ -1,9 +1,11 @@
 package com.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,8 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
-public class Model {
+public class Model implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,9 +31,20 @@ public class Model {
 	@Column(name = "name", nullable=false)
 	private String modelName;
 	
+	 
 	@ManyToOne
 	@JoinColumn(name="brand_id")
 	private Brand brand;
+	
+	 
+	@ManyToOne
+	@JoinColumn(name="fuel_id")
+	private Fuel fuel;
+	
+	 
+	@ManyToOne
+	@JoinColumn(name="category_id")
+	private Category category;
 
 	private int year;
 	
@@ -44,8 +64,11 @@ public class Model {
 	
 	private String transmission;
 	
-	@ManyToOne
-    @JoinColumn(name="model", nullable=false)
+	private Float insurance;
+	
+	@Column(name= "full_tank")
+	private Float fullTank;
+	
     public Brand getBrand() { return brand; }
 
 	
@@ -108,7 +131,6 @@ public class Model {
 		this.brand = brand;
 	}
 
-
 	public List<Booked> getBooked() {
 		return booked;
 	}
@@ -116,6 +138,45 @@ public class Model {
 
 	public void setBooked(List<Booked> booked) {
 		this.booked = booked;
+	}
+
+	public Fuel getFuel() {
+		return fuel;
+	}
+
+
+	public void setFuel(Fuel fuel) {
+		this.fuel = fuel;
+	}
+
+
+	public Category getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+
+	public Float getInsurance() {
+		return insurance;
+	}
+
+
+	public void setInsurance(Float insurance) {
+		this.insurance = insurance;
+	}
+
+
+	public Float getFullTank() {
+		return fullTank;
+	}
+
+
+	public void setFullTank(Float fullTank) {
+		this.fullTank = fullTank;
 	}
 	
 	

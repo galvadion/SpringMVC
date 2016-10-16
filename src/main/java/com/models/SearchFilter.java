@@ -2,7 +2,7 @@ package com.models;
 
 import java.util.Date;
 
-public class Filters {
+public class SearchFilter {
 	
 	Date beginDate;
 	Date endDate;
@@ -12,6 +12,7 @@ public class Filters {
 	int luggage;
 	String transmission;
 	int fuelTypeId;
+	int branchId;
 	
 	public Date getBeginDate() {
 		return beginDate;
@@ -60,6 +61,12 @@ public class Filters {
 	}
 	public void setFuelTypeId(int fuelTypeId) {
 		this.fuelTypeId = fuelTypeId;
+	}
+	public int getBranchId() {
+		return branchId;
+	}
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
 	}
 	
 	

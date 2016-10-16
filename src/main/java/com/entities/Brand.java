@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 public class Brand {
 
@@ -21,7 +23,7 @@ public class Brand {
 	private String name;
 	
 	@OneToMany(mappedBy="brand")
-	public List<Model> Models;
+	public List<Model> models;
 
 	public Integer getId() {
 		return id;
@@ -40,11 +42,11 @@ public class Brand {
 	}
 
 	public List<Model> getModels() {
-		return Models;
+		return models;
 	}
 
 	public void setModels(List<Model> models) {
-		Models = models;
+		models = models;
 	}	
 	
 }
