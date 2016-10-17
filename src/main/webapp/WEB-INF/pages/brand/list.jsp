@@ -6,11 +6,50 @@
     <div class="page page-dashboard">
 
         <div class="pageheader">
-        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Marcas </strong> Listado</h1>
+        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Marcas </strong></h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Inicio</a></li>
                 <li class="breadcrumb-active">Marcas</li>
             </ol>
+        </div>
+
+		<div class="row">
+        	<div class="col-md-12">
+            	
+            	<section class="tile">
+            		
+            		<!-- tile header -->
+                    <div class="tile-header dvd dvd-btm">
+                    	<h2 class="custom-font"><strong>Crear</strong></h2>
+                    </div>
+                    <!-- /tile header -->
+                    
+            		<!-- tile body -->
+                    <div class="tile-body">
+            			
+            			<form  form-on-change="checkFields()" name='form' class="" role="form" ng-submit="saveBrand()">
+
+                        <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+                            <label for="name" class="control-label">* Nombre</label>
+                            <input type="text" name="name" id="name" class="form-control" ng-model="vm.brand.name" placeholder="Nombre de la Marca" required>
+                            <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Nombre es requerido</span>
+                            <span ng-show="vm.duplicated" class="help-block">Ya existe una marca con ese nombre</span>
+                        </div>
+
+                        <!-- Buttons -->
+
+                        <div class="form-group text-right">
+                            <a class="btn btn-lightred" ng-click="cleanInput()">Cancelar</a>
+                            <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
+                        </div>
+
+                    </form>
+            			
+            		</div>
+            	
+            	</section>
+            </div>
+		<!-- /row -->
         </div>
 
         <div class="row">
@@ -20,8 +59,7 @@
             		
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
-                    	<h2 class="custom-font"><strong>Gestion Admin:</strong></h2>
-                        <a href="#/brand/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nueva Marca</a>
+                    	<h2 class="custom-font"><strong>Listado</strong></h2>
                     </div>
                     <!-- /tile header -->
 

@@ -29,7 +29,7 @@ public class Model implements Serializable {
 	private Integer id;
 
 	@Column(name = "name", nullable=false)
-	private String modelName;
+	private String name;
 	
 	 
 	@ManyToOne
@@ -75,11 +75,11 @@ public class Model implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getModelName() {
-		return modelName;
+	public String getname() {
+		return name;
 	}
-	public void setModelName(String modelName) {
-		this.modelName = modelName;
+	public void setname(String name) {
+		this.name = name;
 	}
 	public int getYear() {
 		return year;

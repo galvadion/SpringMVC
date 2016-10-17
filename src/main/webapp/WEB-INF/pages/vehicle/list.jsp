@@ -16,11 +16,11 @@
         <div class="row">
         	<div class="col-md-12">
             	
-            	<section class="tile" ng-if="vm.roladmin">
+            	<section class="tile" ng-show="vm.roladmin">
             		
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
-                    	<h2 class="custom-font"><strong>Gestion Admin:</strong></h2>
+                    	<h2 class="custom-font"><strong>Gestion:</strong></h2>
                         <a href="#/vehicle/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Vehiculo</a>
                     </div>
                     <!-- /tile header -->

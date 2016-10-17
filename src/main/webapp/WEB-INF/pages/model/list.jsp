@@ -20,7 +20,7 @@
             		
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
-                    	<h2 class="custom-font"><strong>Gestion Admin:</strong></h2>
+                    	<h2 class="custom-font"><strong>Gestion:</strong></h2>
                         <a href="#/model/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nueo Modelo</a>
                     </div>
                     <!-- /tile header -->

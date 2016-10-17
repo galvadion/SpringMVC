@@ -47,10 +47,6 @@
         <script type="text/javascript" src="static/js/nprogress.js"></script>
         <script type="text/javascript" src="static/js/ngDialog.js"></script>
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
-        
-        <!-- PAYPAL TEST -->
-        <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>
-        <script type="text/javascript" src="https://www.paypalobjects.com/js/external/apdg.js"></script>
 
 
 

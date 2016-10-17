@@ -51,7 +51,7 @@
 
 
 									<div class="form-group col-sm-6" >
-										<label for="address1">Direccion</label>
+										<label for="address1">* Direccion</label>
 										<input type="text" class="form-control" id="address" name="address" ng-model="vm.user.address" ng-readonly="vm.edit" required>
 									</div>
 
@@ -79,16 +79,6 @@
 						                <input type="text" pattern="\d*" name="phone" class="form-control" placeholder="Telefono" ng-model="vm.user.phone" ng-readonly="vm.edit" required />
 						                <span ng-show="form.phone.$dirty && form.phone.$error.required" class="help-block">Telefono es requerido</span>
 						            </div>
-						            
-						            <div ng-show="vm.roladmin"  class="form-group col-sm-6" ng-class="{ 'has-error': form.rol.$dirty && form.rol.$error.required }" >
-										<label for="access_level">Rol</label>
-										<select ng-readonly="vm.edit" ng-model="vm.rol" ng-change="checkClient()" name="rol" id="rol" class="col-sm-2 control-label col-lg-2 form-control m-bot15" ng-disabled="vm.edit" required>
-											<option value=""> Seleccionar Rol</option> 
-											<option value="employee">Empleado</option>
-											<option value="client">Cliente</option>
-										</select>
-										<span ng-show="form.rol.$dirty && form.rol.$error.required" class="help-block">Rol es requerido</span>
-									</div>
 						        </div>
 								
 								<div class="row" ng-show="vm.rolclient">
@@ -138,37 +128,6 @@
 							<span class="text-muted">Ultima Conexion: {{vm.user.lastlogin}}</span>
 						</div>
 						<!-- /tile widget -->
-
-					</section>
-					<!-- /tile -->
-
-					<!-- tile -->
-					<section ng-show="vm.roladmin" class="tile">
-
-						<!-- tile header -->
-						<div class="tile-header dvd dvd-btm">
-							<h1 class="custom-font"><strong>Usuarios </strong> </h1>
-							<div class="col-sm-9 right text-right p-0">
-								<button ng-click="newUser()" class="btn btn-orange btn-rounded left mr-5">Nuevo Usuario</button>
-							</div>
-						</div>
-						<!-- /tile header -->
-
-						<!-- tile body -->
-						<div  class="tile-body">
-							<div class="list">
-								<ul class="list-group">
-									<li  ng-repeat="user in vm.users" class="list-group-item" ng-class="{{user.status}} == 0 ? 'bg-active-user' : ''">
-										<span class="pull-right">
-											<a class="btn btn-rounded-20 btn-default btn-xs mr-5 bt-times" href="" ng-click="deleteUser(vm.users, $index)" confirm-if="checked" confirm="Are you sure, delete this User: {{user.name}} ?"><i class="fa fa-times"></i></a>
-											<a href="" class="btn btn-rounded-20 btn-default btn-xs mr-5 bt-pencil" ng-click="editUser(user)"><i class="fa fa-pencil"></i></a>
-											<a href="" class="btn btn-rounded-20 btn-default btn-xs mr-5 bt-lock" ng-click="changeUserStatus($event,user)"><i ng-class="{{user.status}} == 0 ? 'fa-lock' : 'fa-unlock'" class="fa " aria-hidden="true"></i></a>
-										</span>
-										{{user.name}}
-									</li>
-								</ul>
-							</div>
-						</div>
 
 					</section>
 					<!-- /tile -->

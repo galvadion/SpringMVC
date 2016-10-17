@@ -75,21 +75,14 @@
                 controllerAs: 'vm'
             })
 
-            .when('/brand/list', {
+            .when('/brand', {
                 controller: 'BrandController',
                 templateUrl: 'brand/list',
                 title: 'Demo - Marcas',
                 controllerAs: 'vm'
             })
-
-            .when('/brand/create', {
-                controller: 'BrandController',
-                templateUrl: 'brand/create',
-                title: 'Demo - Crear Marca',
-                controllerAs: 'vm'
-            })
             
-            .when('/model/list', {
+            .when('/model', {
                 controller: 'ModelController',
                 templateUrl: 'model/list',
                 title: 'Demo - Modelos',
@@ -103,7 +96,7 @@
                 controllerAs: 'vm'
             })
             
-            .when('/vehicle/list', {
+            .when('/vehicle', {
                 controller: 'VehicleController',
                 templateUrl: 'vehicle/list',
                 title: 'Demo - Vehiculos',

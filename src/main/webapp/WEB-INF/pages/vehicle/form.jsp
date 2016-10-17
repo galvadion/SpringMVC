@@ -22,157 +22,138 @@
             		<!-- tile body -->
                     <div class="tile-body">
             			
-            			<form  form-on-change="checkFields()" name='form' class="" role="form" ng-submit="saveAdv()">
+            			<form  form-on-change="checkFields()" name='form' class="" role="form" ng-submit="saveModel()">
 
-                        <div class="form-group" ng-class="{ 'has-error': form.advertiserName.$dirty && form.advertiserName.$error.required }">
-                            <label for="advertiserName" class="control-label">* Name</label>
-                            <input type="text" name="advertiserName" id="advertiserName" class="form-control" id="advertiserName" ng-model="vm.adv.advertiserName" placeholder="Name" required>
-                            <span ng-show="form.advertiserName.$dirty && form.advertiserName.$error.required" class="help-block">Advertiser Name is required</span>
+                        <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+                            <label for="name" class="control-label">* Nombre</label>
+                            <input type="text" name="name" id="name" class="form-control" id="name" ng-model="vm.model.name" placeholder="Nombre" required>
+                            <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Nombre es requerido</span>
                         </div>
 
-                        <div class="form-group" ng-class="{ 'has-error': form.contactName.$dirty && form.contactName.$error.required }">
-                            <label for="contactName" class="control-label">* Contact</label>
-                            <input type="text" class="form-control" name="contactName" id="contactName" class="form-control" id="contactName" ng-model="vm.adv.contactName" placeholder="Contact" required>
-                            <span ng-show="form.contactName.$dirty && form.contactName.$error.required" class="help-block">Contact Name is required</span>
-                        </div>
+						<div class="row">
+	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.brand.$dirty && form.brand.$error.required }">
+	                            <label for="brand" class="control-label">* Marca</label>
+	                            <select ng-model="vm.model.brand" name="brand" id="brand" class="form-control" required>
+									<option value=""> Seleccione una marca</option> 
+									<option value="1">Fiat</option>
+									<option value="2">Cherry</option>
+									<option value="3">Mercedes</option>
+								</select>
+								<span ng-show="form.brand.$dirty && form.brand.$error.required" class="help-block">Marca es requerida</span>
+	                        </div>
+	
+							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.year.$dirty && form.year.$error.required }">
+	                            <label for="year" class="control-label">* Año</label>
+	                            <select ng-model="vm.model.year" name="year" id="year" class="form-control" required>
+									<option value=""> Seleccione el año</option> 
+									<option value="2016">2016</option>
+									<option value="2015">2015</option>
+									<option value="2014">2014</option>
+									<option value="2013">2013</option>
+								</select>
+								<span ng-show="form.year.$dirty && form.year.$error.required" class="help-block">Año es requerido</span>
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="row">
+	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.category.$dirty && form.category.$error.required }">
+	                            <label for="category" class="control-label">* Categoria</label>
+	                            <select ng-model="vm.model.category" name="category" id="category" class="form-control" required>
+									<option value=""> Seleccione una categoria</option> 
+									<option value="1">S</option>
+									<option value="2">A</option>
+									<option value="3">B</option>
+									<option value="4">C</option>
+									<option value="4">D</option>
+								</select>
+								<span ng-show="form.category.$dirty && form.category.$error.required" class="help-block">Marca es requerida</span>
+	                        </div>
+	
+							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.passangers.$dirty && form.passangers.$error.required }">
+	                            <label for="passangers" class="control-label">* Cantidad de pasajeros</label>
+	                            <input type="number" min="1" ng-model="vm.model.passangers" name="passangers" id="passangers" class="form-control" placeholder="1" required>
+								<span ng-show="form.passangers.$dirty && form.passangers.$error.required" class="help-block">Cantidad de pasajeros es requerido</span>
+	                        </div>
+	                    </div>
 
-
-                        <div class="form-group" ng-class="{ 'has-error': (form.emailAddress.$dirty && form.emailAddress.$error.required ) || form.emailAddress.$error.email}">
-
-                            <label for="emailAddress" class="control-label">* Email</label>
-                            <input type="email" class="form-control" name="emailAddress" id="emailAddress" class="form-control" ng-model="vm.adv.emailAddress" placeholder="Enter Email" required>
-                            <span ng-show="form.emailAddress.$dirty && form.emailAddress.$error.required" class="help-block">Email is required</span>
-                            <span ng-show="form.emailAddress.$dirty && form.emailAddress.$error.email" class="help-block">Not valid Email</span>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.address1.$dirty && form.address1.$error.required }">
-                                <label for="address1" class="control-label">* Address 1</label>
-                                <input type="text" name="address1" id="address1" class="form-control" id="address1" ng-model="vm.adv.address1" placeholder="Address 1"  required>
-                                <span ng-show="form.address1.$dirty && form.address1.$error.required" class="help-block">Advertiser Address is required</span>
-                            </div>
-                            
-                            <div class="form-group col-md-6">
-                                <label for="address2" class="control-label">Address 2</label>
-                                <input type="text" class="form-control" name="address2" id="address2" class="form-control" id="address2" placeholder="Address 2" ng-model="vm.adv.address2">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-3" ng-class="{ 'has-error': form.country.$dirty && form.country.$error.required }">
-                                <label for="country" class="control-label">* Country</label>
-                                <select name="country" id="country" ng-model="vm.adv.country" class="form-control" ng-change="countryFilter()" required>
-                                    <option ng-repeat="(key,value) in vm.allCountry" value="{{value.id}}">{{value.name}}</option>
-                                </select>
-                                <!--<input type="text" name="country" id="country" class="form-control" id="country" ng-model="vm.adv.country" required>-->
-                                <span ng-show="form.country.$dirty && form.country.$error.required" class="help-block">Advertiser Country is required</span>
-                            </div>
-
-
-                            <div class="form-group col-md-3" ng-class="{ 'has-error': form.state.$dirty && form.state.$error.required }">
-                                <label for="state" class="control-label">* State</label>
-                                <select name="state" id="state" ng-model="vm.adv.state" class="form-control">
-                                    <option ng-repeat="(key,value) in vm.filteredState" value="{{value.id}}">{{value.name}}</option>
-                                </select>
-                                <!--<input type="text" name="state" id="state" class="form-control" id="state" ng-model="vm.adv.state" required>
-                                <span ng-show="form.state.$dirty && form.state.$error.required" class="help-block">Advertiser State is required</span>-->
-                            </div>
-
-                            <div class="form-group col-md-3" ng-class="{ 'has-error': form.city.$dirty && form.city.$error.required }">
-                                <label for="city" class="control-label">* City</label>
-                                <input type="text" name="city" id="city" class="form-control" id="city" ng-model="vm.adv.city" placeholder="City"  required>
-                                <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">Advertiser City is required</span>
-                            </div>
-
-                            <div class="form-group col-md-3" ng-class="{ 'has-error': form.zipcode.$dirty && form.zipcode.$error.required }">
-                                <label for="zipcode" class="control-label">* Zip Code</label>
-                                <input type="number" name="zipcode" id="zipcode" class="form-control" id="zipcode" ng-model="vm.adv.zipcode" placeholder="Zip Code" required>
-                                <span ng-show="form.zipcode.$dirty && form.zipcode.$error.required" class="help-block">Advertiser Zip Code is required</span>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group" ng-class="{ 'has-error': form.phone.$dirty && form.phone.$error.required }">
-                            <label for="phone" class="control-label">* Phone Number</label>
-                            <input type="number" name="phone" id="phone" class="form-control" id="phone" ng-model="vm.adv.phone" placeholder="Phone Number" required>
-                            <span ng-show="form.phone.$dirty && form.phone.$error.required" class="help-block">Advertiser Phone is required</span>
-                        </div>
-
-                      <!-- Commercial Contact -->
-                        <div class="form-group col-md-12 legend"> <h4><strong>Commercial</strong> Contact</h4><p></p> </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.commercialName.$dirty && form.commercialName.$error.required }">
-                                <label for="commercialName" class="control-label">* Name</label>
-                                <input type="text" name="commercialName" id="commercialName" class="form-control" id="commercialName" ng-model="vm.adv.commercial.name" placeholder="Name" required>
-                                <span ng-show="form.commercialName.$dirty && form.commercialName.$error.required" class="help-block">Name is required</span>
-                            </div>
-
-                            <div class="form-group col-md-6"  ng-class="{ 'has-error': form.commercialLastname.$dirty && form.commercialLastname.$error.required }">
-                                <label for="commercialLastname" class="control-label">* Last Name</label>
-                                <input type="text" name="commercialLastname" id="commercialLastname" class="form-control" id="commercialLastname" ng-model="vm.adv.commercial.lastName" placeholder="Last Name" required>
-                                <span ng-show="form.commercialLastname.$dirty && form.commercialLastname.$error.required" class="help-block">Last name is required</span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': (form.commercialEmail.$dirty && form.commercialEmail.$error.required ) || form.commercialEmail.$error.email}">
-
-                                <label for="commercialEmail" class="control-label">* Email</label>
-                                <input type="email" class="form-control" name="commercialEmail" id="commercialEmail" class="form-control" ng-model="vm.adv.commercial.email" placeholder="Enter Email" required>
-                                <span ng-show="form.commercialEmail.$dirty && form.commercialEmail.$error.required" class="help-block">Email is required</span>
-                                <span ng-show="form.commercialEmail.$dirty && form.commercialEmail.$error.email" class="help-block">Not valid Email</span>
-                            </div>
-
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.commercialPhone.$dirty && form.commercialPhone.$error.required }">
-                                <label for="commercialPhone" class="control-label">* Phone Number</label>
-                                <input type="number" name="commercialPhone" id="commercialPhone" class="form-control" id="commercialPhone" ng-model="vm.adv.commercial.phone" placeholder="Phone Number" required>
-                                <span ng-show="form.commercialPhone.$dirty && form.commercialPhone.$error.required" class="help-block">Phone is required</span>
-                            </div>
-                        </div>
-                      <!-- /Commercial Contact -->
-
-                      <!-- Finance Contact -->
-                        <div class="form-group col-md-12 legend"> <h4><strong>Finance</strong> Contact</h4><p></p> </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.financeName.$dirty && form.financeName.$error.required }">
-                                <label for="financeName" class="control-label">* Name</label>
-                                <input type="text" name="financeName" id="financeName" class="form-control" id="financeName" ng-model="vm.adv.finance.name" placeholder="Name" required>
-                                <span ng-show="form.financeName.$dirty && form.financeName.$error.required" class="help-block">Name is required</span>
-                            </div>
-
-                            <div class="form-group col-md-6"  ng-class="{ 'has-error': form.financeLastname.$dirty && form.financeLastname.$error.required }">
-                                <label for="financeLastname" class="control-label">* Last Name</label>
-                                <input type="text" name="financeLastname" id="financeLastname" class="form-control" id="financeLastname" ng-model="vm.adv.finance.lastName" placeholder="Last Name" required>
-                                <span ng-show="form.financeLastname.$dirty && form.financeLastname.$error.required" class="help-block">Last name is required</span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': (form.financeEmail.$dirty && form.financeEmail.$error.required ) || form.financeEmail.$error.email}">
-
-                                <label for="financeEmail" class="control-label">* Email</label>
-                                <input type="email" class="form-control" name="financeEmail" id="financeEmail" class="form-control" ng-model="vm.adv.finance.email" placeholder="Enter Email" required>
-                                <span ng-show="form.financeEmail.$dirty && form.financeEmail.$error.required" class="help-block">Email is required</span>
-                                <span ng-show="form.financeEmail.$dirty && form.financeEmail.$error.email" class="help-block">Not valid Email</span>
-                            </div>
-
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.financePhone.$dirty && form.financePhone.$error.required }">
-                                <label for="financePhone" class="control-label">* Phone Number</label>
-                                <input type="number" name="financePhone" id="financePhone" class="form-control" id="financePhone" ng-model="vm.adv.finance.phone" placeholder="Phone Number" required>
-                                <span ng-show="form.financePhone.$dirty && form.financePhone.$error.required" class="help-block">Phone is required</span>
-                            </div>
-                        </div>
-                      <!-- /Finance Contact -->
+                      	<div class="row">
+	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.cylinders.$dirty && form.cylinders.$error.required }">
+	                            <label for="cylinders" class="control-label">* Cilindrada</label>
+	                            <select ng-model="vm.model.cylinders" name="cylinders" id="cylinders" class="form-control" required>
+									<option value=""> Seleccione tipo</option> 
+									<option value="800">800</option>
+									<option value="1000">1000</option>
+									<option value="1200">1200</option>
+									<option value="1300">1300</option>
+									<option value="1400">1400</option>
+									<option value="1600">1600</option>
+									<option value="1800">1800</option>
+									<option value="2000">2000</option>
+								</select>
+								<span ng-show="form.cylinders.$dirty && form.cylinders.$error.required" class="help-block">Cilindrada es requerido</span>
+	                        </div>
+	                        
+	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.luggage.$dirty && form.luggage.$error.required }">
+	                            <label for="luggage" class="control-label">* Cantidad de valijas</label>
+	                            <input type="number" min="0" ng-model="vm.model.luggage" name="luggage" id="luggage" class="form-control" placeholder="0" required>
+								<span ng-show="form.luggage.$dirty && form.luggage.$error.required" class="help-block">Cantidad de valias es requerido</span>
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="row">
+	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.fuel.$dirty && form.fuel.$error.required }">
+	                            <label for="fuel" class="control-label">* Tipo Combustible</label>
+	                            <select ng-model="vm.model.fuel" name="fuel" id="fuel" class="form-control" required>
+									<option value=""> Seleccione un tipo de combustible</option> 
+									<option value="1">Nafta</option>
+									<option value="2">Gas Oil</option>
+								</select>
+								<span ng-show="form.fuel.$dirty && form.fuel.$error.required" class="help-block">Tipo de combustible es requerido</span>
+	                        </div>
+	                        
+	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.fullTank.$dirty && form.fullTank.$error.required }">
+	                            <label for="fullTank" class="control-label">* Capacidad de lts. del tanque</label>
+	                            <input type="number" min="1" ng-model="vm.model.fullTank" name="fullTank" id="fullTank" class="form-control" placeholder="1 lts" required>
+								<span ng-show="form.fullTank.$dirty && form.fullTank.$error.required" class="help-block">Capacidad del tanque es requerido</span>
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="row">
+	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.transmission.$dirty && form.transmission.$error.required }">
+	                            <label for="transmission" class="control-label">* Transmision</label>
+	                            <select ng-model="vm.model.transmission" name="transmission" id="transmission" class="form-control" required>
+									<option value=""> Seleccione tipo</option> 
+									<option value="manual">Manual</option>
+									<option value="automatico">Automatico</option>
+								</select>
+								<span ng-show="form.transmission.$dirty && form.transmission.$error.required" class="help-block">Tipo de transmision es requerido</span>
+	                        </div>
+	                        
+	                        
+	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.insurance.$dirty && form.insurance.$error.required }">
+	                            <label for="insurance" class="control-label">* Precio del seguro</label>
+	                            <input type="number" min="1" ng-model="vm.model.insurance" name="insurance" id="insurance" class="form-control" placeholder="$0" required>
+								<span ng-show="form.insurance.$dirty && form.insurance.$error.required" class="help-block">Precio del seguro es requerido</span>
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="row">
+	                    	<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.airConditioner.$dirty && form.airConditioner.$error.required }">
+	                            <label for="airConditioner" class="control-label">* Aire acondicionado</label>
+	                            <select ng-model="vm.model.airConditioner" name="airConditioner" id="airConditioner" class="form-control" required>
+									<option value=""> Seleccione tipo</option> 
+									<option value="1">Con aire acondicionado</option>
+									<option value="0">Sin  aire acondicionado</option>
+								</select>
+								<span ng-show="form.airConditioner.$dirty && form.airConditioner.$error.required" class="help-block">Tipo de aire acondicionado es requerido</span>
+	                        </div>
+	                    </div>
 
                         <!-- Buttons -->
 
                         <div class="form-group text-right">
-                            <a href="#/advertiser" class="btn btn-lightred">Cancel</a>
-                            <button type="submit" id="submit" ng-disabled="form.$invalid || vm.saveAdvFlag == true" class="btn  btn-orange">Save changes</button>
-                            <img ng-if="vm.adv.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                            <a href="#/vehicle" class="btn btn-lightred">Cancelar</a>
+                            <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
                         </div>
 
                     </form>

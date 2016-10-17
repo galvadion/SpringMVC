@@ -22,7 +22,7 @@ public class BrandController {
 	@Autowired
 	BrandService BrandService;
 
-	@RequestMapping(value="/list",method =RequestMethod.GET)
+	@RequestMapping(value="",method =RequestMethod.GET)
 	public ModelAndView getListPage(){
 		ModelAndView view=new ModelAndView("brand/list");
 		return view;

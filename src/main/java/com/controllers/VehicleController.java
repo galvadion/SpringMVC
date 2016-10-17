@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value="vehicle")
 public class VehicleController {
 	
-	@RequestMapping(value="/list",method =RequestMethod.GET)
+	@RequestMapping(value="",method =RequestMethod.GET)
 	public ModelAndView getListPage(){
 		ModelAndView view=new ModelAndView("vehicle/list");
 		return view;

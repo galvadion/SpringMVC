@@ -25,15 +25,15 @@
 						    <div class="collapse navbar-collapse" id="myNavbar">
 							    <ul class="nav navbar-nav nav-navigation" id="">
 							      <li ng-class=getClass('home') class=""><a href="#/home"><span class="nav-custom-font">Inicio</span></a></li>
-							      <li ng-if="vm.roladmin" ng-class=getClass('brand') class=""><a href="#/brand/list"><span class="nav-custom-font">Marcas</span></a></li>
-							      <li ng-if="vm.roladmin" ng-class=getClass('model') class=""><a href="#/model/list"><span class="nav-custom-font">Modelos</span></a></li>
-							      <li ng-class=getClass('vehicle') class=""><a href="#/vehicle/list"><span class="nav-custom-font">Coches</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('brand') class=""><a href="#/brand"><span class="nav-custom-font">Marcas</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('model') class=""><a href="#/model"><span class="nav-custom-font">Modelos</span></a></li>
+							      <li ng-class=getClass('vehicle') class=""><a href="#/vehicle"><span class="nav-custom-font">Vehiculos</span></a></li>
 							      <li ng-class=getClass('offices') class=""><a href=""><span class="nav-custom-font">Sucursales</span></a></li>
-							      <li ng-if="vm.roladmin" ng-class=getClass('employee') class=""><a href=""><span class="nav-custom-font">Empleados</span></a></li>
-							      <li ng-if="vm.roladmin" ng-class=getClass('client') class=""><a href=""><span class="nav-custom-font">Clientes</span></a></li>
-							      <li ng-if="vm.roladmin" ng-class=getClass('tarifas') class=""><a href=""><span class="nav-custom-font">Tarifas</span></a></li>
-							      <li ng-if="vm.roladmin" ng-class=getClass('promo') class=""><a href=""><span class="nav-custom-font">Promociones</span></a></li>
-							      <li ng-if="!vm.roladmin" ng-class=getClass('about') class=""><a href="#/about"><span class="nav-custom-font">Nosotros</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('employee') class=""><a href=""><span class="nav-custom-font">Empleados</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('client') class=""><a href=""><span class="nav-custom-font">Clientes</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('tarifas') class=""><a href=""><span class="nav-custom-font">Tarifas</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('promo') class=""><a href=""><span class="nav-custom-font">Promociones</span></a></li>
+							      <li ng-show="!vm.roladmin" ng-class=getClass('about') class=""><a href="#/about"><span class="nav-custom-font">Nosotros</span></a></li>
 							    </ul>
 							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="1==1">
 							        <li ng-class=getClass('profile') class="dropdown">
