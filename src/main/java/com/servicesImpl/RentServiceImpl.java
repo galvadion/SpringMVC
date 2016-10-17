@@ -1,5 +1,6 @@
 package com.servicesImpl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,18 @@ import org.springframework.stereotype.Service;
 
 import com.dao.GenericDao;
 import com.dao.RentDao;
+import com.dao.UserDao;
+import com.entities.Booked;
+import com.entities.Client;
 import com.entities.Rent;
+import com.entities.User;
 import com.services.RentService;
 
 @Service
 public class RentServiceImpl extends GenericServiceImpl<Rent, Integer> implements RentService{
 
 	private RentDao RentDao;
+	
 	public RentServiceImpl(){
 		
 	}
@@ -25,6 +31,16 @@ public class RentServiceImpl extends GenericServiceImpl<Rent, Integer> implement
         super(genericDao);
         this.RentDao = (RentDao) genericDao;
     }
+
+	public void confirmRent(Booked book) {
+		Rent rent=new Rent();
+		rent.setDeliveryDate(LocalDate.now());
+		rent.setBooked(book);
+		rent.setClient(book.getClient());
+		RentDao.saveOrUpdate(rent);
+		// TODO Auto-generated method stub
+		
+	}
 
 	
 }

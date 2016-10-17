@@ -1,29 +1,31 @@
 package com.models;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
-public class SearchFilter {
+public class SearchFilter implements Serializable {
 	
-	Date beginDate;
-	Date endDate;
-	boolean airConditioner;
-	int passangers;
-	Integer branchOfficeId;
-	int luggage;
-	String transmission;
-	int fuelTypeId;
-	int branchId;
+	private LocalDate beginDate;
+	private LocalDate endDate;
+	private boolean airConditioner;
+	private int passangers;
+	private Integer branchOfficeId;
+	private int luggage;
+	private String transmission;
+	private int fuelTypeId;
+	private int branchId;
 	
-	public Date getBeginDate() {
+	public LocalDate getBeginDate() {
 		return beginDate;
 	}
-	public void setBeginDate(Date beginDate) {
+	public void setBeginDate(LocalDate beginDate) {
 		this.beginDate = beginDate;
 	}
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 	public boolean isAirConditioner() {

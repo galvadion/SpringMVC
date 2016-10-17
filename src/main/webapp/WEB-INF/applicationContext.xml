@@ -37,7 +37,7 @@
 		<property name="jndiName" value="java:/Proyecto-Desa" />
 	</bean>
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="jndiDataSource" />
 		<property name="packagesToScan" value="com.entities" />
 		<property name="hibernateProperties">
@@ -58,7 +58,7 @@
 	<mvc:default-servlet-handler />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 </beans>

@@ -1,6 +1,7 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -33,20 +34,13 @@ public class Rent implements Serializable{
 	private String transactionNr;
 	
 	@Column(name= "transaction_date")
-	@Temporal(TemporalType.DATE)
-	private Date transactionDate;
+	private LocalDate transactionDate;
 	
-	@Column(name= "begin_rent_date")
-	@Temporal(TemporalType.DATE)
-	private Date beginRentDate;
-	
-	@Column(name= "last_rent_date")
-	@Temporal(TemporalType.DATE)
-	private Date lastRentDate;
+	@Column(name= "return_date")
+	private LocalDate returnDate;
 	
 	@Column(name= "delivery_date")
-	@Temporal(TemporalType.DATE)
-	private Date deliveryDate;
+	private LocalDate deliveryDate;
 	
 	@Column(name="initial_amount")
 	private Float initialAmount;
@@ -56,18 +50,6 @@ public class Rent implements Serializable{
 	
 	@OneToMany(mappedBy="rent")
 	private List<RentLine> rentLine;
-	
-	@ManyToOne
-	@JoinColumn(name="origin_branch_office")
-	private BranchOffice originBranchOffice;
-	
-	@ManyToOne
-	@JoinColumn(name="end_branch_office")
-	private BranchOffice endBranchOffice;
-	
-	@ManyToOne
-	@JoinColumn(name="vehicule_id")
-	private Vehicule vehicule;
 	
 	@ManyToOne
 	@JoinColumn(name ="client_id")
@@ -95,35 +77,33 @@ public class Rent implements Serializable{
 		this.transactionNr = transactionNr;
 	}
 
-	public Date getTransactionDate() {
+	public LocalDate getTransactionDate() {
 		return transactionDate;
 	}
 
-	public void setTransactionDate(Date transactionDate) {
+	public void setTransactionDate(LocalDate transactionDate) {
 		this.transactionDate = transactionDate;
 	}
 
-	public Date getBeginRentDate() {
-		return beginRentDate;
+	
+
+	public LocalDate getReturnDate() {
+		return returnDate;
 	}
 
-	public void setBeginRentDate(Date beginRentDate) {
-		this.beginRentDate = beginRentDate;
+	public void setReturnDate(LocalDate returnDate) {
+		this.returnDate = returnDate;
 	}
 
-	public Date getLastRentDate() {
-		return lastRentDate;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setLastRentDate(Date lastRentDate) {
-		this.lastRentDate = lastRentDate;
-	}
-
-	public Date getDeliveryDate() {
+	public LocalDate getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(Date deliveryDate) {
+	public void setDeliveryDate(LocalDate deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
@@ -151,29 +131,6 @@ public class Rent implements Serializable{
 		this.rentLine = rentLine;
 	}
 
-	public BranchOffice getOriginBranchOffice() {
-		return originBranchOffice;
-	}
-
-	public void setOriginBranchOffice(BranchOffice originBranchOffice) {
-		this.originBranchOffice = originBranchOffice;
-	}
-
-	public BranchOffice getEndBranchOffice() {
-		return endBranchOffice;
-	}
-
-	public void setEndBranchOffice(BranchOffice endBranchOffice) {
-		this.endBranchOffice = endBranchOffice;
-	}
-
-	public Vehicule getVehicule() {
-		return vehicule;
-	}
-
-	public void setVehicule(Vehicule vehicule) {
-		this.vehicule = vehicule;
-	}
 
 	public Client getClient() {
 		return client;
