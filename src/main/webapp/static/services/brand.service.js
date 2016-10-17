@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .factory('VehicleService', VehicleService);
+        .factory('BrandService', BrandService);
 
-    VehicleService.$inject = ['$http'];
+    BrandService.$inject = ['$http'];
 
-    function VehicleService($http) {
+    function BrandService($http) {
         var service = {};
 
         service.GetAllBrands = GetAllBrands;
@@ -25,7 +25,7 @@
             return $http.get('/SpringMVC/brand/getall').then(handleSuccess, handleError('Error getting all brands'));
         }
         
-        function CreateBrand(brand) {
+        function CreateBrand(brand) {console.log(brand);
             return $http.post('/SpringMVC/brand/insert', brand).then(handleSuccess, handleError('Error creating brand'));
         }
         

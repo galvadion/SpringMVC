@@ -12,6 +12,7 @@ import javax.validation.ValidatorFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,11 +31,6 @@ public class BrandController {
 
 	private static Validator validator;
 
-	public static void setUpValidator() {
-		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-		validator = factory.getValidator();
-	}
-
 	@RequestMapping(value="",method =RequestMethod.GET)
 	public ModelAndView getListPage(){
 		ModelAndView view=new ModelAndView("brand/list");
@@ -45,6 +41,11 @@ public class BrandController {
 	public ModelAndView getCreatePage() {
 		ModelAndView view = new ModelAndView("brand/form");
 		return view;
+	}
+	
+	public static void setUpValidator() {
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		validator = factory.getValidator();
 	}
 
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
@@ -63,7 +64,7 @@ public class BrandController {
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> getSaved(Brand brand) {
+	public @ResponseBody Map<String, Object> getSaved(@RequestBody Brand brand) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		setUpValidator();
 		Set<ConstraintViolation<Brand>> constraintViolations = validator.validate(brand);

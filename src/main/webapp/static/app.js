@@ -77,14 +77,14 @@
 
             .when('/brand', {
                 controller: 'BrandController',
-                templateUrl: 'brand/list',
+                templateUrl: 'brand',
                 title: 'Demo - Marcas',
                 controllerAs: 'vm'
             })
             
             .when('/model', {
                 controller: 'ModelController',
-                templateUrl: 'model/list',
+                templateUrl: 'model',
                 title: 'Demo - Modelos',
                 controllerAs: 'vm'
             })
@@ -98,7 +98,7 @@
             
             .when('/vehicle', {
                 controller: 'VehicleController',
-                templateUrl: 'vehicle/list',
+                templateUrl: 'vehicle',
                 title: 'Demo - Vehiculos',
                 controllerAs: 'vm'
             })
