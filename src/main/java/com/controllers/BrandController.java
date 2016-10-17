@@ -11,6 +11,8 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +29,7 @@ import com.services.BrandService;
 public class BrandController {
 
 	@Autowired
-	BrandService BrandService;
+	BrandService brandService;
 
 	private static Validator validator;
 
@@ -51,7 +53,7 @@ public class BrandController {
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getAll() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Brand> list = BrandService.getAll();
+		List<Brand> list = brandService.getAll();
 		if (list != null) {
 			map.put("status", "200");
 			map.put("message", "Data found");
@@ -64,23 +66,20 @@ public class BrandController {
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> getSaved(@RequestBody Brand brand) {
+	public ResponseEntity<String> getSaved(@RequestBody Brand brand) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		setUpValidator();
 		Set<ConstraintViolation<Brand>> constraintViolations = validator.validate(brand);
 		if (constraintViolations.size() > 0) {
-			map.put("status", "400");
-			map.put("message", constraintViolations.iterator().next().getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(constraintViolations.iterator().next().getMessage());
 		} else {
 			try {
-				BrandService.saveOrUpdate(brand);
-				map.put("status", "200");
-				map.put("message", "Your record have been saved successfully");
+				brandService.saveOrUpdate(brand);
+				return ResponseEntity.ok("The brand has been saved");
 			} catch (Exception e) {
-				map.put("status", "400");
-				map.put("message", "The name of the brand is duplicated");
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The name of the brand is duplicated");
 			}
 		}
-		return map;
 	}
 }

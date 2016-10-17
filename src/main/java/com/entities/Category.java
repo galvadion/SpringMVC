@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
 
 @Entity
 public class Category implements Serializable{
@@ -23,6 +24,7 @@ public class Category implements Serializable{
 	@Column(name = "id")
 	private Integer id;
 	
+	@Min(value=0, message="The value can't be negative")
 	@Column(name="base_price")
 	private float basePrice;
 

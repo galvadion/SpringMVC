@@ -19,14 +19,14 @@
         return service;
 
         
-        //Brand functions
+        // Brand functions
         
         function GetAllBrands() {
             return $http.get('/SpringMVC/brand/getall').then(handleSuccess, handleError('Error getting all brands'));
         }
         
         function CreateBrand(brand) {console.log(brand);
-            return $http.post('/SpringMVC/brand/insert', brand).then(handleSuccess, handleError('Error creating brand'));
+            return $http.post('/SpringMVC/brand/insert', brand).then(handleSuccess, handleError);
         }
         
         function UpdateBrand(brand) {
@@ -41,13 +41,17 @@
         // private functions
 
         function handleSuccess(data) {
-            return data;
+        	var response ={};
+        	response.success =true;
+    		response.data = data.data;
+            return response;
         }
-
-        function handleError(error) {
-            return function () {
-                return { success: false, message: error };
-            };
+        
+        function handleError(data) {
+        	var response = {};
+        		response.success =false;
+        		response.data = data.data;
+                return response;
         }
     }
 

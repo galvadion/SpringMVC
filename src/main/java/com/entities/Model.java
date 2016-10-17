@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Model implements Serializable {
@@ -28,12 +30,14 @@ public class Model implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
+	@NotNull(message="The name can't be null")
+	@NotEmpty(message="The name can't be empty")
 	@Column(name = "name", nullable=false)
 	private String name;
 	
 	 
 	@ManyToOne
-	@JoinColumn(name="brand_id")
+	@JoinColumn(name="brand_id", nullable=false)
 	private Brand brand;
 	
 	 
@@ -47,6 +51,7 @@ public class Model implements Serializable {
 	private Category category;
 
 	private int year;
+	
 	
 	private int passangers;
 	
