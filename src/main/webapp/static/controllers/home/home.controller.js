@@ -11,7 +11,7 @@
 
         var vm = this;
         initController();
-        
+        vm.roladmin = $rootScope.roladmin;
 
         function initController() {
             NProgress.start();

@@ -147,9 +147,9 @@
 
 						<!-- tile header -->
 						<div class="tile-header dvd dvd-btm">
-							<h1 class="custom-font"><strong>Users </strong> </h1>
+							<h1 class="custom-font"><strong>Usuarios </strong> </h1>
 							<div class="col-sm-9 right text-right p-0">
-								<button ng-click="newUser()" class="btn btn-orange btn-rounded left mr-5">New User</button>
+								<button ng-click="newUser()" class="btn btn-orange btn-rounded left mr-5">Nuevo Usuario</button>
 							</div>
 						</div>
 						<!-- /tile header -->

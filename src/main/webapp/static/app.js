@@ -62,6 +62,11 @@
                 title: 'Demo - Recuperar Contraseña',
                 controllerAs: 'vm'
             })
+            
+            .when('/terms', {
+                templateUrl: 'login/terms',
+                title: 'Demo - Terminos & Condiciones'
+            })
 
             .when('/profile', {
                 controller: 'UserController',
@@ -70,31 +75,66 @@
                 controllerAs: 'vm'
             })
 
-            .when('/vehicle/list', {
-                controller: 'VehicleController',
-                templateUrl: 'vehicle/list',
-                title: 'Demo - Vehicles',
+            .when('/brand/list', {
+                controller: 'BrandController',
+                templateUrl: 'brand/list',
+                title: 'Demo - Marcas',
                 controllerAs: 'vm'
             })
 
-            .when('/terms', {
-                templateUrl: 'login/terms',
-                title: 'Demo - Terminos & Condiciones'
+            .when('/brand/create', {
+                controller: 'BrandController',
+                templateUrl: 'brand/create',
+                title: 'Demo - Crear Marca',
+                controllerAs: 'vm'
+            })
+            
+            .when('/model/list', {
+                controller: 'ModelController',
+                templateUrl: 'model/list',
+                title: 'Demo - Modelos',
+                controllerAs: 'vm'
+            })
+
+            .when('/model/create', {
+                controller: 'ModelController',
+                templateUrl: 'model/create',
+                title: 'Demo - Crear Modelo',
+                controllerAs: 'vm'
+            })
+            
+            .when('/vehicle/list', {
+                controller: 'VehicleController',
+                templateUrl: 'vehicle/list',
+                title: 'Demo - Vehiculos',
+                controllerAs: 'vm'
+            })
+
+            .when('/vehicle/create', {
+                controller: 'VehicleController',
+                templateUrl: 'vehicle/create',
+                title: 'Demo - Crear Vehiculo',
+                controllerAs: 'vm'
             })
 
             .otherwise({ redirectTo: '/' });
     }
 
 
-
     /***Run Function ($routeScope Functions)***/
 
     run.$inject = ['$rootScope', '$location', '$cookieStore', '$http','FlashService', 'UserService', '$window', 'AuthenticationService'];
     function run($rootScope, $location, $cookieStore, $http,FlashService, UserService, $window, AuthenticationService) {
-        
+
+
+    	///Rol Admin Validator: true show admin views
+    	$rootScope.roladmin = true;
+    	/////////////////////////////////////////////
+    	
         //Session persistance: keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         $rootScope.loggedRol;
+
 
         if ($rootScope.globals.currentUser) {
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line

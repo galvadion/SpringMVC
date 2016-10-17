@@ -47,6 +47,10 @@
         <script type="text/javascript" src="static/js/nprogress.js"></script>
         <script type="text/javascript" src="static/js/ngDialog.js"></script>
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
+        
+        <!-- PAYPAL TEST -->
+        <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>
+        <script type="text/javascript" src="https://www.paypalobjects.com/js/external/apdg.js"></script>
 
 
 
@@ -55,6 +59,8 @@
         <script src="static/services/flash.service.js"></script>
         <script src="static/services/session.service.js"></script>
         <script src="static/services/user.service.js"></script>
+        <script src="static/services/brand.service.js"></script>
+        <script src="static/services/model.service.js"></script>
         <script src="static/services/vehicle.service.js"></script>
 
         <!--Controllers-->
@@ -63,6 +69,8 @@
         <script src="static/controllers/register/register.controller.js"></script>
         <script src="static/controllers/user/user.controller.js"></script>
         <script src="static/controllers/home/home.controller.js"></script>
+        <script src="static/controllers/brand/brand.controller.js"></script>
+        <script src="static/controllers/model/model.controller.js"></script>
         <script src="static/controllers/vehicle/vehicle.controller.js"></script>
 
         <div id="wrap">

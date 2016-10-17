@@ -6,22 +6,22 @@
     <div class="page page-dashboard">
 
         <div class="pageheader">
-        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Vehiculos </strong> Listado</h1>
+        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Modelos </strong> Listado</h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Inicio</a></li>
-                <li class="breadcrumb-active">Vehiculos</li>
+                <li class="breadcrumb-active">Modelos</li>
             </ol>
         </div>
 
         <div class="row">
         	<div class="col-md-12">
             	
-            	<section class="tile" ng-if="vm.roladmin">
+            	<section class="tile">
             		
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                     	<h2 class="custom-font"><strong>Gestion Admin:</strong></h2>
-                        <a href="#/vehicle/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Vehiculo</a>
+                        <a href="#/model/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nueo Modelo</a>
                     </div>
                     <!-- /tile header -->
 
@@ -32,46 +32,42 @@
             				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
                                 <thead>
                                    <tr>
-                                   		<th>Matricula</th>
+                                   		<th>Id</th>
+                                        <th>Nombre</th>
                                         <th>Marca</th>
-                                        <th>Modelo</th>
-                                        <th>Estado</th>
-                                        <th>Vencimiento Patente</th>
+                                        <th>Categoria</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!--tr ng-repeat="(key, value) in allVehicles"-->
+                                    <!--tr ng-repeat="(key, value) in allModels"-->
                                     <tr>
                                     	<td>
-                                            SBF 562                                             
+                                            1                                             
+                                        </td>
+                                        <td>
+                                            Uno
                                         </td>
                                         <td>
                                             Fiat                                             
                                         </td>
                                         <td>
-                                            Uno                                             
-                                        </td>
-                                        <td>
-                                            Disponible
-                                        </td>
-                                        <td>
-                                            23/10/2017
+                                            C
                                         </td>
                                         <td class="text-center plus">
-                                             <a ng-href="#/vehicle/{{value.id}}" title="Alquilar Vehiculo">
-                                             	<i class="fa fa-automobile"></i><br><small>Alquilar</small>
+                                             <a ng-href="#/model/{{value.id}}" title="Ver">
+                                             	<i class="fa fa-eye"></i><br><small>Ver</small>
                                              </a>
                                         </td>
                                         <td class="text-center plus">
-                                             <a ng-href="#/vehicle/{{value.id}}" title="Editar">
+                                             <a ng-href="#/model/{{value.id}}" title="Edit">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
                                              </a>
                                         </td>
                                         <td class="text-center delete">
-                                            <a doing-action="" href id="vehic-{{$index}}" href data-toggle="" ng-click="deleteVehicle(value,$index)" confirm-if="checked" confirm="Esta seguro, eliminar vehiculo id {{value.id}} ?" title="Eliminar">
+                                            <a doing-action="" href id="model-{{$index}}" href data-toggle="" ng-click="deleteModel(value,$index)" confirm-if="checked" confirm="Esta seguro, eliminar modelo nombre {{value.name}} ?" title="Eliminar">
                                                 <i class="fa fa-times"></i><br />
                                                 <small>Eliminar</small>
                                             </a>

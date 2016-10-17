@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value="vehicle")
-public class VehicleController {
+@RequestMapping(value="model")
+public class ModelController {
 	
 	@RequestMapping(value="/list",method =RequestMethod.GET)
 	public ModelAndView getListPage(){
-		ModelAndView view=new ModelAndView("vehicle/list");
+		ModelAndView view=new ModelAndView("model/list");
 		return view;
 	}
 	
 	@RequestMapping(value="/create",method =RequestMethod.GET)
 	public ModelAndView getCreatePage(){
-		ModelAndView view=new ModelAndView("vehicle/form");
+		ModelAndView view=new ModelAndView("model/form");
 		return view;
 	}
 }

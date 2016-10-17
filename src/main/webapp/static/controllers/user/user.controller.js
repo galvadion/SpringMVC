@@ -14,7 +14,7 @@
         vm.master ={};
         vm.auxuser = {};
         vm.users = {};
-        vm.roladmin = false;
+        vm.roladmin = $rootScope.roladmin;
         vm.rolclient = false;
         vm.edit = true;
         vm.saveUserFlag = false;

@@ -22,13 +22,19 @@ public class BrandController {
 	@Autowired
 	BrandService BrandService;
 
-	@RequestMapping(value = "/brand", method = RequestMethod.GET)
-	public ModelAndView getPage() {
-		ModelAndView view = new ModelAndView("brand/brand");
+	@RequestMapping(value="/list",method =RequestMethod.GET)
+	public ModelAndView getListPage(){
+		ModelAndView view=new ModelAndView("brand/list");
+		return view;
+	}
+	
+	@RequestMapping(value="/create",method =RequestMethod.GET)
+	public ModelAndView getCreatePage(){
+		ModelAndView view=new ModelAndView("brand/form");
 		return view;
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/GetAllBrands", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getAll() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Brand> list = BrandService.getAll();

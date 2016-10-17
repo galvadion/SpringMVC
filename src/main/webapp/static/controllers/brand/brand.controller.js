@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .controller('VehicleController', VehicleController);
+        .controller('BrandController', BrandController);
 
-    VehicleController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService'];
+    BrandController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService'];
     
-    function VehicleController($location,UserService, $rootScope, $scope,$timeout,SessionService) {
+    function BrandController($location,UserService, $rootScope, $scope,$timeout,SessionService) {
 
         var vm = this;
         initController();
