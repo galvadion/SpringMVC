@@ -22,12 +22,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.controllers.LoginController.LogInResonseBody;
+import com.entities.Booked;
+import com.entities.Client;
 import com.entities.Model;
 import com.entities.User;
 import com.models.BookingModel;
 import com.models.SearchFilter;
 import com.services.BookedService;
 import com.services.ModelService;
+import com.services.RentService;
+import com.services.StatusBetweenDatesService;
 import com.services.UserServices;
 
 
@@ -43,6 +47,10 @@ public class ApiRestController {
 	@Autowired
 	BookedService bookedService;
 	
+	@Autowired
+	RentService rentService;
+		
+	
 	@RequestMapping(value="/api/allUsers",method =RequestMethod.GET)
 	public List<User> getPage(){
 		
@@ -53,8 +61,7 @@ public class ApiRestController {
 	public @ResponseBody Map<String,Object> getModelos(){
 		SearchFilter filter=new SearchFilter();
 		filter.setBeginDate(LocalDate.now());
-		LocalDate finalDate=LocalDate.now();
-		finalDate.plusDays(2);
+		LocalDate finalDate=LocalDate.now().plusDays(2);
 		filter.setEndDate(finalDate);
 		filter.setAirConditioner(true);
 		filter.setLuggage(1);
@@ -73,8 +80,7 @@ public class ApiRestController {
 	public void bookVehicule(){
 		BookingModel booking=new BookingModel();
 		booking.setEndBranchOfficeId(2);
-		LocalDate finalDate=LocalDate.now();
-		finalDate.plusDays(2);
+		LocalDate finalDate=LocalDate.now().plusDays(2);
 		booking.setEndDate(finalDate);
 		booking.setOriginBranchOfficeId(1);
 		booking.setStartDate(LocalDate.now());
@@ -82,7 +88,12 @@ public class ApiRestController {
 		booking.setWithGps(true);
 		booking.setWithInsurance(false);
 		booking.setIdModel(1);
-		bookedService.registerBoot(booking);
+		bookedService.registerBoot(booking,(Client)userService.get(1));
 	}
-
+	
+	@RequestMapping(value="/api/confirm",method =RequestMethod.GET)
+	public void confirmRent(){
+		Booked booking= bookedService.getBookedByClient((Client)userService.get(1));
+		rentService.confirmRent(booking);
+	}
 }

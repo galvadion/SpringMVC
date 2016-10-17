@@ -24,6 +24,10 @@ import com.models.SearchFilter;
 import com.models.Vehicule_Status;
 import com.entities.Model;
 
+/**
+ * @author root
+ *
+ */
 @Repository
 @Transactional
 public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates, Integer> implements StatusBetweenDatesDao {
@@ -37,13 +41,15 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	public void editStatusAtBooking(Vehicule vehicule, LocalDate initialDate, LocalDate endDate,BranchOffice finalBranchOffice) {
-		Query query=currentSession().createQuery("Select s from StatusBetweenDate s where s.vehicule =:vehicule and :beginDate >= s.beginDate and :endDate <= s.endDate");
+		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicule =:vehicule and :beginDate >= s.beginDate and :endDate <= s.endDate");
 		query.setParameter("beginDate", initialDate);
 		query.setParameter("endDate", endDate);
 		query.setParameter("vehicule", vehicule);
 		StatusBetweenDates status=(StatusBetweenDates) query.getSingleResult();
 		status.setEndDate(initialDate);
+		System.out.println(status);
 		this.saveOrUpdate(status);
 		StatusBetweenDates booked=new StatusBetweenDates();
 		booked.setBeginDate(initialDate);
@@ -51,6 +57,8 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		booked.setEndDate(finalDate);
 		booked.setStatus(Vehicule_Status.Unavailable);
 		booked.setVehicule(vehicule);
+		booked.setBranchOffice(finalBranchOffice);
+		System.out.println(booked);
 		this.saveOrUpdate(booked);
 		StatusBetweenDates newDisponibility=new StatusBetweenDates();
 		newDisponibility.setBeginDate(finalDate);
@@ -58,6 +66,7 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		newDisponibility.setBranchOffice(finalBranchOffice);
 		newDisponibility.setStatus(Vehicule_Status.Available);
 		newDisponibility.setVehicule(vehicule);
+		System.out.println(newDisponibility);
 		this.saveOrUpdate(newDisponibility);
 	}
 

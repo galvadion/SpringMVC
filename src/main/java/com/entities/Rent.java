@@ -36,11 +36,8 @@ public class Rent implements Serializable{
 	@Column(name= "transaction_date")
 	private LocalDate transactionDate;
 	
-	@Column(name= "begin_rent_date")
-	private LocalDate beginRentDate;
-	
-	@Column(name= "last_rent_date")
-	private LocalDate lastRentDate;
+	@Column(name= "return_date")
+	private LocalDate returnDate;
 	
 	@Column(name= "delivery_date")
 	private LocalDate deliveryDate;
@@ -53,7 +50,6 @@ public class Rent implements Serializable{
 	
 	@OneToMany(mappedBy="rent")
 	private List<RentLine> rentLine;
-	
 	
 	@ManyToOne
 	@JoinColumn(name ="client_id")
@@ -89,20 +85,18 @@ public class Rent implements Serializable{
 		this.transactionDate = transactionDate;
 	}
 
-	public LocalDate getBeginRentDate() {
-		return beginRentDate;
+	
+
+	public LocalDate getReturnDate() {
+		return returnDate;
 	}
 
-	public void setBeginRentDate(LocalDate beginRentDate) {
-		this.beginRentDate = beginRentDate;
+	public void setReturnDate(LocalDate returnDate) {
+		this.returnDate = returnDate;
 	}
 
-	public LocalDate getLastRentDate() {
-		return lastRentDate;
-	}
-
-	public void setLastRentDate(LocalDate lastRentDate) {
-		this.lastRentDate = lastRentDate;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public LocalDate getDeliveryDate() {

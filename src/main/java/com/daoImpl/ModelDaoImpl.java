@@ -49,6 +49,7 @@ public class ModelDaoImpl extends GenericDaoImpl<Model, Integer> implements Mode
 		query.setParameter("endDate", filter.getEndDate());
 		query.setParameter("status", Vehicule_Status.Available);
 		query.setParameter("branchId", filter.getBranchId());
+		//System.out.println(filter.getEndDate());
 		return query.getResultList();
 	}
 	

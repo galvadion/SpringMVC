@@ -2,7 +2,8 @@ package com.daoImpl;
 
 import java.util.List;
 
-import org.hibernate.Query;
+import javax.persistence.Query;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,7 +34,7 @@ public class VehiculeDaoImpl extends GenericDaoImpl<Vehicule, Integer> implement
 		query.setParameter("endDate", model.getEndDate());
 		query.setParameter("status", Vehicule_Status.Available);
 		query.setParameter("branchId", model.getOriginBranchOfficeId());
-		return (Vehicule) query.uniqueResult();
+		return (Vehicule) query.getSingleResult();
 	}
 
 

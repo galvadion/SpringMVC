@@ -23,6 +23,12 @@ import com.models.Vehicule_Status;
 @Table(name = "status_in_dates")
 public class StatusBetweenDates implements Serializable{
 
+	@Override
+	public String toString() {
+		return "StatusBetweenDates [id=" + id + ", beginDate=" + beginDate + ", endDate=" + endDate + ", status="
+				+ status + ", vehicule=" + vehicule + ", branchOffice=" + branchOffice + "]";
+	}
+
 	/**
 	 * 
 	 */
