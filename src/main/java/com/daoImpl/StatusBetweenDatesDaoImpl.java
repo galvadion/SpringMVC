@@ -19,9 +19,9 @@ import com.entities.BranchOffice;
 import com.entities.Fuel;
 import com.entities.Model;
 import com.entities.StatusBetweenDates;
-import com.entities.Vehicule;
+import com.entities.Vehicle;
 import com.models.SearchFilter;
-import com.models.Vehicule_Status;
+import com.models.Vehicle_Status;
 import com.entities.Model;
 
 /**
@@ -42,11 +42,11 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 	}
 
 	
-	public void editStatusAtBooking(Vehicule vehicule, LocalDate initialDate, LocalDate endDate,BranchOffice finalBranchOffice) {
+	public void editStatusAtBooking(Vehicle vehicle, LocalDate initialDate, LocalDate endDate,BranchOffice finalBranchOffice) {
 		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicule =:vehicule and :beginDate >= s.beginDate and :endDate <= s.endDate");
 		query.setParameter("beginDate", initialDate);
 		query.setParameter("endDate", endDate);
-		query.setParameter("vehicule", vehicule);
+		query.setParameter("vehicule", vehicle);
 		StatusBetweenDates status=(StatusBetweenDates) query.getSingleResult();
 		status.setEndDate(initialDate);
 		System.out.println(status);
@@ -55,8 +55,8 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		booked.setBeginDate(initialDate);
 		LocalDate finalDate=endDate.plusDays(5);
 		booked.setEndDate(finalDate);
-		booked.setStatus(Vehicule_Status.Unavailable);
-		booked.setVehicule(vehicule);
+		booked.setStatus(Vehicle_Status.Unavailable);
+		booked.setVehicle(vehicle);
 		booked.setBranchOffice(finalBranchOffice);
 		System.out.println(booked);
 		this.saveOrUpdate(booked);
@@ -64,8 +64,8 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		newDisponibility.setBeginDate(finalDate);
 		newDisponibility.setEndDate(finalDate.plusYears(10));
 		newDisponibility.setBranchOffice(finalBranchOffice);
-		newDisponibility.setStatus(Vehicule_Status.Available);
-		newDisponibility.setVehicule(vehicule);
+		newDisponibility.setStatus(Vehicle_Status.Available);
+		newDisponibility.setVehicle(vehicle);
 		System.out.println(newDisponibility);
 		this.saveOrUpdate(newDisponibility);
 	}

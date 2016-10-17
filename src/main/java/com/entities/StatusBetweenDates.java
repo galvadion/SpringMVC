@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.models.Vehicule_Status;
+import com.models.Vehicle_Status;
 
 @Entity
 @Table(name = "status_in_dates")
@@ -26,7 +26,7 @@ public class StatusBetweenDates implements Serializable{
 	@Override
 	public String toString() {
 		return "StatusBetweenDates [id=" + id + ", beginDate=" + beginDate + ", endDate=" + endDate + ", status="
-				+ status + ", vehicule=" + vehicule + ", branchOffice=" + branchOffice + "]";
+				+ status + ", vehicle=" + vehicle + ", branchOffice=" + branchOffice + "]";
 	}
 
 	/**
@@ -46,11 +46,11 @@ public class StatusBetweenDates implements Serializable{
 	private LocalDate endDate;
 	
 	@Enumerated(EnumType.STRING)
-	private Vehicule_Status status;
+	private Vehicle_Status status;
 	
 	@ManyToOne
-	@JoinColumn(name="vehicule_id", nullable=false)
-	private Vehicule vehicule;
+	@JoinColumn(name="vehicle_id", nullable=false)
+	private Vehicle vehicle;
 	
 	@ManyToOne
 	@JoinColumn(name="branch_office_id", nullable=false)
@@ -82,20 +82,20 @@ public class StatusBetweenDates implements Serializable{
 		this.endDate = endDate;
 	}
 
-	public Vehicule_Status getStatus() {
+	public Vehicle_Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(Vehicule_Status status) {
+	public void setStatus(Vehicle_Status status) {
 		this.status = status;
 	}
 
-	public Vehicule getVehicule() {
-		return vehicule;
+	public Vehicle getVehicle() {
+		return vehicle;
 	}
 
-	public void setVehicule(Vehicule vehicule) {
-		this.vehicule = vehicule;
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 
 	public BranchOffice getBranchOffice() {

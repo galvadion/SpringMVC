@@ -16,11 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.models.Vehicule_Status;
+import com.models.Vehicle_Status;
 
 
 @Entity
-public class Vehicule implements Serializable{
+public class Vehicle implements Serializable{
 
 	/**
 	 * 
@@ -43,7 +43,7 @@ public class Vehicule implements Serializable{
 	private Date licensePlateExpirationDate;
 	
 	@Enumerated(EnumType.STRING)
-	private Vehicule_Status state;
+	private Vehicle_Status state;
 	
 	private String color;
 	
@@ -68,10 +68,10 @@ public class Vehicule implements Serializable{
 	private BranchOffice branchOffice;
 	
 	
-	@OneToMany(mappedBy="vehicule")
+	@OneToMany(mappedBy="vehicle")
 	private List<Booked> booked;
 
-	@OneToMany(mappedBy="vehicule")
+	@OneToMany(mappedBy="vehicle")
 	private List<StatusBetweenDates> status;
 	
 	
@@ -124,11 +124,11 @@ public class Vehicule implements Serializable{
 		this.licensePlateExpirationDate = licensePlateExpirationDate;
 	}
 
-	public Vehicule_Status getState() {
+	public Vehicle_Status getState() {
 		return state;
 	}
 
-	public void setState(Vehicule_Status state) {
+	public void setState(Vehicle_Status state) {
 		this.state = state;
 	}
 

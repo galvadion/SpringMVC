@@ -14,11 +14,11 @@ import com.dao.FuelDao;
 import com.dao.GenericDao;
 import com.dao.ModelDao;
 import com.dao.UserDao;
-import com.dao.VehiculeDao;
+import com.dao.VehicleDao;
 import com.entities.Fuel;
 import com.entities.Model;
 import com.entities.User;
-import com.entities.Vehicule;
+import com.entities.Vehicle;
 import com.models.SearchFilter;
 import com.services.ModelService;
 import com.services.UserServices;
@@ -27,7 +27,7 @@ import com.services.UserServices;
 public class ModelServiceImpl extends GenericServiceImpl<Model, Integer> implements ModelService{
 
 	private ModelDao modelDao;
-	private VehiculeDao vehiculeDao;
+	private VehicleDao vehicleDao;
 	private FuelDao fuelDao;
 	public ModelServiceImpl(){
 		
@@ -36,9 +36,9 @@ public class ModelServiceImpl extends GenericServiceImpl<Model, Integer> impleme
     @Autowired
     public ModelServiceImpl(@Qualifier("modelDaoImpl") GenericDao<Model, Integer> genericDao,
     		@Qualifier("fuelDaoImpl") GenericDao<Fuel, Integer> genericDao3,
-    		@Qualifier("vehiculeDaoImpl") GenericDao<Vehicule, Integer> genericDao2) {
+    		@Qualifier("vehicleDaoImpl") GenericDao<Vehicle, Integer> genericDao2) {
         super(genericDao);
-        this.vehiculeDao = (VehiculeDao) genericDao2;
+        this.vehicleDao = (VehicleDao) genericDao2;
         this.modelDao = (ModelDao) genericDao;
         this.fuelDao = (FuelDao) genericDao3;
     }

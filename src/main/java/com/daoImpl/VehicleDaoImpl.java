@@ -9,32 +9,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dao.VehiculeDao;
-import com.entities.Vehicule;
+import com.dao.VehicleDao;
+import com.entities.Vehicle;
 import com.models.BookingModel;
 import com.models.SearchFilter;
-import com.models.Vehicule_Status;
+import com.models.Vehicle_Status;
 
 @Repository
 @Transactional
-public class VehiculeDaoImpl extends GenericDaoImpl<Vehicule, Integer> implements VehiculeDao {
+public class VehicleDaoImpl extends GenericDaoImpl<Vehicle, Integer> implements VehicleDao {
 
-	public VehiculeDaoImpl(){
+	public VehicleDaoImpl(){
 		super(null);
 	}
-	public VehiculeDaoImpl(Class<Vehicule> entityClass) {
+	public VehicleDaoImpl(Class<Vehicle> entityClass) {
 		super(entityClass);
 		// TODO Auto-generated constructor stub
 	}
-	public Vehicule getVehiculeAvailable(BookingModel model) {
+	public Vehicle getVehiculeAvailable(BookingModel model) {
 		
 		Query query=currentSession().createQuery("Select v from Vehicule v join v.model m join v.status s where m.id=:modelId and s.id in (Select s.id from StatusBetweenDates s join s.branchOffice b where :beginDate >= s.beginDate and :endDate <= s.endDate and s.status =:status and b.id =:branchId)");
 		query.setParameter("modelId", model.getIdModel());
 		query.setParameter("beginDate", model.getStartDate());
 		query.setParameter("endDate", model.getEndDate());
-		query.setParameter("status", Vehicule_Status.Available);
+		query.setParameter("status", Vehicle_Status.Available);
 		query.setParameter("branchId", model.getOriginBranchOfficeId());
-		return (Vehicule) query.getSingleResult();
+		return (Vehicle) query.getSingleResult();
 	}
 
 

@@ -57,7 +57,7 @@ public class Model implements Serializable {
 	private boolean airConditioner;
 	
 	@OneToMany(mappedBy="model")
-	private List<Vehicule> vehicules;
+	private List<Vehicle> vehicles;
 	
 	private String transmission;
 	
@@ -111,11 +111,11 @@ public class Model implements Serializable {
 	public void setAirConditioner(boolean airConditioner) {
 		this.airConditioner = airConditioner;
 	}
-	public List<Vehicule> getVehicules() {
-		return vehicules;
+	public List<Vehicle> getVehicules() {
+		return vehicles;
 	}
-	public void setVehicules(List<Vehicule> vehicules) {
-		this.vehicules = vehicules;
+	public void setVehicules(List<Vehicle> vehicles) {
+		this.vehicles = vehicles;
 	}
 	public String getTransmission() {
 		return transmission;
