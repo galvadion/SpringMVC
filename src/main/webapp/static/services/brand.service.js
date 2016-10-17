@@ -10,9 +10,7 @@
     function VehicleService($http) {
         var service = {};
 
-        service.CheckBrand = CheckBrand;
         service.GetAllBrands = GetAllBrands;
-        service.GetBrandById = GetBrandById;
         service.CreateBrand = CreateBrand;
         service.UpdateBrand = UpdateBrand;
         service.DeleteBrand = DeleteBrand;
@@ -23,20 +21,12 @@
         
         //Brand functions
         
-        function CheckBrand(name) {
-            return $http.post('/SpringMVC/brand/checkname', name).then(handleSuccess, handleError('Error checking brand'));
-        }
-        
         function GetAllBrands() {
             return $http.get('/SpringMVC/brand/getall').then(handleSuccess, handleError('Error getting all brands'));
         }
         
-        function GetBrandById(id) {
-            return $http.get('/SpringMVC/brand/getbyid' + id).then(handleSuccess, handleError('Error getting brand by id'));
-        }
-        
         function CreateBrand(brand) {
-            return $http.post('/SpringMVC/brand/register', brand).then(handleSuccess, handleError('Error creating brand'));
+            return $http.post('/SpringMVC/brand/insert', brand).then(handleSuccess, handleError('Error creating brand'));
         }
         
         function UpdateBrand(brand) {

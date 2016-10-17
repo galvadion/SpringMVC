@@ -10,7 +10,6 @@
     function VehicleService($http) {
         var service = {};
 
-        service.CheckVehicle = CheckVehicle;
         service.GetAllVehicles = GetAllVehicles;
         service.GetVehicleById = GetVehicleById;
         service.CreateVehicle = CreateVehicle;
@@ -23,10 +22,6 @@
         
         //Vehicle functions
         
-        function CheckVehicle(vehicle) {
-            return $http.post('/SpringMVC/vehicle/checkvehicle', vehicle).then(handleSuccess, handleError('Error checking vehicle'));
-        }
-        
         function GetAllVehicles() {
             return $http.get('/SpringMVC/vehicle/getall').then(handleSuccess, handleError('Error getting all vehicles'));
         }
@@ -36,7 +31,7 @@
         }
         
         function CreateVehicle(vehicle) {
-            return $http.post('/SpringMVC/vehicle/register', vehicle).then(handleSuccess, handleError('Error creating vehicle'));
+            return $http.post('/SpringMVC/vehicle/insert', vehicle).then(handleSuccess, handleError('Error creating vehicle'));
         }
         
         function UpdateVehicle(vehicle) {

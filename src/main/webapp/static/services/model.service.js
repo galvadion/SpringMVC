@@ -10,7 +10,6 @@
     function VehicleService($http) {
         var service = {};
 
-        service.CheckModel = CheckModel;
         service.GetAllModels = GetAllModels;
         service.GetModelById = GetModelById;
         service.CreateModel = CreateModel;
@@ -23,10 +22,6 @@
         
         //Model functions
         
-        function CheckModel(name) {
-            return $http.post('/SpringMVC/model/checkname', name).then(handleSuccess, handleError('Error checking model'));
-        }
-        
         function GetAllModels() {
             return $http.get('/SpringMVC/model/getall').then(handleSuccess, handleError('Error getting all models'));
         }
@@ -36,7 +31,7 @@
         }
         
         function CreateModel(model) {
-            return $http.post('/SpringMVC/model/register', model).then(handleSuccess, handleError('Error creating model'));
+            return $http.post('/SpringMVC/model/insert', model).then(handleSuccess, handleError('Error creating model'));
         }
         
         function UpdateModel(model) {
