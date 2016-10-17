@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.GenericDao;
 import com.dao.StatusBetweenDatesDao;
-import com.dao.VehiculeDao;
+import com.dao.VehicleDao;
 import com.dao.BookedDao;
 import com.dao.BranchOfficeDao;
 import com.entities.Booked;
@@ -23,7 +23,7 @@ import com.entities.Client;
 import com.entities.Model;
 import com.entities.StatusBetweenDates;
 import com.entities.User;
-import com.entities.Vehicule;
+import com.entities.Vehicle;
 import com.models.BookingModel;
 import com.services.BookedService;
 
@@ -32,7 +32,7 @@ import com.services.BookedService;
 public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> implements BookedService{
 
 	private BookedDao bookedDao;
-	private VehiculeDao vehiculeDao;
+	private VehicleDao vehicleDao;
 	private BranchOfficeDao branchOfficeDao;
 	private StatusBetweenDatesDao statusBetweenDao;
 	
@@ -48,31 +48,31 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
     public BookedServiceImpl(
             @Qualifier("bookedDaoImpl") GenericDao<Booked, Integer> genericDao,
             @Qualifier("branchOfficeDaoImpl") GenericDao<BranchOffice, Integer> genericDao3,
-            @Qualifier("vehiculeDaoImpl") GenericDao<Vehicule, Integer> genericDao2,
+            @Qualifier("vehicleDaoImpl") GenericDao<Vehicle, Integer> genericDao2,
             @Qualifier("statusBetweenDatesDaoImpl") GenericDao<StatusBetweenDates, Integer> genericDao4) {
         super(genericDao);
         this.bookedDao = (BookedDao) genericDao;
-        this.vehiculeDao= (VehiculeDao) genericDao2;
+        this.vehicleDao= (VehicleDao) genericDao2;
         this.branchOfficeDao= (BranchOfficeDao) genericDao3;
         this.statusBetweenDao = (StatusBetweenDatesDao) genericDao4;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
 	public void registerBoot(BookingModel model,Client client) {
-		Vehicule vehicule=vehiculeDao.getVehiculeAvailable(model);
+		Vehicle vehicle=vehicleDao.getVehiculeAvailable(model);
 		BranchOffice originBO=branchOfficeDao.getById(model.getOriginBranchOfficeId());
 		BranchOffice finalBO=branchOfficeDao.getById(model.getEndBranchOfficeId());
 		Booked booked=new Booked();
 		booked.setBeginbookedDate(model.getStartDate());
 		booked.setLastbookedDate(model.getEndDate());
-		booked.setVehicule(vehicule);
+		booked.setVehicule(vehicle);
 		booked.setWithGps(model.isWithGps());
 		booked.setWithFullTank(model.isWithFullTank());
 		booked.setWithInsurance(model.isWithInsurance());
 		booked.setTransactionDate(LocalDate.now());
 		booked.setOriginOffice(originBO);
 		booked.setEndOffice(finalBO);
-		Model vehiculeModel=vehicule.getModel();
+		Model vehiculeModel=vehicle.getModel();
 		float gpsByDay=0,insuranceByDay=0;
 		if(model.isWithGps()){
 			gpsByDay=Float.valueOf(env.getProperty("gps"));
@@ -93,7 +93,7 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		//Missing booked set client waiting for Oauth implementation
 		//missing data related to the paypal callback
 		bookedDao.saveOrUpdate(booked);
-		statusBetweenDao.editStatusAtBooking(vehicule, model.getStartDate(), model.getEndDate(), finalBO);
+		statusBetweenDao.editStatusAtBooking(vehicle, model.getStartDate(), model.getEndDate(), finalBO);
 		
 	}
 

@@ -13,7 +13,7 @@ import com.dao.ModelDao;
 import com.entities.Fuel;
 import com.entities.Model;
 import com.models.SearchFilter;
-import com.models.Vehicule_Status;
+import com.models.Vehicle_Status;
 import com.entities.Model;
 
 @Repository
@@ -47,7 +47,7 @@ public class ModelDaoImpl extends GenericDaoImpl<Model, Integer> implements Mode
 		}
 		query.setParameter("beginDate", filter.getBeginDate());
 		query.setParameter("endDate", filter.getEndDate());
-		query.setParameter("status", Vehicule_Status.Available);
+		query.setParameter("status", Vehicle_Status.Available);
 		query.setParameter("branchId", filter.getBranchId());
 		//System.out.println(filter.getEndDate());
 		return query.getResultList();

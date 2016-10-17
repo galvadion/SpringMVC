@@ -1,5 +1,5 @@
 package com.models;
 
-public enum Vehicule_Status {
+public enum Vehicle_Status {
 	Available, Unavailable, Maintenance
 }

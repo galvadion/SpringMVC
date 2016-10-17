@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 public class Brand {
@@ -19,7 +21,9 @@ public class Brand {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "name",unique =true, nullable=false)
+	@NotNull(message="The name can't be null")
+	@NotEmpty(message="The name can't be empty")
+	@Column(name = "name",unique =true)
 	private String name;
 	
 	@OneToMany(mappedBy="brand")

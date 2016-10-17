@@ -8,7 +8,7 @@ import com.entities.BranchOffice;
 import com.entities.Fuel;
 import com.entities.Model;
 import com.entities.StatusBetweenDates;
-import com.entities.Vehicule;
+import com.entities.Vehicle;
 import com.models.SearchFilter;
 
 /**
@@ -23,5 +23,5 @@ public interface StatusBetweenDatesDao extends GenericDao<StatusBetweenDates, In
 	 * @endDate the last Date of the booking
 	 *
 	 */
-	public void editStatusAtBooking(Vehicule vehicule,LocalDate initialDate,LocalDate endDate,BranchOffice finalBranchOffice);
+	public void editStatusAtBooking(Vehicle vehicle,LocalDate initialDate,LocalDate endDate,BranchOffice finalBranchOffice);
 }

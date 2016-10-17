@@ -54,18 +54,18 @@ public class BranchOffice implements Serializable{
 	private List<Booked> BookedOriginsLists;
 	
 	@OneToMany(mappedBy="branchOffice")
-	private List<Vehicule> vehicules;
+	private List<Vehicle> vehicles;
 
 	@OneToMany(mappedBy="branchOffice")
 	private List<StatusBetweenDates> statusDates;
 
 	
-	public List<Vehicule> getVehicules() {
-		return vehicules;
+	public List<Vehicle> getVehicles() {
+		return vehicles;
 	}
 
-	public void setVehicules(List<Vehicule> vehicules) {
-		this.vehicules = vehicules;
+	public void setVehicles(List<Vehicle> vehicles) {
+		this.vehicles = vehicles;
 	}
 
 	public Integer getId() {

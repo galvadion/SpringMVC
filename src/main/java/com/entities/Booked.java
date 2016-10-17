@@ -58,8 +58,8 @@ public class Booked implements Serializable{
 	private Rent rent;
 	
 	@ManyToOne
-	@JoinColumn(name="vehicule_id", nullable=false)
-	private Vehicule vehicule;
+	@JoinColumn(name="vehicle_id", nullable=false)
+	private Vehicle vehicle;
 	
 	@ManyToOne
 	@JoinColumn(name="origin_office_id", nullable=false)
@@ -97,12 +97,12 @@ public class Booked implements Serializable{
 		this.lastbookedDate = lastbookedDate;
 	}
 
-	public Vehicule getVehicule() {
-		return vehicule;
+	public Vehicle getVehicule() {
+		return vehicle;
 	}
 
-	public void setVehicule(Vehicule model) {
-		this.vehicule = model;
+	public void setVehicule(Vehicle model) {
+		this.vehicle = model;
 	}
 
 	public String getTransactionNr() {
