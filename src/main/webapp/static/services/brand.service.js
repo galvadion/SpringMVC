@@ -25,7 +25,7 @@
             return $http.get('/SpringMVC/brand/getall').then(handleSuccess, handleError('Error getting all brands'));
         }
         
-        function CreateBrand(brand) {console.log(brand);
+        function CreateBrand(brand) {
             return $http.post('/SpringMVC/brand/insert', brand).then(handleSuccess, handleError);
         }
         
@@ -41,17 +41,17 @@
         // private functions
 
         function handleSuccess(data) {
-        	var response ={};
-        	response.success =true;
+        	var response = {};
+        	response.success = true;
     		response.data = data.data;
             return response;
         }
         
         function handleError(data) {
         	var response = {};
-        		response.success =false;
-        		response.data = data.data;
-                return response;
+    		response.success = false;
+    		response.data = data.data;
+            return response;
         }
     }
 

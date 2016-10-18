@@ -31,15 +31,16 @@
 
                         <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
                             <label for="name" class="control-label">* Nombre</label>
-                            <input type="text" name="name" id="name" class="form-control" ng-model="vm.brand.name" placeholder="Nombre de la Marca" required>
+                            <input type="text" name="name" id="name" class="form-control" ng-model="vm.brand.name" placeholder="Nombre de la Marca" ng-change="cleanMessagges();" required>
                             <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Nombre es requerido</span>
-                            <span ng-show="vm.duplicated" class="help-block">Ya existe una marca con ese nombre</span>
+                            <span ng-show="vm.error" class="help-block" style="color: red;">Ya existe una marca con ese nombre</span>
+                            <span ng-show="vm.success" class="help-block" style="color: green;">Marca creada</span>
                         </div>
 
                         <!-- Buttons -->
 
                         <div class="form-group text-right">
-                            <a class="btn btn-lightred" ng-click="cleanInput()">Cancelar</a>
+                            <a class="btn btn-lightred" ng-click="cleanInput();cleanMessagges();">Cancelar</a>
                             <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
                         </div>
 
@@ -78,13 +79,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!--tr ng-repeat="(key, value) in allBrands"-->
-                                    <tr>
+                                    <tr ng-repeat="(key, value) in allBrands">
                                     	<td>
-                                            1
+                                            {{value.id}}
                                         </td>
                                         <td>
-                                            Fiat
+                                            {{value.name}}
                                         </td>
                                         <td>
                                         </td>

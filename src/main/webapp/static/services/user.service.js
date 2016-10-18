@@ -72,13 +72,17 @@
         // private functions
 
         function handleSuccess(data) {
-            return data;
+        	var response = {};
+        	response.success = true;
+    		response.data = data.data;
+            return response;
         }
-
-        function handleError(error) {
-            return function () {
-                return { success: false, message: error };
-            };
+        
+        function handleError(data) {
+        	var response = {};
+    		response.success = false;
+    		response.data = data.data;
+            return response;
         }
     }
 
