@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Brand;
-import com.entities.User;
 import com.services.BrandService;
 
 @Controller
@@ -67,7 +66,6 @@ public class BrandController {
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<String> getSaved(@RequestBody Brand brand) {
-		Map<String, Object> map = new HashMap<String, Object>();
 		setUpValidator();
 		Set<ConstraintViolation<Brand>> constraintViolations = validator.validate(brand);
 		if (constraintViolations.size() > 0) {

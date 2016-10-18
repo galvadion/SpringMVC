@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.entities.Booked;
 import com.entities.Brand;
 import com.entities.Client;
+import com.entities.Model;
 import com.entities.User;
 import com.models.BookingModel;
 import com.models.SearchFilter;
@@ -123,5 +124,27 @@ public class ApiRestController {
 			}
 		}
 		
+	}
+	
+	@RequestMapping(value = "/api/insertModel", method = RequestMethod.GET)
+	public ResponseEntity<String> insertModel() {
+		Model model=new Model();
+		model.setname("Nombre 1");
+		model.setTransmission("M");
+		model.setPassangers(2);
+		model.setLuggage(1);
+		setUpValidator();
+		Set<ConstraintViolation<Model>> constraintViolations = validator.validate(model);
+		if (constraintViolations.size() > 0) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(constraintViolations.iterator().next().getMessage());
+		} else {
+			try {
+				modelService.saveOrUpdate(model);
+				return ResponseEntity.ok("The model has been saved");
+			} catch (Exception e) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There has been an error");
+			}
+		}
 	}
 }

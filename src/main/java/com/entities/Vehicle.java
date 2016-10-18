@@ -1,8 +1,7 @@
 package com.entities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -40,7 +39,7 @@ public class Vehicle implements Serializable{
 	private String observations;
 	
 	@Column(name = "license_plate_expiration_date")
-	private Date licensePlateExpirationDate;
+	private LocalDate licensePlateExpirationDate;
 	
 	@Enumerated(EnumType.STRING)
 	private Vehicle_Status state;
@@ -116,11 +115,11 @@ public class Vehicle implements Serializable{
 		this.observations = observations;
 	}
 
-	public Date getLicensePlateExpirationDate() {
+	public LocalDate getLicensePlateExpirationDate() {
 		return licensePlateExpirationDate;
 	}
 
-	public void setLicensePlateExpirationDate(Date licensePlateExpirationDate) {
+	public void setLicensePlateExpirationDate(LocalDate licensePlateExpirationDate) {
 		this.licensePlateExpirationDate = licensePlateExpirationDate;
 	}
 
