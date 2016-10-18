@@ -29,8 +29,6 @@
         	BrandService.GetAllBrands(vm.brand).then(function (response) {
         		if(response.success){
         			vm.allBrands = response.data;
-        			console.log(response);
-        			console.log(vm.allBrands);
         		}
         		else{
         			vm.allBrands = [];
@@ -44,6 +42,7 @@
         	$scope.cleanMessagges();
         	BrandService.CreateBrand(vm.brand).then(function (response) {
         		if(response.success){
+        			getAllBrands();
         			vm.success = true;
         			$scope.cleanInput();
         		}
@@ -64,6 +63,21 @@
         	vm.error = false;
             vm.success = false;
         };
+        
+        $scope.editBrand = function(brand) {
+        	vm.brand = angular.copy(brand);
+        	$scope.scrollTo( "#wrap");
+        };
+        
+        $scope.deleteBrand = function(id) {
+        	alert('eliminar brand id: ' + id);
+        };
+        
+        $scope.scrollTo = function(element) {
+            $( 'html, body').animate({
+                scrollTop: $(element).offset().top
+            }, 500);
+        }
 
     }
 

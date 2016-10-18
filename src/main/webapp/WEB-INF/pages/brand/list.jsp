@@ -71,30 +71,26 @@
             				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
                                 <thead>
                                    <tr>
-                                   		<th>Id</th>
-                                        <th>Nombre</th>
+                                   		<th>Nombre</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="(key, value) in allBrands">
+                                    <tr ng-repeat="(key, value) in vm.allBrands">
                                     	<td>
-                                            {{value.id}}
-                                        </td>
-                                        <td>
                                             {{value.name}}
                                         </td>
                                         <td>
                                         </td>
-                                        <td class="text-center plus">
-                                             <a ng-href="#/brand/{{value.id}}" title="Editar">
+                                        <td class="text-center plus" style="cursor: pointer;">
+                                             <a title="Editar" ng-click="editBrand(value)">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
                                              </a>
                                         </td>
                                         <td class="text-center delete">
-                                            <a doing-action="" href id="brand-{{$index}}" href data-toggle="" ng-click="deleteBrand(value,$index)" confirm-if="checked" confirm="Esta seguro, eliminar marca {{value.name}} ?" title="Eliminar">
+                                            <a doing-action="" href data-toggle="" ng-click="deleteBrand(value.id)" confirm-if="checked" confirm="Esta seguro, eliminar marca {{value.name}} ?" title="Eliminar">
                                                 <i class="fa fa-times"></i><br />
                                                 <small>Eliminar</small>
                                             </a>

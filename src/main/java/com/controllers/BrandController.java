@@ -62,18 +62,18 @@ public class BrandController {
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public ResponseEntity<String> getSaved(@RequestBody Brand brand) {
+	public ResponseEntity<Object> getSaved(@RequestBody Brand brand) {
 		setUpValidator();
 		Set<ConstraintViolation<Brand>> constraintViolations = validator.validate(brand);
 		if (constraintViolations.size() > 0) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body(constraintViolations.iterator().next().getMessage());
+					.body((Object) constraintViolations.iterator().next().getMessage());
 		} else {
 			try {
 				brandService.saveOrUpdate(brand);
-				return ResponseEntity.ok("The brand has been saved");
+				return ResponseEntity.ok((Object)brand);
 			} catch (Exception e) {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The name of the brand is duplicated");
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body((Object)"The name of the brand is duplicated");
 			}
 		}
 	}
