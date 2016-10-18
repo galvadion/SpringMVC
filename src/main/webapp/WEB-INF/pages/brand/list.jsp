@@ -31,15 +31,16 @@
 
                         <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
                             <label for="name" class="control-label">* Nombre</label>
-                            <input type="text" name="name" id="name" class="form-control" ng-model="vm.brand.name" placeholder="Nombre de la Marca" required>
+                            <input type="text" name="name" id="name" class="form-control" ng-model="vm.brand.name" placeholder="Nombre de la Marca" ng-change="cleanMessagges();" required>
                             <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Nombre es requerido</span>
-                            <span ng-show="vm.duplicated" class="help-block">Ya existe una marca con ese nombre</span>
+                            <span ng-show="vm.error" class="help-block" style="color: red;">Ya existe una marca con ese nombre</span>
+                            <span ng-show="vm.success" class="help-block" style="color: green;">Marca creada</span>
                         </div>
 
                         <!-- Buttons -->
 
                         <div class="form-group text-right">
-                            <a class="btn btn-lightred" ng-click="cleanInput()">Cancelar</a>
+                            <a class="btn btn-lightred" ng-click="cleanInput();cleanMessagges();">Cancelar</a>
                             <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
                         </div>
 
@@ -70,31 +71,26 @@
             				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
                                 <thead>
                                    <tr>
-                                   		<th>Id</th>
-                                        <th>Nombre</th>
+                                   		<th>Nombre</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!--tr ng-repeat="(key, value) in allBrands"-->
-                                    <tr>
+                                    <tr ng-repeat="(key, value) in vm.allBrands">
                                     	<td>
-                                            1
-                                        </td>
-                                        <td>
-                                            Fiat
+                                            {{value.name}}
                                         </td>
                                         <td>
                                         </td>
-                                        <td class="text-center plus">
-                                             <a ng-href="#/brand/{{value.id}}" title="Editar">
+                                        <td class="text-center plus" style="cursor: pointer;">
+                                             <a title="Editar" ng-click="editBrand(value)">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
                                              </a>
                                         </td>
                                         <td class="text-center delete">
-                                            <a doing-action="" href id="brand-{{$index}}" href data-toggle="" ng-click="deleteBrand(value,$index)" confirm-if="checked" confirm="Esta seguro, eliminar marca {{value.name}} ?" title="Eliminar">
+                                            <a doing-action="" href data-toggle="" ng-click="deleteBrand(value.id)" confirm-if="checked" confirm="Esta seguro, eliminar marca {{value.name}} ?" title="Eliminar">
                                                 <i class="fa fa-times"></i><br />
                                                 <small>Eliminar</small>
                                             </a>

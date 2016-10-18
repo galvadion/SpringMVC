@@ -2,10 +2,13 @@ package com.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class SearchFilter implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LocalDate beginDate;
 	private LocalDate endDate;
 	private boolean airConditioner;

@@ -1,28 +1,17 @@
 package com.daoImpl;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Query;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dao.FuelDao;
-import com.dao.ModelDao;
 import com.dao.StatusBetweenDatesDao;
 import com.entities.BranchOffice;
-import com.entities.Fuel;
-import com.entities.Model;
 import com.entities.StatusBetweenDates;
 import com.entities.Vehicle;
-import com.models.SearchFilter;
 import com.models.Vehicle_Status;
-import com.entities.Model;
 
 /**
  * @author root

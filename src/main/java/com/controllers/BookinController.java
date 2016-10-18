@@ -1,7 +1,6 @@
 package com.controllers;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Brand;
-import com.entities.User;
 import com.services.BrandService;
 
 @Controller

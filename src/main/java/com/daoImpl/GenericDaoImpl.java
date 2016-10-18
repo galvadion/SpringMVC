@@ -27,7 +27,7 @@ public abstract class GenericDaoImpl<T, K extends Serializable> implements Gener
 	public GenericDaoImpl(Class<T> entityClass){
 		Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
-        daoType = (Class) pt.getActualTypeArguments()[0];
+        daoType = (Class<? extends T>) pt.getActualTypeArguments()[0];
 	}
 	
 	protected Session currentSession(){

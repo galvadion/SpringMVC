@@ -1,25 +1,15 @@
 package com.daoImpl;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 import javax.persistence.Query;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.BookedDao;
 import com.entities.Booked;
-import com.entities.BranchOffice;
 import com.entities.Client;
-import com.entities.Model;
-import com.entities.Vehicle;
-import com.models.BookingModel;
 
 @Repository
 @Transactional

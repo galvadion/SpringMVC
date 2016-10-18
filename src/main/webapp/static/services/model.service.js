@@ -45,14 +45,20 @@
         
         // private functions
 
-        function handleSuccess(data) {
-            return data;
-        }
+     // private functions
 
-        function handleError(error) {
-            return function () {
-                return { success: false, message: error };
-            };
+        function handleSuccess(data) {
+        	var response = {};
+        	response.success = true;
+    		response.data = data.data;
+            return response;
+        }
+        
+        function handleError(data) {
+        	var response = {};
+    		response.success = false;
+    		response.data = data.data;
+            return response;
         }
     }
 

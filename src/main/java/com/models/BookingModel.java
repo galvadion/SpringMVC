@@ -2,9 +2,12 @@ package com.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class BookingModel implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer idModel;
 	private LocalDate startDate;
 	private LocalDate endDate;
