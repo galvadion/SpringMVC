@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Brand;
-import com.entities.User;
 import com.services.BrandService;
 
 @Controller
@@ -51,23 +50,19 @@ public class BrandController {
 	}
 
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> getAll() {
+	public ResponseEntity<List<Brand>> getAll() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Brand> list = brandService.getAll();
 		if (list != null) {
-			map.put("status", "200");
-			map.put("message", "Data found");
-			map.put("data", list);
+			return ResponseEntity.ok(list);
 		} else {
-			map.put("status", "404");
-			map.put("message", "Data not found");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
-		return map;
+		
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<String> getSaved(@RequestBody Brand brand) {
-		Map<String, Object> map = new HashMap<String, Object>();
 		setUpValidator();
 		Set<ConstraintViolation<Brand>> constraintViolations = validator.validate(brand);
 		if (constraintViolations.size() > 0) {

@@ -9,7 +9,6 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -72,6 +71,11 @@ public class RentLine implements Serializable{
 @Embeddable
 class rentLinePK implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Basic(optional =false)
 	@Column(name="rent_line_id")
 	private Integer rentLineId;

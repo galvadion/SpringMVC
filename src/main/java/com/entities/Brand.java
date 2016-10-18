@@ -50,7 +50,7 @@ public class Brand {
 	}
 
 	public void setModels(List<Model> models) {
-		models = models;
+		this.models = models;
 	}	
 	
 }
