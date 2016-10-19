@@ -5,9 +5,37 @@
 
     <div class="page page-dashboard">
 
-        <div class="pageheader">
-			<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Inicio </strong></h1> banner?
-        </div>
+        <div class="row">
+			<div class="col-md-12">
+				<section class="tile text-center" id="slyder">
+					Slyder
+				</section>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<section class="tile">
+					<br/>
+					<h3 class="text-center">Encuentra tu vehiculo</h3>
+					
+					<form name="form" ng-submit="search()" role="form" class="form-validation">
+						
+		        	</form>
+					
+				</section>
+			</div>
+			
+			<div class="col-md-1"></div>
+			
+			<div class="col-md-5">
+				<section class="tile text-center">
+					mapa
+				</section>
+			</div>
+		</div>
+
+		<br/><br/><br/><br/><br/>
 
         <div class="row">
         	<div class="col-md-12">
@@ -16,13 +44,13 @@
             		
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
-                        <h1 class="custom-font"><strong>Titulo </strong>de una seccion</h1>
+                        <h1 class="custom-font"><strong>Listado </strong>de promociones</h1>
                     </div>
                     <!-- /tile header -->
 
                     <!-- tile body -->
                     <div class="tile-body table-custom">
-            			<p>PUT ALL THE CRAP HERE</p>
+                    	PUT ALL THE CRAP HERE
             		</div>
             	
             	</section>
