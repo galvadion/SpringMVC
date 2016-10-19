@@ -71,13 +71,11 @@ public class ApiRestController {
 		filter.setAirConditioner(true);
 		filter.setLuggage(1);
 		filter.setPassangers(0);
-		filter.setTransmission("-");
 		filter.setBranchId(1);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("status", "200");
 		map.put("message", "Your record have been saved successfully");
-		map.put("models", modelService.getModelsBetweenFilter(filter, false, filter.getFuelTypeId()));
-		map.put("gps", "200");
+		map.put("models", modelService.getModelsBetweenFilter(filter));
 		return map;
 	}
 

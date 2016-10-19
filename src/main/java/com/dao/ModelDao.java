@@ -7,5 +7,5 @@ import com.entities.Model;
 import com.models.SearchFilter;
 
 public interface ModelDao extends GenericDao<Model, Integer> {
-	public List<Model> modelInFilter(SearchFilter filter,Fuel fuel,boolean byFuel);
+	public List<Model> modelInFilter(SearchFilter filter);
 }
