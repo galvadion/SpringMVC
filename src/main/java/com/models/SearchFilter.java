@@ -13,10 +13,7 @@ public class SearchFilter implements Serializable {
 	private LocalDate endDate;
 	private boolean airConditioner;
 	private int passangers;
-	private Integer branchOfficeId;
 	private int luggage;
-	private String transmission;
-	private int fuelTypeId;
 	private int branchId;
 	
 	public LocalDate getBeginDate() {
@@ -43,30 +40,13 @@ public class SearchFilter implements Serializable {
 	public void setPassangers(int passangers) {
 		this.passangers = passangers;
 	}
-	public Integer getBranchOfficeId() {
-		return branchOfficeId;
-	}
-	public void setBranchOfficeId(Integer branchOfficeId) {
-		this.branchOfficeId = branchOfficeId;
-	}
 	public int getLuggage() {
 		return luggage;
 	}
 	public void setLuggage(int luggage) {
 		this.luggage = luggage;
 	}
-	public String getTransmission() {
-		return transmission;
-	}
-	public void setTransmission(String transmission) {
-		this.transmission = transmission;
-	}
-	public int getFuelTypeId() {
-		return fuelTypeId;
-	}
-	public void setFuelTypeId(int fuelTypeId) {
-		this.fuelTypeId = fuelTypeId;
-	}
+
 	public int getBranchId() {
 		return branchId;
 	}

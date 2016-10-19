@@ -1,6 +1,10 @@
 package com.controllers;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -15,9 +19,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Model;
+import com.models.SearchFilter;
 import com.services.BrandService;
 import com.services.CategoryService;
 import com.services.ModelService;
@@ -74,6 +80,11 @@ public class ModelController {
 		}
 	}
 
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ResponseEntity<List<Model>> searchModels(@RequestBody SearchFilter search) {
+		return ResponseEntity.ok(modelService.getModelsBetweenFilter(search));
+	}
+	
 	private static class RequestModel implements Serializable {
 		/**
 		 * 
