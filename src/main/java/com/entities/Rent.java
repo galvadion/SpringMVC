@@ -14,6 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.configuration.LocalDateDeserializer;
+import com.configuration.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 public class Rent implements Serializable{
 
@@ -30,6 +35,8 @@ public class Rent implements Serializable{
 	@Column(name = "transaction_number")
 	private String transactionNr;
 	
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)  
 	@Column(name= "transaction_date")
 	private LocalDate transactionDate;
 	

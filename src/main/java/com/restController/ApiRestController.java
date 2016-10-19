@@ -71,7 +71,7 @@ public class ApiRestController {
 		filter.setAirConditioner(true);
 		filter.setLuggage(1);
 		filter.setPassangers(0);
-		filter.setBranchId(1);
+		filter.setOfficeOriginId(1);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("status", "200");
 		map.put("message", "Your record have been saved successfully");

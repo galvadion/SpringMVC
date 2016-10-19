@@ -3,18 +3,28 @@ package com.models;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.configuration.LocalDateDeserializer;
+import com.configuration.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class SearchFilter implements Serializable {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)  
 	private LocalDate beginDate;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)  
 	private LocalDate endDate;
 	private boolean airConditioner;
 	private int passangers;
 	private int luggage;
-	private int branchId;
+	private int officeOriginId;
+	private int officeEndId;
 	
 	public LocalDate getBeginDate() {
 		return beginDate;
@@ -47,11 +57,22 @@ public class SearchFilter implements Serializable {
 		this.luggage = luggage;
 	}
 
-	public int getBranchId() {
-		return branchId;
+	@Override
+	public String toString() {
+		return "SearchFilter [beginDate=" + beginDate + ", endDate=" + endDate + ", airConditioner=" + airConditioner
+				+ ", passangers=" + passangers + ", luggage=" + luggage + "]";
 	}
-	public void setBranchId(int branchId) {
-		this.branchId = branchId;
+	public int getOfficeOriginId() {
+		return officeOriginId;
+	}
+	public void setOfficeOriginId(int officeOriginId) {
+		this.officeOriginId = officeOriginId;
+	}
+	public int getOfficeEndId() {
+		return officeEndId;
+	}
+	public void setOfficeEndId(int officeEndId) {
+		this.officeEndId = officeEndId;
 	}
 	
 	
