@@ -3,21 +3,28 @@ package com.models;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.configuration.LocalDateDeserializer;
+import com.configuration.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class SearchFilter implements Serializable {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)  
 	private LocalDate beginDate;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)  
 	private LocalDate endDate;
 	private boolean airConditioner;
 	private int passangers;
-	private Integer branchOfficeId;
 	private int luggage;
-	private String transmission;
-	private int fuelTypeId;
-	private int branchId;
+	private int officeOriginId;
+	private int officeEndId;
 	
 	public LocalDate getBeginDate() {
 		return beginDate;
@@ -43,35 +50,29 @@ public class SearchFilter implements Serializable {
 	public void setPassangers(int passangers) {
 		this.passangers = passangers;
 	}
-	public Integer getBranchOfficeId() {
-		return branchOfficeId;
-	}
-	public void setBranchOfficeId(Integer branchOfficeId) {
-		this.branchOfficeId = branchOfficeId;
-	}
 	public int getLuggage() {
 		return luggage;
 	}
 	public void setLuggage(int luggage) {
 		this.luggage = luggage;
 	}
-	public String getTransmission() {
-		return transmission;
+
+	@Override
+	public String toString() {
+		return "SearchFilter [beginDate=" + beginDate + ", endDate=" + endDate + ", airConditioner=" + airConditioner
+				+ ", passangers=" + passangers + ", luggage=" + luggage + "]";
 	}
-	public void setTransmission(String transmission) {
-		this.transmission = transmission;
+	public int getOfficeOriginId() {
+		return officeOriginId;
 	}
-	public int getFuelTypeId() {
-		return fuelTypeId;
+	public void setOfficeOriginId(int officeOriginId) {
+		this.officeOriginId = officeOriginId;
 	}
-	public void setFuelTypeId(int fuelTypeId) {
-		this.fuelTypeId = fuelTypeId;
+	public int getOfficeEndId() {
+		return officeEndId;
 	}
-	public int getBranchId() {
-		return branchId;
-	}
-	public void setBranchId(int branchId) {
-		this.branchId = branchId;
+	public void setOfficeEndId(int officeEndId) {
+		this.officeEndId = officeEndId;
 	}
 	
 	

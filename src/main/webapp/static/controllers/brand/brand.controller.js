@@ -11,10 +11,10 @@
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
-        vm.error = false;
-        vm.success = false;
         vm.brand = {};
         vm.allBrands = [];
+        vm.error = false;
+        vm.success = false;
         
         
         initController();

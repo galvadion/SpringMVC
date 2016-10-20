@@ -12,6 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.configuration.LocalDateDeserializer;
+import com.configuration.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 public class Booked implements Serializable{
 
@@ -24,10 +29,12 @@ public class Booked implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
-	
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)  
 	@Column(name= "begin_booked_date")
 	private LocalDate beginbookedDate;
-	
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)  
 	@Column(name= "last_booked_date")
 	private LocalDate lastbookedDate;
 	

@@ -15,6 +15,7 @@
         service.CreateModel = CreateModel;
         service.UpdateModel = UpdateModel;
         service.DeleteModel = DeleteModel;
+        service.SearchModels = SearchModels;
         
         
         return service;
@@ -40,6 +41,10 @@
         
         function DeleteModel(id) {
             return $http.delete('/SpringMVC/model/delete', id).then(handleSuccess, handleError('Error deleting model'));
+        }
+        
+        function SearchModels(searchObject) {
+            return $http.post('/SpringMVC/model/search', searchObject).then(handleSuccess, handleError('Error searching models'));
         }
 
         

@@ -27,29 +27,36 @@ import com.services.ModelService;
 import com.services.StatusBetweenDatesService;
 import com.services.VehicleService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+
 @Controller
 @RequestMapping(value="vehicle")
 public class VehicleController {
 	
 	@Autowired
-	ModelService modelService;
+		ModelService modelService;
+		
+		@Autowired
+		VehicleService vehicleService;
+		
+		@Autowired
+		BranchOfficeService branchService;
+		
+		@Autowired
+		StatusBetweenDatesService statusService;
+		
+		private static Validator validator;
 	
-	@Autowired
-	VehicleService vehicleService;
+		public static void setUpValidator() {
+			ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+			validator = factory.getValidator();
+		}
 	
-	@Autowired
-	BranchOfficeService branchService;
-	
-	@Autowired
-	StatusBetweenDatesService statusService;
-	
-	private static Validator validator;
-
-	public static void setUpValidator() {
-		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-		validator = factory.getValidator();
-	}
-
+		
 	
 	@RequestMapping(value="",method =RequestMethod.GET)
 	public ModelAndView getListPage(){
@@ -62,7 +69,7 @@ public class VehicleController {
 		ModelAndView view=new ModelAndView("vehicle/form");
 		return view;
 	}
-	
+
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<Object> getSaved(@RequestBody RequestModel requestModel) {
 		Vehicle vehicle = requestModel.vehicle;

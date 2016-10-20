@@ -18208,3 +18208,13 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 .breadcrumb-active {
 	content: none !important;
 }
+
+#slyder {
+	margin-top: -15px;
+	height: 350px;
+}
+
+#mapa {
+	height: 500px;
+	background-image: url("../images/map.png");
+}

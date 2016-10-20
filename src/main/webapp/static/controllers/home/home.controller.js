@@ -5,19 +5,39 @@
         .module('app')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService'];
+    HomeController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','ModelService'];
     
-    function HomeController($location,UserService, $rootScope, $scope,$timeout,SessionService) {
+    function HomeController($location, UserService, $rootScope, $scope, $timeout, SessionService, ModelService) {
 
         var vm = this;
-        initController();
         vm.roladmin = $rootScope.roladmin;
+        vm.search = {};
+
+
+        $scope.searchModels = function() {
+        	
+        	//Pruebas
+        	vm.search.airConditioner = true;
+            vm.search.passanger = 0;
+            vm.search.luggage = 0;
+        	console.log(vm.search);
+        	//
+        	
+        	ModelService.SearchModels(vm.search).then(function (response) {
+        		console.log(response);
+        	});
+        };
+        
+        initController();
 
         function initController() {
             NProgress.start();
-            //SessionService.initService();
-            //$rootScope.checkCurrentRol();    
+            getAllOffers();
             NProgress.done();
+        }
+        
+        function getAllOffers(){
+        	
         }
 
     }

@@ -20,23 +20,19 @@ import com.services.ModelService;
 public class ModelServiceImpl extends GenericServiceImpl<Model, Integer> implements ModelService{
 
 	private ModelDao modelDao;
-	private FuelDao fuelDao;
 	public ModelServiceImpl(){
 		
 	}
 	
     @Autowired
-    public ModelServiceImpl(@Qualifier("modelDaoImpl") GenericDao<Model, Integer> genericDao,
-    		@Qualifier("fuelDaoImpl") GenericDao<Fuel, Integer> genericDao3) {
+    public ModelServiceImpl(@Qualifier("modelDaoImpl") GenericDao<Model, Integer> genericDao) {
         super(genericDao);
         this.modelDao = (ModelDao) genericDao;
-        this.fuelDao = (FuelDao) genericDao3;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-	public List<Model> getModelsBetweenFilter(SearchFilter filter,boolean byFuel,int fuelId) {
-    	Fuel fuel=fuelDao.getById(fuelId);
-		List<Model> models=modelDao.modelInFilter(filter, fuel, byFuel);
+	public List<Model> getModelsBetweenFilter(SearchFilter filter) {
+		List<Model> models=modelDao.modelInFilter(filter);
 		return models;
 	}
 
