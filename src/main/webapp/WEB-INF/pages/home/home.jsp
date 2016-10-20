@@ -96,7 +96,53 @@
 
                     <!-- tile body -->
                     <div class="tile-body table-custom">
-                    	PUT ALL THE CRAP HERE
+                    	
+						<div class="table-responsive">
+            				
+            				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
+                                <thead>
+                                   <tr>
+                                   		<th>Marca</th>
+                                   		<th>Modelo</th>
+                                   		<th>Combustible</th>
+                                   		<th>Ano</th>
+                                   		<th>Pasajeros</th>
+                                   		<th>Valijas</th>
+                                   		<th>Cilindrada</th>
+                                   		<th>Aire acondicionado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(key, value) in vm.searchResult">
+                                    	<td>
+                                            {{value.brand.name}}
+                                        </td>
+                                        <td>
+                                            {{value.name}}
+                                        </td>
+                                        <td>
+                                            {{value.fuel.fuelType}}
+                                        </td>
+                                        <td>
+                                            {{value.year}}
+                                        </td>
+                                        <td>
+                                            {{value.passangers}}
+                                        </td>
+                                        <td>
+                                            {{value.luggage}}
+                                        </td>
+                                        <td>
+                                            {{value.cylinders}}
+                                        </td>
+                                        <td>
+                                            {{value.airConditioner}}
+                                        </td>
+                                   	</tr>
+                                </tbody>
+                            </table>
+                         </div>
+
             		</div>
             	
             	</section>

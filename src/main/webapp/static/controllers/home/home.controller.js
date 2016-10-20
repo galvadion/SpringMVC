@@ -13,6 +13,7 @@
         vm.roladmin = $rootScope.roladmin;
         vm.search = {};
 
+        vm.searchResult = [];
 
         $scope.searchModels = function() {
         	
@@ -24,7 +25,13 @@
         	//
         	
         	ModelService.SearchModels(vm.search).then(function (response) {
-        		console.log(response);
+        		if(response){
+        			vm.searchResult = response.data;
+        			console.log(vm.searchResult);
+        		}
+        		else{
+        			alert("No se encontraron resultados");
+        		}
         	});
         };
         
