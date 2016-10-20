@@ -30,7 +30,7 @@ public class ModelDaoImpl extends GenericDaoImpl<Model, Integer> implements Mode
 	}
 
 	public List<Model> modelInFilter(SearchFilter filter) {
-		Query query=currentSession().createQuery("Select distinct m from Model m join m.vehicules v join v.status s where passangers>= :passangers and luggage >= :luggage and airConditioner = :air and s.id in (Select s.id from StatusBetweenDates s join s.branchOffice b where :beginDate >= s.beginDate and :endDate <= s.endDate and s.status =:status and b.id =:branchId)");
+		Query query=currentSession().createQuery("Select distinct m from Model m join m.vehicles v join v.status s where passangers>= :passangers and luggage >= :luggage and airConditioner = :air and s.id in (Select s.id from StatusBetweenDates s join s.branchOffice b where :beginDate >= s.beginDate and :endDate <= s.endDate and s.status =:status and b.id =:branchId)");
 		query.setParameter("passangers",filter.getPassangers());
 		query.setParameter("luggage", filter.getLuggage());
 		query.setParameter("air",filter.isAirConditioner());

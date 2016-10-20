@@ -18,7 +18,7 @@
         	
         	//Pruebas
         	vm.search.airConditioner = true;
-            vm.search.passanger = 0;
+            vm.search.passangers = 0;
             vm.search.luggage = 0;
         	console.log(vm.search);
         	//

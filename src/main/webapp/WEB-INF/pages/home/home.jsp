@@ -44,7 +44,7 @@
 	                    <div class="row" style="padding: 0 10px 0 10px;">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.endDate.$dirty && form.endDate.$error.required }">
 	                            <label for="endDate" class="control-label">Fecha de entrega</label>
-	                            <input type="text" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="birthDate" class="form-control" placeholder="YYYY-MM-DD" ng-model="vm.search.birthDate" required />
+	                            <input type="text" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="endDate" class="form-control" placeholder="YYYY-MM-DD" ng-model="vm.search.endDate" required />
 								<span ng-show="form.endDate.$dirty && form.endDate.$error.required" class="help-block">Fecha es requerido</span>
 	                        </div>
 	
