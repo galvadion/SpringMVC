@@ -118,8 +118,7 @@
                     <!-- /tile header -->
 
                     <!-- tile body -->
-                    <div class="tile-body table-custom">
-                    	PUT ALL THE CRAP HERE
+                    <div class="btn btn-info" id="pago-paypal-example">Pago PayPal
             		</div>
             	
             	</section>
