@@ -40,7 +40,7 @@
                 }
         }
         function Success(message, keepAfterLocationChange) {
-            angular.element('#flash-service').fadeIn();
+        	$('#flash-service').fadeIn();
             $rootScope.flash = {
                 message: message,
                 type: 'success', 
@@ -49,7 +49,7 @@
         }
 
         function Error(message, keepAfterLocationChange) {
-            angular.element('#flash-service').fadeIn();
+            $('#flash-service').fadeIn();
             $rootScope.flash = {
                 message: message,
                 type: 'error',

@@ -29,9 +29,6 @@
         			vm.searchResult = response.data;
         			console.log(vm.searchResult);
         		}
-        		else{
-        			alert("No se encontraron resultados");
-        		}
         	});
         };
         

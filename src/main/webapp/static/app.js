@@ -122,7 +122,7 @@
 
     	///Rol Admin Validator: true show admin views
     	$rootScope.roladmin = true;
-    	/////////////////////////////////////////////
+
     	
         //Session persistance: keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
@@ -161,7 +161,7 @@
                 }
 
                 setTimeout(function(){
-                    angular.element('#flash-service').fadeOut();
+                    $('#flash-service').fadeOut();
                     FlashService.clearFlashMessage();                    
                 },timeToSwitch);
 

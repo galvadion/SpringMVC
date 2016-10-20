@@ -13,8 +13,6 @@
         vm.roladmin = $rootScope.roladmin;
         vm.brand = {};
         vm.allBrands = [];
-        vm.error = false;
-        vm.success = false;
         
         
         initController();
@@ -22,6 +20,7 @@
         function initController() {
             NProgress.start();
             getAllBrands();
+            
             NProgress.done();
         }
         
@@ -39,15 +38,14 @@
         
         $scope.saveBrand = function() {
         	NProgress.start();
-        	$scope.cleanMessagges();
         	BrandService.CreateBrand(vm.brand).then(function (response) {
         		if(response.success){
         			getAllBrands();
-        			vm.success = true;
+        			$rootScope.doFlashMessage('Marca creada','','success');
         			$scope.cleanInput();
         		}
         		else{
-        			vm.error = true;
+        			$rootScope.doFlashMessage('Marca ya existente','','error');
         		}
         		NProgress.done();
         	});
@@ -56,12 +54,6 @@
         $scope.cleanInput = function() {
         	vm.brand.name = "";
         	$scope.form.$setPristine();
-        };
-        
-        $scope.cleanMessagges = function() {
-        	$scope.form.$setPristine();
-        	vm.error = false;
-            vm.success = false;
         };
         
         $scope.editBrand = function(brand) {

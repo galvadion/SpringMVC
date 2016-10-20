@@ -27,6 +27,10 @@
 
     </head>
     <body>
+    	<div id="wrap" class="animsition hz-menu">
+        	<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-lightred ': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message" id="flash-service"></div>
+        </div>
+        
         <!--Extensions-->
         <script src="//code.angularjs.org/1.5.5/angular.js"></script>
         <script src="//code.angularjs.org/1.5.5/angular-route.js"></script>

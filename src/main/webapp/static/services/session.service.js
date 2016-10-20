@@ -13,29 +13,29 @@
 
        
 
-         return service;
+        return service;
 
         function initService() {
-            var id =1;
-            return $http.get('/users/users/'+id).then(handle);
+            return $http.get('/SpringMVC/users/loged', brand).then(handleSuccess, handleError('Error comprabando estado sesion'));
         }
 
         
+        // private functions
 
-        function handle(data) {
-            if(data.data ==1){
-                return true;
-            }else{
-                handleError(data);
-            }
+        function handleSuccess(data) {
+        	var response = {};
+        	response.success = true;
+            return response;
         }
-
-        function handleError(error) {
-            FlashService.Error("Your session has expired. Please Log in again!",true);
+        
+        function handleError(data) {
+        	var response = {};
+    		response.success = false;
+    		
+    		FlashService.Error("Su sesion ha expirado. Por favor ingresa nuevamente!",true);
             $timeout(function() {
                 $location.path('/login');
             },2000);
-            
         }
 
     }

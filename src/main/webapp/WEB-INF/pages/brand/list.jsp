@@ -33,8 +33,6 @@
                             <label for="name" class="control-label">* Nombre</label>
                             <input type="text" name="name" id="name" class="form-control" ng-model="vm.brand.name" placeholder="Nombre de la Marca" ng-change="cleanMessagges();" required>
                             <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Nombre es requerido</span>
-                            <span ng-show="vm.error" class="help-block" style="color: red;">Ya existe una marca con ese nombre</span>
-                            <span ng-show="vm.success" class="help-block" style="color: green;">Marca creada</span>
                         </div>
 
                         <!-- Buttons -->
