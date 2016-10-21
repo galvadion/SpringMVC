@@ -5,19 +5,63 @@
         .module('app')
         .controller('ModelController', ModelController);
 
-    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader'];
+    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService'];
     
-    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader) {
+    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService) {
 
         var vm = this;
-        initController();
+        
         vm.roladmin = $rootScope.roladmin;
-
+        vm.requestModel = {};
+        vm.allBrands = [];
+        vm.allModels = [];
+        
+        
+        initController();
+        
         function initController() {
             NProgress.start();
-
-            NProgress.done();
+            getAllBrands();
+            getAllModels();
         }
+        
+        function getAllBrands(){
+        	BrandService.GetAllBrands(vm.brand).then(function (response) {
+        		if(response.success){
+        			vm.allBrands = response.data;
+        		}
+        		else{
+        			vm.allBrands = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        
+        function getAllModels(){
+        	ModelService.GetAllModels().then(function (response) {
+        		if(response.success){
+        			vm.allModels = response.data;
+        		}
+        		else{
+        			vm.allModels = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        
+        $scope.saveModel = function() {
+        	NProgress.start();
+        	console.log(vm.requestModel);
+        	ModelService.CreateModel(vm.requestModel).then(function (response) {
+        		console.log(response);
+        		
+        		NProgress.done();
+        	});
+        };
+        
+        
+        
+        //File uploader methods
         
         var file = $scope.file = new FileUploader({
             url: 'front.justmob/upload.php',
@@ -25,10 +69,6 @@
             removeAfterUpload: true
         });
 
-        
-        
-        //File uploader methods
-        
         file.filters.push({
             name: 'imageFilter',
             fn: function(item,options) {
@@ -63,7 +103,9 @@
         };
         
         //End - File uploader methods
-
+        
+        
+        
     }
 
 })();

@@ -21,7 +21,7 @@
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                     	<h2 class="custom-font"><strong>Gestion:</strong></h2>
-                        <a href="#/model/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nueo Modelo</a>
+                        <a href="#/model/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Modelo</a>
                     </div>
                     <!-- /tile header -->
 
@@ -32,8 +32,7 @@
             				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
                                 <thead>
                                    <tr>
-                                   		<th>Id</th>
-                                        <th>Nombre</th>
+                                   		<th>Nombre</th>
                                         <th>Marca</th>
                                         <th>Categoria</th>
                                         <th style="width:20px;"></th>
@@ -42,19 +41,42 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!--tr ng-repeat="(key, value) in allModels"-->
-                                    <tr>
+                                    <tr ng-repeat="(key, value) in vm.allModels">
                                     	<td>
-                                            1                                             
+                                            {{value.name}}
                                         </td>
                                         <td>
-                                            Uno
+                                            {{value.brand.name}}
                                         </td>
                                         <td>
-                                            Fiat                                             
+                                            {{value.category.id}}
                                         </td>
                                         <td>
-                                            C
+                                            {{value.year}}
+                                        </td>
+                                        <td>
+                                            {{value.fuel.fuelType}}
+                                        </td>
+                                        <td>
+                                            {{value.passangers}}
+                                        </td>
+                                        <td>
+                                            {{value.luggage}}
+                                        </td>
+                                        <td>
+                                            {{value.cylinders}}
+                                        </td>
+                                        <td>
+                                            {{value.airConditioner}}
+                                        </td>
+                                        <td>
+                                            {{value.transmission}}
+                                        </td>
+                                        <td>
+                                            {{value.insurance}}
+                                        </td>
+                                        <td>
+                                            {{value.fullTank}}
                                         </td>
                                         <td class="text-center plus">
                                              <a ng-href="#/model/{{value.id}}" title="Ver">

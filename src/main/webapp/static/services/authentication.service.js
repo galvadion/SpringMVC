@@ -33,6 +33,12 @@
                     authdata: authdata
                 }
             };
+            if(rol == "Admin"){
+            	$rootScope.roladmin = true;
+            }
+            else if(rol == "Client"){
+            	$rootScope.rolclient = true;
+            }
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
             $cookieStore.put('globals', $rootScope.globals);
         }

@@ -22,7 +22,7 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDa
 	}
 
 	public User getUserByName(String username) {
-		Query query=currentSession().createQuery("from Users where user_name = :username");
+		Query query=currentSession().createQuery("from User where email = :username");
 		query.setParameter("username", username);
 		User user=(User) query.getSingleResult();
 		return user;

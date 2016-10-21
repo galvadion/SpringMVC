@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.entities.Brand;
 import com.entities.Model;
 import com.models.SearchFilter;
 import com.services.BrandService;
@@ -61,10 +62,9 @@ public class ModelController {
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public ResponseEntity<Object> getSaved(@RequestBody RequestModel requestModel) {
-		Model model = requestModel.model;
-		model.setBrand(brandService.get(requestModel.brand_id));
-		model.setCategory(categoryService.get(requestModel.category_id));
+	public ResponseEntity<Object> getSaved(@RequestBody Model model) {
+		
+		System.out.println(model);
 		setUpValidator();
 		Set<ConstraintViolation<Model>> constraintViolations = validator.validate(model);
 		if (constraintViolations.size() > 0) {
@@ -78,6 +78,17 @@ public class ModelController {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body((Object) "There has been an error");
 			}
 		}
+	}
+	
+	@RequestMapping(value = "/getall", method = RequestMethod.GET)
+	public ResponseEntity<List<Model>> getAll() {
+		List<Model> list = modelService.getAll();
+		if (list != null) {
+			return ResponseEntity.ok(list);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST)

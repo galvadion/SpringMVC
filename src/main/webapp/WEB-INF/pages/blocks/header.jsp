@@ -35,10 +35,10 @@
 							      <li ng-show="vm.roladmin" ng-class=getClass('promo') class=""><a href=""><span class="nav-custom-font">Promociones</span></a></li>
 							      <li ng-show="!vm.roladmin" ng-class=getClass('about') class=""><a href="#/about"><span class="nav-custom-font">Nosotros</span></a></li>
 							    </ul>
-							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="1==1">
+							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="globals.currentUser">
 							        <li ng-class=getClass('profile') class="dropdown">
 							        	<a class="dropdown-toggle" data-toggle="dropdown" href="">
-							        		<span class="nav-custom-font">Pepe{{globals.currentUser.username}} </span>
+							        		<span class="nav-custom-font">{{globals.currentUser.name}} </span>
 	                                		<img src="static/images/avatar.png" alt="" class="img-circle" style="height: 22px; width: 22px;">
 							        		<span class="caret"></span>
 							        	</a>
@@ -48,13 +48,13 @@
 								          </ul>
 									</li>
 							    </ul>
-							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="1==2">
-							        <li>
+							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="!globals.currentUser">
+							        <li ng-class=getClass('register')>
 							        	<a href="#/register" class="text-default">
 			                                <span class="nav-custom-font">Registrarse</span>
 			                            </a>
 									</li>
-							        <li>
+							        <li ng-class=getClass('login')>
 							        	<a href="#/login" class="text-default">
 			                                <span class="nav-custom-font">Ingresar</span>
 			                            </a>

@@ -55,6 +55,11 @@ public class Category implements Serializable{
 	public void setModels(List<Model> Models) {
 		this.Models = Models;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", basePrice=" + basePrice + ", Models=" + Models + "]";
+	}
 	
 	
 }

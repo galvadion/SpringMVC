@@ -20,12 +20,10 @@
         function initController() {
             NProgress.start();
             getAllBrands();
-            
-            NProgress.done();
         }
         
         function getAllBrands(){
-        	BrandService.GetAllBrands(vm.brand).then(function (response) {
+        	BrandService.GetAllBrands().then(function (response) {
         		if(response.success){
         			vm.allBrands = response.data;
         		}

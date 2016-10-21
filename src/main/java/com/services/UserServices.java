@@ -6,5 +6,5 @@ import com.entities.User;
 
 public interface UserServices extends GenericService<User,Integer> {
 	
-	public boolean validateLogin(String username, String password);
+	public User validateLogin(String username, String password);
 }

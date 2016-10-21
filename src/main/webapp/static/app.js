@@ -119,17 +119,20 @@
     run.$inject = ['$rootScope', '$location', '$cookieStore', '$http','FlashService', 'UserService', '$window', 'AuthenticationService'];
     function run($rootScope, $location, $cookieStore, $http,FlashService, UserService, $window, AuthenticationService) {
 
-
-    	///Rol Admin Validator: true show admin views
-    	$rootScope.roladmin = true;
-
+    	$rootScope.roladmin = false;
+    	$rootScope.rolclient = false;
     	
         //Session persistance: keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
-        $rootScope.loggedRol;
-
 
         if ($rootScope.globals.currentUser) {
+
+        	if($rootScope.globals.currentUser.rol == "Admin"){
+        		$rootScope.roladmin = true;
+        	}
+        	else if($rootScope.globals.currentUser.rol == "Client"){
+        		$rootScope.rolclient = true;
+        	}
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
         }
 
@@ -172,24 +175,6 @@
             }
 
         };
-
-        $rootScope.getLoggedRol = function() {
-            var c = document.cookie.split('; ');
-            var cookies = {};
-
-            for(var i=c.length-1; i>=0; i--){
-               var C = c[i].split('=');
-               cookies[C[0]] = C[1];
-            }
-
-            if(!angular.isUndefined(cookies['globals'])){
-                var cookieContent = JSON.parse(decodeURIComponent(cookies['globals']));                      
-                //console.log(cookieContent.currentUser.rol);
-                $rootScope.loggedRol = cookieContent.currentUser.rol;
-            } else {
-                setTimeout(function()  { $rootScope.getLoggedRol();},1000) ;
-            } 
-        };
         
         $rootScope.getClass = function (path) {
         	var currentLocation = $location.path().split('/',2);
@@ -204,7 +189,13 @@
         	else{
         		return '';
         	}
-       }
+        }
+        
+        $rootScope.logOut = function () {
+        	AuthenticationService.ClearCredentials();
+        	$rootScope.roladmin = false;
+        	$location.path('/home');
+        }
 
     }
 

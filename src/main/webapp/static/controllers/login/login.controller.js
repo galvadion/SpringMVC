@@ -20,11 +20,10 @@
         
         function login() {
             NProgress.start();
-            
-            AuthenticationService.Login(vm.email, vm.password, function(response) {
-            	console.log(response);
+
+            AuthenticationService.Login(vm.email, vm.password).then(function (response) {
                 if(response.success) {
-                    AuthenticationService.SetCredentials(response.data.id, response.data.email, response.data.name, response.data.dtype, response.data.password);
+                    AuthenticationService.SetCredentials(response.data.id, response.data.email, response.data.name, response.data.rol, response.data.password);
                 	$location.path('/home');
                 } else {
                     //$rootScope.doFlashMessage('Error en login','','error');
