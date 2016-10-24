@@ -21,7 +21,7 @@ import com.entities.Extras;
 import com.services.ExtrasService;
 
 @Controller
-@RequestMapping(value = "booking")
+@RequestMapping(value = "extras")
 public class ExtrasController {
 	
 	@Autowired

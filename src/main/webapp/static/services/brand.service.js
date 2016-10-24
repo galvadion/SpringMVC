@@ -22,7 +22,7 @@
         // Brand functions
         
         function GetAllBrands() {
-            return $http.get('/SpringMVC/brand/getall').then(handleSuccess, handleError('Error getting all brands'));
+            return $http.get('/SpringMVC/brand/getall').then(handleSuccess, handleError);
         }
         
         function CreateBrand(brand) {
@@ -30,11 +30,11 @@
         }
         
         function UpdateBrand(brand) {
-            return $http.put('/SpringMVC/brand/update', brand).then(handleSuccess, handleError('Error updating brand'));
+            return $http.put('/SpringMVC/brand/update', brand).then(handleSuccess, handleError);
         }
         
         function DeleteBrand(id) {
-            return $http.delete('/SpringMVC/brand/delete', id).then(handleSuccess, handleError('Error deleting brand'));
+            return $http.delete('/SpringMVC/brand/delete', id).then(handleSuccess, handleError);
         }
 
         

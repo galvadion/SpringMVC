@@ -24,13 +24,11 @@
             
            UserService.CreateClient(vm.user)
 	            .then(function (response) {
-	            	console.log('a');
-	            	console.log(response);
-	                 /*if (response.data.id > 0) {
-	                    $rootScope.doFlashMessage('Client created successfully','/login','success',10000);
+	            	if (response.success) {
+	                    $rootScope.doFlashMessage('Cliente creado con éxito','/login','success',5000);
 	                } else {
-	                    $rootScope.doFlashMessage(response.error,'/login','error');
-	                }*/
+	                    $rootScope.doFlashMessage('Email ya en uso, reingrese e intente nuevamente','','error',1000);
+	                }
 	            NProgress.done();
 	        });
         }

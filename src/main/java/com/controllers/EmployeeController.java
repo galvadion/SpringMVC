@@ -22,7 +22,7 @@ import com.entities.User;
 import com.services.UserServices;
 
 @Controller
-@RequestMapping(value = "booking")
+@RequestMapping(value = "employee")
 public class EmployeeController {
 	
 	@Autowired

@@ -21,7 +21,7 @@ import com.entities.Category;
 import com.services.CategoryService;
 
 @Controller
-@RequestMapping(value = "booking")
+@RequestMapping(value = "category")
 public class CategoryController {
 	
 	@Autowired

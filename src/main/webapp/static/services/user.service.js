@@ -26,25 +26,25 @@
         //User functions
         
         function GetAllUsers() {
-            return $http.get('/SpringMVC/user/getall').then(handleSuccess, handleError('Error getting all users'));
+            return $http.get('/SpringMVC/user/getall').then(handleSuccess, handleError);
         }
         
         function GetUserById(id) {
-            return $http.get('/SpringMVC/user/getbyid' + id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get('/SpringMVC/user/getbyid' + id).then(handleSuccess, handleError);
         }
         
         //Client functions
 
         function CreateClient(client) {
-            return $http.post('/SpringMVC/client/register', client).then(handleSuccess, handleError('Error creating client'));
+            return $http.post('/SpringMVC/client/register', client).then(handleSuccess, handleError);
         }
         
         function UpdateClient(client) {
-            return $http.put('/SpringMVC/client/update', client).then(handleSuccess, handleError('Error updating client'));
+            return $http.put('/SpringMVC/client/update', client).then(handleSuccess, handleError);
         }
         
         function DeleteClient(id) {
-            return $http.delete('/SpringMVC/client/delete', id).then(handleSuccess, handleError('Error deleting client'));
+            return $http.delete('/SpringMVC/client/delete', id).then(handleSuccess, handleError);
         }
 
         
