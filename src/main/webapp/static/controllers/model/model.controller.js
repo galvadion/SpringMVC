@@ -15,6 +15,7 @@
         vm.requestModel = {};
         vm.allBrands = [];
         vm.allModels = [];
+        vm.lastYears = [];
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -60,6 +61,7 @@
         function initController() {
             NProgress.start();
             getAllBrands();
+            getLastYears();
             getAllModels();
         }
         
@@ -85,6 +87,15 @@
         		}
         		NProgress.done();
         	});
+        }
+        
+        function getLastYears(){
+        	var today = new Date();
+            vm.lastYears.push(today.getFullYear());
+            vm.lastYears.push(today.getFullYear() - 1);
+            vm.lastYears.push(today.getFullYear() - 2);
+            vm.lastYears.push(today.getFullYear() - 3);
+            vm.lastYears.push(today.getFullYear() - 4);
         }
         
         $scope.saveModel = function() {

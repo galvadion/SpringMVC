@@ -35,15 +35,15 @@
                                    		<th>Nombre</th>
                                         <th>Marca</th>
                                         <th>Categoria</th>
-                                        <th></th>
-                                   		<th></th>
-                                   		<th></th>
-                                   		<th></th>
-                                   		<th></th>
-                                   		<th></th>
-                                   		<th></th>
-                                   		<th></th>
-                                   		<th></th>
+                                        <th>Año</th>
+                                   		<th>Combustible</th>
+                                   		<th>Pasajeros</th>
+                                   		<th>Valijas</th>
+                                   		<th>Cilindrada</th>
+                                   		<th>Aire acondicionado</th>
+                                   		<th>Transmisión</th>
+                                   		<th>Seguro</th>
+                                   		<th>Tanque</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>
@@ -58,7 +58,11 @@
                                             {{value.brand.name}}
                                         </td>
                                         <td>
-                                            {{value.category.id}}
+                                            <p ng-if="value.category.id == 1">S</p>
+                                            <p ng-if="value.category.id == 2">A</p>
+                                            <p ng-if="value.category.id == 3">B</p>
+                                            <p ng-if="value.category.id == 4">C</p>
+                                            <p ng-if="value.category.id == 5">D</p>
                                         </td>
                                         <td>
                                             {{value.year}}
@@ -76,16 +80,18 @@
                                             {{value.cylinders}}
                                         </td>
                                         <td>
-                                            {{value.airConditioner}}
+                                            <p ng-if="value.airConditioner">Tiene</p>
+                                            <p ng-if="!value.airConditioner">No tiene</p>
                                         </td>
                                         <td>
-                                            {{value.transmission}}
+                                            <p ng-if="value.transmission == 'M'">Manual</p>
+                                            <p ng-if="value.transmission == 'A'">Automático</p>
                                         </td>
                                         <td>
-                                            {{value.insurance}}
+                                            $ {{value.insurance}}
                                         </td>
                                         <td>
-                                            {{value.fullTank}}
+                                            {{value.fullTank}} lts.
                                         </td>
                                         <td class="text-center plus">
                                              <a ng-href="#/model/{{value.id}}" title="Ver">

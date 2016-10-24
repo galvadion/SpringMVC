@@ -48,12 +48,14 @@
         <script type="text/javascript" src="static/js/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="static/js/angular-ui-router.js"></script>
         <script type="text/javascript" src="static/js/angular-file-upload.js"></script>
-        <script type="text/javascript" src="static/js/ngDatepicker.min.js"></script>
         <script type="text/javascript" src="static/js/angular-confirm.js"></script>
         <script type="text/javascript" src="static/js/nprogress.js"></script>
         <script type="text/javascript" src="static/js/ngDialog.js"></script>
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
-
+		<script type="text/javascript" src="static/js/ngDatepicker.min.js"></script>
+		<script type="text/javascript" src="static/js/moment.min.js"></script>
+		<script type="text/javascript" src="static/js/moment-with-locales.js"></script>
+		
 
 		<!-- Data Tablbes -->
 		<script type="text/javascript" src="static/js/vendor/datatables/media/js/jquery.dataTables.js"></script>

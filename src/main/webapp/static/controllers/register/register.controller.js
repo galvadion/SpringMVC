@@ -22,25 +22,42 @@
             vm.user.id = null;
             vm.user.active = true;
             
-            /*UserService.CheckEmail(vm.user.email).then(function (response) {
-                if(response.data.exist != true){*/
-            
-                    UserService.CreateClient(vm.user)
-                        .then(function (response) {
-                             /*if (response.data.id > 0) {
-                                $rootScope.doFlashMessage('Client created successfully','/login','success',10000);
-                            } else {
-                                $rootScope.doFlashMessage(response.error,'/login','error');
-                            }*/console.log(response);
-                        NProgress.done();
-                    });
-                /*}
-                else{
-                    $rootScope.doFlashMessage('Email already exist.','','error', 5000);
-                    NProgress.done();
-                }
-            });*/
+           UserService.CreateClient(vm.user)
+	            .then(function (response) {
+	                 /*if (response.data.id > 0) {
+	                    $rootScope.doFlashMessage('Client created successfully','/login','success',10000);
+	                } else {
+	                    $rootScope.doFlashMessage(response.error,'/login','error');
+	                }*/console.log(response);
+	            NProgress.done();
+	        });
         }
+        
+        $scope.checkBirthDateErr = function(varDate) {
+        	var localDate = new Date();
+        	localDate = (localDate.getFullYear() - 18) + '-' + (localDate.getMonth() + 1) + '-' +  localDate.getDate();
+        	console.log(localDate);
+        	if(Date.parse(localDate) <= Date.parse(varDate)){
+        		$scope.birthDateError = true;
+        	}
+        	else{
+        		$scope.birthDateError = false;
+        	}
+        	
+        };
+        
+        $scope.checkLicenseExpirationDateErr = function(varDate) {
+        	var localDate = new Date();
+        	localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1) + '-' +  localDate.getDate();
+        	if(Date.parse(localDate) > Date.parse(varDate)){
+        		$scope.licenseExpirationDateError = true;
+        	}
+        	else{
+        		$scope.licenseExpirationDateError = false;
+        	}
+        	
+        };
+        
     }
 
 })();

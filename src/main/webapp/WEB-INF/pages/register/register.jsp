@@ -61,22 +61,21 @@
 		            </div>
 		            
 		            
-		            <div class="form-group" ng-class="{ 'has-error': form.birthDate.$dirty && form.birthDate.$error.required }">
-		
-		                <input type="text" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="birthDate" id="Text1" class="form-control underline-input" placeholder="Nacimiento YYYY-MM-DD" ng-model="vm.user.birthDate" required />
-		
-		                <span ng-show="form.birthDate.$dirty && form.birthDate.$error.required" class="help-block">Fecha de nacimiento es requerido</span>
-		
+		            <div class="input-group datepicker" ng-class="{ 'has-error': (form.birthDate.$dirty && form.birthDate.$error.required) || birthDateError }">
+                    	<ng-datepicker class="input-group underline-input" locale="es" format="YYYY-MM-DD" view-format="YYYY-MM-DD" placeholder="Nacimiento YYYY-MM-DD" ng-model="vm.user.birthDate" name="birthDate" ng-change="checkBirthDateErr(vm.user.birthDate)"></ng-datepicker>
+                        <span ng-show="form.birthDate.$dirty && form.birthDate.$error.required" class="help-block">Fecha de nacimiento es requerido</span>
+                        <span ng-show="form.birthDate.$dirty && birthDateError" class="help-block">Fecha de nacimiento debe ser menor</span>
 		            </div>
 		            
+		            <br/>
 		            
-		            <div class="form-group" ng-class="{ 'has-error': form.licenseExpirationDate.$dirty && form.licenseExpirationDate.$error.required }">
-		
-		                <input type="text" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="licenseExpirationDate" id="Text1" class="form-control underline-input" placeholder="Vencimiento licencia YYYY-MM-DD" ng-model="vm.user.licenseExpirationDate" required />
-		
-		                <span ng-show="form.licenseExpirationDate.$dirty && form.licenseExpirationDate.$error.required" class="help-block">Vencimiento de licencia es requerido</span>
-		
+		            <div class="input-group datepicker" ng-class="{ 'has-error': (form.licenseExpirationDate.$dirty && form.licenseExpirationDate.$error.required) || licenseExpirationDate }">
+                    	<ng-datepicker class="input-group underline-input" locale="es" format="YYYY-MM-DD" view-format="YYYY-MM-DD" placeholder="Vencimiento licencia YYYY-MM-DD" ng-model="vm.user.licenseExpirationDate" name="licenseExpirationDate" ng-change="checkLicenseExpirationDateErr(vm.user.licenseExpirationDate)"></ng-datepicker>
+                        <span ng-show="form.licenseExpirationDate.$dirty && form.licenseExpirationDate.$error.required" class="help-block">Vencimiento de licencia es requerido</span>
+                        <span ng-show="form.licenseExpirationDate.$dirty && licenseExpirationDate" class="help-block">Vencimiento debe ser mayor</span>
 		            </div>
+		            
+		             <br/>
 		            
 		
 		            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty &&  vm.user.password.length <= 1 }">

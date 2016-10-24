@@ -44,10 +44,7 @@
 	                            <label for="year" class="control-label">* Año</label>
 	                            <select ng-model="vm.requestModel.year" name="year" id="year" class="form-control" required>
 									<option value=""> Seleccione el año</option> 
-									<option value="2016">2016</option>
-									<option value="2015">2015</option>
-									<option value="2014">2014</option>
-									<option value="2013">2013</option>
+									<option ng-repeat="(key, value) in vm.lastYears" value="{{value}}">{{value}}</option>
 								</select>
 								<span ng-show="form.year.$dirty && form.year.$error.required" class="help-block">Año es requerido</span>
 	                        </div>
