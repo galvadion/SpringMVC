@@ -10,8 +10,6 @@
     function UserService($http) {
         var service = {};
 
-        service.CheckEmail = CheckEmail;
-        
         service.GetAllUsers = GetAllUsers;
         service.GetUserById = GetUserById;
         
@@ -26,10 +24,6 @@
         return service;
 
         //User functions
-        
-        function CheckEmail(email) {
-            return $http.post('/SpringMVC/user/checkemail', email).then(handleSuccess, handleError('Error checking user email'));
-        }
         
         function GetAllUsers() {
             return $http.get('/SpringMVC/user/getall').then(handleSuccess, handleError('Error getting all users'));
