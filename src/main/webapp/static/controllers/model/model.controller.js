@@ -5,9 +5,9 @@
         .module('app')
         .controller('ModelController', ModelController);
 
-    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService'];
+    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
     
-    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService) {
+    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
 
         var vm = this;
         
@@ -16,6 +16,44 @@
         vm.allBrands = [];
         vm.allModels = [];
         
+        vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
+        .withPaginationType('simple_numbers')
+        .withDisplayLength(10)
+        .withLanguage({
+            "sEmptyTable":     "No hay entradas disponibles",
+            "sInfo":           "Mostrando _START_ - _END_ de _TOTAL_ entradas",
+            "sInfoEmpty":      "Mostrando 0 a 0 de 0 entradas",
+            "sInfoFiltered":   "(filtrando desde _MAX_ entradas totales)",
+            "sInfoPostFix":    "",
+            "sInfoThousands":  ",",
+            "sLengthMenu":     "_MENU_",
+            "sLoadingRecords": "Cargando...",
+            "sProcessing":     "Procesando...",
+            "sSearch":         "",
+            "sZeroRecords":    "No se encontraron resultados",
+            'sSearchPlaceholder': "Buscar...",
+            "paginate": {
+                "first":      "Primera",
+                "last":       "Última",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+            },
+        });
+
+        vm.DTColumnDefs = [
+            DTColumnDefBuilder.newColumnDef(3).notSortable(),
+            DTColumnDefBuilder.newColumnDef(4).notSortable(),
+            DTColumnDefBuilder.newColumnDef(5).notSortable(),
+            DTColumnDefBuilder.newColumnDef(6).notSortable(),
+            DTColumnDefBuilder.newColumnDef(7).notSortable(),
+            DTColumnDefBuilder.newColumnDef(8).notSortable(),
+            DTColumnDefBuilder.newColumnDef(9).notSortable(),
+            DTColumnDefBuilder.newColumnDef(10).notSortable(),
+            DTColumnDefBuilder.newColumnDef(11).notSortable(),
+            DTColumnDefBuilder.newColumnDef(12).notSortable(),
+            DTColumnDefBuilder.newColumnDef(13).notSortable(),
+            DTColumnDefBuilder.newColumnDef(14).notSortable(),
+        ];
         
         initController();
         

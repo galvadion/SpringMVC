@@ -29,12 +29,21 @@
                     <div class="tile-body table-custom p-0">
             			<div class="table-responsive">
             				
-            				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
+            				<table datatable="ng" class="table mb-0 table-custom" id="ModelList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
                                 <thead>
                                    <tr>
                                    		<th>Nombre</th>
                                         <th>Marca</th>
                                         <th>Categoria</th>
+                                        <th></th>
+                                   		<th></th>
+                                   		<th></th>
+                                   		<th></th>
+                                   		<th></th>
+                                   		<th></th>
+                                   		<th></th>
+                                   		<th></th>
+                                   		<th></th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>

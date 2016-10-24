@@ -43,8 +43,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!--tr ng-repeat="(key, value) in allVehicles"-->
-                                    <tr>
+                                    <tr ng-repeat="(key, value) in vm.allVehicles">
                                     	<td>
                                             SBF 562                                             
                                         </td>

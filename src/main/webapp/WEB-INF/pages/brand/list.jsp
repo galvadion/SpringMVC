@@ -66,7 +66,7 @@
                     <div class="tile-body table-custom p-0">
             			<div class="table-responsive">
             				
-            				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
+            				<table datatable="ng" class="table mb-0 table-custom" id="BrandList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
                                 <thead>
                                    <tr>
                                    		<th>Nombre</th>
