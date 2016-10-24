@@ -73,4 +73,13 @@ public class BrandController {
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> delete(String id){
+		Brand entity=brandService.get(Integer.valueOf(id));
+		brandService.removeCascade(entity);
+		return ResponseEntity.ok((Object)"It has been removed");
+		
+	}
+	
 }

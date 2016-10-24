@@ -26,7 +26,7 @@ public class BookedDaoImpl extends GenericDaoImpl<Booked, Integer> implements Bo
 	}
 
 	public Booked getBookedByClient(Client user) {
-		Query query=currentSession().createQuery("from Booked where client =:client and :today between beginbookedDate and lastbookedDate");
+		Query query=currentSession().createQuery("from Booked where client =:client and :today between beginbookedDate and lastbookedDate and canceled=false");
 		query.setParameter("client", user);
 		query.setParameter("today",LocalDate.now());
 		return (Booked) query.getSingleResult();

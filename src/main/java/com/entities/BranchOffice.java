@@ -36,6 +36,8 @@ public class BranchOffice implements Serializable{
 	
 	private String address;
 	
+	private boolean closed=false;
+	
 	@Column(name= "aperture_hour")
 	private LocalTime apertureHour;
 	
@@ -147,6 +149,14 @@ public class BranchOffice implements Serializable{
 
 	public void setStatusDates(List<StatusBetweenDates> originStatus) {
 		this.statusDates = originStatus;
+	}
+
+	public boolean isClosed() {
+		return closed;
+	}
+
+	public void setClosed(boolean closed) {
+		this.closed = closed;
 	}
 
 	

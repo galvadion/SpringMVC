@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.dao.GenericDao;
 import com.dao.UserDao;
+import com.entities.Client;
+import com.entities.Employee;
 import com.entities.User;
 import com.services.UserServices;
 
@@ -35,5 +37,11 @@ public class UserServicesImpl extends GenericServiceImpl<User, Integer> implemen
 			return null;
 		}
 	}
+
+	public List<Employee> getAllEmployees() {
+		// TODO Auto-generated method stub
+		return userDao.getAllEmployees();
+	}
+
 	
 }

@@ -1,12 +1,15 @@
 package com.daoImpl;
 
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.UserDao;
+import com.entities.Employee;
 import com.entities.User;
 
 @Repository
@@ -26,6 +29,10 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDa
 		query.setParameter("username", username);
 		User user=(User) query.getSingleResult();
 		return user;
+	}
+	public List<Employee> getAllEmployees() {
+		Query query=currentSession().createQuery("from Employee");
+		return query.getResultList();
 	}
 	
 }

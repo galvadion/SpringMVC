@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.entities.Model;
 import com.entities.StatusBetweenDates;
 import com.entities.Vehicle;
+import com.models.MaintenanceModel;
 import com.models.Vehicle_Status;
 import com.services.BranchOfficeService;
 import com.services.ModelService;
@@ -67,39 +68,55 @@ public class VehicleController {
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public ResponseEntity<Object> getSaved(@RequestBody RequestModel requestModel) {
-		Vehicle vehicle = requestModel.vehicle;
-		vehicle.setState(Vehicle_Status.Available);
-		vehicle.setModel(modelService.get(requestModel.model_id));
-		vehicle.setBranchOffice(branchService.get(requestModel.branchOffice_id));
+	public ResponseEntity<Object> getSaved(@RequestBody Vehicle requestModel) {
+		requestModel.setState(Vehicle_Status.Available);
 		setUpValidator();
-		Set<ConstraintViolation<Vehicle>> constraintViolations = validator.validate(vehicle);
+		Set<ConstraintViolation<Vehicle>> constraintViolations = validator.validate(requestModel);
 		if (constraintViolations.size() > 0) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body((Object) constraintViolations.iterator().next().getMessage());
 		} else {
 			try {
-				vehicleService.saveOrUpdate(vehicle);
+				vehicleService.saveOrUpdate(requestModel);
 				StatusBetweenDates availability=new StatusBetweenDates();
 				availability.setBeginDate(LocalDate.now());
 				availability.setEndDate(LocalDate.now().plusYears(5));
-				availability.setVehicle(vehicle);
-				availability.setBranchOffice(branchService.get(requestModel.branchOffice_id));
+				availability.setVehicle(requestModel);
+				availability.setBranchOffice(branchService.get(requestModel.getBranchOffice().getId()));
 				statusService.saveOrUpdate(availability);
-				return ResponseEntity.ok((Object) vehicle);
+				return ResponseEntity.ok((Object) requestModel);
 			} catch (Exception e) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body((Object) "There has been an error");
 			}
 		}
 	}
 	
-	private static class RequestModel implements Serializable {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		private Vehicle vehicle;
-		private Integer model_id;
-		private Integer branchOffice_id;
+	@RequestMapping(value = "/maintenance", method = RequestMethod.POST)
+	public ResponseEntity<Object> sendToMaintenance(@RequestBody MaintenanceModel requestModel){
+		Vehicle vehicle=vehicleService.get(requestModel.getVehicleId());
+		StatusBetweenDates current=statusService.getCurrentStatus(vehicle,requestModel.getFirstDate());
+		current.setEndDate(requestModel.getFirstDate());
+		statusService.saveOrUpdate(current);
+		//Creates the status in the unavailable date
+		StatusBetweenDates unavailability=new StatusBetweenDates();
+		unavailability.setBeginDate(requestModel.getFirstDate());
+		unavailability.setStatus(Vehicle_Status.Maintenance);
+		unavailability.setEndDate(requestModel.getEndDate());
+		unavailability.setVehicle(vehicle);
+		unavailability.setBranchOffice(vehicle.getBranchOffice());
+		statusService.saveOrUpdate(unavailability);
+		//Creates the status in the available date
+		StatusBetweenDates availability=new StatusBetweenDates();
+		availability.setBeginDate(requestModel.getEndDate());
+		availability.setStatus(Vehicle_Status.Available);
+		availability.setEndDate(requestModel.getEndDate().plusYears(5));
+		availability.setVehicle(vehicle);
+		availability.setBranchOffice(vehicle.getBranchOffice());
+		statusService.saveOrUpdate(availability);
+		return ResponseEntity.ok((Object) "Its been registered");
+		
 	}
+	
+	
+	
 }

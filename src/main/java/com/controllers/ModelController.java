@@ -96,14 +96,11 @@ public class ModelController {
 		return ResponseEntity.ok(modelService.getModelsBetweenFilter(search));
 	}
 	
-	private static class RequestModel implements Serializable {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		private Model model;
-		private Integer category_id;
-		private Integer brand_id;
-
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> delete(String id) {
+		Model model=modelService.get(Integer.parseInt(id));
+		modelService.removeCascade(model);
+		return ResponseEntity.ok((Object)"It has been removed");
 	}
+	
 }
