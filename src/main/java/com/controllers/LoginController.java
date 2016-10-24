@@ -55,7 +55,7 @@ public class LoginController {
 		LogInResonseBody response = new LogInResonseBody();
 		if(user != null){
 			response.setEmail(user.getEmail());
-			response.setId(user.getUser_id());
+			response.setId(user.getId());
 			response.setName(user.getName());
 			response.setPasssword(user.getPassword());
 			if(user.getClass() == Client.class){
