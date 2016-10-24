@@ -60,6 +60,12 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 	}
 
 	
-
+	public StatusBetweenDates getActualStatus(Vehicle vehicle,LocalDate date){
+		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicle =:vehicule and :date between s.beginDate and s.endDate");
+		query.setParameter("date", date);
+		query.setParameter("vehicule", vehicle);
+		return (StatusBetweenDates) query.getSingleResult();
+		
+	}
 
 }

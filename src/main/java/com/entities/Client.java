@@ -50,6 +50,21 @@ public class Client extends User implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
+	public List<Booked> getBooked() {
+		return booked;
+	}
+	public void setBooked(List<Booked> booked) {
+		this.booked = booked;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	
 	

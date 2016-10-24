@@ -27,6 +27,8 @@ public class Category implements Serializable{
 	@Min(value=0, message="The value can't be negative")
 	@Column(name="base_price")
 	private float basePrice;
+	
+	private boolean unavailable=false;
 
 	@OneToMany(mappedBy="category")
 	public List<Model> Models;
@@ -59,6 +61,14 @@ public class Category implements Serializable{
 	@Override
 	public String toString() {
 		return "Category [id=" + id + ", basePrice=" + basePrice + ", Models=" + Models + "]";
+	}
+
+	public boolean isUnavailable() {
+		return unavailable;
+	}
+
+	public void setUnavailable(boolean unavailable) {
+		this.unavailable = unavailable;
 	}
 	
 	

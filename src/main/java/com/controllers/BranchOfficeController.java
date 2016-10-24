@@ -1,5 +1,6 @@
 package com.controllers;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.BranchOffice;
 import com.entities.Brand;
+import com.entities.Extras;
 import com.services.BranchOfficeService;
 
 @Controller
@@ -61,6 +63,17 @@ public class BranchOfficeController {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body((Object)"The name of the branch is duplicated");
 			}
 		}
+	}
+	
+	@RequestMapping(value = "/getall", method = RequestMethod.GET)
+	public ResponseEntity<List<BranchOffice>> getAll() {
+		List<BranchOffice> list = branchOfficeService.getAll();
+		if (list != null) {
+			return ResponseEntity.ok(list);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		
 	}
 	
 }

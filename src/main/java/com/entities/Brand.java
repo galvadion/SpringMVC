@@ -27,7 +27,9 @@ public class Brand {
 	private String name;
 	
 	@OneToMany(mappedBy="brand")
-	public List<Model> models;
+	private List<Model> models;
+	
+	private boolean unavailable=false;
 
 	public Integer getId() {
 		return id;
@@ -56,6 +58,14 @@ public class Brand {
 	@Override
 	public String toString() {
 		return "Brand [id=" + id + ", name=" + name + ", models=" + models + "]";
+	}
+
+	public boolean isUnavailable() {
+		return unavailable;
+	}
+
+	public void setUnavailable(boolean available) {
+		this.unavailable = available;
 	}	
 	
 	

@@ -38,6 +38,8 @@ public class Booked implements Serializable{
 	@Column(name= "last_booked_date")
 	private LocalDate lastbookedDate;
 	
+	private boolean canceled=false;
+	
 	@Column(name = "transaction_number")
 	private String transactionNr;
 	
@@ -191,6 +193,14 @@ public class Booked implements Serializable{
 
 	public void setEndOffice(BranchOffice endOffice) {
 		this.endOffice = endOffice;
+	}
+
+	public boolean isCanceled() {
+		return canceled;
+	}
+
+	public void setCanceled(boolean canceled) {
+		this.canceled = canceled;
 	}
 
 	

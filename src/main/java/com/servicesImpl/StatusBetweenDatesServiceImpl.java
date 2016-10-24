@@ -54,5 +54,11 @@ public class StatusBetweenDatesServiceImpl extends GenericServiceImpl<StatusBetw
 	}
 
 
+	public StatusBetweenDates getCurrentStatus(Vehicle vehicle, LocalDate firstDate) {
+		
+		return statusBetweenDatesDao.getActualStatus(vehicle, firstDate);
+	}
+
+
 	
 }

@@ -54,6 +54,8 @@ public class Vehicle implements Serializable{
 
 	private Integer kilometers;
 	
+	private boolean unavailable=false;
+	
 	@ManyToOne
 	@JoinColumn(name="model_id", nullable=false)
 	private Model model;
@@ -199,6 +201,14 @@ public class Vehicle implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public boolean isUnavailable() {
+		return unavailable;
+	}
+
+	public void setUnavailable(boolean unavailable) {
+		this.unavailable = unavailable;
 	}
 
 	

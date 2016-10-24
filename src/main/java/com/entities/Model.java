@@ -60,6 +60,8 @@ public class Model implements Serializable {
 
 	private boolean airConditioner;
 	
+	private boolean unavailable=false;
+	
 	@Transient
 	private int vehicleCount;
 
@@ -69,6 +71,9 @@ public class Model implements Serializable {
 
 	@OneToMany(mappedBy = "model")
 	private List<Vehicle> vehicles;
+	
+	@OneToMany(mappedBy = "model")
+	private List<Images> images;
 
 	private String transmission;
 
@@ -202,6 +207,30 @@ public class Model implements Serializable {
 				+ ", year=" + year + ", passangers=" + passangers + ", luggage=" + luggage + ", cylinders=" + cylinders
 				+ ", airConditioner=" + airConditioner + ", vehicles=" + vehicles + ", transmission=" + transmission
 				+ ", insurance=" + insurance + ", fullTank=" + fullTank + "]";
+	}
+
+	public boolean isUnavailable() {
+		return unavailable;
+	}
+
+	public void setUnavailable(boolean unavailable) {
+		this.unavailable = unavailable;
+	}
+
+	public List<Images> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Images> images) {
+		this.images = images;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setVehicleCount(int vehicleCount) {
+		this.vehicleCount = vehicleCount;
 	}
 	
 	
