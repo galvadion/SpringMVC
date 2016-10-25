@@ -89,9 +89,12 @@
             	<section class="tile">
             		
             		<!-- tile header -->
-                    <div class="tile-header dvd dvd-btm">
-                        <h1 class="custom-font"><strong>Listado </strong>de promociones</h1>
-                    </div>
+            		<a href="localhost:8443/SpringMVC/payment/start-paypal">
+            			<div class="tile-header dvd dvd-btm">
+                        	<h1 class="custom-font"><strong>Listado </strong>de promociones</h1>
+                    	</div>
+            		</a>
+                    
                     <!-- /tile header -->
 
                     <!-- tile body -->
@@ -118,8 +121,11 @@
                     <!-- /tile header -->
 
                     <!-- tile body -->
-                    <div class="btn btn-info" id="pago-paypal-example">Pago PayPal
-            		</div>
+                    <form method="post" action="/SpringMVC/payment/start-paypal">
+                    
+                    <button type="submit" ><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/blue-rect-paypal-34px.png" alt="PayPal"></button> 
+                    </form>
+                    
             	
             	</section>
             </div>

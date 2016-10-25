@@ -5,20 +5,27 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize
 public class TransactionItem {
 
-	private String descripcion;
-	private Double amount;
+	private String name;
+	private String amount;
+	private int quantity;
 	
-	public String getDescripcion() {
-		return descripcion;
+	public String getName() {
+		return name;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public Double getAmount() {
+	public String getAmount() {
 		return amount;
 	}
-	public void setAmount(Double amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	
 	

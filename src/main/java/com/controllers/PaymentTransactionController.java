@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.jboss.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,10 +22,10 @@ public class PaymentTransactionController {
 
 	static Logger log = Logger.getLogger(PaymentTransactionController.class.getName());
 
-	@Autowired
+	@Resource(name="PayPalServiceImpl")
 	PayPalService paypalService;
 
-	@RequestMapping(value="/start-paypal",method =RequestMethod.GET)
+	@RequestMapping(value="/start-paypal",method =RequestMethod.POST)
 	public Map<String, Object> paypalPaymentBegin(){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -33,18 +35,36 @@ public class PaymentTransactionController {
 			// HARDCODED *************************
 
 			TransactionItem item = new TransactionItem();
-			item.setAmount(12450.5);
-			item.setDescripcion("Alquiler BMW Z4 x 1 semana");
-
+			item.setAmount("12450.50");
+			item.setName("Alquiler BMW Z4 x 1 semana");
+			item.setQuantity(2);
+			
 			List<TransactionItem> itemsList = new ArrayList<TransactionItem>();
 			itemsList.add(item);
 
 			// *************************************
 
-			String token = paypalService.beginTransaction(itemsList);
+			Map<String, String> response = paypalService.beginTransaction(itemsList);
 			
-			map.put("status", "200");
-			map.put("token", token);
+			switch (response.get("ack")) {
+			case "success" :
+				map.put("status", "200");
+				map.put("token", response.get("token"));
+				break;
+			
+			case "failure" :
+				map.put("status", "500");
+				map.put("message", "An error has ocurred");
+				log.error(response.get("message"));
+			case "none" : 
+				map.put("status", "500");
+				map.put("message","An error has ocurred");
+				log.error(response.get("message"));
+			default:
+				map.put("status", "500");
+				map.put("message", "An error has ocurred");
+				break;
+			}
 
 			return map;
 		}

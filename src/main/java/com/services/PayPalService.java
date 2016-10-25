@@ -1,14 +1,16 @@
 package com.services;
 
 import java.util.List;
+import java.util.Map;
 
 import com.models.TransactionItem;
 
-public interface PayPalService {
+public interface PayPalService  {
 	
 	/**
 	 * Initialize the process of transaction with paypal Server
 	 * @return Token from PayPal for application user client use
+	 * @throws Exception 
 	 */
-	String beginTransaction(List<TransactionItem> items);
+	Map<String, String> beginTransaction(List<TransactionItem> items) throws Exception;
 }
