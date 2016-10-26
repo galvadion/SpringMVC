@@ -65,21 +65,34 @@
         
         $scope.saveBrand = function() {
         	NProgress.start();
-        	BrandService.CreateBrand(vm.brand).then(function (response) {
+        	var mgsSuccess = "";
+        	var mgsError = "";
+        	
+        	if(vm.brand.id){
+        		mgsSuccess = "Marca editada con éxito";
+        		mgsError = "Error al editar marca";
+        		
+        	}
+        	else{
+        		mgsSuccess = "Marca creada con éxito";
+        		mgsError = "Marca ya existente";
+        	}
+        	
+        	BrandService.InsertBrand(vm.brand).then(function (response) {
         		if(response.success){
         			getAllBrands();
-        			$rootScope.doFlashMessage('Marca creada','','success');
+        			$rootScope.doFlashMessage(mgsSuccess,'','success');
         			$scope.cleanInput();
         		}
         		else{
-        			$rootScope.doFlashMessage('Marca ya existente','','error');
+        			$rootScope.doFlashMessage(mgsError,'','error');
         		}
         		NProgress.done();
         	});
         };
         
         $scope.cleanInput = function() {
-        	vm.brand.name = "";
+        	vm.brand = {};
         	$scope.form.$setPristine();
         };
         
@@ -89,7 +102,17 @@
         };
         
         $scope.deleteBrand = function(id) {
-        	alert('eliminar brand id: ' + id);
+        	NProgress.start();
+        	BrandService.DeleteBrand(id).then(function (response) {
+        		if(response.success){
+        			getAllBrands();
+        			$rootScope.doFlashMessage('Marca eliminada','','success');
+        		}
+        		else{
+        			$rootScope.doFlashMessage('Error al eliminar','','error');
+        		}
+        		NProgress.done();
+        	});
         };
         
         $scope.scrollTo = function(element) {

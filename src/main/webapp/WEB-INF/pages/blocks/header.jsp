@@ -44,8 +44,9 @@
 							        	</a>
 							        	<ul class="dropdown-menu">
 								            <li><a href="#/profile">Perfil</a></li>
+								            <li><a href="">Transacciones</a></li>
 								            <li><a ng-click="logOut()" href="#/">Salir</a></li>
-								          </ul>
+								        </ul>
 									</li>
 							    </ul>
 							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="!globals.currentUser">

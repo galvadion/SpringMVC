@@ -24,9 +24,10 @@
             AuthenticationService.Login(vm.email, vm.password).then(function (response) {
                 if(response.success) {
                     AuthenticationService.SetCredentials(response.data.id, response.data.email, response.data.name, response.data.rol, response.data.password);
-                	$location.path('/home');
+                    $rootScope.doFlashMessage('Bienvenido!','/home','success');
+                    $location.path('/home');
                 } else {
-                    //$rootScope.doFlashMessage('Error en login','','error');
+                    $rootScope.doFlashMessage('Error, por favor intente nuevamente','','error');
                 }
                 NProgress.done();
             });
