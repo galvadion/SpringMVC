@@ -49,5 +49,9 @@ public class BrandServiceImpl extends GenericServiceImpl<Brand, Integer> impleme
 		brandDao.saveOrUpdate(entity);
 	}
 
+	public List<Brand> getAvailable() {
+		return brandDao.getAvailable();
+	}
+
 	
 }
