@@ -19,7 +19,10 @@ public class BookinController {
 
 	@Autowired
 	BrandService BookedService;
-
+	
+	/*
+	 * return the searchView
+	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView getPage() {
 		ModelAndView view = new ModelAndView("booking/search");
@@ -28,13 +31,4 @@ public class BookinController {
 
 
 
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> getSaved(Brand brand) {
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("status", "200");
-		map.put("message", "Your record have been saved successfully");
-
-		return map;
-	}
 }

@@ -9,6 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value="blocks")
 public class BlocksController {
 	
+	/*
+	 * This method brings the header of the page
+	 */
 	@RequestMapping(value="/header",method =RequestMethod.GET)
 	public ModelAndView getHeader(){
 		ModelAndView view=new ModelAndView("blocks/header");

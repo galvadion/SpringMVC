@@ -1,6 +1,7 @@
 package com.daoImpl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Query;
 
@@ -31,6 +32,5 @@ public class BookedDaoImpl extends GenericDaoImpl<Booked, Integer> implements Bo
 		query.setParameter("today",LocalDate.now());
 		return (Booked) query.getSingleResult();
 	}
-	
 	
 }

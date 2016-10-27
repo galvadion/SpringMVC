@@ -29,7 +29,7 @@
         }
         
         function DeleteBrand(id) {
-            return $http.delete('/SpringMVC/brand/delete', id).then(handleSuccess, handleError);
+            return $http.delete('/SpringMVC/brand/delete?id='+id).then(handleSuccess, handleError);
         }
 
         
