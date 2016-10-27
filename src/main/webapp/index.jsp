@@ -105,6 +105,11 @@
         <script src="static/services/brand.service.js"></script>
         <script src="static/services/model.service.js"></script>
         <script src="static/services/vehicle.service.js"></script>
+        <script src="static/services/booked.service.js"></script>
+        <script src="static/services/branchoffice.service.js"></script>
+        <script src="static/services/promotion.service.js"></script>
+        <script src="static/services/rent.service.js"></script>
+        <script src="static/services/tariff.service.js"></script>
 
 
         <!--Controllers-->
@@ -116,6 +121,13 @@
         <script src="static/controllers/brand/brand.controller.js"></script>
         <script src="static/controllers/model/model.controller.js"></script>
         <script src="static/controllers/vehicle/vehicle.controller.js"></script>
+        <script src="static/controllers/booked/booked.controller.js"></script>
+        <script src="static/controllers/branchoffice/branchoffice.controller.js"></script>
+        <script src="static/controllers/promotion/promotion.controller.js"></script>
+        <script src="static/controllers/rent/rent.controller.js"></script>
+        <script src="static/controllers/tariff/tariff.controller.js"></script>
+        
+        
 
         <div id="wrap">
           <div ng-view></div>

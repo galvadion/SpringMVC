@@ -23,7 +23,7 @@ import com.entities.Extras;
 import com.services.BranchOfficeService;
 
 @Controller
-@RequestMapping(value = "branch_offices")
+@RequestMapping(value = "branchoffice")
 public class BranchOfficeController {
 	
 	@Autowired
@@ -38,7 +38,13 @@ public class BranchOfficeController {
 	
 	@RequestMapping(value="",method =RequestMethod.GET)
 	public ModelAndView getListPage(){
-		ModelAndView view=new ModelAndView("brand/list");
+		ModelAndView view=new ModelAndView("branchoffice/list");
+		return view;
+	}
+	
+	@RequestMapping(value="/create",method =RequestMethod.GET)
+	public ModelAndView getFormPage(){
+		ModelAndView view=new ModelAndView("branchoffice/list");
 		return view;
 	}
 

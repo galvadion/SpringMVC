@@ -25,7 +25,7 @@
             .when('/home', {
                 controller: 'HomeController',
                 templateUrl: 'home/home',
-                title: 'Demo - Inicio',
+                title: 'Rent-UY - Inicio',
                 /*resolve:{
                     'AllAdvertiserData':
                         ['$http', function($http) { return $http.get('/adv/adv'); }],
@@ -38,75 +38,201 @@
              .when('/', {
                 controller: 'HomeController',
                 templateUrl: 'home/home',
-                title: 'Demo - Inicio',
+                title: 'Rent-UY - Inicio',
                 controllerAs: 'vm'            
              })
 
             .when('/login', {
                 controller: 'LoginController',
                 templateUrl: 'login/login',
-                title: 'Demo - Ingresar',
+                title: 'Rent-UY - Ingresar',
                 controllerAs: 'vm'
             })
 
             .when('/register', {
                 controller: 'RegisterController',
                 templateUrl: 'login/register',
-                title: 'Demo - Registrarse',
+                title: 'Rent-UY - Registrarse',
                 controllerAs: 'vm'
             })
 
             .when('/forgot', {
                 controller: 'ForgotController',
                 templateUrl: 'login/forgot',
-                title: 'Demo - Recuperar Contraseña',
+                title: 'Rent-UY - Recuperar Contraseña',
                 controllerAs: 'vm'
             })
             
             .when('/terms', {
                 templateUrl: 'login/terms',
-                title: 'Demo - Terminos & Condiciones'
+                title: 'Rent-UY - Términos & Condiciones'
             })
 
             .when('/profile', {
                 controller: 'UserController',
-                templateUrl: 'user/user',
-                title: 'Demo - Perfil',
+                templateUrl: 'user/profile',
+                title: 'Rent-UY - Perfil',
+                controllerAs: 'vm'
+            })
+            
+            .when('/employee', {
+                controller: 'UserController',
+                templateUrl: 'employee',
+                title: 'Rent-UY - Empleados',
+                controllerAs: 'vm'
+            })
+            
+            .when('/employee/create', {
+                controller: 'UserController',
+                templateUrl: 'employee/create',
+                title: 'Rent-UY - Crear Empleado',
+                controllerAs: 'vm'
+            })
+            
+            .when('/employee/edit', {
+                controller: 'UserController',
+                templateUrl: 'employee/edit',
+                title: 'Rent-UY - Editar Empleado',
+                controllerAs: 'vm'
+            })
+            
+            .when('/client', {
+                controller: 'UserController',
+                templateUrl: 'client',
+                title: 'Rent-UY - Clientes',
+                controllerAs: 'vm'
+            })
+            
+            .when('/client/create', {
+                controller: 'UserController',
+                templateUrl: 'client/create',
+                title: 'Rent-UY - Crear Cliente',
+                controllerAs: 'vm'
+            })
+            
+            .when('/client/edit', {
+                controller: 'UserController',
+                templateUrl: 'client/edit',
+                title: 'Rent-UY - Editar Cliente',
                 controllerAs: 'vm'
             })
 
             .when('/brand', {
                 controller: 'BrandController',
                 templateUrl: 'brand',
-                title: 'Demo - Marcas',
+                title: 'Rent-UY - Marcas',
                 controllerAs: 'vm'
             })
             
             .when('/model', {
                 controller: 'ModelController',
                 templateUrl: 'model',
-                title: 'Demo - Modelos',
+                title: 'Rent-UY - Modelos',
                 controllerAs: 'vm'
             })
 
             .when('/model/create', {
                 controller: 'ModelController',
                 templateUrl: 'model/create',
-                title: 'Demo - Crear Modelo',
+                title: 'Rent-UY - Crear Modelo',
+                controllerAs: 'vm'
+            })
+            
+            .when('/model/edit', {
+                controller: 'ModelController',
+                templateUrl: 'model/edit',
+                title: 'Rent-UY - Editar Modelo',
                 controllerAs: 'vm'
             })
             
             .when('/vehicle', {
                 controller: 'VehicleController',
                 templateUrl: 'vehicle',
-                title: 'Demo - Vehiculos',
+                title: 'Rent-UY - Vehículos',
                 controllerAs: 'vm'
             })
 
             .when('/vehicle/create', {
                 controller: 'VehicleController',
                 templateUrl: 'vehicle/create',
-                title: 'Demo - Crear Vehiculo',
+                title: 'Rent-UY - Crear Vehículo',
+                controllerAs: 'vm'
+            })
+            
+            .when('/vehicle/edit', {
+                controller: 'VehicleController',
+                templateUrl: 'vehicle/edit',
+                title: 'Rent-UY - Editar Vehículo',
+                controllerAs: 'vm'
+            })
+            
+            .when('/branchoffice', {
+                controller: 'BranchofficeController',
+                templateUrl: 'branchoffice',
+                title: 'Rent-UY - Sucursales',
+                controllerAs: 'vm'
+            })
+
+            .when('/branchoffice/create', {
+                controller: 'BranchofficeController',
+                templateUrl: 'branchoffice/create',
+                title: 'Rent-UY - Crear Sucursal',
+                controllerAs: 'vm'
+            })
+            
+            .when('/branchoffice/edit', {
+                controller: 'BranchofficeController',
+                templateUrl: 'branchoffice/edit',
+                title: 'Rent-UY - Editar Sucursal',
+                controllerAs: 'vm'
+            })
+            
+            .when('/tariff', {
+                controller: 'TariffController',
+                templateUrl: 'tariff',
+                title: 'Rent-UY - Tarifas',
+                controllerAs: 'vm'
+            })
+            
+            .when('/promotion', {
+                controller: 'PromotionController',
+                templateUrl: 'promotion',
+                title: 'Rent-UY - Promociones',
+                controllerAs: 'vm'
+            })
+            
+            .when('/rent', {
+                controller: 'RenteController',
+                templateUrl: 'rent',
+                title: 'Rent-UY - Alquileres',
+                controllerAs: 'vm'
+            })
+
+            .when('/rent/view', {
+                controller: 'VehicleController',
+                templateUrl: 'rent/view',
+                title: 'Rent-UY - Rentar Vehículo',
+                controllerAs: 'vm'
+            })
+            
+            .when('/booked', {
+                controller: 'BookedController',
+                templateUrl: 'booked',
+                title: 'Rent-UY - Reservas',
+                controllerAs: 'vm'
+            })
+
+            .when('/booked/create', {
+                controller: 'BookedController',
+                templateUrl: 'booked/create',
+                title: 'Rent-UY - Crear Reserva',
+                controllerAs: 'vm'
+            })
+            
+            .when('/booked/edit', {
+                controller: 'BookedController',
+                templateUrl: 'booked/edit',
+                title: 'Rent-UY - Editar Reserva',
                 controllerAs: 'vm'
             })
 
