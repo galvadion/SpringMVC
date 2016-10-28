@@ -6,10 +6,10 @@
     <div class="page page-dashboard">
 
         <div class="pageheader">
-        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Vehiculos </strong> Listado</h1>
+        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Reservas </strong> Listado</h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Inicio</a></li>
-                <li class="breadcrumb-active">Vehiculos</li>
+                <li class="breadcrumb-active">Reservas</li>
             </ol>
         </div>
 

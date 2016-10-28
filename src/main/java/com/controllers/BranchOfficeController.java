@@ -45,14 +45,14 @@ public class BranchOfficeController {
 	}
 	
 	@RequestMapping(value="/create",method =RequestMethod.GET)
-	public ModelAndView getFormPage(){
-		ModelAndView view=new ModelAndView("branchoffice/list");
+	public ModelAndView getCreatePage(){
+		ModelAndView view=new ModelAndView("branchoffice/form");
 		return view;
 	}
-
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView getCreatePage() {
-		ModelAndView view = new ModelAndView("brand/form");
+	
+	@RequestMapping(value="/edit",method =RequestMethod.GET)
+	public ModelAndView getEditPage(){
+		ModelAndView view=new ModelAndView("branchoffice/form");
 		return view;
 	}
 	

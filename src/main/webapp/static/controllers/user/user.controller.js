@@ -14,12 +14,14 @@
         vm.master ={};
         vm.auxuser = {};
         vm.users = {};
+        
         vm.roladmin = $rootScope.roladmin;
         vm.rolclient = false;
+        
         vm.edit = true;
         vm.saveUserFlag = false;
         vm.newpassword = "";
-        vm.rol = "";
+        vm.location = "";
         
         var currentUserRol;
         
@@ -29,6 +31,19 @@
         function initController(){
             NProgress.start();
             //SessionService.initService();
+            
+            vm.location = $location.path().split('/',2);
+            vm.location = vm.location[1];
+            
+            if(vm.location == "profile"){
+
+            }
+            else if(vm.location == "employee"){
+            	
+            }
+            else if(vm.location == "client"){
+            	
+            }
 
             NProgress.done();
         }

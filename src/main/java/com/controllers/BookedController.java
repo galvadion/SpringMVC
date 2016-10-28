@@ -14,11 +14,29 @@ import com.entities.Brand;
 import com.services.BrandService;
 
 @Controller
-@RequestMapping(value = "booking")
-public class BookinController {
+@RequestMapping(value = "booked")
+public class BookedController {
 
 	@Autowired
 	BrandService BookedService;
+
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ModelAndView getListPage() {
+		ModelAndView view = new ModelAndView("booked/list");
+		return view;
+	}
+	
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView getCreatePage() {
+		ModelAndView view = new ModelAndView("booked/form");
+		return view;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView getEditPage() {
+		ModelAndView view = new ModelAndView("user/form");
+		return view;
+	}
 	
 	/*
 	 * return the searchView
@@ -28,7 +46,5 @@ public class BookinController {
 		ModelAndView view = new ModelAndView("booking/search");
 		return view;
 	}
-
-
 
 }

@@ -38,13 +38,19 @@ public class EmployeeController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView getListPage() {
-		ModelAndView view = new ModelAndView("employee/list");
+		ModelAndView view = new ModelAndView("user/list");
 		return view;
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView getCreatePage() {
-		ModelAndView view = new ModelAndView("employee/form");
+		ModelAndView view = new ModelAndView("user/form");
+		return view;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView getEditPage() {
+		ModelAndView view = new ModelAndView("user/form");
 		return view;
 	}
 	

@@ -3,33 +3,33 @@
 
     angular
         .module('app')
-        .factory('BranchofficeService', BranchofficeService);
+        .factory('RentService', RentService);
 
-    BranchofficeService.$inject = ['$http'];
+    RentService.$inject = ['$http'];
 
-    function BranchofficeService($http) {
+    function RentService($http) {
         var service = {};
 
-        service.GetAllBranchoffices = GetAllBranchoffices;
-        service.InsertBranchoffice = InsertBranchoffice;
-        service.DeleteBranchoffice = DeleteBranchoffice;
+        service.GetAllRents = GetAllRents;
+        service.InsertRent = InsertRent;
+        service.DeleteRent = DeleteRent;
         
         
         return service;
 
         
-        // Branchoffice functions
+        // Rent functions
         
-        function GetAllBranchoffices() {
-            return $http.get('/SpringMVC/branchoffice/getall').then(handleSuccess, handleError);
+        function GetAllRents() {
+            return $http.get('/SpringMVC/rent/getall').then(handleSuccess, handleError);
         }
         
-        function InsertBranchoffice(branchoffice) {
-            return $http.post('/SpringMVC/branchoffice/insert', branchoffice).then(handleSuccess, handleError);
+        function InsertRent(rent) {
+            return $http.post('/SpringMVC/rent/insert', rent).then(handleSuccess, handleError);
         }
         
-        function DeleteBranchoffice(id) {
-            return $http.delete('/SpringMVC/branchoffice/delete', id).then(handleSuccess, handleError);
+        function DeleteRent(id) {
+            return $http.delete('/SpringMVC/rent/delete', id).then(handleSuccess, handleError);
         }
 
         

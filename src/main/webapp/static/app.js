@@ -202,16 +202,16 @@
             })
             
             .when('/rent', {
-                controller: 'RenteController',
+                controller: 'RentController',
                 templateUrl: 'rent',
                 title: 'Rent-UY - Alquileres',
                 controllerAs: 'vm'
             })
 
             .when('/rent/view', {
-                controller: 'VehicleController',
+                controller: 'RentController',
                 templateUrl: 'rent/view',
-                title: 'Rent-UY - Rentar Vehículo',
+                title: 'Rent-UY - Alquiler',
                 controllerAs: 'vm'
             })
             

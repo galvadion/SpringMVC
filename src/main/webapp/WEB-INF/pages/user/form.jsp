@@ -5,12 +5,21 @@
 
     <div class="page page-dashboard">
 
-        <div class="pageheader">
-        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Vehiculos </strong> Crear</h1>
+        <div ng-if="vm.location == 'employee'" class="pageheader">
+        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Empleados </strong> Crear</h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Dashboard</a></li>
-                <li><a href="#/vehicle/list">Vehiculos</a></li>
-                <li class="breadcrumb-active">Nuevo Vehiculo</li>
+                <li><a href="#/employee">Empleados</a></li>
+                <li class="breadcrumb-active">Nuevo Empleado</li>
+            </ol>
+        </div>
+        
+        <div ng-if="vm.location == 'client'" class="pageheader">
+        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Clientes </strong> Crear</h1>
+            <ol class="breadcrumb">
+                <li><a href="#/home">Dashboard</a></li>
+                <li><a href="#/client">Clientes</a></li>
+                <li class="breadcrumb-active">Nuevo Cliente</li>
             </ol>
         </div>
 

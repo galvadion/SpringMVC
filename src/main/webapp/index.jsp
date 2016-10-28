@@ -8,7 +8,7 @@
         
         <!--Page Data-->
         <link rel="icon" type="image/png" href="static/images/favicon.png">
-        <title ng-bind="title">Angular Demo</title>
+        <title ng-bind="title">Rent-UY</title>
 
         <!--Styles-->
         <link rel="stylesheet" type="text/css" href="static/css/vendor/bootstrap.min.css">

@@ -6,11 +6,11 @@
     <div class="page page-dashboard">
 
         <div class="pageheader">
-        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Vehiculos </strong> Crear</h1>
+        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Sucursales </strong> Crear</h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Dashboard</a></li>
-                <li><a href="#/vehicle/list">Vehiculos</a></li>
-                <li class="breadcrumb-active">Nuevo Vehiculo</li>
+                <li><a href="#/branchoffice">Sucursales</a></li>
+                <li class="breadcrumb-active">Nueva Sucursal</li>
             </ol>
         </div>
 

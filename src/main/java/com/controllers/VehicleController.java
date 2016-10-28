@@ -66,6 +66,12 @@ public class VehicleController {
 		ModelAndView view=new ModelAndView("vehicle/form");
 		return view;
 	}
+	
+	@RequestMapping(value="/edit",method =RequestMethod.GET)
+	public ModelAndView getEditPage(){
+		ModelAndView view=new ModelAndView("vehicle/form");
+		return view;
+	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<Object> getSaved(@RequestBody Vehicle requestModel) {

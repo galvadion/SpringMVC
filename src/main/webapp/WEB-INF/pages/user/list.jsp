@@ -5,11 +5,19 @@
 
     <div class="page page-dashboard">
 
-        <div class="pageheader">
-        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Vehiculos </strong> Listado</h1>
+        <div ng-if="vm.location == 'employee'" class="pageheader">
+        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Empleados </strong> Listado</h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Inicio</a></li>
-                <li class="breadcrumb-active">Vehiculos</li>
+                <li class="breadcrumb-active">Empleados</li>
+            </ol>
+        </div>
+        
+        <div ng-if="vm.location == 'client'" class="pageheader">
+        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Clientes </strong> Listado</h1>
+            <ol class="breadcrumb">
+                <li><a href="#/home">Inicio</a></li>
+                <li class="breadcrumb-active">Clientes</li>
             </ol>
         </div>
 

@@ -60,6 +60,12 @@ public class ModelController {
 		ModelAndView view = new ModelAndView("model/form");
 		return view;
 	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView getEditPage() {
+		ModelAndView view = new ModelAndView("model/form");
+		return view;
+	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<Object> getSaved(@RequestBody Model model) {
