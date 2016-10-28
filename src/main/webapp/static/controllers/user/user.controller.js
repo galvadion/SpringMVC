@@ -5,26 +5,50 @@
         .module('app')
         .controller('UserController', UserController);        
 
-    UserController.$inject = ['$routeParams','$timeout','$rootScope','$scope','$location', 'UserService', 'FlashService','FileUploader','SessionService','ngDialog'];
-    function UserController($routeParams,$timeout,$rootScope,$scope,$location, UserService, FlashService,FileUploader,SessionService,ngDialog) {
+    UserController.$inject = ['$routeParams','$timeout','$rootScope','$scope','$location', 'UserService', 'FlashService','FileUploader','SessionService','ngDialog','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
+    function UserController($routeParams,$timeout,$rootScope,$scope,$location, UserService, FlashService,FileUploader,SessionService,ngDialog, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
         
         var vm = this;
 
         vm.user = {};
-        vm.master ={};
-        vm.auxuser = {};
-        vm.users = {};
-        
         vm.roladmin = $rootScope.roladmin;
-        vm.rolclient = false;
-        
-        vm.edit = true;
-        vm.saveUserFlag = false;
+        vm.rolclient = false
         vm.newpassword = "";
         vm.location = "";
-        
-        var currentUserRol;
-        
+
+        vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
+        .withPaginationType('simple_numbers')
+        .withDisplayLength(10)
+        .withLanguage({
+            "sEmptyTable":     "No hay entradas disponibles",
+            "sInfo":           "Mostrando _START_ - _END_ de _TOTAL_ entradas",
+            "sInfoEmpty":      "Mostrando 0 a 0 de 0 entradas",
+            "sInfoFiltered":   "(filtrando desde _MAX_ entradas totales)",
+            "sInfoPostFix":    "",
+            "sInfoThousands":  ",",
+            "sLengthMenu":     "_MENU_",
+            "sLoadingRecords": "Cargando...",
+            "sProcessing":     "Procesando...",
+            "sSearch":         "",
+            "sZeroRecords":    "No se encontraron resultados",
+            'sSearchPlaceholder': "Buscar...",
+            "paginate": {
+                "first":      "Primera",
+                "last":       "Última",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+            },
+        });
+
+        vm.DTColumnDefs = [
+            DTColumnDefBuilder.newColumnDef(3).notSortable(),
+            DTColumnDefBuilder.newColumnDef(4).notSortable(),
+            DTColumnDefBuilder.newColumnDef(5).notSortable(),
+            DTColumnDefBuilder.newColumnDef(6).notSortable(),
+            DTColumnDefBuilder.newColumnDef(8).notSortable(),
+            DTColumnDefBuilder.newColumnDef(9).notSortable(),
+            DTColumnDefBuilder.newColumnDef(10).notSortable(),
+        ];
 
         initController();
 
@@ -39,56 +63,25 @@
 
             }
             else if(vm.location == "employee"){
-            	
+            	getAllEmployees();
             }
             else if(vm.location == "client"){
-            	
+            	getAllClients();
             }
 
             NProgress.done();
         }
 
-        function getAllUsers(){
-        	UserService.GetAll().then(function (response) {
-        		if(response.users.length > 1){
-        			vm.users = response.users;
-        		}
-        		angular.forEach(vm.users, function(value, key){
-                    if(value.id == vm.user.id){
-                    	delete vm.users[key];
-                    }
-                 });
+        function getAllEmployees(){
+        	UserService.GetAllEmployees().then(function (response) {
+        		console.log(response);
         	});
         }
         
-        
-        $scope.deleteUser = function(coll,idx){
-            NProgress.start();
-                var index = -1;
-                var aux = eval(coll);
-                for(var i = 0; i < aux.length; i++){
-                    if(aux[i].id === coll[idx].id){
-                        index = i;
-                        break;
-                    }
-                }
-                if( index === -1 ) {
-                    $rootScope.doFlashMessage('Something gone wrong','','error');
-                }
-                else{      
-                        vm.user.id = parseInt(coll[index].id);
-                        UserService.Delete(vm.user.id).then(function (response) {
-                        if (response.statusText == "OK") {
-                            $rootScope.doFlashMessage('Delete User successful','','success');
-                            coll.splice(idx, 1);
-                        }
-                        else {
-                            $rootScope.doFlashMessage(response.error,'','error',3000);
-                            vm.dataLoading = false;
-                        }
-                    });
-                        NProgress.done();
-                }
+        function getAllClients(){
+        	UserService.GetAllClients().then(function (response) {
+        		console.log(response);
+        	});
         }
 
 
