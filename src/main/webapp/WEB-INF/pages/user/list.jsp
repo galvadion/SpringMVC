@@ -5,7 +5,7 @@
 
     <div class="page page-dashboard">
 
-        <div ng-if="vm.location == 'employee'" class="pageheader">
+        <div ng-if="vm.location[1] == 'employee'" class="pageheader">
         	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Empleados </strong> Listado</h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Inicio</a></li>
@@ -13,7 +13,7 @@
             </ol>
         </div>
         
-        <div ng-if="vm.location == 'client'" class="pageheader">
+        <div ng-if="vm.location[1] == 'client'" class="pageheader">
         	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Clientes </strong> Listado</h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Inicio</a></li>
@@ -29,8 +29,8 @@
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                     	<h2 class="custom-font"><strong>Gestion:</strong></h2>
-                        <a ng-if="vm.location == 'client'" href="#/client/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Cliente</a>
-                        <a ng-if="vm.location == 'employee'" href="#/employee/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Empleado</a>
+                        <a ng-if="vm.location[1] == 'client'" href="#/client/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Cliente</a>
+                        <a ng-if="vm.location[1] == 'employee'" href="#/employee/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Empleado</a>
                     </div>
                     <!-- /tile header -->
 
@@ -46,8 +46,8 @@
                                         <th>E-mail</th>
                                         <th>Dirección</th>
                                         <th>Teléfono</th>
-                                        <th><span ng-if="vm.location == 'client'">Nacimiento</span></th>
-                                        <th><span ng-if="vm.location == 'client'">Expiración de licencia</span></th>
+                                        <th><span ng-if="vm.location[1] == 'client'">Nacimiento</span></th>
+                                        <th><span ng-if="vm.location[1] == 'client'">Expiración de licencia</span></th>
                                         <th>Estado</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
@@ -72,12 +72,12 @@
                                             {{value.phone}}
                                         </td>
                                         <td>
-                                        	<span ng-if="vm.location == 'client'">
+                                        	<span ng-if="vm.location[1] == 'client'">
                                             	{{value.birthDate}}
                                             </span>
                                         </td>
                                         <td>
-                                        	<span ng-if="vm.location == 'client'">
+                                        	<span ng-if="vm.location[1] == 'client'">
 	                                            {{value.licenseExpirationDate}}
 	                                        </span>
                                         </td>
@@ -90,15 +90,15 @@
                                              	<i class="fa fa-pause"></i><br><small>Activar/Desactivar</small>
                                              </a>
                                         </td>
-                                        <td class="text-center plus">
-                                             <a ng-if="vm.location == 'client'" ng-href="#/client/edit/{{value.id}}" title="Editar">
+                                        <td class="text-center plus" style="cursor: pointer !important;">
+                                             <a ng-if="vm.location[1] == 'client'" ng-href="#/client/edit/{{value.id}}" title="Editar">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
                                              </a>
-                                             <a ng-if="vm.location == 'employee'" ng-href="#/employee/edit/{{value.id}}" title="Editar">
+                                             <a ng-if="vm.location[1] == 'employee'" ng-href="#/employee/edit/{{value.id}}" title="Editar">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
                                              </a>
                                         </td>
-                                        <td class="text-center delete">
+                                        <td class="text-center delete" style="cursor: pointer !important;">
                                             <a href ng-click="openDialog(value)" title="Eliminar">
                                                 <i class="fa fa-times"></i><br />
                                                 <small>Eliminar</small>

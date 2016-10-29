@@ -14,13 +14,11 @@
         service.GetUserById = GetUserById;
         
         service.GetAllClients = GetAllClients;
-        service.CreateClient = CreateClient;
-        service.UpdateClient = UpdateClient;
+        service.InsertClient = InsertClient;
         service.DeleteClient = DeleteClient;
         
         service.GetAllEmployees = GetAllEmployees;
-        service.CreateEmployee = CreateEmployee;
-        service.UpdateEmployee = UpdateEmployee;
+        service.InsertEmployee = InsertEmployee;
         service.DeleteEmployee = DeleteEmployee;
         
         return service;
@@ -41,16 +39,12 @@
             return $http.get('/SpringMVC/client/getall').then(handleSuccess, handleError);
         }
         
-        function CreateClient(client) {
+        function InsertClient(client) {
             return $http.post('/SpringMVC/client/register', client).then(handleSuccess, handleError);
         }
         
-        function UpdateClient(client) {
-            return $http.put('/SpringMVC/client/update', client).then(handleSuccess, handleError);
-        }
-        
         function DeleteClient(id) {
-            return $http.delete('/SpringMVC/client/delete', id).then(handleSuccess, handleError);
+            return $http.delete('/SpringMVC/client/delete?id=' + id).then(handleSuccess, handleError);
         }
 
         
@@ -60,16 +54,12 @@
             return $http.get('/SpringMVC/employee/getall').then(handleSuccess, handleError);
         }
         
-        function CreateEmployee(employee) {
+        function InsertEmployee(employee) {
             return $http.post('/SpringMVC/employee/register', employee).then(handleSuccess, handleError);
         }
         
-        function UpdateEmployee(employee) {
-            return $http.put('/SpringMVC/employee/update', employee).then(handleSuccess, handleError);
-        }
-        
         function DeleteEmployee(id) {
-            return $http.delete('/SpringMVC/employee/delete', id).then(handleSuccess, handleError);
+            return $http.delete('/SpringMVC/employee/delete?id=' + id).then(handleSuccess, handleError);
         }
 
         
