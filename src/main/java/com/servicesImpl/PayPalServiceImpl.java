@@ -92,10 +92,8 @@ public class PayPalServiceImpl implements PayPalService {
 			Map<String, String> response = new HashMap<String, String>();
 
 			AckCodeType ack = setExpressCheckoutResponse.getAck();
-			System.out.println(ack.name());
 			switch (ack.name()) {
 			case "SUCCESS":
-				System.out.println(setExpressCheckoutResponse.getToken());
 				response.put("ack", "success");
 				response.put("token", setExpressCheckoutResponse.getToken());
 				response.put("corrrelationId", setExpressCheckoutResponse.getCorrelationID());
