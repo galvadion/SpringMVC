@@ -100,6 +100,12 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone
+				+ ", address=" + address + ", active=" + active + ", password=" + password + "]";
+	}
 	
 	
 }

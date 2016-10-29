@@ -65,6 +65,11 @@ public class Client extends User implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	@Override
+	public String toString() {
+		return "Client [birthDate=" + birthDate + ", licenseExpirationDate=" + licenseExpirationDate + ", booked="
+				+ booked + "]";
+	}
 	
 	
 	

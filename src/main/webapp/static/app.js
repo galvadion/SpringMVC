@@ -91,7 +91,7 @@
             
             .when('/employee/edit/:id', {
                 controller: 'UserController',
-                templateUrl: 'employee/edit',
+                templateUrl: 'user/edit',
                 title: 'Rent-UY - Editar Empleado',
                 controllerAs: 'vm'
             })

@@ -47,7 +47,7 @@
 									<span ng-show="form.lastname.$dirty && form.lastname.$error.required" class="help-block">Apellido es requerido</span>
 								</div>
 							</div>
-
+	${user }
 							<div class="row">
 								<div class="form-group col-sm-6" ng-class="{ 'has-error': (form.email.$dirty && 	form.email.$error.required) || form.email.$error.email }">
 									<label for="email">* E-mail</label>

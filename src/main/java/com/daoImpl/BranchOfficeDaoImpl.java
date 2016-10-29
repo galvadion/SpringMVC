@@ -1,6 +1,7 @@
 package com.daoImpl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Query;
 
@@ -28,6 +29,11 @@ public class BranchOfficeDaoImpl extends GenericDaoImpl<BranchOffice, Integer> i
 		query.setParameter("branch", branch);
 		query.setParameter("today",LocalDate.now());
 		return false;
+	}
+
+	public List<BranchOffice> getAvailable() {
+		// TODO Auto-generated method stub
+		return currentSession().createQuery("from BranchOffice where closed=false").getResultList();
 	}
 	
 }

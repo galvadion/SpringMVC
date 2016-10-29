@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.entities.Model;
 import com.entities.StatusBetweenDates;
 import com.entities.Vehicle;
 import com.models.MaintenanceModel;
@@ -133,5 +134,11 @@ public class VehicleController {
 		}
 	}
 	
-	
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> delete(String id) {
+		Vehicle vehicle=vehicleService.get(Integer.parseInt(id));
+		vehicle.setUnavailable(true);
+		
+		return ResponseEntity.ok((Object)"It has been removed");
+	}
 }
