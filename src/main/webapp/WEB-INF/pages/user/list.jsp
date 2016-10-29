@@ -48,7 +48,6 @@
                                         <th>Teléfono</th>
                                         <th><span ng-if="vm.location[1] == 'client'">Nacimiento</span></th>
                                         <th><span ng-if="vm.location[1] == 'client'">Expiración de licencia</span></th>
-                                        <th>Estado</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>
@@ -81,15 +80,7 @@
 	                                            {{value.licenseExpirationDate}}
 	                                        </span>
                                         </td>
-                                        <td>
-                                            <p ng-if="value.active">Activo</p>
-                                            <p ng-if="!value.active">Inactivo</p>
-                                        </td>
-                                        <td class="text-center plus" style="cursor: pointer !important;">
-                                             <a ng-href="" title="Cambiar estado" ng-click="changeStatus(value.id, value.active)">
-                                             	<i class="fa fa-pause"></i><br><small>Activar/Desactivar</small>
-                                             </a>
-                                        </td>
+                                        <td></td>
                                         <td class="text-center plus" style="cursor: pointer !important;">
                                              <a ng-if="vm.location[1] == 'client'" ng-href="#/client/edit/{{value.id}}" title="Editar">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
@@ -125,11 +116,11 @@
 	<h3 class="modal-title custom-font">Eliminar</h3>
 	</div>
 	<div class="modal-body">
-	Esta seguro, eliminar a <strong>{{object.name}} {{object.lastName}}</strong>?
+	Esta seguro, eliminar a <strong>{{vm.auxUser.name}} {{vm.auxUser.lastName}}</strong>?
 	</div>                     
 	<div class="modal-footer  ngdialog-buttons">
 	<button type="button" class="ngdialog-button btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" ng-click="closeThisDialog('button')"><i class="fa fa-arrow-left"></i>Cancelar</button>
-	<button type="button" class="ngdialog-button btn btn-success btn-ef btn-ef-3 btn-ef-3c" ng-click="confirm();deleteUser(id)"><i class="fa fa-arrow-right"></i> Confirmar</button>
+	<button type="button" class="ngdialog-button btn btn-success btn-ef btn-ef-3 btn-ef-3c" ng-click="confirm();deleteUser(vm.auxUser.id)"><i class="fa fa-arrow-right"></i> Confirmar</button>
 	</div>
 	</div>
 </script>

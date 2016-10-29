@@ -5,8 +5,8 @@
         .module('app')
         .controller('UserController', UserController);        
 
-    UserController.$inject = ['$routeParams','$rootScope','$scope','$location', 'UserService', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
-    function UserController($routeParams, $rootScope, $scope,$location, UserService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+    UserController.$inject = ['$routeParams','$rootScope','$scope','$location', 'UserService', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', 'ngDialog'];
+    function UserController($routeParams, $rootScope, $scope,$location, UserService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder, ngDialog) {
         
         var vm = this;
 
@@ -46,9 +46,9 @@
             DTColumnDefBuilder.newColumnDef(4).notSortable(),
             DTColumnDefBuilder.newColumnDef(5).notSortable(),
             DTColumnDefBuilder.newColumnDef(6).notSortable(),
+            DTColumnDefBuilder.newColumnDef(7).notSortable(),
             DTColumnDefBuilder.newColumnDef(8).notSortable(),
             DTColumnDefBuilder.newColumnDef(9).notSortable(),
-            DTColumnDefBuilder.newColumnDef(10).notSortable(),
         ];
 
         initController();
@@ -64,7 +64,11 @@
             else if(vm.location[2] == "edit"){
         		getUserById($routeParams.id);
         	}
-            else if(vm.location[2] != "create"){
+            else if(vm.location[2] == "create"){
+            	vm.user.id = null;
+                vm.user.active = true;
+            }
+            else{
             	if(vm.location[1] == "employee"){
 	            	getAllEmployees();
 	            }
@@ -107,7 +111,7 @@
         	if(vm.location[1] == "client"){
 	        	UserService.InsertClient(vm.user).then(function (response) {
 	        		if(response.success){
-	        			$rootScope.doFlashMessage("Cliente creado con éxito",'/client','success');
+	        			$rootScope.doFlashMessage("Cliente guardado con éxito",'/client','success');
 	        		}
 	        		else{
 	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
@@ -118,7 +122,7 @@
         	else if(vm.location[1] == "employee"){
 	        	UserService.InsertEmployee(vm.user).then(function (response) {
 	        		if(response.success){
-	        			$rootScope.doFlashMessage("Empleado creado con éxito",'/employee','success');
+	        			$rootScope.doFlashMessage("Empleado guardado con éxito",'/employee','success');
 	        		}
 	        		else{
 	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
@@ -128,16 +132,37 @@
         	}
         };
         
-        $scope.changeStatus = function (object) {
-        	alert('a');
+        $scope.deleteUser = function (id) {
+        	if(vm.location[1] == "client"){
+	        	UserService.DeleteClient(id).then(function (response) {
+	        		if(response.success){
+	        			$rootScope.doFlashMessage("Cliente eliminado con éxito",'','success');
+	        		}
+	        		else{
+	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+	        		}
+	        		NProgress.done();
+	        	});
+        	}
+        	else if(vm.location[1] == "employee"){
+	        	UserService.InsertEmployee(id).then(function (response) {
+	        		if(response.success){
+	        			$rootScope.doFlashMessage("Empleado eliminado con éxito",'','success');
+	        		}
+	        		else{
+	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+	        		}
+	        		NProgress.done();
+	        	});
+        	}
         };
-
-        $scope.openDialog = function (object) {
+        
+        $scope.openDialog = function (user) {
+        	vm.auxUser = angular.copy(user);
             ngDialog.openConfirm({
                 template: 'modalDialog',
                 className: 'ngdialog-theme-default',
                 scope: $scope,
-                object : object
             }).then(function (value) {}, function (reason) {});
         };
 

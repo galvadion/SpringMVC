@@ -22,7 +22,7 @@
             vm.user.id = null;
             vm.user.active = true;
             
-           UserService.CreateClient(vm.user)
+           UserService.InsertClient(vm.user)
 	            .then(function (response) {
 	            	if (response.success) {
 	                    $rootScope.doFlashMessage('Cliente creado con éxito','/login','success',5000);

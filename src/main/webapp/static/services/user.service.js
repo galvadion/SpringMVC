@@ -40,7 +40,7 @@
         }
         
         function InsertClient(client) {
-            return $http.post('/SpringMVC/client/register', client).then(handleSuccess, handleError);
+            return $http.post('/SpringMVC/client/insert', client).then(handleSuccess, handleError);
         }
         
         function DeleteClient(id) {
@@ -55,7 +55,7 @@
         }
         
         function InsertEmployee(employee) {
-            return $http.post('/SpringMVC/employee/register', employee).then(handleSuccess, handleError);
+            return $http.post('/SpringMVC/employee/insert', employee).then(handleSuccess, handleError);
         }
         
         function DeleteEmployee(id) {

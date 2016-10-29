@@ -72,7 +72,7 @@
 						                <span ng-show="form.phone.$dirty && form.phone.$error.required" class="help-block">Telefono es requerido</span>
 						            </div>
 						            
-									<div class="form-group col-sm-6" ng-class="{ 'has-error': form.password.$dirty }">
+									<div class="form-group col-sm-6" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required}">
 										<label for="password">* Contraseña</label>
 										<input type="password"  name="password" id="password" class="form-control" id="password" ng-model="vm.user.password" required>
 										<span ng-show="form.password.$dirty && vm.user.password.length <= 1 " class="help-block">Contraseña es requerida</span>
@@ -98,7 +98,8 @@
 								</div>
 								
 								<div class="form-group text-right">
-									<a href="" ng-click="resetUser()" class="btn btn-lightred">Cancelar</a>
+									<a ng-if="vm.location[1] == 'client'" href="#/client" class="btn btn-lightred">Cancelar</a>
+									<a ng-if="vm.location[1] == 'employee'" href="#/employee" class="btn btn-lightred">Cancelar</a>
 									<button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Guardar</button>
 								</div>
 							</form>

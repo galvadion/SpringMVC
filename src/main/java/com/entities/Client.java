@@ -34,12 +34,6 @@ public class Client extends User implements Serializable{
 	@OneToMany(mappedBy="client")
 	private List<Booked> booked;
 	
-	public LocalDate getBirthDay() {
-		return birthDate;
-	}
-	public void setBirthDay(LocalDate birthDay) {
-		this.birthDate = birthDay;
-	}
 	public LocalDate getLicenseExpirationDate() {
 		return licenseExpirationDate;
 	}
