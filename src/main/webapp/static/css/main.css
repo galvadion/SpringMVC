@@ -18218,3 +18218,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 	height: 500px;
 	background-image: url("../images/map.png");
 }
+
+.paging_simple_numbers {
+	margin-top: -20px !important;
+}

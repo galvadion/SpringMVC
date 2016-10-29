@@ -28,33 +28,37 @@
 							      <li ng-show="vm.roladmin" ng-class=getClass('brand') class=""><a href="#/brand"><span class="nav-custom-font">Marcas</span></a></li>
 							      <li ng-show="vm.roladmin" ng-class=getClass('model') class=""><a href="#/model"><span class="nav-custom-font">Modelos</span></a></li>
 							      <li ng-class=getClass('vehicle') class=""><a href="#/vehicle"><span class="nav-custom-font">Vehiculos</span></a></li>
-							      <li ng-class=getClass('offices') class=""><a href=""><span class="nav-custom-font">Sucursales</span></a></li>
-							      <li ng-show="vm.roladmin" ng-class=getClass('employee') class=""><a href=""><span class="nav-custom-font">Empleados</span></a></li>
-							      <li ng-show="vm.roladmin" ng-class=getClass('client') class=""><a href=""><span class="nav-custom-font">Clientes</span></a></li>
-							      <li ng-show="vm.roladmin" ng-class=getClass('tarifas') class=""><a href=""><span class="nav-custom-font">Tarifas</span></a></li>
-							      <li ng-show="vm.roladmin" ng-class=getClass('promo') class=""><a href=""><span class="nav-custom-font">Promociones</span></a></li>
+							      <li ng-class=getClass('branchoffice') class=""><a href="#/branchoffice"><span class="nav-custom-font">Sucursales</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('employee') class=""><a href="#/employee"><span class="nav-custom-font">Empleados</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('client') class=""><a href="#/client"><span class="nav-custom-font">Clientes</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('tariff') class=""><a href="#/tariff"><span class="nav-custom-font">Tarifas</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('promotion') class=""><a href="#/promotion"><span class="nav-custom-font">Promociones</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('booked') class=""><a href="#/booked"><span class="nav-custom-font">Reservas</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('rent') class=""><a href="#/rent"><span class="nav-custom-font">Alquileres</span></a></li>
 							      <li ng-show="!vm.roladmin" ng-class=getClass('about') class=""><a href="#/about"><span class="nav-custom-font">Nosotros</span></a></li>
 							    </ul>
-							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="1==1">
+							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="globals.currentUser">
 							        <li ng-class=getClass('profile') class="dropdown">
 							        	<a class="dropdown-toggle" data-toggle="dropdown" href="">
-							        		<span class="nav-custom-font">Pepe{{globals.currentUser.username}} </span>
+							        		<span class="nav-custom-font">{{globals.currentUser.name}} </span>
 	                                		<img src="static/images/avatar.png" alt="" class="img-circle" style="height: 22px; width: 22px;">
 							        		<span class="caret"></span>
 							        	</a>
 							        	<ul class="dropdown-menu">
 								            <li><a href="#/profile">Perfil</a></li>
+								            <li><a ng-show="!vm.roladmin" href="#/booked">Mis reservas</a></li>
+								            <li><a ng-show="!vm.roladmin" href="#/rent">Historial Alquileres</a></li>
 								            <li><a ng-click="logOut()" href="#/">Salir</a></li>
-								          </ul>
+								        </ul>
 									</li>
 							    </ul>
-							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="1==2">
-							        <li>
+							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="!globals.currentUser">
+							        <li ng-class=getClass('register')>
 							        	<a href="#/register" class="text-default">
 			                                <span class="nav-custom-font">Registrarse</span>
 			                            </a>
 									</li>
-							        <li>
+							        <li ng-class=getClass('login')>
 							        	<a href="#/login" class="text-default">
 			                                <span class="nav-custom-font">Ingresar</span>
 			                            </a>

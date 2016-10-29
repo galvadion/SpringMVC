@@ -28,6 +28,8 @@ import com.services.BrandService;
 import com.services.CategoryService;
 import com.services.ModelService;
 
+
+
 @Controller
 @RequestMapping(value = "model")
 public class ModelController {
@@ -59,12 +61,17 @@ public class ModelController {
 		ModelAndView view = new ModelAndView("model/form");
 		return view;
 	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView getEditPage() {
+		ModelAndView view = new ModelAndView("model/form");
+		return view;
+	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public ResponseEntity<Object> getSaved(@RequestBody RequestModel requestModel) {
-		Model model = requestModel.model;
-		model.setBrand(brandService.get(requestModel.brand_id));
-		model.setCategory(categoryService.get(requestModel.category_id));
+	public ResponseEntity<Object> getSaved(@RequestBody Model model) {
+		
+		System.out.println(model);
 		setUpValidator();
 		Set<ConstraintViolation<Model>> constraintViolations = validator.validate(model);
 		if (constraintViolations.size() > 0) {
@@ -79,20 +86,28 @@ public class ModelController {
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/getall", method = RequestMethod.GET)
+	public ResponseEntity<List<Model>> getAll() {
+		List<Model> list = modelService.getAvailable();
+		if (list != null) {
+			return ResponseEntity.ok(list);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		
+	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public ResponseEntity<List<Model>> searchModels(@RequestBody SearchFilter search) {
 		return ResponseEntity.ok(modelService.getModelsBetweenFilter(search));
 	}
 	
-	private static class RequestModel implements Serializable {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		private Model model;
-		private Integer category_id;
-		private Integer brand_id;
-
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> delete(String id) {
+		Model model=modelService.get(Integer.parseInt(id));
+		modelService.removeCascade(model);
+		return ResponseEntity.ok((Object)"It has been removed");
 	}
+	
 }

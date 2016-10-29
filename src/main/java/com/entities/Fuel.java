@@ -25,6 +25,8 @@ public class Fuel implements Serializable{
 	@Column(name = "id")
 	private Integer id;
 	
+	private boolean unavailable=false;
+	
 	@Column(name="fuel_type")
 	private String fuelType;
 	
@@ -65,6 +67,14 @@ public class Fuel implements Serializable{
 
 	public void setModel(List<Model> vehicules) {
 		this.model = vehicules;
+	}
+
+	public boolean isUnavailable() {
+		return unavailable;
+	}
+
+	public void setUnavailable(boolean unavailable) {
+		this.unavailable = unavailable;
 	}
 	
 	

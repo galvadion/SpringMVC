@@ -44,7 +44,7 @@
 	                    <div class="row" style="padding: 0 10px 0 10px;">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.endDate.$dirty && form.endDate.$error.required }">
 	                            <label for="endDate" class="control-label">Fecha de entrega</label>
-	                            <input type="text" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="birthDate" class="form-control" placeholder="YYYY-MM-DD" ng-model="vm.search.birthDate" required />
+	                            <input type="text" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="endDate" class="form-control" placeholder="YYYY-MM-DD" ng-model="vm.search.endDate" required />
 								<span ng-show="form.endDate.$dirty && form.endDate.$error.required" class="help-block">Fecha es requerido</span>
 	                        </div>
 	
@@ -99,7 +99,53 @@
 
                     <!-- tile body -->
                     <div class="tile-body table-custom">
-                    	PUT ALL THE CRAP HERE
+                    	
+						<div class="table-responsive">
+            				
+            				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
+                                <thead>
+                                   <tr>
+                                   		<th>Marca</th>
+                                   		<th>Modelo</th>
+                                   		<th>Combustible</th>
+                                   		<th>Ano</th>
+                                   		<th>Pasajeros</th>
+                                   		<th>Valijas</th>
+                                   		<th>Cilindrada</th>
+                                   		<th>Aire acondicionado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(key, value) in vm.searchResult">
+                                    	<td>
+                                            {{value.brand.name}}
+                                        </td>
+                                        <td>
+                                            {{value.name}}
+                                        </td>
+                                        <td>
+                                            {{value.fuel.fuelType}}
+                                        </td>
+                                        <td>
+                                            {{value.year}}
+                                        </td>
+                                        <td>
+                                            {{value.passangers}}
+                                        </td>
+                                        <td>
+                                            {{value.luggage}}
+                                        </td>
+                                        <td>
+                                            {{value.cylinders}}
+                                        </td>
+                                        <td>
+                                            {{value.airConditioner}}
+                                        </td>
+                                   	</tr>
+                                </tbody>
+                            </table>
+                         </div>
+
             		</div>
             	
             	</section>

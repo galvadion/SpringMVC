@@ -11,8 +11,7 @@
         var service = {};
 
         service.GetAllBrands = GetAllBrands;
-        service.CreateBrand = CreateBrand;
-        service.UpdateBrand = UpdateBrand;
+        service.InsertBrand = InsertBrand;
         service.DeleteBrand = DeleteBrand;
         
         
@@ -22,19 +21,15 @@
         // Brand functions
         
         function GetAllBrands() {
-            return $http.get('/SpringMVC/brand/getall').then(handleSuccess, handleError('Error getting all brands'));
+            return $http.get('/SpringMVC/brand/getall').then(handleSuccess, handleError);
         }
         
-        function CreateBrand(brand) {
+        function InsertBrand(brand) {
             return $http.post('/SpringMVC/brand/insert', brand).then(handleSuccess, handleError);
         }
         
-        function UpdateBrand(brand) {
-            return $http.put('/SpringMVC/brand/update', brand).then(handleSuccess, handleError('Error updating brand'));
-        }
-        
         function DeleteBrand(id) {
-            return $http.delete('/SpringMVC/brand/delete', id).then(handleSuccess, handleError('Error deleting brand'));
+            return $http.delete('/SpringMVC/brand/delete?id='+id).then(handleSuccess, handleError);
         }
 
         

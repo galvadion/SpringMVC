@@ -5,9 +5,9 @@
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
+    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout'];
     
-    function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
+    function AuthenticationService($http, $cookieStore, $rootScope, $timeout) {
         var service = {};
 
         service.Login = Login;
@@ -16,40 +16,58 @@
 
         return service;
 
-        function Login(username, password, callback) {
+        function Login(email, password) {
+        	var data = {email: email , password:password};
+            return $http.post('/SpringMVC/login/login', data).then(handleSuccess, handleError);
+        }
 
-            var data = {username: username , password:password};
-            $http.post('login/login', data)
-                .success(function (response) {
-                	console.log(response+"Llego el response, pero esta nulo");
-                callback(response);
-            });
-            
-
-    }
-
-        function SetCredentials(username, password,id,rol,avatarURL) {
-            var authdata = Base64.encode(username + ':' + password);
-             $rootScope.globals = {
-                currentUser: {
-                    username: username,
-                    authdata: authdata,
-                    id: id,
-                    avatarURL : avatarURL,
-                    rol: rol
+        
+        function SetCredentials(id, email, name, rol, password) {
+            var authdata = Base64.encode(email + ':' + password);
+            $rootScope.globals = {
+            	currentUser: {
+            		id: id,
+            		email: email,
+            		name: name,
+            		rol: rol,
+                    authdata: authdata
                 }
             };
-
+            if(rol == "Admin"){
+            	$rootScope.roladmin = true;
+            }
+            else if(rol == "Client"){
+            	$rootScope.rolclient = true;
+            }
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
             $cookieStore.put('globals', $rootScope.globals);
         }
 
+        
         function ClearCredentials() {
             $rootScope.globals = {};
             $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';
         }
+        
+        
+        // private functions
+
+        function handleSuccess(data) {
+        	var response = {};
+        	response.success = true;
+    		response.data = data.data;
+            return response;
+        }
+        
+        function handleError(data) {
+        	var response = {};
+    		response.success = false;
+    		response.data = data.data;
+            return response;
+        }
     }
+
 
     // Base64 encoding service used by AuthenticationService
     var Base64 = {

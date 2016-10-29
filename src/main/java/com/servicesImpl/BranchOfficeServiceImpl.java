@@ -14,7 +14,7 @@ import com.services.BranchOfficeService;
 @Service
 public class BranchOfficeServiceImpl extends GenericServiceImpl<BranchOffice, Integer> implements BranchOfficeService{
 
-	private BranchOfficeDao BranchOfficeDao;
+	private BranchOfficeDao branchOfficeDao;
 	public BranchOfficeServiceImpl(){
 		
 	}
@@ -23,8 +23,15 @@ public class BranchOfficeServiceImpl extends GenericServiceImpl<BranchOffice, In
     public BranchOfficeServiceImpl(
             @Qualifier("branchOfficeDaoImpl") GenericDao<BranchOffice, Integer> genericDao) {
         super(genericDao);
-        this.BranchOfficeDao = (BranchOfficeDao) genericDao;
+        this.branchOfficeDao = (BranchOfficeDao) genericDao;
     }
+
+	public void closeBranchOffice(BranchOffice entity) throws Exception {
+		if(!entity.getVehicles().isEmpty())	throw new Exception("You cant close this branch if you have vehicles registered in it");
+		if(branchOfficeDao.expectingArrivals(entity)) throw new Exception("You are expecting vehicles");
+		entity.setClosed(true);
+		branchOfficeDao.saveOrUpdate(entity);
+	}
 
 	
 }

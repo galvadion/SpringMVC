@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.entities.Admin;
+import com.entities.Client;
+import com.entities.User;
 import com.services.UserServices;
 
 
@@ -47,15 +50,24 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<LogInResonseBody> logInUser(@RequestBody LogInRequestBody user,    UriComponentsBuilder ucBuilder){
-		boolean log= userService.validateLogin(user.getUsername(), user.getPassword());
+	public ResponseEntity<LogInResonseBody> logInUser(@RequestBody LogInRequestBody users,    UriComponentsBuilder ucBuilder){
+		User user= userService.validateLogin(users.getEmail(), users.getPassword());
 		LogInResonseBody response = new LogInResonseBody();
-		if(log){
+		if(user != null){
+			response.setEmail(user.getEmail());
+			response.setId(user.getId());
+			response.setName(user.getName());
+			response.setPasssword(user.getPassword());
+			if(user.getClass() == Client.class){
+				response.setRol("Client");
+			}else if ( user.getClass() == Admin.class) {
+				response.setRol("Admin");
+			}else{
+				response.setRol("Employee");
+			}
 			
-			response.setIs_logged_in(true);
 			return new ResponseEntity<LogInResonseBody>(response,HttpStatus.OK);
 		}else{
-			response.setIs_logged_in(false);
 			return new ResponseEntity<LogInResonseBody>(response,HttpStatus.CONFLICT);
 		}
 	}
@@ -65,12 +77,12 @@ public class LoginController {
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		private String username;
+		private String email;
 		private String password;
 		
-		public LogInRequestBody(String username, String password) {
+		public LogInRequestBody(String email, String password) {
 			super();
-			this.username = username;
+			this.email = email;
 			this.password = password;
 		}
 
@@ -78,11 +90,11 @@ public class LoginController {
 			
 		};
 		
-		public String getUsername() {
-			return username;
+		public String getEmail() {
+			return email;
 		}
-		public void setUsername(String username) {
-			this.username = username;
+		public void setEmail(String email) {
+			this.email = email;
 		}
 		public String getPassword() {
 			return password;
@@ -93,16 +105,63 @@ public class LoginController {
 	}
 	
 	public static class LogInResonseBody{
-		Boolean is_logged_in;
-
-		public Boolean getIs_logged_in() {
-			return is_logged_in;
-		}
-
-		public void setIs_logged_in(Boolean is_logged_in) {
-			this.is_logged_in = is_logged_in;
-		}
+		Integer id;
+		String name;
+		String rol;
+		String passsword;
+		String email;
 		
+		
+		public Integer getId() {
+			return id;
+		}
+
+
+		public void setId(Integer id) {
+			this.id = id;
+		}
+
+
+		public String getName() {
+			return name;
+		}
+
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+
+		public String getRol() {
+			return rol;
+		}
+
+
+		public void setRol(String rol) {
+			this.rol = rol;
+		}
+
+
+		public String getPasssword() {
+			return passsword;
+		}
+
+
+		public void setPasssword(String passsword) {
+			this.passsword = passsword;
+		}
+
+
+		public String getEmail() {
+			return email;
+		}
+
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+
 		public LogInResonseBody(){};
 	}
 }

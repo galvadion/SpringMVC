@@ -10,15 +10,15 @@
     function UserService($http) {
         var service = {};
 
-        service.CheckEmail = CheckEmail;
-        
         service.GetAllUsers = GetAllUsers;
         service.GetUserById = GetUserById;
         
+        service.GetAllClients = GetAllClients;
         service.CreateClient = CreateClient;
         service.UpdateClient = UpdateClient;
         service.DeleteClient = DeleteClient;
         
+        service.GetAllEmployees = GetAllEmployees;
         service.CreateEmployee = CreateEmployee;
         service.UpdateEmployee = UpdateEmployee;
         service.DeleteEmployee = DeleteEmployee;
@@ -27,45 +27,49 @@
 
         //User functions
         
-        function CheckEmail(email) {
-            return $http.post('/SpringMVC/user/checkemail', email).then(handleSuccess, handleError('Error checking user email'));
-        }
-        
         function GetAllUsers() {
-            return $http.get('/SpringMVC/user/getall').then(handleSuccess, handleError('Error getting all users'));
+            return $http.get('/SpringMVC/user/getall').then(handleSuccess, handleError);
         }
         
         function GetUserById(id) {
-            return $http.get('/SpringMVC/user/getbyid' + id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get('/SpringMVC/user/getbyid?id=' + id).then(handleSuccess, handleError);
         }
         
         //Client functions
 
+        function GetAllClients() {
+            return $http.get('/SpringMVC/client/getall').then(handleSuccess, handleError);
+        }
+        
         function CreateClient(client) {
-            return $http.post('/SpringMVC/client/register', client).then(handleSuccess, handleError('Error creating client'));
+            return $http.post('/SpringMVC/client/register', client).then(handleSuccess, handleError);
         }
         
         function UpdateClient(client) {
-            return $http.put('/SpringMVC/client/update', client).then(handleSuccess, handleError('Error updating client'));
+            return $http.put('/SpringMVC/client/update', client).then(handleSuccess, handleError);
         }
         
         function DeleteClient(id) {
-            return $http.delete('/SpringMVC/client/delete', id).then(handleSuccess, handleError('Error deleting client'));
+            return $http.delete('/SpringMVC/client/delete', id).then(handleSuccess, handleError);
         }
 
         
         //Employee functions
         
+        function GetAllEmployees() {
+            return $http.get('/SpringMVC/employee/getall').then(handleSuccess, handleError);
+        }
+        
         function CreateEmployee(employee) {
-            return $http.post('/SpringMVC/employee/register', employee).then(handleSuccess, handleError('Error creating employee'));
+            return $http.post('/SpringMVC/employee/register', employee).then(handleSuccess, handleError);
         }
         
         function UpdateEmployee(employee) {
-            return $http.put('/SpringMVC/employee/update', employee).then(handleSuccess, handleError('Error employee client'));
+            return $http.put('/SpringMVC/employee/update', employee).then(handleSuccess, handleError);
         }
         
         function DeleteEmployee(id) {
-            return $http.delete('/SpringMVC/employee/delete', id).then(handleSuccess, handleError('Error deleting client'));
+            return $http.delete('/SpringMVC/employee/delete', id).then(handleSuccess, handleError);
         }
 
         

@@ -102,5 +102,6 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		return bookedDao.getBookedByClient(user);
 	}
 
+
 	
 }

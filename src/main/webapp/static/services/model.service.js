@@ -31,7 +31,7 @@
             return $http.get('/SpringMVC/model/getbyid' + id).then(handleSuccess, handleError('Error getting model by id'));
         }
         
-        function CreateModel(model) {
+        function CreateModel(model) { console.log(model);
             return $http.post('/SpringMVC/model/insert', model).then(handleSuccess, handleError('Error creating model'));
         }
         

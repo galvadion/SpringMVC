@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -58,9 +59,21 @@ public class Model implements Serializable {
 	private int cylinders;
 
 	private boolean airConditioner;
+	
+	private boolean unavailable=false;
+	
+	@Transient
+	private int vehicleCount;
+
+	public int getVehicleCount() {
+		return vehicles.size();
+	}
 
 	@OneToMany(mappedBy = "model")
 	private List<Vehicle> vehicles;
+	
+	@OneToMany(mappedBy = "model")
+	private List<Images> images;
 
 	private String transmission;
 
@@ -83,11 +96,11 @@ public class Model implements Serializable {
 		this.id = id;
 	}
 
-	public String getname() {
+	public String getName() {
 		return name;
 	}
 
-	public void setname(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -131,11 +144,11 @@ public class Model implements Serializable {
 		this.airConditioner = airConditioner;
 	}
 
-	public List<Vehicle> getVehicules() {
+	public List<Vehicle> getVehicles() {
 		return vehicles;
 	}
 
-	public void setVehicules(List<Vehicle> vehicles) {
+	public void setVehicles(List<Vehicle> vehicles) {
 		this.vehicles = vehicles;
 	}
 
@@ -187,5 +200,39 @@ public class Model implements Serializable {
 	private boolean isValid() {
 		return transmission.equals("M") || transmission.equals("A");
 	}
+
+	@Override
+	public String toString() {
+		return "Model [id=" + id + ", name=" + name + ", brand=" + brand + ", fuel=" + fuel + ", category=" + category
+				+ ", year=" + year + ", passangers=" + passangers + ", luggage=" + luggage + ", cylinders=" + cylinders
+				+ ", airConditioner=" + airConditioner + ", vehicles=" + vehicles + ", transmission=" + transmission
+				+ ", insurance=" + insurance + ", fullTank=" + fullTank + "]";
+	}
+
+	public boolean isUnavailable() {
+		return unavailable;
+	}
+
+	public void setUnavailable(boolean unavailable) {
+		this.unavailable = unavailable;
+	}
+
+	public List<Images> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Images> images) {
+		this.images = images;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setVehicleCount(int vehicleCount) {
+		this.vehicleCount = vehicleCount;
+	}
+	
+	
 
 }

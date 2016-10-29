@@ -5,19 +5,112 @@
         .module('app')
         .controller('ModelController', ModelController);
 
-    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader'];
+    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
     
-    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader) {
+    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
 
         var vm = this;
-        initController();
+        
         vm.roladmin = $rootScope.roladmin;
+        vm.requestModel = {};
+        vm.allBrands = [];
+        vm.allModels = [];
+        vm.lastYears = [];
+        
+        vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
+        .withPaginationType('simple_numbers')
+        .withDisplayLength(10)
+        .withLanguage({
+            "sEmptyTable":     "No hay entradas disponibles",
+            "sInfo":           "Mostrando _START_ - _END_ de _TOTAL_ entradas",
+            "sInfoEmpty":      "Mostrando 0 a 0 de 0 entradas",
+            "sInfoFiltered":   "(filtrando desde _MAX_ entradas totales)",
+            "sInfoPostFix":    "",
+            "sInfoThousands":  ",",
+            "sLengthMenu":     "_MENU_",
+            "sLoadingRecords": "Cargando...",
+            "sProcessing":     "Procesando...",
+            "sSearch":         "",
+            "sZeroRecords":    "No se encontraron resultados",
+            'sSearchPlaceholder': "Buscar...",
+            "paginate": {
+                "first":      "Primera",
+                "last":       "Última",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+            },
+        });
 
+        vm.DTColumnDefs = [
+            DTColumnDefBuilder.newColumnDef(3).notSortable(),
+            DTColumnDefBuilder.newColumnDef(4).notSortable(),
+            DTColumnDefBuilder.newColumnDef(5).notSortable(),
+            DTColumnDefBuilder.newColumnDef(6).notSortable(),
+            DTColumnDefBuilder.newColumnDef(7).notSortable(),
+            DTColumnDefBuilder.newColumnDef(8).notSortable(),
+            DTColumnDefBuilder.newColumnDef(9).notSortable(),
+            DTColumnDefBuilder.newColumnDef(10).notSortable(),
+            DTColumnDefBuilder.newColumnDef(11).notSortable(),
+            DTColumnDefBuilder.newColumnDef(12).notSortable(),
+            DTColumnDefBuilder.newColumnDef(13).notSortable(),
+            DTColumnDefBuilder.newColumnDef(14).notSortable(),
+        ];
+        
+        initController();
+        
         function initController() {
             NProgress.start();
-
-            NProgress.done();
+            getAllBrands();
+            getLastYears();
+            getAllModels();
         }
+        
+        function getAllBrands(){
+        	BrandService.GetAllBrands(vm.brand).then(function (response) {
+        		if(response.success){
+        			vm.allBrands = response.data;
+        		}
+        		else{
+        			vm.allBrands = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        
+        function getAllModels(){
+        	ModelService.GetAllModels().then(function (response) {
+        		if(response.success){
+        			vm.allModels = response.data;
+        		}
+        		else{
+        			vm.allModels = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        
+        function getLastYears(){
+        	var today = new Date();
+            vm.lastYears.push(today.getFullYear());
+            vm.lastYears.push(today.getFullYear() - 1);
+            vm.lastYears.push(today.getFullYear() - 2);
+            vm.lastYears.push(today.getFullYear() - 3);
+            vm.lastYears.push(today.getFullYear() - 4);
+        }
+        
+        $scope.saveModel = function() {
+        	NProgress.start();
+        	console.log(vm.requestModel);
+        	ModelService.CreateModel(vm.requestModel).then(function (response) {
+        		console.log(response);
+        		
+        		NProgress.done();
+        	});
+        };
+        
+        
+        
+        //File uploader methods
         
         var file = $scope.file = new FileUploader({
             url: 'front.justmob/upload.php',
@@ -25,10 +118,6 @@
             removeAfterUpload: true
         });
 
-        
-        
-        //File uploader methods
-        
         file.filters.push({
             name: 'imageFilter',
             fn: function(item,options) {
@@ -63,7 +152,9 @@
         };
         
         //End - File uploader methods
-
+        
+        
+        
     }
 
 })();

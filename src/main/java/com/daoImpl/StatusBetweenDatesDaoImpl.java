@@ -32,7 +32,7 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 
 	
 	public void editStatusAtBooking(Vehicle vehicle, LocalDate initialDate, LocalDate endDate,BranchOffice finalBranchOffice) {
-		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicule =:vehicule and :beginDate >= s.beginDate and :endDate <= s.endDate");
+		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicle =:vehicule and :beginDate >= s.beginDate and :endDate <= s.endDate");
 		query.setParameter("beginDate", initialDate);
 		query.setParameter("endDate", endDate);
 		query.setParameter("vehicule", vehicle);
@@ -60,6 +60,12 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 	}
 
 	
-
+	public StatusBetweenDates getActualStatus(Vehicle vehicle,LocalDate date){
+		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicle =:vehicule and :date between s.beginDate and s.endDate");
+		query.setParameter("date", date);
+		query.setParameter("vehicule", vehicle);
+		return (StatusBetweenDates) query.getSingleResult();
+		
+	}
 
 }

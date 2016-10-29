@@ -33,8 +33,6 @@
                             <label for="name" class="control-label">* Nombre</label>
                             <input type="text" name="name" id="name" class="form-control" ng-model="vm.brand.name" placeholder="Nombre de la Marca" ng-change="cleanMessagges();" required>
                             <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Nombre es requerido</span>
-                            <span ng-show="vm.error" class="help-block" style="color: red;">Ya existe una marca con ese nombre</span>
-                            <span ng-show="vm.success" class="help-block" style="color: green;">Marca creada</span>
                         </div>
 
                         <!-- Buttons -->
@@ -68,7 +66,7 @@
                     <div class="tile-body table-custom p-0">
             			<div class="table-responsive">
             				
-            				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
+            				<table datatable="ng" class="table mb-0 table-custom" id="BrandList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
                                 <thead>
                                    <tr>
                                    		<th>Nombre</th>

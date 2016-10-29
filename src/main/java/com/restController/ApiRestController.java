@@ -125,7 +125,7 @@ public class ApiRestController {
 	@RequestMapping(value = "/api/insertModel", method = RequestMethod.GET)
 	public ResponseEntity<String> insertModel() {
 		Model model=new Model();
-		model.setname("Nombre 1");
+		model.setName("Nombre 1");
 		model.setTransmission("M");
 		model.setPassangers(2);
 		model.setLuggage(1);

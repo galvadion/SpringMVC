@@ -21,7 +21,7 @@
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                     	<h2 class="custom-font"><strong>Gestion:</strong></h2>
-                        <a href="#/model/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nueo Modelo</a>
+                        <a href="#/model/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Modelo</a>
                     </div>
                     <!-- /tile header -->
 
@@ -29,32 +29,69 @@
                     <div class="tile-body table-custom p-0">
             			<div class="table-responsive">
             				
-            				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
+            				<table datatable="ng" class="table mb-0 table-custom" id="ModelList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
                                 <thead>
                                    <tr>
-                                   		<th>Id</th>
-                                        <th>Nombre</th>
+                                   		<th>Nombre</th>
                                         <th>Marca</th>
                                         <th>Categoria</th>
+                                        <th>Año</th>
+                                   		<th>Combustible</th>
+                                   		<th>Pasajeros</th>
+                                   		<th>Valijas</th>
+                                   		<th>Cilindrada</th>
+                                   		<th>Aire acondicionado</th>
+                                   		<th>Transmisión</th>
+                                   		<th>Seguro</th>
+                                   		<th>Tanque</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!--tr ng-repeat="(key, value) in allModels"-->
-                                    <tr>
+                                    <tr ng-repeat="(key, value) in vm.allModels">
                                     	<td>
-                                            1                                             
+                                            {{value.name}}
                                         </td>
                                         <td>
-                                            Uno
+                                            {{value.brand.name}}
                                         </td>
                                         <td>
-                                            Fiat                                             
+                                            <p ng-if="value.category.id == 1">S</p>
+                                            <p ng-if="value.category.id == 2">A</p>
+                                            <p ng-if="value.category.id == 3">B</p>
+                                            <p ng-if="value.category.id == 4">C</p>
+                                            <p ng-if="value.category.id == 5">D</p>
                                         </td>
                                         <td>
-                                            C
+                                            {{value.year}}
+                                        </td>
+                                        <td>
+                                            {{value.fuel.fuelType}}
+                                        </td>
+                                        <td>
+                                            {{value.passangers}}
+                                        </td>
+                                        <td>
+                                            {{value.luggage}}
+                                        </td>
+                                        <td>
+                                            {{value.cylinders}}
+                                        </td>
+                                        <td>
+                                            <p ng-if="value.airConditioner">Tiene</p>
+                                            <p ng-if="!value.airConditioner">No tiene</p>
+                                        </td>
+                                        <td>
+                                            <p ng-if="value.transmission == 'M'">Manual</p>
+                                            <p ng-if="value.transmission == 'A'">Automático</p>
+                                        </td>
+                                        <td>
+                                            $ {{value.insurance}}
+                                        </td>
+                                        <td>
+                                            {{value.fullTank}} lts.
                                         </td>
                                         <td class="text-center plus">
                                              <a ng-href="#/model/{{value.id}}" title="Ver">

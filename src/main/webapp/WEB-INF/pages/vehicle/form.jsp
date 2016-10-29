@@ -9,7 +9,7 @@
         	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Vehiculos </strong> Crear</h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Dashboard</a></li>
-                <li><a href="#/vehicle/list">Vehiculos</a></li>
+                <li><a href="#/vehicle">Vehiculos</a></li>
                 <li class="breadcrumb-active">Nuevo Vehiculo</li>
             </ol>
         </div>

@@ -1,12 +1,16 @@
 package com.daoImpl;
 
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.UserDao;
+import com.entities.Client;
+import com.entities.Employee;
 import com.entities.User;
 
 @Repository
@@ -22,10 +26,18 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDa
 	}
 
 	public User getUserByName(String username) {
-		Query query=currentSession().createQuery("from Users where user_name = :username");
+		Query query=currentSession().createQuery("from User where email = :username");
 		query.setParameter("username", username);
 		User user=(User) query.getSingleResult();
 		return user;
+	}
+	public List<Employee> getAllEmployees() {
+		Query query=currentSession().createQuery("from Employee where active=true");
+		return query.getResultList();
+	}
+	public List<Client> getAllClients() {
+		Query query=currentSession().createQuery("from Client where active=true");
+		return query.getResultList();
 	}
 	
 }

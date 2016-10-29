@@ -16,10 +16,10 @@
 		
 		        <form name="form" ng-submit="vm.login()" role="form" class="form-validation mt-20">
 		
-		            <div class="form-group" ng-class="{ 'has-error': (form.emailAddress.$dirty && form.emailAddress.$error.required ) || form.emailAddress.$error.email}">
-		                <input type="email" class="form-control" name="emailAddress" id="emailAddress" class="form-control" ng-model="vm.emailAddress" placeholder="Email" required>
-		                <span ng-show="form.emailAddress.$dirty && form.emailAddress.$error.required" class="help-block">Email es requirido</span>
-		                <span ng-show="form.emailAddress.$dirty && form.emailAddress.$error.email" class="help-block">No es un Email valido</span>
+		            <div class="form-group" ng-class="{ 'has-error': (form.email.$dirty && form.email.$error.required ) || form.email.$error.email}">
+		                <input type="email" class="form-control" name="email" id="email" class="form-control" ng-model="vm.email" placeholder="Email" required>
+		                <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email es requirido</span>
+		                <span ng-show="form.email.$dirty && form.email.$error.email" class="help-block">No es un Email valido</span>
 		            </div>
 		
 		            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
@@ -28,9 +28,7 @@
 		            </div>
 		
 		            <div class="text-left">
-		                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-blue b-0 br-2 mr-5">Ingresar</button>
-		                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-		
+		                <button type="submit" ng-disabled="form.$invalid" class="btn btn-blue b-0 br-2 mr-5">Ingresar</button>
 		            </div>
 		            <div class="form-group text-left">
 		                <label class="checkbox checkbox-custom-alt checkbox-custom-sm inline-block"><input type="checkbox"><i></i> Recuerdame</label>

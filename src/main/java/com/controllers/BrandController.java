@@ -8,6 +8,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Brand;
@@ -48,7 +50,7 @@ public class BrandController {
 
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
 	public ResponseEntity<List<Brand>> getAll() {
-		List<Brand> list = brandService.getAll();
+		List<Brand> list = brandService.getAvailable();
 		if (list != null) {
 			return ResponseEntity.ok(list);
 		} else {
@@ -73,4 +75,13 @@ public class BrandController {
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> delete(@RequestParam("id") String id){
+		Brand entity=brandService.get(Integer.valueOf(id));
+		brandService.removeCascade(entity);
+		return ResponseEntity.ok((Object)"It has been removed");
+		
+	}
+	
 }

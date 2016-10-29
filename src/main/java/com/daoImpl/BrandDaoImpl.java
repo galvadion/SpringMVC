@@ -1,5 +1,9 @@
 package com.daoImpl;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +21,11 @@ public class BrandDaoImpl extends GenericDaoImpl<Brand, Integer> implements Bran
 	public BrandDaoImpl(Class<Brand> entityClass) {
 		super(entityClass);
 		// TODO Auto-generated constructor stub
+	}
+
+	public List<Brand> getAvailable() {
+		Query query=currentSession().createQuery("from Brand where unavailable=false");
+		return query.getResultList();
 	}
 	
 }

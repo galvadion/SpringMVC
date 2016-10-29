@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.dao.GenericDao;
 import com.dao.UserDao;
+import com.entities.Client;
+import com.entities.Employee;
 import com.entities.User;
 import com.services.UserServices;
 
@@ -26,14 +28,25 @@ public class UserServicesImpl extends GenericServiceImpl<User, Integer> implemen
         this.userDao = (UserDao) genericDao;
     }
 
-	public boolean validateLogin(String username, String password) {
+	public User validateLogin(String username, String password) {
 		try{
 		User user=userDao.getUserByName(username);
-		if(user.getPassword().equals(password)) return true;
-		return false;
+		if(user.getPassword().equals(password)) return user;
+		return null;
 		}catch(NullPointerException e){
-			return false;
+			return null;
 		}
 	}
+
+	public List<Employee> getAllEmployees() {
+		// TODO Auto-generated method stub
+		return userDao.getAllEmployees();
+	}
+
+	public List<Client> getAllClients() {
+		// TODO Auto-generated method stub
+		return userDao.getAllClients();
+	}
+
 	
 }

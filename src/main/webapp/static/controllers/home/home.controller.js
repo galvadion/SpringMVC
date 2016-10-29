@@ -13,18 +13,22 @@
         vm.roladmin = $rootScope.roladmin;
         vm.search = {};
 
+        vm.searchResult = [];
 
         $scope.searchModels = function() {
         	
         	//Pruebas
         	vm.search.airConditioner = true;
-            vm.search.passanger = 0;
+            vm.search.passangers = 0;
             vm.search.luggage = 0;
         	console.log(vm.search);
         	//
         	
         	ModelService.SearchModels(vm.search).then(function (response) {
-        		console.log(response);
+        		if(response){
+        			vm.searchResult = response.data;
+        			console.log(vm.searchResult);
+        		}
         	});
         };
         
