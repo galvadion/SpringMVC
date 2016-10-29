@@ -109,6 +109,13 @@
                 title: 'Demo - Crear Vehiculo',
                 controllerAs: 'vm'
             })
+            
+            .when('/payment/example', {
+            	controller: 'PaymentController',
+            	templateUrl:'payment/example',
+            	title: 'Paypal payment example',
+            	controllerAs: 'vm'
+            })
 
             .otherwise({ redirectTo: '/' });
     }

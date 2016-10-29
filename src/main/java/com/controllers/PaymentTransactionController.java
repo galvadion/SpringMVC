@@ -12,6 +12,7 @@ import org.jboss.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.models.TransactionItem;
 import com.services.PayPalService;
@@ -76,4 +77,9 @@ public class PaymentTransactionController {
 		}
 	}
 
+	@RequestMapping(value="/example", method=RequestMethod.GET)
+	public ModelAndView getExamplePage(){
+		ModelAndView view = new ModelAndView("payment/example");
+		return view;
+	}
 }
