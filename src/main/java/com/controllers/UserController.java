@@ -32,8 +32,16 @@ public class UserController {
 		return view;
 	}
 	
+	@RequestMapping(value="/edit/{id}",method =RequestMethod.GET)
+	public ModelAndView getEdit(String id){
+		ModelAndView view=new ModelAndView("user/form");
+		view.addObject(userServices.get(Integer.parseInt(id)));
+		return view;
+	}
+	
 	@RequestMapping(value="/saveOrUpdate", method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> getSaved(User users){
+		System.out.println(users);
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		userServices.saveOrUpdate(users);

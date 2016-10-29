@@ -47,6 +47,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<Object> getSaved(@RequestBody Client users) {
+		System.out.println(users);
 		try {
 			userServices.saveOrUpdate(users);
 			return ResponseEntity.ok((Object) users);

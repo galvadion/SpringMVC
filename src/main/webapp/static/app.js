@@ -89,9 +89,9 @@
                 controllerAs: 'vm'
             })
             
-            .when('/employee/edit', {
+            .when('/user/edit', {
                 controller: 'UserController',
-                templateUrl: 'employee/edit',
+                templateUrl: 'user/edit',
                 title: 'Rent-UY - Editar Empleado',
                 controllerAs: 'vm'
             })
@@ -110,12 +110,12 @@
                 controllerAs: 'vm'
             })
             
-            .when('/client/edit', {
+         /*   .when('/client/edit', {
                 controller: 'UserController',
                 templateUrl: 'client/edit',
                 title: 'Rent-UY - Editar Cliente',
                 controllerAs: 'vm'
-            })
+            })*/
 
             .when('/brand', {
                 controller: 'BrandController',

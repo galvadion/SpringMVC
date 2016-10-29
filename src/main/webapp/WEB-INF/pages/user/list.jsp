@@ -91,10 +91,10 @@
                                              </a>
                                         </td>
                                         <td class="text-center plus">
-                                             <a ng-if="vm.location == 'client'" ng-href="#/client/edit/{{value.id}}" title="Editar">
+                                             <a ng-if="vm.location == 'client'" ng-href="#/user/edit/{{value.id}}" title="Editar">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
                                              </a>
-                                             <a ng-if="vm.location == 'employee'" ng-href="#/employee/edit/{{value.id}}" title="Editar">
+                                             <a ng-if="vm.location == 'employee'" ng-href="#/user/edit/{{value.id}}" title="Editar">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
                                              </a>
                                         </td>
