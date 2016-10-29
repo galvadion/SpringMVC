@@ -9,13 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.entities.Client;
+import com.entities.Employee;
+import com.entities.User;
+import com.services.UserServices;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.entities.Client;
-import com.entities.User;
-import com.services.UserServices;
 
 @Controller
 @RequestMapping(value = "client")
@@ -83,4 +86,14 @@ public class ClientController {
 		return map;
 	}
 
+	@RequestMapping(value = "/getall", method = RequestMethod.GET)
+	public ResponseEntity<List<Client>> getAll() {
+		List<Client> list = userServices.getAllClients();
+		if (list != null) {
+			return ResponseEntity.ok(list);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		
+	}
 }

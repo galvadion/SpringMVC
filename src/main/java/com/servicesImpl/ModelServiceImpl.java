@@ -51,5 +51,10 @@ public class ModelServiceImpl extends GenericServiceImpl<Model, Integer> impleme
 		
 	}
 
+	public List<Model> getAvailable() {
+		// TODO Auto-generated method stub
+		return modelDao.getAvailable();
+	}
+
 	
 }

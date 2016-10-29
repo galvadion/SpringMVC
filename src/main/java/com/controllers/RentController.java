@@ -18,6 +18,7 @@ import com.services.BookedService;
 import com.services.RentService;
 import com.services.UserServices;
 
+
 @Controller
 @RequestMapping(value = "rent")
 public class RentController {

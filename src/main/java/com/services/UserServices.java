@@ -12,4 +12,6 @@ public interface UserServices extends GenericService<User,Integer> {
 
 	public List<Employee> getAllEmployees();
 
+	public List<Client> getAllClients();
+
 }

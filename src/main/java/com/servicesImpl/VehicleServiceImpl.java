@@ -26,5 +26,9 @@ public class VehicleServiceImpl extends GenericServiceImpl<Vehicle, Integer> imp
         this.VehicleDao = (VehicleDao) genericDao;
     }
 
+	public List<Vehicle> getAvailable() {
+		return VehicleDao.getAvailable();
+	}
+
 	
 }

@@ -1,17 +1,23 @@
 package com.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.entities.User;
+import com.services.UserServices;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.entities.User;
-import com.services.UserServices;
+
 
 @Controller
 @RequestMapping(value="user")
@@ -71,4 +77,16 @@ public class UserController {
 		return map;
 	}
 	
+	@RequestMapping(value="/getbyid", method=RequestMethod.GET)
+	public ResponseEntity<Object> getById(@RequestParam("id") Integer id){
+		return ResponseEntity.ok((Object) userServices.get(id));
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> delete(@RequestParam("id") Integer id){
+		User user=userServices.get(id);
+		user.setActive(false);
+		userServices.saveOrUpdate(user);
+		return ResponseEntity.ok((Object)"It has been removed");
+	}
 }

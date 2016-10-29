@@ -22,12 +22,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.entities.Brand;
 import com.entities.Model;
 import com.models.SearchFilter;
 import com.services.BrandService;
 import com.services.CategoryService;
 import com.services.ModelService;
+
+
 
 @Controller
 @RequestMapping(value = "model")
@@ -88,7 +89,7 @@ public class ModelController {
 	
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
 	public ResponseEntity<List<Model>> getAll() {
-		List<Model> list = modelService.getAll();
+		List<Model> list = modelService.getAvailable();
 		if (list != null) {
 			return ResponseEntity.ok(list);
 		} else {

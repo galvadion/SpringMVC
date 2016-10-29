@@ -20,9 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.BranchOffice;
-import com.entities.Brand;
-import com.entities.Extras;
 import com.services.BranchOfficeService;
+
 
 @Controller
 @RequestMapping(value = "branchoffice")

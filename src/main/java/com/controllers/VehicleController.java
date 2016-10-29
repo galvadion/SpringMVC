@@ -2,6 +2,7 @@ package com.controllers;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.entities.Model;
 import com.entities.StatusBetweenDates;
 import com.entities.Vehicle;
 import com.models.MaintenanceModel;
@@ -123,6 +123,15 @@ public class VehicleController {
 		
 	}
 	
+	@RequestMapping(value = "/getall", method = RequestMethod.GET)
+	public ResponseEntity<List<Vehicle>> getVehicles(){
+		List<Vehicle> list=vehicleService.getAvailable();
+		if (list != null) {
+			return ResponseEntity.ok(list);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 	
 	
 }

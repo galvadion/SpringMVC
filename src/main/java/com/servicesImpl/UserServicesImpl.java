@@ -43,5 +43,10 @@ public class UserServicesImpl extends GenericServiceImpl<User, Integer> implemen
 		return userDao.getAllEmployees();
 	}
 
+	public List<Client> getAllClients() {
+		// TODO Auto-generated method stub
+		return userDao.getAllClients();
+	}
+
 	
 }

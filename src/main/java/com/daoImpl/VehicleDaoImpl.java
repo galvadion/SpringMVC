@@ -1,5 +1,7 @@
 package com.daoImpl;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -30,6 +32,10 @@ public class VehicleDaoImpl extends GenericDaoImpl<Vehicle, Integer> implements 
 		query.setParameter("status", Vehicle_Status.Available);
 		query.setParameter("branchId", model.getOriginBranchOfficeId());
 		return (Vehicle) query.getSingleResult();
+	}
+	public List<Vehicle> getAvailable() {
+		// TODO Auto-generated method stub
+		return currentSession().createQuery("from Vehicle where unavailable=false").getResultList();
 	}
 
 

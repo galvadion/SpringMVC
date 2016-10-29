@@ -43,6 +43,11 @@ public class ModelDaoImpl extends GenericDaoImpl<Model, Integer> implements Mode
 		return resultList;
 	}
 
+	public List<Model> getAvailable() {
+		// TODO Auto-generated method stub
+		return currentSession().createQuery("from Model where unavailable=false").getResultList();
+	}
+
 	
 
 

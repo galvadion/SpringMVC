@@ -10,15 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.entities.Brand;
-import com.services.BrandService;
-
 @Controller
 @RequestMapping(value = "booked")
 public class BookedController {
 
-	@Autowired
-	BrandService BookedService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView getListPage() {
