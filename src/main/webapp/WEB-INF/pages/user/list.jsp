@@ -82,11 +82,12 @@
 	                                        </span>
                                         </td>
                                         <td>
-                                            {{value.active}}
+                                            <p ng-if="value.active">Activo</p>
+                                            <p ng-if="!value.active">Inactivo</p>
                                         </td>
-                                        <td class="text-center plus">
+                                        <td class="text-center plus" style="cursor: pointer !important;">
                                              <a ng-href="" title="Cambiar estado" ng-click="changeStatus(value.id, value.active)">
-                                             	<i class="fa fa-pause"></i><br><small>Cambiar estado</small>
+                                             	<i class="fa fa-pause"></i><br><small>Activar/Desactivar</small>
                                              </a>
                                         </td>
                                         <td class="text-center plus">
@@ -98,7 +99,7 @@
                                              </a>
                                         </td>
                                         <td class="text-center delete">
-                                            <a doing-action="" href data-toggle="" ng-click="deleteUser(value.id)" confirm-if="checked" confirm="Esta seguro, eliminar a {{value.name}} {{value.lastName}}?" title="Eliminar">
+                                            <a href ng-click="openDialog(value)" title="Eliminar">
                                                 <i class="fa fa-times"></i><br />
                                                 <small>Eliminar</small>
                                             </a>
@@ -117,3 +118,18 @@
     </div>
 
 </section>
+
+<script type="text/ng-template" id="modalDialog">
+	<div class="ngdialog-message modal-content">
+	<div class="modal-header">
+	<h3 class="modal-title custom-font">Eliminar</h3>
+	</div>
+	<div class="modal-body">
+	Esta seguro, eliminar a <strong>{{object.name}} {{object.lastName}}</strong>?
+	</div>                     
+	<div class="modal-footer  ngdialog-buttons">
+	<button type="button" class="ngdialog-button btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" ng-click="closeThisDialog('button')"><i class="fa fa-arrow-left"></i>Cancelar</button>
+	<button type="button" class="ngdialog-button btn btn-success btn-ef btn-ef-3 btn-ef-3c" ng-click="confirm();deleteUser(id)"><i class="fa fa-arrow-right"></i> Confirmar</button>
+	</div>
+	</div>
+</script>

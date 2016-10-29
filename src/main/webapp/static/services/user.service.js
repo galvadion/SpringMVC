@@ -32,7 +32,7 @@
         }
         
         function GetUserById(id) {
-            return $http.get('/SpringMVC/user/getbyid' + id).then(handleSuccess, handleError);
+            return $http.get('/SpringMVC/user/getbyid?id=' + id).then(handleSuccess, handleError);
         }
         
         //Client functions

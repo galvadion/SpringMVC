@@ -11,6 +11,7 @@
         var vm = this;
 
         vm.user = {};
+        vm.allUsers = [];
         vm.roladmin = $rootScope.roladmin;
         vm.rolclient = false
         vm.newpassword = "";
@@ -58,32 +59,63 @@
             
             vm.location = $location.path().split('/',2);
             vm.location = vm.location[1];
-            
+ 
             if(vm.location == "profile"){
-
+            	getUserById($scope.globals.currentUser.id);
             }
             else if(vm.location == "employee"){
-            	getAllEmployees();
+            	if($scope.globals.editUser != ""){
+            		console.log($scope.globals.editUser);
+            	}
+            	else{
+            		getAllEmployees();
+            	}
             }
             else if(vm.location == "client"){
             	getAllClients();
             }
 
-            NProgress.done();
         }
 
+        function getUserById(id){
+        	UserService.GetUserById(id).then(function (response) {
+        		if(response.success){
+        			vm.user = response.data;
+        		}
+        		NProgress.done();
+        	});
+        }
+        
         function getAllEmployees(){
         	UserService.GetAllEmployees().then(function (response) {
-        		console.log(response);
+        		if(response.success){
+        			vm.allUsers = response.data;
+        		}
+        		NProgress.done();
         	});
         }
         
         function getAllClients(){
         	UserService.GetAllClients().then(function (response) {
-        		console.log(response);
+        		if(response.success){
+        			vm.allUsers = response.data;
+        		}
+        		NProgress.done();
         	});
         }
+        
+        $scope.changeStatus = function (object) {
+        	alert('a');
+        };
 
+        $scope.openDialog = function (object) {
+            ngDialog.openConfirm({
+                template: 'modalDialog',
+                className: 'ngdialog-theme-default',
+                scope: $scope,
+                object : object
+            }).then(function (value) {}, function (reason) {});
+        };
 
         
     }

@@ -138,18 +138,4 @@
 		</div>
 	</section>
 
-	<script type="text/ng-template" id="modalDialogCampaign">
-	<div class="ngdialog-message modal-content">
-	<div class="modal-header">
-	<h3 class="modal-title custom-font">Change Password</h3>
-	</div>
-	<div class="modal-body">
-	Do you want to change the <strong>Password</strong>?
-	</div>                     
-	<div class="modal-footer  ngdialog-buttons">
-	<button type="button" class="ngdialog-button btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" ng-click="closeThisDialog('button')"><i class="fa fa-arrow-left"></i>Cancel</button>
-	<button type="button" class="ngdialog-button btn btn-success btn-ef btn-ef-3 btn-ef-3c" ng-click="confirm();enablePasswordEdit()"><i class="fa fa-arrow-right"></i> Confirm</button>
-	</div>
-	</div>
-	</script>
 <!--/ CONTENT -->
