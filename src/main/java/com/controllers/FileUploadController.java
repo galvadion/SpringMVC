@@ -4,7 +4,9 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,15 +15,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.entities.Images;
+import com.entities.Model;
+import com.services.ImageService;
+import com.services.ModelService;
 
 @Controller
+@RequestMapping(value = "upload")
 public class FileUploadController {
 
+	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+	public ModelAndView getCreatePage() {
+		ModelAndView view = new ModelAndView("upload/form");
+		return view;
+	}
+	
+	@Autowired
+	ModelService modelService;
+	
+	@Autowired
+	ImageService imageService;
 	/**
 	 * Upload single file using Spring Controller
 	 */
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	public @ResponseBody String uploadFileHandler(@RequestParam("name") String name,
+	public @ResponseBody String uploadFileHandler(@RequestParam("name") String name,@RequestParam("id") String id,
 			@RequestParam("file") MultipartFile file) {
 
 		if (!file.isEmpty()) {
@@ -39,7 +59,13 @@ public class FileUploadController {
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();
-
+				Model model=modelService.get(Integer.parseInt(id));
+				List<Images> imagesList=model.getImages();
+				Images image=new Images();
+				image.setFileLocation(serverFile.toString());
+				image.setModel(model);
+				imagesList.add(image);
+				imageService.saveOrUpdate(image);
 				return "You successfully uploaded file=" + name;
 			} catch (Exception e) {
 				return "You failed to upload " + name + " => " + e.getMessage();

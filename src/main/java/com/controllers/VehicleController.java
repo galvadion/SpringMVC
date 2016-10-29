@@ -101,6 +101,7 @@ public class VehicleController {
 	@RequestMapping(value = "/maintenance", method = RequestMethod.POST)
 	public ResponseEntity<Object> sendToMaintenance(@RequestBody MaintenanceModel requestModel){
 		Vehicle vehicle=vehicleService.get(requestModel.getVehicleId());
+		vehicleService.abortNewEvents(vehicle);
 		StatusBetweenDates current=statusService.getCurrentStatus(vehicle,requestModel.getFirstDate());
 		current.setEndDate(requestModel.getFirstDate());
 		statusService.saveOrUpdate(current);
@@ -138,6 +139,7 @@ public class VehicleController {
 	public ResponseEntity<Object> delete(String id) {
 		Vehicle vehicle=vehicleService.get(Integer.parseInt(id));
 		vehicle.setUnavailable(true);
+		vehicleService.abortNewEvents(vehicle);
 		
 		return ResponseEntity.ok((Object)"It has been removed");
 	}

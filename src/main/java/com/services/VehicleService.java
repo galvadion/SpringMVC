@@ -15,4 +15,6 @@ public interface VehicleService extends GenericService<Vehicle,Integer> {
 	
 	public List<Vehicle> getReturnedToday(BranchOffice bo);
 
+	public void abortNewEvents(Vehicle vehicle);
+
 }

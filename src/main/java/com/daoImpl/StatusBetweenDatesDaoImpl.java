@@ -1,6 +1,7 @@
 package com.daoImpl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Query;
 
@@ -66,6 +67,12 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		query.setParameter("vehicule", vehicle);
 		return (StatusBetweenDates) query.getSingleResult();
 		
+	}
+
+	public List<StatusBetweenDates> getNextStatus(Vehicle vehicle) {
+		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicle =:vehicle and s.beginDate > CURRENT_DATE");
+		query.setParameter("vehicule", vehicle);
+		return query.getResultList();
 	}
 
 }
