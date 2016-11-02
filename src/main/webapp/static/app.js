@@ -89,9 +89,9 @@
                 controllerAs: 'vm'
             })
             
-            .when('/user/edit', {
+            .when('/employee/edit/:id', {
                 controller: 'UserController',
-                templateUrl: 'user/edit',
+                templateUrl: 'employee/edit',
                 title: 'Rent-UY - Editar Empleado',
                 controllerAs: 'vm'
             })
@@ -110,12 +110,12 @@
                 controllerAs: 'vm'
             })
             
-         /*   .when('/client/edit', {
+            .when('/client/edit/:id', {
                 controller: 'UserController',
                 templateUrl: 'client/edit',
                 title: 'Rent-UY - Editar Cliente',
                 controllerAs: 'vm'
-            })*/
+            })
 
             .when('/brand', {
                 controller: 'BrandController',
@@ -138,7 +138,7 @@
                 controllerAs: 'vm'
             })
             
-            .when('/model/edit', {
+            .when('/model/edit/:id', {
                 controller: 'ModelController',
                 templateUrl: 'model/edit',
                 title: 'Rent-UY - Editar Modelo',
@@ -159,7 +159,7 @@
                 controllerAs: 'vm'
             })
             
-            .when('/vehicle/edit', {
+            .when('/vehicle/edit/:id', {
                 controller: 'VehicleController',
                 templateUrl: 'vehicle/edit',
                 title: 'Rent-UY - Editar Vehículo',
@@ -180,7 +180,7 @@
                 controllerAs: 'vm'
             })
             
-            .when('/branchoffice/edit', {
+            .when('/branchoffice/edit/:id', {
                 controller: 'BranchofficeController',
                 templateUrl: 'branchoffice/edit',
                 title: 'Rent-UY - Editar Sucursal',
@@ -229,7 +229,7 @@
                 controllerAs: 'vm'
             })
             
-            .when('/booked/edit', {
+            .when('/booked/edit/:id', {
                 controller: 'BookedController',
                 templateUrl: 'booked/edit',
                 title: 'Rent-UY - Editar Reserva',

@@ -5,8 +5,8 @@
         .module('app')
         .controller('UserController', UserController);        
 
-    UserController.$inject = ['$routeParams','$timeout','$rootScope','$scope','$location', 'UserService', 'FlashService','FileUploader','SessionService','ngDialog','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
-    function UserController($routeParams,$timeout,$rootScope,$scope,$location, UserService, FlashService,FileUploader,SessionService,ngDialog, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+    UserController.$inject = ['$routeParams','$rootScope','$scope','$location', 'UserService', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', 'ngDialog'];
+    function UserController($routeParams, $rootScope, $scope,$location, UserService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder, ngDialog) {
         
         var vm = this;
 
@@ -46,35 +46,38 @@
             DTColumnDefBuilder.newColumnDef(4).notSortable(),
             DTColumnDefBuilder.newColumnDef(5).notSortable(),
             DTColumnDefBuilder.newColumnDef(6).notSortable(),
+            DTColumnDefBuilder.newColumnDef(7).notSortable(),
             DTColumnDefBuilder.newColumnDef(8).notSortable(),
             DTColumnDefBuilder.newColumnDef(9).notSortable(),
-            DTColumnDefBuilder.newColumnDef(10).notSortable(),
         ];
 
         initController();
 
         function initController(){
             NProgress.start();
-            //SessionService.initService();
             
-            vm.location = $location.path().split('/',2);
-            vm.location = vm.location[1];
+            vm.location = $location.path().split('/',3);
  
-            if(vm.location == "profile"){
+            if(vm.location[1] == "profile"){
             	getUserById($scope.globals.currentUser.id);
             }
-            else if(vm.location == "employee"){
-            	if($scope.globals.editUser != ""){
-            		console.log($scope.globals.editUser);
-            	}
-            	else{
-            		getAllEmployees();
-            	}
+            else if(vm.location[2] == "edit"){
+        		getUserById($routeParams.id);
+        	}
+            else if(vm.location[2] == "create"){
+            	vm.user.id = null;
+                vm.user.active = true;
             }
-            else if(vm.location == "client"){
-            	getAllClients();
+            else{
+            	if(vm.location[1] == "employee"){
+	            	getAllEmployees();
+	            }
+	            else if(vm.location[1] == "client"){
+	            	getAllClients();
+	            }
             }
 
+            NProgress.done();
         }
 
         function getUserById(id){
@@ -104,16 +107,62 @@
         	});
         }
         
-        $scope.changeStatus = function (object) {
-        	alert('a');
+        $scope.saveUser = function() {
+        	if(vm.location[1] == "client"){
+	        	UserService.InsertClient(vm.user).then(function (response) {
+	        		if(response.success){
+	        			$rootScope.doFlashMessage("Cliente guardado con éxito",'/client','success');
+	        		}
+	        		else{
+	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+	        		}
+	        		NProgress.done();
+	        	});
+        	}
+        	else if(vm.location[1] == "employee"){
+	        	UserService.InsertEmployee(vm.user).then(function (response) {
+	        		if(response.success){
+	        			$rootScope.doFlashMessage("Empleado guardado con éxito",'/employee','success');
+	        		}
+	        		else{
+	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+	        		}
+	        		NProgress.done();
+	        	});
+        	}
         };
-
-        $scope.openDialog = function (object) {
+        
+        $scope.deleteUser = function (id) {
+        	if(vm.location[1] == "client"){
+	        	UserService.DeleteClient(id).then(function (response) {
+	        		if(response.success){
+	        			$rootScope.doFlashMessage("Cliente eliminado con éxito",'','success');
+	        		}
+	        		else{
+	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+	        		}
+	        		NProgress.done();
+	        	});
+        	}
+        	else if(vm.location[1] == "employee"){
+	        	UserService.InsertEmployee(id).then(function (response) {
+	        		if(response.success){
+	        			$rootScope.doFlashMessage("Empleado eliminado con éxito",'','success');
+	        		}
+	        		else{
+	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+	        		}
+	        		NProgress.done();
+	        	});
+        	}
+        };
+        
+        $scope.openDialog = function (user) {
+        	vm.auxUser = angular.copy(user);
             ngDialog.openConfirm({
                 template: 'modalDialog',
                 className: 'ngdialog-theme-default',
                 scope: $scope,
-                object : object
             }).then(function (value) {}, function (reason) {});
         };
 
