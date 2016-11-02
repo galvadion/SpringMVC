@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.entities.Brand;
 import com.entities.User;
 import com.services.UserServices;
 
@@ -92,7 +93,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@RequestParam("id") Integer id){
-		User user=userServices.get(id);
+		User user=userServices.get(Integer.valueOf(id));
 		user.setActive(false);
 		userServices.saveOrUpdate(user);
 		return ResponseEntity.ok((Object)"It has been removed");

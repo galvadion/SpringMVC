@@ -12,14 +12,13 @@
 
         service.GetAllUsers = GetAllUsers;
         service.GetUserById = GetUserById;
+        service.DeleteUser = DeleteUser;
         
         service.GetAllClients = GetAllClients;
         service.InsertClient = InsertClient;
-        service.DeleteClient = DeleteClient;
         
         service.GetAllEmployees = GetAllEmployees;
         service.InsertEmployee = InsertEmployee;
-        service.DeleteEmployee = DeleteEmployee;
         
         return service;
 
@@ -33,6 +32,11 @@
             return $http.get('/SpringMVC/user/getbyid?id=' + id).then(handleSuccess, handleError);
         }
         
+        function DeleteUser(id) {
+            return $http.delete('/SpringMVC/user/delete?id=' + id).then(handleSuccess, handleError);
+        }
+        
+        
         //Client functions
 
         function GetAllClients() {
@@ -43,11 +47,7 @@
             return $http.post('/SpringMVC/client/insert', client).then(handleSuccess, handleError);
         }
         
-        function DeleteClient(id) {
-            return $http.delete('/SpringMVC/client/delete?id=' + id).then(handleSuccess, handleError);
-        }
 
-        
         //Employee functions
         
         function GetAllEmployees() {
@@ -56,10 +56,6 @@
         
         function InsertEmployee(employee) {
             return $http.post('/SpringMVC/employee/insert', employee).then(handleSuccess, handleError);
-        }
-        
-        function DeleteEmployee(id) {
-            return $http.delete('/SpringMVC/employee/delete?id=' + id).then(handleSuccess, handleError);
         }
 
         
