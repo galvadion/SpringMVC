@@ -56,6 +56,15 @@
 		<script type="text/javascript" src="static/js/moment.min.js"></script>
 		<script type="text/javascript" src="static/js/moment-with-locales.js"></script>
 		
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCToOBKLzgMq3u02g7OO_v-txL_LnfEO_g&callback=initMap" type="text/javascript"></script>
+		<script type="text/javascript" src="static/js/maps/lodash.core.js"></script>
+		<script type="text/javascript" src="static/js/maps/angular-simple-logger.js"></script>
+		<script type="text/javascript" src="static/js/maps/angular-google-maps.min.js"></script>
+		
+		
+		
+		
+		
 
 		<!-- Data Tablbes -->
 		<script type="text/javascript" src="static/js/vendor/datatables/media/js/jquery.dataTables.js"></script>

@@ -15,10 +15,10 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<section class="tile">
+				<section class="tile" style="height: 400px !important;">
 					<br/>
-					<h3 class="text-center">Encuentra tu vehiculo</h3>
-					<br/>
+					<h3 class="text-center">Encuentra tu vehículo</h3>
+					<br/><br/>
 					<form name='form' class="" role="form" ng-submit="searchModels()">
 						
 						<div class="row" style="padding: 0 10px 0 10px;">
@@ -64,7 +64,7 @@
 	                    <br/>
 	                    
 	                    <!-- Buttons -->
-                        <div class="form-group text-right">
+                        <div class="form-group text-right" style="margin-right: 15px;">
                             <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Buscar</button>
                         </div>
 		        	</form>
@@ -72,11 +72,13 @@
 				</section>
 			</div>
 			
-			<div class="col-md-1"></div>
+			<!--div class="col-md-1"></div-->
 			
-			<div class="col-md-5">
+			<div class="col-md-6">
 				<section class="tile text-center">
-					<div id="mapa"></div>
+					<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
+                    	<ui-gmap-markers models="markers" coords="'self'" icon="'icon'">
+					</ui-gmap-google-map>
 				</section>
 			</div>
 		</div>
@@ -99,26 +101,14 @@
                     	
 						<div class="table-responsive">
             				
-            				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
-                                <thead>
-                                   <tr>
-                                   		<th>Marca</th>
-                                   		<th>Modelo</th>
-                                   		<th>Combustible</th>
-                                   		<th>Ano</th>
-                                   		<th>Pasajeros</th>
-                                   		<th>Valijas</th>
-                                   		<th>Cilindrada</th>
-                                   		<th>Aire acondicionado</th>
-                                    </tr>
-                                </thead>
+            				<table class="table mb-0 table-custom" id="promoList">
                                 <tbody>
-                                    <tr ng-repeat="(key, value) in vm.searchResult">
+                                    <tr ng-repeat="(key, value) in vm.allPromos">
                                     	<td>
-                                            {{value.brand.name}}
+                                            {{value.name}}
                                         </td>
                                         <td>
-                                            {{value.name}}
+                                            {{value.picture}}
                                         </td>
                                         <td>
                                             {{value.fuel.fuelType}}
@@ -150,29 +140,7 @@
 		<!-- /row -->
 		
         </div>
-        
-        
-        <div class="row">
-        	<div class="col-md-12">
-            	
-            	<section class="tile">
-            		
-            		<!-- tile header -->
-                    <div class="tile-header dvd dvd-btm">
-                        <h1 class="custom-font"><strong>NICO </strong></h1>
-                    </div>
-                    <!-- /tile header -->
 
-                    <!-- tile body -->
-                    <div class="tile-body table-custom">
-                    	PUT ALL THE CRAP HERE
-            		</div>
-            	
-            	</section>
-            </div>
-		<!-- /row -->
-		
-        </div>
 
     </div>
 

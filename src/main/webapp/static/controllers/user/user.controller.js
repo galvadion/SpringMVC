@@ -108,6 +108,7 @@
         }
         
         $scope.saveUser = function() {
+        	NProgress.start();
         	if(vm.location[1] == "client"){
 	        	UserService.InsertClient(vm.user).then(function (response) {
 	        		if(response.success){
@@ -133,6 +134,7 @@
         };
         
         $scope.deleteUser = function (id) {
+        	NProgress.start();
         	if(vm.location[1] == "client"){
         		var msg = "Cliente eliminado con éxito";
         	}

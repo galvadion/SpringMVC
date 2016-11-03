@@ -11,6 +11,7 @@
         var service = {};
 
         service.GetAllBranchoffices = GetAllBranchoffices;
+        service.GetBranchofficeById = GetBranchofficeById;
         service.InsertBranchoffice = InsertBranchoffice;
         service.DeleteBranchoffice = DeleteBranchoffice;
         
@@ -24,12 +25,16 @@
             return $http.get('/SpringMVC/branchoffice/getall').then(handleSuccess, handleError);
         }
         
+        function GetBranchofficeById(id) {
+            return $http.get('/SpringMVC/branchoffice/getbyid?id=' + id).then(handleSuccess, handleError);
+        }
+        
         function InsertBranchoffice(branchoffice) {
             return $http.post('/SpringMVC/branchoffice/insert', branchoffice).then(handleSuccess, handleError);
         }
         
         function DeleteBranchoffice(id) {
-            return $http.delete('/SpringMVC/branchoffice/delete', id).then(handleSuccess, handleError);
+            return $http.delete('/SpringMVC/branchoffice/delete?id=' + id).then(handleSuccess, handleError);
         }
 
         

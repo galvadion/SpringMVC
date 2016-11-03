@@ -5,14 +5,28 @@
         .module('app')
         .controller('BranchofficeController', BranchofficeController);
 
-    BranchofficeController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','BranchofficeService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
+    BranchofficeController.$inject = ['$location','$rootScope','$routeParams','$scope','$timeout','SessionService','BranchofficeService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','ngDialog'];
     
-    function BranchofficeController($location, UserService, $rootScope, $scope, $timeout, SessionService, BranchofficeService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+    function BranchofficeController($location, $rootScope, $routeParams, $scope, $timeout, SessionService, BranchofficeService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder, ngDialog) {
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
         vm.branchoffice = {};
+        vm.auxBranchoffice = {};
         vm.allBranchoffices = [];
+        vm.location = "";
+        
+        $scope.map = {
+        		center: { 
+        			latitude: -34.901113,
+        			longitude: -56.164531
+        		},
+        		zoom: 14,
+        };
+        
+        $scope.options = {
+        		scrollwheel: false
+	    };
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -39,16 +53,29 @@
         });
 
         vm.DTColumnDefs = [
-            DTColumnDefBuilder.newColumnDef(1).notSortable(),
             DTColumnDefBuilder.newColumnDef(2).notSortable(),
             DTColumnDefBuilder.newColumnDef(3).notSortable(),
+            DTColumnDefBuilder.newColumnDef(4).notSortable(),
+            DTColumnDefBuilder.newColumnDef(5).notSortable(),
+            DTColumnDefBuilder.newColumnDef(6).notSortable(),
+            DTColumnDefBuilder.newColumnDef(7).notSortable(),
         ];
         
         initController();
         
         function initController() {
             NProgress.start();
-            getAllBranchoffices();
+            
+            vm.location = $location.path().split('/',3);
+            
+            if(vm.location[2] == "edit"){
+        		getBranchofficeById($routeParams.id);
+        	}
+            else if(vm.location[2] != "create"){
+            	getAllBranchoffices();
+            }
+            
+            NProgress.done();
         }
         
         function getAllBranchoffices(){
@@ -58,6 +85,15 @@
         		}
         		else{
         			vm.allBranchoffices = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        
+        function getBranchofficeById(id){
+        	BranchofficeService.GetBranchofficeById(id).then(function (response) {
+        		if(response.success){
+        			vm.branchoffice = response.data;
         		}
         		NProgress.done();
         	});
@@ -79,6 +115,7 @@
         	}
         	
         	BranchofficeService.InsertBranchoffice(vm.branchoffice).then(function (response) {
+        		NProgress.start();
         		if(response.success){
         			getAllBranchoffices();
         			$rootScope.doFlashMessage(mgsSuccess,'','success');
@@ -91,35 +128,28 @@
         	});
         };
         
-        $scope.cleanInput = function() {
-        	vm.branchoffice = {};
-        	$scope.form.$setPristine();
-        };
-        
-        $scope.editBranchoffice = function(brand) {
-        	vm.branchoffice = angular.copy(brand);
-        	$scope.scrollTo( "#wrap");
-        };
-        
-        $scope.deleteBranchoffice = function(id) {
+        $scope.deleteBranch = function (id) {
         	NProgress.start();
         	BranchofficeService.DeleteBranchoffice(id).then(function (response) {
         		if(response.success){
-        			getAllBranchoffices();
-        			$rootScope.doFlashMessage('Marca eliminada','','success');
+        			$rootScope.doFlashMessage("Sucursal eliminada con éxito",'','success');
+        			initController();
         		}
         		else{
-        			$rootScope.doFlashMessage('Error al eliminar','','error');
+        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
         		}
         		NProgress.done();
         	});
         };
         
-        $scope.scrollTo = function(element) {
-            $( 'html, body').animate({
-                scrollTop: $(element).offset().top
-            }, 500);
-        }
+        $scope.openDialog = function (branchoffice) {
+        	vm.auxBranchoffice = angular.copy(branchoffice);
+            ngDialog.openConfirm({
+                template: 'modalDialog',
+                className: 'ngdialog-theme-default',
+                scope: $scope,
+            }).then(function (value) {}, function (reason) {});
+        };
 
     }
 
