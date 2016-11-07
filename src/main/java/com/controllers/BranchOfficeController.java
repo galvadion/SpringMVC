@@ -93,6 +93,11 @@ public class BranchOfficeController {
 		}
 	}
 	
+	@RequestMapping(value="/getbyid", method=RequestMethod.GET)
+	public ResponseEntity<Object> getById(@RequestParam("id") Integer id){
+		return ResponseEntity.ok((Object) branchOfficeService.get(id));
+	}
+	
 	/*
 	 * 
 	 * Throws an error if the branch has vehicles in it or if it is going to recibe a vehicle

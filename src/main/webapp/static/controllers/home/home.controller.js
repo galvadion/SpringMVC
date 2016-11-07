@@ -12,11 +12,36 @@
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
         vm.search = {};
-
         vm.searchResult = [];
+        
+        $scope.map = {
+        		center: { 
+        			latitude: -34.901113,
+        			longitude: -56.164531
+        		},
+        		zoom: 14,
+        };
+        
+        $scope.options = {
+        		scrollwheel: false
+	    };
 
-        $scope.searchModels = function() {
-        	
+        $scope.markers = [];
+        $scope.markers.push({
+        	id: 1,
+    		latitude: -34.901113,
+            longitude: -56.164531,
+            title: 'Sucursal 1'
+        });
+        $scope.markers.push({
+        	id: 2,
+    		latitude: -34.904113,
+            longitude: -56.160531,
+            title: 'Sucursal 2'
+        });
+
+
+        $scope.searchModels = function() {        	
         	//Pruebas
         	vm.search.airConditioner = true;
             vm.search.passangers = 0;
@@ -36,7 +61,9 @@
 
         function initController() {
             NProgress.start();
+            
             getAllOffers();
+            
             NProgress.done();
         }
         

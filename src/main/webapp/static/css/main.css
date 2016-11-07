@@ -18222,3 +18222,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 .paging_simple_numbers {
 	margin-top: -20px !important;
 }
+
+.angular-google-map-container {
+	height: 400px;
+}

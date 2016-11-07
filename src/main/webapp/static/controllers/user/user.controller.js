@@ -108,6 +108,7 @@
         }
         
         $scope.saveUser = function() {
+        	NProgress.start();
         	if(vm.location[1] == "client"){
 	        	UserService.InsertClient(vm.user).then(function (response) {
 	        		if(response.success){
@@ -133,28 +134,23 @@
         };
         
         $scope.deleteUser = function (id) {
+        	NProgress.start();
         	if(vm.location[1] == "client"){
-	        	UserService.DeleteClient(id).then(function (response) {
-	        		if(response.success){
-	        			$rootScope.doFlashMessage("Cliente eliminado con éxito",'','success');
-	        		}
-	        		else{
-	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
-	        		}
-	        		NProgress.done();
-	        	});
+        		var msg = "Cliente eliminado con éxito";
         	}
         	else if(vm.location[1] == "employee"){
-	        	UserService.InsertEmployee(id).then(function (response) {
-	        		if(response.success){
-	        			$rootScope.doFlashMessage("Empleado eliminado con éxito",'','success');
-	        		}
-	        		else{
-	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
-	        		}
-	        		NProgress.done();
-	        	});
+        		var msg = "Empleado eliminado con éxito";
         	}
+        	UserService.DeleteUser(id).then(function (response) {
+        		if(response.success){
+        			$rootScope.doFlashMessage(msg,'','success');
+        			initController();
+        		}
+        		else{
+        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+        		}
+        		NProgress.done();
+        	});
         };
         
         $scope.openDialog = function (user) {
