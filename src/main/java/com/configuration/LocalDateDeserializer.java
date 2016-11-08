@@ -2,6 +2,7 @@ package com.configuration;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,7 +21,7 @@ public class LocalDateDeserializer extends StdDeserializer<LocalDate> {
     @Override
     public LocalDate deserialize(JsonParser jp, DeserializationContext ctxt)
             throws IOException, JsonProcessingException {
-        return LocalDate.parse(jp.readValueAs(String.class));
+        return LocalDate.parse(jp.readValueAs(String.class),DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
 }
