@@ -12,7 +12,6 @@
 
         <!--Styles-->
         <link rel="stylesheet" type="text/css" href="static/css/vendor/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="static/css/ngDatepicker.css">
         <link rel="stylesheet" type="text/css" href="static/css/nprogress.css">
         <link rel="stylesheet" type="text/css" href="static/css/ngDialog.css">
         <link rel="stylesheet" type="text/css" href="static/css/ngDialog-theme-default.css">
@@ -25,6 +24,8 @@
         <link rel="stylesheet" type="text/css" href="static/fonts/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="static/js/dista/plugins/bootstrap/datatables.bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="static/js/dista/css/angular-datatables.css">
+        <link rel="stylesheet" type="text/css" href="static/css/bootstrap-datetimepicker.min.css">
+        
         
 
     </head>
@@ -44,7 +45,9 @@
 
 
 		<!--Extensions-->
-        <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="static/js/bootstrap-datetimepicker.min.js"></script>
+		<script type="text/javascript" src="static/js/bootstrap-datetimepicker.es.js"></script>
+		<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="static/js/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="static/js/angular-ui-router.js"></script>
         <script type="text/javascript" src="static/js/angular-file-upload.js"></script>
@@ -52,10 +55,8 @@
         <script type="text/javascript" src="static/js/nprogress.js"></script>
         <script type="text/javascript" src="static/js/ngDialog.js"></script>
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
-		<script type="text/javascript" src="static/js/ngDatepicker.min.js"></script>
-		<script type="text/javascript" src="static/js/moment.min.js"></script>
-		<script type="text/javascript" src="static/js/moment-with-locales.js"></script>
 		
+		<!--Maps-->
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCToOBKLzgMq3u02g7OO_v-txL_LnfEO_g&callback=initMap" type="text/javascript"></script>
 		<script type="text/javascript" src="static/js/maps/lodash.core.js"></script>
 		<script type="text/javascript" src="static/js/maps/angular-simple-logger.js"></script>

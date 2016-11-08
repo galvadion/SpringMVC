@@ -18226,3 +18226,17 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 .angular-google-map-container {
 	height: 400px;
 }
+
+.customDatePickers {
+	padding-left: 15px !important;
+	padding-rigth: 15px !important;
+}
+
+.customAddonSize {
+	background-color: white;
+	border-color: white;
+}
+
+.customAddonSize span {
+	top: 10px;
+}

@@ -22,10 +22,13 @@
 					<form name='form' class="" role="form" ng-submit="searchModels()">
 						
 						<div class="row" style="padding: 0 10px 0 10px;">
-	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.beginDate.$dirty && form.beginDate.$error.required }">
-	                            <label for="beginDate" class="control-label">Fecha de recogida</label>
-	                            <input type="text" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="beginDate" class="form-control" placeholder="YYYY-MM-DD" ng-model="vm.search.beginDate" required />
-								<span ng-show="form.beginDate.$dirty && form.beginDate.$error.required" class="help-block">Fecha es requerido</span>
+						
+							<div class="form-group customDatePickers col-sm-6">
+								<div class="input-group date" id="beginDate" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+									<label for="beginDate" class="control-label">Fecha de recogida</label>
+									<input class="form-control" size="16" type="text" name="beginDate" placeholder="YYYY-MM-DD" ng-model="vm.search.beginDate" readonly required ng-change="checkEndDate()">
+									<span class="input-group-addon customAddonSize"><span class="glyphicon glyphicon-calendar"></span></span>
+		                        </div>
 	                        </div>
 	
 							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.officeOriginId.$dirty && form.officeOriginId.$error.required }">
@@ -42,10 +45,14 @@
 	                    </div>
 	                    
 	                    <div class="row" style="padding: 0 10px 0 10px;">
-	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.endDate.$dirty && form.endDate.$error.required }">
-	                            <label for="endDate" class="control-label">Fecha de entrega</label>
-	                            <input type="text" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="endDate" class="form-control" placeholder="YYYY-MM-DD" ng-model="vm.search.endDate" required />
-								<span ng-show="form.endDate.$dirty && form.endDate.$error.required" class="help-block">Fecha es requerido</span>
+	                    
+	                    	<div class="form-group customDatePickers col-sm-6">
+								<div class="input-group date" id="endDate" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+									<label for="endDate" class="control-label">Fecha de entrega</label>
+									<input class="form-control" size="16" type="text" name="endDate" placeholder="YYYY-MM-DD" ng-model="vm.search.endDate" readonly required ng-change="checkEndDate()">
+									<span class="input-group-addon customAddonSize"><span class="glyphicon glyphicon-calendar"></span></span>
+		                        </div>
+		                        <span ng-show="endDateError" class="help-block" style="color: red">Fecha de entrega debe ser posterior a la de recogida</span>
 	                        </div>
 	
 							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.officeEndId.$dirty && form.officeEndId.$error.required }">
@@ -61,11 +68,11 @@
 	                        </div>
 	                    </div>
 	                    
-	                    <br/>
+	                    <br/><br/>
 	                    
 	                    <!-- Buttons -->
                         <div class="form-group text-right" style="margin-right: 15px;">
-                            <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Buscar</button>
+                            <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Buscar ahora</button>
                         </div>
 		        	</form>
 					

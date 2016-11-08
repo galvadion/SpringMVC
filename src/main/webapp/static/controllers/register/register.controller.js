@@ -10,6 +10,31 @@
         var vm = this;
         vm.register = register;
 
+        var localDate = new Date();
+        localDate = (localDate.getFullYear()-18) + '-' + (localDate.getMonth() + 1) + '-' +  localDate.getDate();
+        
+        $('#birthDate').datetimepicker({
+        	language:  'es',
+            weekStart: 1,
+        	autoclose: 1,
+        	todayHighlight: 1,
+        	startView: 2,
+        	minView: 2,
+        	forceParse: 0,
+        	endDate: localDate
+        });
+        
+        $('#licenseExpirationDate').datetimepicker({
+        	language:  'es',
+            weekStart: 1,
+        	autoclose: 1,
+        	todayHighlight: 1,
+        	startView: 2,
+        	minView: 2,
+        	forceParse: 0
+        });
+
+        
         NProgress.start();
         (function initController() {
             AuthenticationService.ClearCredentials();
@@ -32,31 +57,6 @@
 	            NProgress.done();
 	        });
         }
-        
-        $scope.checkBirthDateErr = function(varDate) {
-        	var localDate = new Date();
-        	localDate = (localDate.getFullYear() - 18) + '-' + (localDate.getMonth() + 1) + '-' +  localDate.getDate();
-        	console.log(localDate);
-        	if(Date.parse(localDate) <= Date.parse(varDate)){
-        		$scope.birthDateError = true;
-        	}
-        	else{
-        		$scope.birthDateError = false;
-        	}
-        	
-        };
-        
-        $scope.checkLicenseExpirationDateErr = function(varDate) {
-        	var localDate = new Date();
-        	localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1) + '-' +  localDate.getDate();
-        	if(Date.parse(localDate) > Date.parse(varDate)){
-        		$scope.licenseExpirationDateError = true;
-        	}
-        	else{
-        		$scope.licenseExpirationDateError = false;
-        	}
-        	
-        };
         
     }
 

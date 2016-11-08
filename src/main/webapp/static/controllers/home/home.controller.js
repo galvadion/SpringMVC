@@ -14,6 +14,28 @@
         vm.search = {};
         vm.searchResult = [];
         
+        var localDate = new Date();
+    	localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1) + '-' +  localDate.getDate();
+        $('.date').datetimepicker({
+        	language:  'es',
+            weekStart: 1,
+        	autoclose: 1,
+        	todayHighlight: 1,
+        	startView: 2,
+        	minView: 2,
+        	forceParse: 0,
+        	startDate: localDate
+        });
+        
+        $scope.checkEndDate = function(varDate) {
+        	if(Date.parse(vm.search.beginDate) > Date.parse(vm.search.endDate)){
+        		$scope.endDateError = true;
+        	}
+        	else{
+        		$scope.endDateError = false;
+        	}
+        };
+        
         $scope.map = {
         		center: { 
         			latitude: -34.901113,
