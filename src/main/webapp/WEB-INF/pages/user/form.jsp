@@ -85,14 +85,14 @@
 
 										<div class="form-group col-sm-6" ng-class="{ 'has-error': form.birthDate.$dirty && form.birthDate.$error.required }">
 											<label for="form.birthDate.$dirty">* Fecha de Nacimiento</label>
-							                <input type="text" name="birthDate" id="Text1" class="form-control" placeholder="Nacimiento DD/MM/YYYY" ng-model="vm.user.birthDate" ng-readonly="vm.edit" required />
+							                <input type="text" name="birthDate" id="Text1" class="form-control" placeholder="Nacimiento DD-MM-YYYY" ng-model="vm.user.birthDate" ng-readonly="vm.edit" required />
 							                <span ng-show="form.birthDate.$dirty && form.birthDate.$error.required" class="help-block">Fecha de nacimiento es requerido</span>
 							            </div>
 							            
 							            
 							            <div class="form-group col-sm-6" ng-class="{ 'has-error': form.licenseExpirationDate.$dirty && form.licenseExpirationDate.$error.required }">
 							                <label for="form.licenseExpirationDate.$dirty">* Vencimiento Licencia</label>
-							                <input type="text" name="licenseExpirationDate" id="Text1" class="form-control" placeholder="Vencimiento licencia DD/MM/YYYY" ng-model="vm.user.licenseExpirationDate" ng-readonly="vm.edit" required />
+							                <input type="text" name="licenseExpirationDate" id="Text1" class="form-control" placeholder="Vencimiento licencia DD-MM-YYYY" ng-model="vm.user.licenseExpirationDate" ng-readonly="vm.edit" required />
 							                <span ng-show="form.licenseExpirationDate.$dirty && form.licenseExpirationDate.$error.required" class="help-block">Vencimiento de licencia es requerido</span>
 							            </div>
 										
