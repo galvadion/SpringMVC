@@ -3,6 +3,7 @@ package com.services;
 import java.util.List;
 import java.util.Map;
 
+import com.models.PayPalTransaction;
 import com.models.TransactionItem;
 
 public interface PayPalService  {
@@ -13,4 +14,6 @@ public interface PayPalService  {
 	 * @throws Exception 
 	 */
 	Map<String, String> beginTransaction(List<TransactionItem> items) throws Exception;
+	
+	PayPalTransaction getTransactionDetails(String token) throws Exception;
 }

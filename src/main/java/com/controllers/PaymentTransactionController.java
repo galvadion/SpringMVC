@@ -14,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.models.PayPalTransaction;
 import com.models.TransactionItem;
 import com.services.PayPalService;
 
@@ -35,17 +37,6 @@ public class PaymentTransactionController {
 
 		// El metodo debe recibir una lista TransactionItems, validar su contenido y luego enviarlo al paypalService
 		try{
-			// HARDCODED *************************
-
-//			TransactionItem item = new TransactionItem();
-//			item.setAmount("12450.50");
-//			item.setName("Alquiler BMW Z4 x 1 semana");
-//			item.setQuantity(2);
-//			
-//			List<TransactionItem> itemsList = new ArrayList<TransactionItem>();
-//			itemsList.add(item);
-
-			// *************************************
 			
 			if(itemsList == null){
 				throw new Exception("Items list from client is empty.");
@@ -81,9 +72,8 @@ public class PaymentTransactionController {
 		}
 		catch(Exception ex){
 			log.error(ex.getMessage());
-			map.put("status", "500");
 			map.put("message", "An error has ocurred");
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(map);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
 
@@ -91,6 +81,22 @@ public class PaymentTransactionController {
 	public ModelAndView getExamplePage(){
 		ModelAndView view = new ModelAndView("payment/example");
 		return view;
+	}
+	
+	@RequestMapping(value="/accept-payment", method=RequestMethod.GET)
+	public ModelAndView acceptPayment(@RequestParam("token") String token, @RequestParam("PayerID") String PayerID) throws Exception{
+		
+		try{
+			PayPalTransaction transaction = paypalService.getTransactionDetails(token);
+			ModelAndView view = new ModelAndView("payment/details");
+			view.addObject(transaction);
+			
+			return view;
+		}
+		catch(Exception ex){
+			log.error(ex.getMessage());
+			throw ex;
+		}
 	}
 	
 	private void validateItemList(List<TransactionItem> listItem) throws Exception{

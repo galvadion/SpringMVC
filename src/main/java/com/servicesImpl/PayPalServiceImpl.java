@@ -11,9 +11,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+import com.models.PayPalTransaction;
 import com.models.TransactionItem;
 import com.services.PayPalService;
 
+import urn.ebay.api.PayPalAPI.GetExpressCheckoutDetailsReq;
+import urn.ebay.api.PayPalAPI.GetExpressCheckoutDetailsRequestType;
+import urn.ebay.api.PayPalAPI.GetExpressCheckoutDetailsResponseType;
 import urn.ebay.api.PayPalAPI.PayPalAPIInterfaceServiceService;
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutReq;
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutRequestType;
@@ -22,6 +26,9 @@ import urn.ebay.apis.CoreComponentTypes.BasicAmountType;
 import urn.ebay.apis.eBLBaseComponents.AckCodeType;
 import urn.ebay.apis.eBLBaseComponents.CurrencyCodeType;
 import urn.ebay.apis.eBLBaseComponents.ErrorType;
+import urn.ebay.apis.eBLBaseComponents.GetExpressCheckoutDetailsResponseDetailsType;
+import urn.ebay.apis.eBLBaseComponents.PayPalUserStatusCodeType;
+import urn.ebay.apis.eBLBaseComponents.PayerInfoType;
 import urn.ebay.apis.eBLBaseComponents.PaymentActionCodeType;
 import urn.ebay.apis.eBLBaseComponents.PaymentDetailsItemType;
 import urn.ebay.apis.eBLBaseComponents.PaymentDetailsType;
@@ -33,10 +40,11 @@ public class PayPalServiceImpl implements PayPalService {
 
 	@Autowired
 	Environment env;
-	
+
 	static Logger log = Logger.getLogger(PayPalServiceImpl.class.getName());
 
 	public Map<String, String> beginTransaction(List<TransactionItem> items) throws Exception{
+
 		try{
 
 			PaymentDetailsType paymentDetails = new PaymentDetailsType();
@@ -121,5 +129,93 @@ public class PayPalServiceImpl implements PayPalService {
 			log.error(ex);
 			throw new Exception(ex.getMessage());
 		}
+	}
+
+	public PayPalTransaction getTransactionDetails(String token) throws Exception{
+
+		try{
+			GetExpressCheckoutDetailsRequestType getExpressCheckoutDetailsRequest = new GetExpressCheckoutDetailsRequestType(token);
+			getExpressCheckoutDetailsRequest.setVersion("204.0");
+
+			GetExpressCheckoutDetailsReq getExpressCheckoutDetailsReq = new GetExpressCheckoutDetailsReq();
+			getExpressCheckoutDetailsReq.setGetExpressCheckoutDetailsRequest(getExpressCheckoutDetailsRequest);
+
+			Map<String, String> sdkConfig = new HashMap<String, String>();
+			sdkConfig.put("mode", "sandbox");
+			sdkConfig.put("acct1.UserName", env.getProperty("PayPalUser"));
+			sdkConfig.put("acct1.Password", env.getProperty("PayPalPass"));
+			sdkConfig.put("acct1.Signature", env.getProperty("PayPalSignature"));
+			PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(sdkConfig);
+			GetExpressCheckoutDetailsResponseType getExpressCheckoutDetailsResponse = service.getExpressCheckoutDetails(getExpressCheckoutDetailsReq);
+			/***
+			 * For details of GetExpressCheckoutDetails API Operation search in: 
+			 * https://developer.paypal.com/docs/classic/api/merchant/GetExpressCheckoutDetails_API_Operation_SOAP
+			 */
+
+			AckCodeType ack = getExpressCheckoutDetailsResponse.getAck();
+			PayPalTransaction transaction = new PayPalTransaction();
+			switch(ack.name()){
+
+			case "SUCCESS": 
+
+				GetExpressCheckoutDetailsResponseDetailsType checkoutDetailsResponse = getExpressCheckoutDetailsResponse.getGetExpressCheckoutDetailsResponseDetails();
+				PayerInfoType payer = checkoutDetailsResponse.getPayerInfo();
+
+				transaction.setAck("success");
+				transaction.setPayerMarketingEmail(checkoutDetailsResponse.getBuyerMarketingEmail());
+				transaction.setCheckoutStatus(checkoutDetailsResponse.getCheckoutStatus());
+				transaction.setInvoiceID(checkoutDetailsResponse.getInvoiceID());
+				transaction.setContactPhone(checkoutDetailsResponse.getContactPhone());
+				transaction.setPayerFirsName(payer.getPayerName().getFirstName());
+				transaction.setPayerLastName(payer.getPayerName().getLastName());
+				transaction.setPayerPayPalID(payer.getPayerID());
+				transaction.setPayerStatus(payer.getPayerStatus().toString());
+
+				List<PaymentDetailsType> detailsList = checkoutDetailsResponse.getPaymentDetails();
+
+				// For loop only would apply for parallel payments. Change if required
+				for(PaymentDetailsType detail : detailsList){
+
+					transaction.setItemTotal(detail.getItemTotal().getValue());;
+					transaction.setOrderTotal(detail.getOrderTotal().getValue());
+
+					List<PaymentDetailsItemType> detailsItemList = detail.getPaymentDetailsItem();
+					List<TransactionItem> transactionItems = new ArrayList<TransactionItem>();
+
+					for(PaymentDetailsItemType detailsItemType : detailsItemList){
+						TransactionItem item = new TransactionItem();
+						item.setName(detailsItemType.getName());
+						item.setAmount(detailsItemType.getAmount().getValue());
+						item.setQuantity(detailsItemType.getQuantity());
+						transactionItems.add(item);
+					}
+					transaction.setItemsList(transactionItems);
+				}
+
+				return transaction;
+			case "FAILURE":
+				transaction.setAck("failure");
+				String errors = "";
+				for(ErrorType errorList : getExpressCheckoutDetailsResponse.getErrors()){
+					if(errors.equals("")){
+						errors = errorList.getLongMessage();
+					}
+					else{
+						errors += " - " + errorList.getLongMessage();
+					}
+				}
+				transaction.setErrorMessage(errors);
+				return transaction;
+
+			default :
+				throw new Exception("An error has occurred");
+			}
+
+		}
+		catch(Exception ex){
+			log.error(ex);
+			throw new Exception(ex.getMessage());
+		}
+
 	}
 }
