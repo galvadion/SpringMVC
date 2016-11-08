@@ -3,9 +3,9 @@
 <section id="content">
 
 
-    <div class="page page-dashboard">
+	<div class="page page-dashboard">
 
-        <div class="row">
+		<div class="row">
 			<div class="col-md-12">
 				<section class="tile text-center slyder">
 					
@@ -52,139 +52,149 @@
 		<div class="row">
 			<div class="col-md-6">
 				<section class="tile" style="height: 400px !important;">
-					<br/>
+					<br />
 					<h3 class="text-center">Encuentra tu vehículo</h3>
-					<br/><br/>
+					<br /> <br />
 					<form name='form' class="" role="form" ng-submit="searchModels()">
-						
+
 						<div class="row" style="padding: 0 10px 0 10px;">
-						
+
 							<div class="form-group customDatePickers col-sm-6">
-								<div class="input-group date" id="beginDate" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-									<label for="beginDate" class="control-label">Fecha de recogida</label>
-									<input class="form-control" size="16" type="text" name="beginDate" placeholder="YYYY-MM-DD" ng-model="vm.search.beginDate" readonly required ng-change="checkEndDate()">
-									<span class="input-group-addon customAddonSize"><span class="glyphicon glyphicon-calendar"></span></span>
-		                        </div>
-	                        </div>
-	
-							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.officeOriginId.$dirty && form.officeOriginId.$error.required }">
-	                            <label for="officeOriginId" class="control-label">Sucursal de recogida</label>
-	                            <select ng-model="vm.search.officeOriginId" name="officeOriginId" id="officeOriginId" class="form-control" required>
-									<option value=""> Seleccione sucursal</option> 
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-								</select>
-								<span ng-show="form.officeOriginId.$dirty && form.officeOriginId.$error.required" class="help-block">Sucursal es requerido</span>
-	                        </div>
-	                    </div>
-	                    
-	                    <div class="row" style="padding: 0 10px 0 10px;">
-	                    
-	                    	<div class="form-group customDatePickers col-sm-6">
-								<div class="input-group date" id="endDate" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-									<label for="endDate" class="control-label">Fecha de entrega</label>
-									<input class="form-control" size="16" type="text" name="endDate" placeholder="YYYY-MM-DD" ng-model="vm.search.endDate" readonly required ng-change="checkEndDate()">
-									<span class="input-group-addon customAddonSize"><span class="glyphicon glyphicon-calendar"></span></span>
-		                        </div>
-		                        <span ng-show="endDateError" class="help-block" style="color: red">Fecha de entrega debe ser posterior a la de recogida</span>
-	                        </div>
-	
-							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.officeEndId.$dirty && form.officeEndId.$error.required }">
-	                            <label for="officeEndId" class="control-label">Sucursal de entrega</label>
-	                            <select ng-model="vm.search.officeEndId" name="officeEndId" id="officeEndId" class="form-control" required>
-									<option value=""> Seleccione sucursal</option> 
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-								</select>
-								<span ng-show="form.officeEndId.$dirty && form.officeEndId.$error.required" class="help-block">Sucursal es requerido</span>
-	                        </div>
-	                    </div>
-	                    
-	                    <br/><br/>
-	                    
-	                    <!-- Buttons -->
-                        <div class="form-group text-right" style="margin-right: 15px;">
-                            <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Buscar ahora</button>
-                        </div>
-		        	</form>
-					
+								<div class="input-group date" id="beginDate" data-date=""
+									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
+									data-link-format="yyyy-mm-dd">
+									<label for="beginDate" class="control-label">Fecha de
+										recogida</label> <input class="form-control" size="16" type="text"
+										name="beginDate" placeholder="YYYY-MM-DD"
+										ng-model="vm.search.beginDate" readonly required
+										ng-change="checkEndDate()"> <span
+										class="input-group-addon customAddonSize"><span
+										class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+
+							<div class="form-group col-sm-6" class="form-group"
+								ng-class="{ 'has-error': form.officeOriginId.$dirty && form.officeOriginId.$error.required }">
+								<label for="officeOriginId" class="control-label">Sucursal
+									de recogida</label> <select ng-model="vm.search.officeOriginId"
+									name="officeOriginId" id="officeOriginId" class="form-control"
+									required>
+									<option value="">Seleccione sucursal</option>
+									<option ng-repeat="(key, value) in vm.allOffices"
+										value="{{value.id}}">{{value.name}} - {{value.city}}</option>
+								</select> <span
+									ng-show="form.officeOriginId.$dirty && form.officeOriginId.$error.required"
+									class="help-block">Sucursal es requerido</span>
+							</div>
+						</div>
+
+						<div class="row" style="padding: 0 10px 0 10px;">
+
+							<div class="form-group customDatePickers col-sm-6">
+								<div class="input-group date" id="endDate" data-date=""
+									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
+									data-link-format="yyyy-mm-dd">
+									<label for="endDate" class="control-label">Fecha de
+										entrega</label> <input class="form-control" size="16" type="text"
+										name="endDate" placeholder="YYYY-MM-DD"
+										ng-model="vm.search.endDate" readonly required
+										ng-change="checkEndDate()"> <span
+										class="input-group-addon customAddonSize"><span
+										class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+								<span ng-show="endDateError" class="help-block"
+									style="color: red">Fecha de entrega debe ser posterior a
+									la de recogida</span>
+							</div>
+
+							<div class="form-group col-sm-6" class="form-group"
+								ng-class="{ 'has-error': form.officeEndId.$dirty && form.officeEndId.$error.required }">
+								<label for="officeEndId" class="control-label">Sucursal
+									de entrega</label> <select ng-model="vm.search.officeEndId"
+									name="officeEndId" id="officeEndId" class="form-control"
+									required>
+									<option value="">Seleccione sucursal</option>
+									<option ng-repeat="(key, value) in vm.allOffices"
+										value="{{value.id}}">{{value.name}} - {{value.city}}</option>
+								</select> <span
+									ng-show="form.officeEndId.$dirty && form.officeEndId.$error.required"
+									class="help-block">Sucursal es requerido</span>
+							</div>
+						</div>
+
+						<br /> <br />
+
+						<!-- Buttons -->
+						<div class="form-group text-right" style="margin-right: 15px;">
+							<button type="submit" id="submit" ng-disabled="form.$invalid"
+								class="btn  btn-orange">Buscar ahora</button>
+						</div>
+					</form>
+
 				</section>
 			</div>
-			
+
 			<!--div class="col-md-1"></div-->
-			
+
 			<div class="col-md-6">
 				<section class="tile text-center">
-					<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
-                    	<ui-gmap-markers models="markers" coords="'self'" icon="'icon'">
-					</ui-gmap-google-map>
+					<ui-gmap-google-map center="map.center" zoom="map.zoom"
+						draggable="true" options="options"> 
+						<ui-gmap-marker
+						ng-repeat="m in map.markers" coords="m.coords" icon="m.icon"
+						idkey="m.id" title="m.title" click="onClick">
+					<ui-gmap-window show="show">
+					<div>{{m.title}}</div>
+					</ui-gmap-window> </ui-gmap-marker> </ui-gmap-google-map>
 				</section>
 			</div>
 		</div>
 
-		<br/>
+		<br />
 
-        <div class="row">
-        	<div class="col-md-12">
-            	
-            	<section class="tile">
-            		
-            		<!-- tile header -->
-                    <div class="tile-header dvd dvd-btm">
-                        <h1 class="custom-font"><strong>Listado </strong>de promociones</h1>
-                    </div>
-                    <!-- /tile header -->
+		<div class="row">
+			<div class="col-md-12">
 
-                    <!-- tile body -->
-                    <div class="tile-body table-custom">
-                    	
+				<section class="tile">
+
+					<!-- tile header -->
+					<div class="tile-header dvd dvd-btm">
+						<h1 class="custom-font">
+							<strong>Listado </strong>de promociones
+						</h1>
+					</div>
+					<!-- /tile header -->
+
+					<!-- tile body -->
+					<div class="tile-body table-custom">
+
 						<div class="table-responsive">
-            				
-            				<table class="table mb-0 table-custom" id="promoList">
-                                <tbody>
-                                    <tr ng-repeat="(key, value) in vm.allPromos">
-                                    	<td>
-                                            {{value.name}}
-                                        </td>
-                                        <td>
-                                            {{value.picture}}
-                                        </td>
-                                        <td>
-                                            {{value.fuel.fuelType}}
-                                        </td>
-                                        <td>
-                                            {{value.year}}
-                                        </td>
-                                        <td>
-                                            {{value.passangers}}
-                                        </td>
-                                        <td>
-                                            {{value.luggage}}
-                                        </td>
-                                        <td>
-                                            {{value.cylinders}}
-                                        </td>
-                                        <td>
-                                            {{value.airConditioner}}
-                                        </td>
-                                   	</tr>
-                                </tbody>
-                            </table>
-                         </div>
 
-            		</div>
-            	
-            	</section>
-            </div>
-		<!-- /row -->
-		
-        </div>
+							<table class="table mb-0 table-custom" id="promoList">
+								<tbody>
+									<tr ng-repeat="(key, value) in vm.allPromos">
+										<td>{{value.name}}</td>
+										<td>{{value.picture}}</td>
+										<td>{{value.fuel.fuelType}}</td>
+										<td>{{value.year}}</td>
+										<td>{{value.passangers}}</td>
+										<td>{{value.luggage}}</td>
+										<td>{{value.cylinders}}</td>
+										<td>{{value.airConditioner}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+
+				</section>
+			</div>
+			<!-- /row -->
+
+		</div>
 
 
-    </div>
+	</div>
 
 </section>

@@ -1,87 +1,108 @@
-﻿(function () {
-    'use strict';
+(function() {
+	'use strict';
 
-    angular
-        .module('app')
-        .controller('HomeController', HomeController);
+	angular.module('app').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','ModelService'];
-    
-    function HomeController($location, UserService, $rootScope, $scope, $timeout, SessionService, ModelService) {
+	HomeController.$inject = [ '$location', 'UserService', '$rootScope',
+			'$scope', '$timeout', 'SessionService', 'BranchofficeService' ];
 
-        var vm = this;
-        vm.roladmin = $rootScope.roladmin;
-        vm.search = {};
-        vm.searchResult = [];
-        
-        var localDate = new Date();
-    	localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1) + '-' +  localDate.getDate();
-        $('.date').datetimepicker({
-        	language:  'es',
-            weekStart: 1,
-        	autoclose: 1,
-        	todayHighlight: 1,
-        	startView: 2,
-        	minView: 2,
-        	forceParse: 0,
-        	startDate: localDate
-        });
-        
-        $scope.checkEndDate = function(varDate) {
-        	if(Date.parse(vm.search.beginDate) > Date.parse(vm.search.endDate)){
-        		$scope.endDateError = true;
-        	}
-        	else{
-        		$scope.endDateError = false;
-        	}
-        };
-        
-        $scope.map = {
-        		center: { 
-        			latitude: -34.901113,
-        			longitude: -56.164531
-        		},
-        		zoom: 14,
-        };
-        
-        $scope.options = {
-        		scrollwheel: false
-	    };
+	function HomeController($location, UserService, $rootScope, $scope,
+			$timeout, SessionService, BranchofficeService) {
 
-        $scope.markers = [];
-        $scope.markers.push({
-        	id: 1,
-    		latitude: -34.901113,
-            longitude: -56.164531,
-            title: 'Sucursal 1'
-        });
-        $scope.markers.push({
-        	id: 2,
-    		latitude: -34.904113,
-            longitude: -56.160531,
-            title: 'Sucursal 2'
-        });
+		var vm = this;
+		vm.roladmin = $rootScope.roladmin;
+		vm.allOffices = [];
+		vm.search = {};
+		vm.searchResult = [];
+
+		var localDate = new Date();
+		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
+				+ '-' + localDate.getDate();
+		$('.date').datetimepicker({
+			language : 'es',
+			weekStart : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0,
+			startDate : localDate
+		});
+
+		$scope.checkEndDate = function(varDate) {
+			if (Date.parse(vm.search.beginDate) > Date.parse(vm.search.endDate)) {
+				$scope.endDateError = true;
+			} else {
+				$scope.endDateError = false;
+			}
+		};
+
+		$scope.map = {
+			center : {
+				latitude : -32.75948505325886,
+				longitude : -56.165714263916016
+			},
+			zoom : 6,
+			markers : [],
+		};
+
+		$scope.options = {
+			scrollwheel : false
+		};
 
 
-        $scope.searchModels = function() {
-        	NProgress.start();
+		$scope.searchModels = function() {
+			NProgress.start();
         	$location.path("/search/origin={{vm.search.officeOriginId}}&destination={{vm.search.officeEndId}}&from={{vm.search.beginDate}}&to={{vm.search.endDate}}");
+		};
+
+
+		
+        $scope.onClick = function(marker, eventName, model) {
+            console.log("Clicked!");
+            model.show = !model.show;
         };
-        
-        initController();
 
-        function initController() {
-            NProgress.start();
-            
-            getAllOffers();
-            
-            NProgress.done();
-        }
-        
-        function getAllOffers(){
-        	
-        }
+		$scope.closeClick = function() {
+			$scope.windowOptions.visible = false;
+		};
 
-    }
+		initController();
+
+		function initController() {
+			NProgress.start();
+
+			getAllOffers();
+			getAllOffices();
+			NProgress.done();
+		}
+
+		function getAllOffers() {
+
+		}
+
+		function getAllOffices() {
+			BranchofficeService.GetAllBranchoffices().then(function(response) {
+				if (response.success) {
+					vm.allOffices = response.data;
+					angular.forEach(vm.allOffices, function(value, key) {
+						$scope.map.markers.push({
+							id : value.id,
+							coords : {
+								latitude : value.location.latitude,
+								longitude : value.location.longitude
+							},
+							title : value.name
+						});
+					});
+					console.log($scope.map.markers);
+					$scope.$apply();
+				} else {
+					vm.allOffices = [];
+				}
+				NProgress.done();
+			});
+		}
+	}
 
 })();

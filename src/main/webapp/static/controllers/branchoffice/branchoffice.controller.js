@@ -35,8 +35,8 @@
                                 longitude: lon
                             }
                         };
-                        vm.branchoffice.location.coordinateX=lon;
-                        vm.branchoffice.location.coordinateY=lat;
+                        vm.branchoffice.location.longitude=lon;
+                        vm.branchoffice.location.latitude=lat;
                     /*    document.getElementById('coordinateX').value=lon;
                         document.getElementById('coordinateY').value=lat;*/
                         $scope.map.markers.pop();
