@@ -41,7 +41,6 @@
                         document.getElementById('coordinateY').value=lat;*/
                         $scope.map.markers.pop();
                         $scope.map.markers.push(marker);
-                        console.log($scope.map.markers);
                         $scope.$apply();
         	        }
         	     }
@@ -146,7 +145,7 @@
         	});
         }
         
-        $scope.saveBranchOffice = function() {console.log("hola");
+        $scope.saveBranchOffice = function() {
         	NProgress.start();
         	var mgsSuccess = "";
         	var mgsError = "";
@@ -165,8 +164,7 @@
         		NProgress.start();
         		if(response.success){
         			getAllBranchoffices();
-        			$rootScope.doFlashMessage(mgsSuccess,'','success');
-        			$scope.cleanInput();
+        			$rootScope.doFlashMessage(mgsSuccess,'/branchoffice','success');
         		}
         		else{
         			$rootScope.doFlashMessage(mgsError,'','error');

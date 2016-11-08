@@ -79,12 +79,7 @@
         }
         
         function searchModels() {
-        	ModelService.SearchModels(vm.search).then(function (response) {
-        		if(response){
-        			vm.searchResult = response.data;
-        			console.log(vm.searchResult);
-        		}
-        	});
+        	
         };
         
         function getAllBookeds(){

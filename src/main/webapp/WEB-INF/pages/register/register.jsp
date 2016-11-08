@@ -62,15 +62,15 @@
 		            
 		            
 		            <div class="form-group">
-						<div class="input-group date" id="birthDate" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-							<input class="form-control underline-input" size="16" type="text" name="birthDate" placeholder="Fecha de nacimiento YYYY-MM-DD" ng-model="vm.user.birthDate" readonly required>
+						<div class="input-group date" id="birthDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
+							<input class="form-control underline-input" size="16" type="text" name="birthDate" placeholder="Fecha de nacimiento DD/MM/YYYY" ng-model="vm.user.birthDate" readonly required>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                        </div>
                     </div>
 		            
 		            <div class="form-group">
-						<div class="input-group date" id="licenseExpirationDate" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-							<input class="form-control underline-input" size="16" type="text" name="licenseExpirationDate" placeholder="Fecha de vencimiento de licencia YYYY-MM-DD" ng-model="vm.user.licenseExpirationDate" readonly required>
+						<div class="input-group date" id="licenseExpirationDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
+							<input class="form-control underline-input" size="16" type="text" name="licenseExpirationDate" placeholder="Fecha de vencimiento de licencia DD/MM/YYYY" ng-model="vm.user.licenseExpirationDate" readonly required>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                        </div>
                     </div>

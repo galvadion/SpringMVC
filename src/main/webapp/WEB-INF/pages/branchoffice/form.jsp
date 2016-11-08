@@ -111,14 +111,14 @@
 							</div>
 					</div>
 
+					<br/>
 					<!-- Buttons -->
 
-					<div class="form-group text-right">
+					<div class="form-group text-right" style="margin-right: 15px;">
 						<a href="#/branchoffice" class="btn btn-lightred">Cancelar</a>
-						<button type="" id="submit" ng-disabled="form.$invalid"
-							class="btn btn-orange" ng-click="saveBranchOffice()">Guardar</button>
+						<button type="" id="submit" ng-disabled="form.$invalid" class="btn btn-orange" ng-click="saveBranchOffice()">Guardar</button>
 					</div>
-
+					<br/>
 					</form>
 
 				</section>
