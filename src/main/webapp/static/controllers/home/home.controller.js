@@ -16,8 +16,7 @@
 		vm.searchResult = [];
 
 		var localDate = new Date();
-		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
-				+ '-' + localDate.getDate();
+		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1) + '-' + localDate.getDate();
 		$('.date').datetimepicker({
 			language : 'es',
 			weekStart : 1,
@@ -53,13 +52,12 @@
 
 		$scope.searchModels = function() {
 			NProgress.start();
-        	$location.path("/search/origin={{vm.search.officeOriginId}}&destination={{vm.search.officeEndId}}&from={{vm.search.beginDate}}&to={{vm.search.endDate}}");
+        	$location.path("/search/origin=" + vm.search.officeOriginId + "&destination=" + vm.search.officeEndId + "&from=" + vm.search.beginDate + "&to=" + vm.search.endDate);
 		};
 
 
 		
         $scope.onClick = function(marker, eventName, model) {
-            console.log("Clicked!");
             model.show = !model.show;
         };
 
@@ -84,19 +82,20 @@
 		function getAllOffices() {
 			BranchofficeService.GetAllBranchoffices().then(function(response) {
 				if (response.success) {
-					vm.allOffices = response.data;
-					angular.forEach(vm.allOffices, function(value, key) {
-						$scope.map.markers.push({
-							id : value.id,
-							coords : {
-								latitude : value.location.latitude,
-								longitude : value.location.longitude
-							},
-							title : value.name
+					if(response.data.length > 0){
+						vm.allOffices = response.data;
+						angular.forEach(vm.allOffices, function(value, key) {
+							$scope.map.markers.push({
+								id : value.id,
+								coords : {
+									latitude : value.location.latitude,
+									longitude : value.location.longitude
+								},
+								title : value.name
+							});
 						});
-					});
-					console.log($scope.map.markers);
-					$scope.$apply();
+						$scope.$apply();
+					}
 				} else {
 					vm.allOffices = [];
 				}

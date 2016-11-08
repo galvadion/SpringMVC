@@ -18215,16 +18215,16 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 
 .carousel-inner div img{
-	/*display: block;
+	display: block;
 	width:100%;
 	max-height: 350px !important;
 	width: auto;
-	height: auto;*/
-	margin: auto;
+	height: auto;
+	/*margin: auto;
 	background-repeat: no-repeat;
 	background-size: cover;
 	width: 95%;
-	max-height: 350px;
+	max-height: 350px;*/
 }
 
 #mapa {
