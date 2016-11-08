@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.entities.Images;
+import com.entities.Image;
 import com.entities.Model;
 import com.services.ImageService;
 import com.services.ModelService;
@@ -60,8 +60,8 @@ public class FileUploadController {
 				stream.write(bytes);
 				stream.close();
 				Model model=modelService.get(Integer.parseInt(id));
-				List<Images> imagesList=model.getImages();
-				Images image=new Images();
+				List<Image> imagesList=model.getImages();
+				Image image=new Image();
 				image.setFileLocation(serverFile.toString());
 				image.setModel(model);
 				imagesList.add(image);

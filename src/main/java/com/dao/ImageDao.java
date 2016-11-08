@@ -1,7 +1,7 @@
 package com.dao;
 
-import com.entities.Images;
+import com.entities.Image;
 
-public interface ImageDao extends GenericDao<Images, Integer> {
+public interface ImageDao extends GenericDao<Image, Integer> {
 
 }

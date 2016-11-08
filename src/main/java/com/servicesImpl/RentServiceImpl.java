@@ -36,7 +36,6 @@ public class RentServiceImpl extends GenericServiceImpl<Rent, Integer> implement
 		Rent rent=new Rent();
 		rent.setDeliveryDate(LocalDate.now());
 		rent.setBooked(book);
-		rent.setClient(book.getClient());
 		rentDao.saveOrUpdate(rent);
 		// TODO Auto-generated method stub
 		

@@ -13,6 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.configuration.LocalTimeDeserializer;
+import com.configuration.LocalTimeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 @Table(name = "branch_offices")
 public class BranchOffice implements Serializable{
@@ -37,10 +42,12 @@ public class BranchOffice implements Serializable{
 	private String address;
 	
 	private boolean closed=false;
-	
+	@JsonDeserialize(using = LocalTimeDeserializer.class)  
+	@JsonSerialize(using = LocalTimeSerializer.class)  
 	@Column(name= "aperture_hour")
 	private LocalTime apertureHour;
-	
+	@JsonDeserialize(using = LocalTimeDeserializer.class)  
+	@JsonSerialize(using = LocalTimeSerializer.class)  
 	@Column(name= "closing_hour")
 	private LocalTime closingHour;
 	

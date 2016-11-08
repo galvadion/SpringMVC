@@ -73,7 +73,7 @@ public class Model implements Serializable {
 	private List<Vehicle> vehicles;
 	
 	@OneToMany(mappedBy = "model")
-	private List<Images> images;
+	private List<Image> image;
 
 	private String transmission;
 
@@ -217,12 +217,12 @@ public class Model implements Serializable {
 		this.unavailable = unavailable;
 	}
 
-	public List<Images> getImages() {
-		return images;
+	public List<Image> getImages() {
+		return image;
 	}
 
-	public void setImages(List<Images> images) {
-		this.images = images;
+	public void setImages(List<Image> image) {
+		this.image = image;
 	}
 
 	public static long getSerialversionuid() {

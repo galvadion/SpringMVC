@@ -1,7 +1,7 @@
 package com.services;
 
-import com.entities.Images;
+import com.entities.Image;
 
-public interface ImageService extends GenericService<Images, Integer> {
+public interface ImageService extends GenericService<Image, Integer> {
 	
 }

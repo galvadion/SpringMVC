@@ -12,6 +12,7 @@
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
         vm.branchoffice = {};
+        vm.branchoffice.location= {};
         vm.auxBranchoffice = {};
         vm.allBranchoffices = [];
         vm.location = "";
@@ -22,11 +23,57 @@
         			longitude: -56.164531
         		},
         		zoom: 14,
+        		markers: [],
+        	    events: {
+        	        click: function(map, eventName, originalEventArgs) {
+        	        	var e = originalEventArgs[0];
+                        var lat = e.latLng.lat(),lon = e.latLng.lng();
+                        var marker = {
+                            id: Date.now(),
+                            coords: {
+                                latitude: lat,
+                                longitude: lon
+                            }
+                        };
+                        vm.branchoffice.location.coordinateX=lon;
+                        vm.branchoffice.location.coordinateY=lat;
+                    /*    document.getElementById('coordinateX').value=lon;
+                        document.getElementById('coordinateY').value=lat;*/
+                        $scope.map.markers.pop();
+                        $scope.map.markers.push(marker);
+                        console.log($scope.map.markers);
+                        $scope.$apply();
+        	        }
+        	     }
         };
         
         $scope.options = {
         		scrollwheel: false
 	    };
+        
+       /* google.maps.event.addListener($scope.map, 'click', function( event ){
+            
+            document.getElementById('coordinateX').value=event.latLng.lat();
+            document.getElementById('coordinateY').value=event.latLng.lng();
+            var marcador = new google.maps.LatLng(event.latLng.lat(),event.latLng.lng());
+            var marker = new google.maps.Marker({
+          position: marcador,
+          draggable:true,
+          animation: google.maps.Animation.DROP,
+          map: map,
+          title: ''
+      });
+      markers.push(marker);
+      if(markers.length==1){
+          markers[0].setMap(map);
+      }else{
+          markers[0].setMap(null);
+          markers.splice(0,1);
+          marker.setMap(map);    
+      }
+      
+            
+        });*/
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -99,19 +146,19 @@
         	});
         }
         
-        $scope.saveBranchoffice = function() {
+        $scope.saveBranchOffice = function() {console.log("hola");
         	NProgress.start();
         	var mgsSuccess = "";
         	var mgsError = "";
         	
         	if(vm.branchoffice.id){
-        		mgsSuccess = "Marca editada con éxito";
-        		mgsError = "Error al editar marca";
+        		mgsSuccess = "Oficina editada con éxito";
+        		mgsError = "Error al editar oficina";
         		
         	}
         	else{
-        		mgsSuccess = "Marca creada con éxito";
-        		mgsError = "Marca ya existente";
+        		mgsSuccess = "Oficina creada con éxito";
+        		mgsError = "Oficina ya existente";
         	}
         	
         	BranchofficeService.InsertBranchoffice(vm.branchoffice).then(function (response) {

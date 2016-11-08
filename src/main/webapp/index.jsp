@@ -35,11 +35,11 @@
         
         <!--Core-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="//code.angularjs.org/1.5.5/angular.js"></script>
-        <script src="//code.angularjs.org/1.5.5/angular-route.js"></script>
-        <script src="//code.angularjs.org/1.5.5/angular-cookies.js"></script>
-        <script src="//code.angularjs.org/1.5.5/angular-aria.js"></script>
-        <script src="//code.angularjs.org/1.5.5/angular-animate.js"></script>
+        <script src="//code.angularjs.org/1.2.1/angular.js"></script>
+        <script src="//code.angularjs.org/1.2.1/angular-route.js"></script>
+        <script src="//code.angularjs.org/1.2.1/angular-cookies.js"></script>
+        <script src="//code.angularjs.org/1.2.1/angular-aria.js"></script>
+        <script src="//code.angularjs.org/1.2.1/angular-animate.js"></script>
         <script type="text/javascript" src="static/app.js"></script>
 
 

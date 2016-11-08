@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.dao.GenericDao;
 import com.dao.ImageDao;
-import com.entities.Images;
+import com.entities.Image;
 import com.services.ImageService;
 
 @Service
-public class ImageServiceImpl extends GenericServiceImpl<Images, Integer> implements ImageService{
+public class ImageServiceImpl extends GenericServiceImpl<Image, Integer> implements ImageService{
 
 	private ImageDao imagesDao;
 	public ImageServiceImpl(){
@@ -21,7 +21,7 @@ public class ImageServiceImpl extends GenericServiceImpl<Images, Integer> implem
 	
     @Autowired
     public ImageServiceImpl(
-            @Qualifier("imageDaoImpl") GenericDao<Images, Integer> genericDao) {
+            @Qualifier("imageDaoImpl") GenericDao<Image, Integer> genericDao) {
         super(genericDao);
         this.imagesDao = (ImageDao) genericDao;
     }
