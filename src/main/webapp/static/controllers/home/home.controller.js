@@ -63,20 +63,9 @@
         });
 
 
-        $scope.searchModels = function() {        	
-        	//Pruebas
-        	vm.search.airConditioner = true;
-            vm.search.passangers = 0;
-            vm.search.luggage = 0;
-        	console.log(vm.search);
-        	//
-        	
-        	ModelService.SearchModels(vm.search).then(function (response) {
-        		if(response){
-        			vm.searchResult = response.data;
-        			console.log(vm.searchResult);
-        		}
-        	});
+        $scope.searchModels = function() {
+        	NProgress.start();
+        	$location.path("/search/origin={{vm.search.officeOriginId}}&destination={{vm.search.officeEndId}}&from={{vm.search.beginDate}}&to={{vm.search.endDate}}");
         };
         
         initController();

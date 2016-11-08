@@ -5,14 +5,16 @@
         .module('app')
         .controller('BookedController', BookedController);
 
-    BookedController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','BookedService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
+    BookedController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','BookedService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams'];
     
-    function BookedController($location, UserService, $rootScope, $scope, $timeout, SessionService, BookedService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+    function BookedController($location, UserService, $rootScope, $scope, $timeout, SessionService, BookedService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams) {
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
         vm.booked = {};
         vm.allBookeds = [];
+        vm.search = {};
+        vm.searchResult = [];
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -48,8 +50,42 @@
         
         function initController() {
             NProgress.start();
-            getAllBookeds();
+            
+            vm.location = $location.path().split('/',3);
+            
+            if(vm.location[1] == "search"){
+            	vm.search.officeOriginId = $routeParams.origin;
+            	vm.search.officeEndId = $routeParams.destination;
+            	vm.search.beginDate = $routeParams.from;
+            	vm.search.endDate = $routeParams.to;
+            	vm.search.airConditioner = true;
+                vm.search.passangers = 0;
+                vm.search.luggage = 0;
+            	console.log(vm.search);
+            	searchModels();
+            }
+            else if(vm.location[2] == "edit"){
+        		getBookedById($routeParams.id);
+        	}
+            else if(vm.location[2] == "create"){
+            	vm.user.id = null;
+                vm.user.active = true;
+            }
+            else{
+            	getAllBookeds();
+            }
+            
+            NProgress.done();
         }
+        
+        function searchModels() {
+        	ModelService.SearchModels(vm.search).then(function (response) {
+        		if(response){
+        			vm.searchResult = response.data;
+        			console.log(vm.searchResult);
+        		}
+        	});
+        };
         
         function getAllBookeds(){
         	BookedService.GetAllBookeds().then(function (response) {
@@ -91,16 +127,6 @@
         	});
         };
         
-        $scope.cleanInput = function() {
-        	vm.booked = {};
-        	$scope.form.$setPristine();
-        };
-        
-        $scope.editBooked = function(brand) {
-        	vm.booked = angular.copy(brand);
-        	$scope.scrollTo( "#wrap");
-        };
-        
         $scope.deleteBooked = function(id) {
         	NProgress.start();
         	BookedService.DeleteBooked(id).then(function (response) {
@@ -114,12 +140,6 @@
         		NProgress.done();
         	});
         };
-        
-        $scope.scrollTo = function(element) {
-            $( 'html, body').animate({
-                scrollTop: $(element).offset().top
-            }, 500);
-        }
 
     }
 

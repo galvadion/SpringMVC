@@ -18209,9 +18209,22 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 	content: none !important;
 }
 
-#slyder {
+.slyder {
 	margin-top: -15px;
 	height: 350px;
+}
+
+.carousel-inner div img{
+	/*display: block;
+	width:100%;
+	max-height: 350px !important;
+	width: auto;
+	height: auto;*/
+	margin: auto;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 95%;
+	max-height: 350px;
 }
 
 #mapa {

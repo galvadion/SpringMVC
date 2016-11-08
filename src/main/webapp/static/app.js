@@ -236,6 +236,13 @@
                 title: 'Rent-UY - Editar Reserva',
                 controllerAs: 'vm'
             })
+            
+            .when('/search/origin=:origin&destination=:destination&from=:from&to=:to', {
+                controller: 'BookedController',
+                templateUrl: 'booked/search',
+                title: 'Rent-UY - Búsqueda',
+                controllerAs: 'vm'
+            })
 
             .otherwise({ redirectTo: '/' });
     }
