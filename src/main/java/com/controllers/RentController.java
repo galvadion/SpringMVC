@@ -56,7 +56,6 @@ public class RentController {
 		Booked booked = bookedServices.get(Integer.parseInt(id));
 		Rent rent=new Rent();
 		rent.setBooked(booked);
-		rent.setClient(booked.getClient());
 		rent.setDeliveryDate(LocalDate.now());
 		rentServices.saveOrUpdate(rent);
 		return ResponseEntity.ok((Object)"It has been confirmed");
