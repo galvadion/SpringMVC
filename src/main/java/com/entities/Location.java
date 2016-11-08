@@ -4,19 +4,19 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Location {
-	private String coordinateX;
-	private String coordinateY;
-	public String getCoordinateX() {
-		return coordinateX;
+	private String longitude;
+	private String latitude;
+	public String getlongitude() {
+		return longitude;
 	}
-	public void setCoordinateX(String coordinateX) {
-		this.coordinateX = coordinateX;
+	public void setlongitude(String longitude) {
+		this.longitude = longitude;
 	}
-	public String getCoordinateY() {
-		return coordinateY;
+	public String getlatitude() {
+		return latitude;
 	}
-	public void setCoordinateY(String coordinateY) {
-		this.coordinateY = coordinateY;
+	public void setlatitude(String latitude) {
+		this.latitude = latitude;
 	}
 	
 	
