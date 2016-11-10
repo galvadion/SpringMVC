@@ -13,7 +13,6 @@
 		vm.roladmin = $rootScope.roladmin;
 		vm.allOffices = [];
 		vm.search = {};
-		vm.searchResult = [];
 
 		var localDate = new Date();
 		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
@@ -55,9 +54,7 @@
 
 		$scope.searchModels = function() {
 			NProgress.start();
-			$location.path("/search/origin=" + vm.search.officeOriginId
-					+ "&destination=" + vm.search.officeEndId + "&from="
-					+ vm.search.beginDate + "&to=" + vm.search.endDate);
+			$location.path("/search/origin=" + vm.search.officeOriginId + "&destination=" + vm.search.officeEndId + "&from=" + vm.search.beginDate + "&to=" + vm.search.endDate);
 		};
 
 		$scope.onClick = function(marker, eventName, model) {
@@ -72,7 +69,6 @@
 
 		function initController() {
 			NProgress.start();
-
 			getAllOffers();
 			getAllOffices();
 			NProgress.done();

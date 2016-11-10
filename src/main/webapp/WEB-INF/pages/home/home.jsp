@@ -104,7 +104,7 @@
 
 						<!-- Buttons -->
 						<div class="form-group text-right" style="margin-right: 15px;">
-							<button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Buscar ahora</button>
+							<button type="submit" id="submit" ng-disabled="form.$invalid || endDateError" class="btn  btn-orange">Buscar ahora</button>
 						</div>
 					</form>
 
