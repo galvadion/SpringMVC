@@ -169,10 +169,6 @@
                             <a href="#/model" class="btn btn-lightred">Cancelar</a>
                             <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
                         </div>
-
-                    </form>
-<form action="/upload-target" class="dropzone"></form>
-            		</div>
             	
             	</section>
             </div>

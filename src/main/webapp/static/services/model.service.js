@@ -44,6 +44,8 @@
         }
         
         function SearchModels(searchObject) {
+        	searchObject.beginDate = searchObject.beginDate.replace(/-/g , "/");
+        	searchObject.endDate = searchObject.endDate.replace(/-/g , "/");
             return $http.post('/SpringMVC/model/search', searchObject).then(handleSuccess, handleError('Error searching models'));
         }
 
