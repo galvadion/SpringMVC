@@ -25,7 +25,7 @@
         <link rel="stylesheet" type="text/css" href="static/js/dista/plugins/bootstrap/datatables.bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="static/js/dista/css/angular-datatables.css">
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-datetimepicker.min.css">
-        
+        <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
         
 
     </head>
@@ -39,7 +39,6 @@
         <script src="//code.angularjs.org/1.2.1/angular.js"></script>
         <script src="//code.angularjs.org/1.2.1/angular-route.js"></script>
         <script src="//code.angularjs.org/1.2.1/angular-cookies.js"></script>
-        <script src="//code.angularjs.org/1.2.1/angular-aria.js"></script>
         <script src="//code.angularjs.org/1.2.1/angular-animate.js"></script>
         <script type="text/javascript" src="static/app.js"></script>
 
@@ -55,6 +54,7 @@
         <script type="text/javascript" src="static/js/nprogress.js"></script>
         <script type="text/javascript" src="static/js/ngDialog.js"></script>
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
+        <script type="text/javascript" src="https://raw.githubusercontent.com/enyo/dropzone/master/dist/dropzone.js"></script>
 		
 		<!--Maps-->
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCToOBKLzgMq3u02g7OO_v-txL_LnfEO_g&callback=initMap" type="text/javascript"></script>

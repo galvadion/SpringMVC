@@ -171,7 +171,7 @@
                         </div>
 
                     </form>
-            			
+<form action="/upload-target" class="dropzone"></form>
             		</div>
             	
             	</section>
