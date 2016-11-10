@@ -58,7 +58,7 @@
 
 						<div class="row" style="padding: 0 10px 0 10px;">
 
-							<div class="form-group customDatePickers col-sm-6" ng-init="vm.search.beginDate = '10-11-2016'">
+							<div class="form-group customDatePickers col-sm-6">
 								<div class="input-group date" id="beginDate" data-date="" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
 									<label for="beginDate" class="control-label">Fecha de recogida</label>
 									<input class="form-control" size="16" type="text" name="beginDate" placeholder="DD-MM-YYYY" ng-model="vm.search.beginDate" ng-change="checkEndDate()" readonly required>
@@ -79,7 +79,7 @@
 
 						<div class="row" style="padding: 0 10px 0 10px;">
 
-							<div class="form-group customDatePickers col-sm-6" ng-init="vm.search.endDate = '10-11-2016'">
+							<div class="form-group customDatePickers col-sm-6">
 								<div class="input-group date" id="endDate" data-date="" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
 									<label for="endDate" class="control-label">Fecha de entrega</label>
 									<input class="form-control" size="16" type="text" name="endDate" placeholder="DD-MM-YYYY" ng-model="vm.search.endDate" ng-change="checkEndDate()" readonly required>
