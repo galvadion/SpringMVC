@@ -59,18 +59,14 @@
                                         <td>
                                             23/10/2017
                                         </td>
+                                        <td class="text-center plus"></td>
                                         <td class="text-center plus">
-                                             <a ng-href="#/vehicle/{{value.id}}" title="Alquilar Vehiculo">
-                                             	<i class="fa fa-automobile"></i><br><small>Alquilar</small>
-                                             </a>
-                                        </td>
-                                        <td class="text-center plus">
-                                             <a ng-href="#/vehicle/{{value.id}}" title="Editar">
+                                             <a ng-href="#/vehicle/edit/{{value.id}}" title="Editar">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
                                              </a>
                                         </td>
                                         <td class="text-center delete">
-                                            <a doing-action="" href id="vehic-{{$index}}" href data-toggle="" ng-click="deleteVehicle(value,$index)" confirm-if="checked" confirm="Esta seguro, eliminar vehiculo id {{value.id}} ?" title="Eliminar">
+                                            <a doing-action="" href ng-click="deleteVehicle(value,$index)" confirm-if="checked" confirm="Esta seguro, eliminar vehiculo id {{value.id}} ?" title="Eliminar">
                                                 <i class="fa fa-times"></i><br />
                                                 <small>Eliminar</small>
                                             </a>

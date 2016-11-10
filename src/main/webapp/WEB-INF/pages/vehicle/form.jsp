@@ -25,7 +25,7 @@
 					<div class="tile-body">
 
 						<form form-on-change="checkFields()" name='form' class=""
-							role="form" ng-submit="saveModel()">
+							role="form" ng-submit="saveVehicle()">
 							<div class="row">
 								<div class="form-group col-sm-6"
 									ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
@@ -177,7 +177,7 @@
 							<div class="form-group text-right">
 								<a href="#/vehicle" class="btn btn-lightred">Cancelar</a>
 								<button type="submit" id="submit" ng-disabled="form.$invalid"
-									class="btn  btn-orange">Crear</button>
+									class="btn  btn-orange">Guardar</button>
 							</div>
 
 						</form>

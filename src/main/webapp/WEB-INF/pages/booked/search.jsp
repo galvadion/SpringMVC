@@ -33,14 +33,12 @@
 
 							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.officeOriginId.$dirty && form.officeOriginId.$error.required }">
 								<label for="officeOriginId" class="control-label">Sucursal de recogida</label>
-								<select ng-model="vm.search.officeOriginId" name="officeOriginId" id="officeOriginId" class="form-control" required>
+								<select ng-options="item.id as item.name for item in vm.allOffices" ng-model="vm.search.officeOriginId" name="officeOriginId" id="officeOriginId" class="form-control" required>
 									<option value="">Seleccione sucursal</option>
-									<option ng-repeat="(key, value) in vm.allOffices" ng-value="{{value.id}}">{{value.id}} {{value.name}} - {{value.city}}</option>
 								</select>
 								<span ng-show="form.officeOriginId.$dirty && form.officeOriginId.$error.required" class="help-block">Sucursal es requerido</span>
 							</div>
 						</div>
-{{vm.search.officeOriginId}}
 						<div class="row" style="padding: 0 10px 0 10px;">
 
 							<div class="form-group customDatePickers col-sm-6">
@@ -56,9 +54,8 @@
 
 							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.officeEndId.$dirty && form.officeEndId.$error.required }">
 								<label for="officeEndId" class="control-label">Sucursal de entrega</label>
-									<select ng-model="vm.search.officeEndId" name="officeEndId" id="officeEndId" class="form-control" required>
+									<select ng-options="item.id as item.name for item in vm.allOffices" ng-model="vm.search.officeEndId" name="officeEndId" id="officeEndId" class="form-control" required>
 										<option value="">Seleccione sucursal</option>
-										<option ng-repeat="(key, value) in vm.allOffices" value="{{value.id}}">{{value.name}} - {{value.city}}</option>
 									</select>
 								<span ng-show="form.officeEndId.$dirty && form.officeEndId.$error.required" class="help-block">Sucursal es requerido</span>
 							</div>

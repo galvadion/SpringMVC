@@ -106,6 +106,19 @@
         		NProgress.done();
         	});
         }
+        
+        $scope.saveVehicle = function() {
+        	NProgress.start();
+        	VehicleService.InsertVehicles(vm.vehicle).then(function (response) {
+	    		if(response.success){
+	    			$rootScope.doFlashMessage("Vehículo guardado con éxito",'/vehicle','success');
+	    		}
+	    		else{
+	    			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+	    		}
+	    		NProgress.done();
+	    	});
+        };
 
     }
 

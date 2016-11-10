@@ -14,8 +14,6 @@
         vm.booked = {};
         vm.allBookeds = [];
         vm.search = {};
-        vm.search.officeOriginId = "";
-        vm.search.officeEndId = "";
         vm.searchResult = [];
         vm.allOffices = [];
         
@@ -93,8 +91,8 @@
             
             if(vm.location[1] == "search"){
             	getAllOffices();
-            	//vm.search.officeOriginId = $routeParams.origin;
-            	//vm.search.officeEndId = $routeParams.destination;
+            	vm.search.officeOriginId = parseInt($routeParams.origin);
+            	vm.search.officeEndId = parseInt($routeParams.destination);
             	vm.search.beginDate = $routeParams.from;
             	vm.search.endDate = $routeParams.to;
             	
