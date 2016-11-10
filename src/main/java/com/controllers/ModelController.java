@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -90,6 +91,17 @@ public class ModelController {
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
 	public ResponseEntity<List<Model>> getAll() {
 		List<Model> list = modelService.getAvailable();
+		if (list != null) {
+			return ResponseEntity.ok(list);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		
+	}
+	
+	@RequestMapping(value = "/getmodelsbyid", method = RequestMethod.GET)
+	public ResponseEntity<List<Model>> getmodelsbyid(@RequestParam("id") String id) {
+		List<Model> list = modelService.getAvailableByBrand(Integer.parseInt(id));
 		if (list != null) {
 			return ResponseEntity.ok(list);
 		} else {

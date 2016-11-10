@@ -11,4 +11,6 @@ public interface ModelService extends GenericService<Model,Integer> {
 	public void removeCascade(Model model);
 
 	public List<Model> getAvailable();
+
+	public List<Model> getAvailableByBrand(int parseInt);
 }

@@ -60,9 +60,6 @@ public class Vehicle implements Serializable{
 	@JoinColumn(name="model_id", nullable=false)
 	private Model model;
 	
-	@ManyToOne
-	@JoinColumn(name="fuel_id", nullable=false)
-	private Fuel fuel;
 	
 	@ManyToOne
 	@JoinColumn(name="branch_office_id", nullable=false)
@@ -163,14 +160,6 @@ public class Vehicle implements Serializable{
 
 	public void setModel(Model model) {
 		this.model = model;
-	}
-
-	public Fuel getFuel() {
-		return fuel;
-	}
-
-	public void setFuel(Fuel fuel) {
-		this.fuel = fuel;
 	}
 
 
