@@ -33,18 +33,18 @@
 						<div class="row">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.brand.$dirty && form.brand.$error.required }">
 	                            <label for="brand" class="control-label">* Marca</label>
-	                            <select ng-model="vm.requestModel.brand.id" name="brand" id="brand" class="form-control" required>
+	                            <select ng-model="vm.requestModel.brand.id" ng-options="item.id as item.name for item in vm.allBrands" name="brand" id="brand" class="form-control" required>
 									<option value=""> Seleccione una marca</option> 
-									<option ng-repeat="(key, value) in vm.allBrands" value="{{value.id}}">{{value.name}}</option>
+									<!-- <option ng-repeat="(key, value) in vm.allBrands" value="{{value.id}}">{{value.name}}</option>  -->
 								</select>
 								<span ng-show="form.brand.$dirty && form.brand.$error.required" class="help-block">Marca es requerida</span>
 	                        </div>
 	
 							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.year.$dirty && form.year.$error.required }">
 	                            <label for="year" class="control-label">* Año</label>
-	                            <select ng-model="vm.requestModel.year" name="year" id="year" class="form-control" required>
+	                            <select ng-model="vm.requestModel.year" ng-options="item.year as item.year for item in vm.lastYears"  name="year" id="year" class="form-control" required>
 									<option value=""> Seleccione el año</option> 
-									<option ng-repeat="(key, value) in vm.lastYears" value="{{value}}">{{value}}</option>
+								<!--	<option ng-repeat="(key, value) in vm.lastYears" value="{{value}}">{{value}}</option> -->
 								</select>
 								<span ng-show="form.year.$dirty && form.year.$error.required" class="help-block">Año es requerido</span>
 	                        </div>
@@ -53,13 +53,13 @@
 	                    <div class="row">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.category.$dirty && form.category.$error.required }">
 	                            <label for="category" class="control-label">* Categoria</label>
-	                            <select ng-model="vm.requestModel.category.id" name="category" id="category" class="form-control" required>
+	                            <select ng-model="vm.requestModel.category.id" name="category" ng-options="item.id as item.value for item in vm.category" id="category" class="form-control" required>
 									<option value=""> Seleccione una categoria</option> 
-									<option value="1">S</option>
+								<!-- 	<option value="1">S</option>
 									<option value="2">A</option>
 									<option value="3">B</option>
 									<option value="4">C</option>
-									<option value="4">D</option>
+									<option value="5">D</option>  -->
 								</select>
 								<span ng-show="form.category.$dirty && form.category.$error.required" class="help-block">Marca es requerida</span>
 	                        </div>
@@ -74,16 +74,16 @@
                       	<div class="row">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.cylinders.$dirty && form.cylinders.$error.required }">
 	                            <label for="cylinders" class="control-label">* Cilindrada</label>
-	                            <select ng-model="vm.requestModel.cylinders" name="cylinders" id="cylinders" class="form-control" required>
+	                            <select ng-model="vm.requestModel.cylinders" name="cylinders" id="cylinders" ng-options="item.value as item.value for item in vm.cylinders" class="form-control" required>
 									<option value=""> Seleccione tipo</option> 
-									<option value="800">800</option>
+								<!-- 	<option value="800">800</option>
 									<option value="1000">1000</option>
 									<option value="1200">1200</option>
 									<option value="1300">1300</option>
 									<option value="1400">1400</option>
 									<option value="1600">1600</option>
 									<option value="1800">1800</option>
-									<option value="2000">2000</option>
+									<option value="2000">2000</option> -->
 								</select>
 								<span ng-show="form.cylinders.$dirty && form.cylinders.$error.required" class="help-block">Cilindrada es requerido</span>
 	                        </div>
@@ -98,10 +98,10 @@
 	                    <div class="row">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.fuel.$dirty && form.fuel.$error.required }">
 	                            <label for="fuel" class="control-label">* Tipo Combustible</label>
-	                            <select ng-model="vm.requestModel.fuel.id" name="fuel" id="fuel" class="form-control" required>
+	                            <select ng-model="vm.requestModel.fuel.id" name="fuel" id="fuel" ng-options="item.id as item.value for item in vm.fuelType" class="form-control" required>
 									<option value=""> Seleccione un tipo de combustible</option> 
-									<option value="1">Nafta</option>
-									<option value="2">Gas Oil</option>
+								<!-- 	<option value="1">Nafta</option>
+									<option value="2">Gas Oil</option>  -->
 								</select>
 								<span ng-show="form.fuel.$dirty && form.fuel.$error.required" class="help-block">Tipo de combustible es requerido</span>
 	                        </div>

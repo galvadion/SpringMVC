@@ -36,10 +36,10 @@
         
         <!--Core-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="//code.angularjs.org/1.4.2/angular.js"></script>
-        <script src="//code.angularjs.org/1.4.2/angular-route.js"></script>
-        <script src="//code.angularjs.org/1.4.2/angular-cookies.js"></script>
-        <script src="//code.angularjs.org/1.4.2/angular-animate.js"></script>
+        <script src="//code.angularjs.org/1.4.8/angular.js"></script>
+        <script src="//code.angularjs.org/1.4.8/angular-route.js"></script>
+        <script src="//code.angularjs.org/1.4.8/angular-cookies.js"></script>
+        <script src="//code.angularjs.org/1.4.8/angular-animate.js"></script>
         <script type="text/javascript" src="static/app.js"></script>
 
 
