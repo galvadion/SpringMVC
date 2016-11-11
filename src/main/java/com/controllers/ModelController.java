@@ -109,6 +109,16 @@ public class ModelController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/getbyid", method = RequestMethod.GET)
+	public ResponseEntity<Model> getbyid(@RequestParam("id") Integer id) { 
+		if (modelService.get(id) != null) {
+			return ResponseEntity.ok(modelService.get(id));
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		
+	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public ResponseEntity<List<Model>> searchModels(@RequestBody SearchFilter search) {

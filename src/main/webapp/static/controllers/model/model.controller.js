@@ -5,9 +5,9 @@
         .module('app')
         .controller('ModelController', ModelController);
 
-    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
+    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams'];
     
-    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams) {
 
         var vm = this;
         
@@ -16,6 +16,9 @@
         vm.allBrands = [];
         vm.allModels = [];
         vm.lastYears = [];
+        vm.cylinders=[];
+        vm.fuelType=[];
+        vm.category=[];
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -60,9 +63,27 @@
         
         function initController() {
             NProgress.start();
-            getAllBrands();
-            getLastYears();
-            getAllModels();
+            vm.location = $location.path().split('/',3);
+            if(vm.location[2] == "edit"){
+        		getModelById($routeParams.id);
+                getAllBrands();
+                getLastYears();
+                getCylinders();
+                getFuelTypes();
+                getCategories();
+        	}
+            else if(vm.location[2] == "create"){
+            	vm.requestModel.id = null;
+            	getAllBrands();
+            	getLastYears();
+                getCylinders();
+                getFuelTypes();
+                getCategories();
+            }
+            else{
+            	getAllModels();
+            }
+            NProgress.done();
         }
         
         function getAllBrands(){
@@ -89,13 +110,49 @@
         	});
         }
         
+        function getModelById(id){
+        	ModelService.GetModelById(id).then(function (response) {
+        		if(response.success){
+        			vm.requestModel = response.data;
+        			vm.requestModel.airConditioner=vm.requestModel.airConditioner.toString();
+        			
+        		}
+        		else{
+        			vm.requestModel = [];
+        		}
+        		
+        		NProgress.done();
+        	});
+        }
+        
         function getLastYears(){
-        	var today = new Date();
-            vm.lastYears.push(today.getFullYear());
-            vm.lastYears.push(today.getFullYear() - 1);
-            vm.lastYears.push(today.getFullYear() - 2);
-            vm.lastYears.push(today.getFullYear() - 3);
-            vm.lastYears.push(today.getFullYear() - 4);
+        	var today = new Date();        	
+            vm.lastYears.push({'year':today.getFullYear()});
+            vm.lastYears.push({'year':today.getFullYear()-1});
+            vm.lastYears.push({'year':today.getFullYear()-2});
+            vm.lastYears.push({'year':today.getFullYear()-3});
+            vm.lastYears.push({'year':today.getFullYear()-4});
+        }
+        
+        function getCylinders(){
+        	vm.cylinders.push({'value':800});
+        	vm.cylinders.push({'value':1000});
+        	vm.cylinders.push({'value':1200});
+        	vm.cylinders.push({'value':1400});
+        	vm.cylinders.push({'value':1600});
+        	vm.cylinders.push({'value':1800});
+        	vm.cylinders.push({'value':2000});
+        }
+        function getCategories(){
+        	vm.category.push({'id':1,'value':'S'});
+        	vm.category.push({'id':2,'value':'A'});
+        	vm.category.push({'id':3,'value':'B'});
+        	vm.category.push({'id':4,'value':'C'});
+        	vm.category.push({'id':5,'value':'D'});
+        }
+        function getFuelTypes(){
+        	vm.fuelType.push({'id':1,'value':'Nafta'});
+        	vm.fuelType.push({'id':2,'value':'Gas Oil'});
         }
         
         $scope.saveModel = function() {

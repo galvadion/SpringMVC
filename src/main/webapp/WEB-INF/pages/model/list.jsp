@@ -94,12 +94,10 @@
                                             {{value.fullTank}} lts.
                                         </td>
                                         <td class="text-center plus">
-                                             <a ng-href="#/model/{{value.id}}" title="Ver">
-                                             	<i class="fa fa-eye"></i><br><small>Ver</small>
-                                             </a>
+                                            
                                         </td>
                                         <td class="text-center plus">
-                                             <a ng-href="#/model/{{value.id}}" title="Edit">
+                                             <a ng-href="#/model/edit/{{value.id}}" title="Edit">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
                                              </a>
                                         </td>
