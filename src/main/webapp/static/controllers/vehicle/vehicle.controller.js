@@ -16,6 +16,8 @@
         vm.allBrands = [];
         vm.modelsByBrand = [];
         vm.allOffices = [];
+        vm.vehicle = {};
+        vm.vehicle.model = {};
         
 		var localDate = new Date();
 		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
@@ -98,18 +100,18 @@
         	ModelService.GetModelsByBrand(vm.vehicle.brand.id).then(function (response) {
         		if(response.success){
         			vm.modelsByBrand = response.data;
+        			vm.vehicle.model.id = "";
         		}
         		else{
         			vm.modelsByBrand = [];
         		}
-        		vm.vehicle.model.id="";
         		NProgress.done();
         	});
         }
         
         $scope.saveVehicle = function() {
         	NProgress.start();
-        	VehicleService.InsertVehicles(vm.vehicle).then(function (response) {
+        	VehicleService.InsertVehicle(vm.vehicle).then(function (response) {
 	    		if(response.success){
 	    			$rootScope.doFlashMessage("Vehículo guardado con éxito",'/vehicle','success');
 	    		}

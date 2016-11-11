@@ -7,12 +7,12 @@
 
 		<div class="pageheader">
 			<h1 class="custom-font" style="margin-top: -10px !important;">
-				<strong>Vehiculos </strong> Crear
+				<strong>Vehículos </strong> Crear
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#/home">Dashboard</a></li>
-				<li><a href="#/vehicle">Vehiculos</a></li>
-				<li class="breadcrumb-active">Nuevo Vehiculo</li>
+				<li><a href="#/vehicle">Vehículos</a></li>
+				<li class="breadcrumb-active">Nuevo Vehículo</li>
 			</ol>
 		</div>
 
@@ -39,7 +39,7 @@
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.branchOffice.$dirty && form.branchOffice.$error.required }">
 									<label for="branchOffice" class="control-label">Sucursal
-										donde estara el vehiculo</label> <select
+										donde estara el vehículo</label> <select
 										ng-model="vm.vehicle.branchOffice.id" name="branchOffice"
 										id="branchOffice" class="form-control" required>
 										<option value="">Seleccione sucursal</option>
@@ -65,7 +65,7 @@
 								</div>
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.model.$dirty && form.model.$error.required }">
-									<label for="model" class="control-label">* Model</label> 
+									<label for="model" class="control-label">* Modelo</label> 
 									<select	ng-model="vm.vehicle.model.id" name="model" id="model"
 										class="form-control" required>
 										<option value="">Seleccione un modelo</option>
@@ -78,7 +78,7 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-6" class="form-group"
-									ng-class="{ 'has-error': form.licensePlate.$dirty && form.passangers.$error.required }">
+									ng-class="{ 'has-error': form.licensePlate.$dirty && form.licensePlate.$error.required }">
 									<label for="licensePlate" class="control-label">*
 										Matricula</label> <input type="text"
 										ng-model="vm.vehicle.licensePlate" name="licensePlate"
@@ -110,36 +110,36 @@
 							<div class="row">
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.motorNr.$dirty && form.motorNr.$error.required }">
-									<label for="motorNr" class="control-label">* Numero de
+									<label for="motorNr" class="control-label">* Número de
 										motor</label> <input type="text" ng-model="vm.vehicle.motorNr"
-										name="licensePlate" id="licensePlate" class="form-control"
-										placeholder="numero de motor" required> <span
+										name="motorNr" id="motorNr" class="form-control"
+										placeholder="Número de motor" required> <span
 										ng-show="form.motorNr.$dirty && form.motorNr.$error.required"
-										class="help-block">Es necesario ingresar el numero de
+										class="help-block">Es necesario ingresar el número de
 										motor</span>
 								</div>
 								<div class="form-group col-sm-6" class="form-group"
-									ng-class="{ 'has-error': form.licensePlate.$dirty && form.passangers.$error.required }">
-									<label for="chasisNr" class="control-label">* Numero de
+									ng-class="{ 'has-error': form.chasisNr.$dirty && form.chasisNr.$error.required }">
+									<label for="chasisNr" class="control-label">* Número de
 										chasis</label> <input type="text" ng-model="vm.vehicle.chasisNr"
 										name="chasisNr" id="chasisNr" class="form-control"
-										placeholder="Numero de chasis" required> <span
+										placeholder="Número de chasis" required> <span
 										ng-show="form.chasisNr.$dirty && form.chasisNr.$error.required"
-										class="help-block">Es necesario ingresar el numero de
+										class="help-block">Es necesario ingresar el número de
 										chasis</span>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="form-group col-sm-6" class="form-group"
-									ng-class="{ 'has-error': form.motorNr.$dirty && form.motorNr.$error.required }">
-									<label for="motorNr" class="control-label">* Kilometros
+									ng-class="{ 'has-error': form.kilometers.$dirty && form.kilometers.$error.required }">
+									<label for="kilometers" class="control-label">* Kilómetros
 										ya recorridos</label> <input type="number"
 										ng-model="vm.vehicle.kilometers" name="kilometers"
 										id="kilometers" class="form-control" min="1"
-										placeholder="Kilometros" required> <span
+										placeholder="Kilómetros" required> <span
 										ng-show="form.kilometers.$dirty && form.kilometers.$error.required"
-										class="help-block">Es necesario ingresar los kilometros
+										class="help-block">Es necesario ingresar los kilómetros
 										recorridos</span>
 								</div>
 								<div class="form-group col-sm-6" class="form-group"
@@ -155,12 +155,12 @@
 							<div class="row">
 								<div class="form-group col-sm-12" class="form-group"
 									ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required }">
-									<label for="description" class="control-label">* Descripcion</label>
+									<label for="description" class="control-label">* Descripción</label>
 										 <textarea type="text" ng-model="vm.vehicle.description"
 										name="description" id="description" class="form-control"
-										placeholder="Descripcion del vehiculo" required /> <span
+										placeholder="Descripción del vehículo" required /> <span
 										ng-show="form.description.$dirty && form.description.$error.required"
-										class="help-block">Es necesario escribir una descripcion para el usuario</span>
+										class="help-block">Es necesario escribir una descripción para el usuario</span>
 								</div>
 								</div>
 								<div class="row">
@@ -177,7 +177,7 @@
 							<div class="form-group text-right">
 								<a href="#/vehicle" class="btn btn-lightred">Cancelar</a>
 								<button type="submit" id="submit" ng-disabled="form.$invalid"
-									class="btn  btn-orange">Guardar</button>
+									class="btn  btn-orange">Crear</button>
 							</div>
 
 						</form>
