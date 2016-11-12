@@ -5,9 +5,9 @@
         .module('app')
         .controller('ModelController', ModelController);
 
-    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams'];
+    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams','TariffService'];
     
-    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams) {
+    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams,TariffService) {
 
         var vm = this;
         
@@ -144,15 +144,26 @@
         	vm.cylinders.push({'value':2000});
         }
         function getCategories(){
-        	vm.category.push({'id':1,'value':'S'});
-        	vm.category.push({'id':2,'value':'A'});
-        	vm.category.push({'id':3,'value':'B'});
-        	vm.category.push({'id':4,'value':'C'});
-        	vm.category.push({'id':5,'value':'D'});
+        	TariffService.getAllCategories().then(function (response) {
+        		if(response.success){
+        			vm.category = response.data;
+        		}
+        		else{
+        			vm.category = [];
+        		}
+        		NProgress.done();
+        	});
         }
         function getFuelTypes(){
-        	vm.fuelType.push({'id':1,'value':'Nafta'});
-        	vm.fuelType.push({'id':2,'value':'Gas Oil'});
+        	TariffService.getAllFuelTypes().then(function (response) {
+        		if(response.success){
+        			vm.fuelType = response.data;
+        		}
+        		else{
+        			vm.fuelType = [];
+        		}
+        		NProgress.done();
+        	});
         }
         
         $scope.saveModel = function() {

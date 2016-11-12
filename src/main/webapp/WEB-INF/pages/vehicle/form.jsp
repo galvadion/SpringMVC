@@ -26,7 +26,8 @@
 
 						<form form-on-change="checkFields()" name='form' class=""
 							role="form" ng-submit="saveVehicle()">
-															<div class="form-group col-sm-6" class="form-group"
+							<div class="row">
+								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.licensePlate.$dirty && form.licensePlate.$error.required }">
 									<label for="licensePlate" class="control-label">*
 										Matricula</label> <input type="text"
@@ -36,16 +37,15 @@
 										ng-show="form.licensePlate.$dirty && form.licensePlate.$error.required"
 										class="help-block">Es necesario ingresar la matricula</span>
 								</div>
-							<div class="row">
+							
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.branchOffice.$dirty && form.branchOffice.$error.required }">
 									<label for="branchOffice" class="control-label">Sucursal
 										donde estara el vehículo</label> <select
 										ng-model="vm.vehicle.branchOffice.id" name="branchOffice"
-										id="branchOffice" class="form-control" required>
+										id="branchOffice" ng-options="item.id as item.name for item in vm.allOffices" class="form-control" required>
 										<option value="">Seleccione sucursal</option>
-										<option ng-repeat="(key, value) in vm.allOffices"
-											value="{{value.id}}">{{value.name}} - {{value.city}}</option>
+										
 									</select> <span
 										ng-show="form.branchOffice.$dirty && form.branchOffice.$error.required"
 										class="help-block">Sucursal es requerido</span>
@@ -55,11 +55,9 @@
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.brand.$dirty && form.brand.$error.required }">
 									<label for="brand" class="control-label">* Marca</label>
-									 <select ng-model="vm.vehicle.brand.id" name="brand" id="brand"
-										ng-change="getModelsByBrand()" class="form-control" required>
+									 <select ng-model="vm.brand.id" name="brand" id="brand"
+										ng-change="getModelsByBrand()" ng-options="item.id as item.name for item in vm.allBrands" class="form-control" required>
 										<option value="">Seleccione una marca</option>
-										<option ng-repeat="(key, value) in vm.allBrands"
-											value="{{value.id}}">{{value.name}}</option>
 									</select> <span
 										ng-show="form.brand.$dirty && form.brand.$error.required"
 										class="help-block">Marca es requerida</span>
@@ -67,14 +65,12 @@
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.model.$dirty && form.model.$error.required }">
 									<label for="model" class="control-label">* Modelo</label> 
-									<select	ng-model="vm.vehicle.model.id" name="model" id="model"
+									<select	ng-model="vm.vehicle.model.id" ng-options="item.id as item.name for item in vm.modelsByBrand" name="model" id="model"
 										class="form-control" required>
 										<option value="">Seleccione un modelo</option>
-										<option ng-repeat="(key, value) in vm.modelsByBrand"
-											value="{{value.id}}">{{value.name}}</option>
 									</select> <span
 										ng-show="form.model.$dirty && form.model.$error.required"
-										class="help-block">Marca es requerida</span>
+										class="help-block">Modelo es requerida</span>
 								</div>
 							</div>
 							<div class="row">

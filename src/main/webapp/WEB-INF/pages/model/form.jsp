@@ -53,7 +53,7 @@
 	                    <div class="row">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.category.$dirty && form.category.$error.required }">
 	                            <label for="category" class="control-label">* Categoria</label>
-	                            <select ng-model="vm.requestModel.category.id" name="category" ng-options="item.id as item.value for item in vm.category" id="category" class="form-control" required>
+	                            <select ng-model="vm.requestModel.category.id" name="category" ng-options="item.id as item.name for item in vm.category" id="category" class="form-control" required>
 									<option value=""> Seleccione una categoria</option> 
 								<!-- 	<option value="1">S</option>
 									<option value="2">A</option>
@@ -98,7 +98,7 @@
 	                    <div class="row">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.fuel.$dirty && form.fuel.$error.required }">
 	                            <label for="fuel" class="control-label">* Tipo Combustible</label>
-	                            <select ng-model="vm.requestModel.fuel.id" name="fuel" id="fuel" ng-options="item.id as item.value for item in vm.fuelType" class="form-control" required>
+	                            <select ng-model="vm.requestModel.fuel.id" name="fuel" id="fuel" ng-options="item.id as item.fuelType for item in vm.fuelType" class="form-control" required>
 									<option value=""> Seleccione un tipo de combustible</option> 
 								<!-- 	<option value="1">Nafta</option>
 									<option value="2">Gas Oil</option>  -->
