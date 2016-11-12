@@ -20,6 +20,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -185,4 +186,10 @@ public class ApiRestController {
         // forwards to the view named "Result"
         return "Result";
     }
+    
+	@RequestMapping(value = "/api/search", method = RequestMethod.POST)
+	public ResponseEntity<List<Model>> searchModels(@RequestBody SearchFilter search) {
+		System.out.println(search);
+		return ResponseEntity.ok(modelService.getModelsBetweenFilter(search));
+	}
 }

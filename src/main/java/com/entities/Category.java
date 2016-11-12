@@ -24,6 +24,8 @@ public class Category implements Serializable{
 	@Column(name = "id")
 	private Integer id;
 	
+	private String name;
+	
 	@Min(value=0, message="The value can't be negative")
 	@Column(name="base_price")
 	private float basePrice;
@@ -69,6 +71,14 @@ public class Category implements Serializable{
 
 	public void setUnavailable(boolean unavailable) {
 		this.unavailable = unavailable;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

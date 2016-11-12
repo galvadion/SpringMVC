@@ -21,7 +21,7 @@ public class LocalDateDeserializer extends StdDeserializer<LocalDate> {
     @Override
     public LocalDate deserialize(JsonParser jp, DeserializationContext ctxt)
             throws IOException, JsonProcessingException {
-        return LocalDate.parse(jp.readValueAs(String.class),DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        return LocalDate.parse(jp.readValueAs(String.class),DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
 }
