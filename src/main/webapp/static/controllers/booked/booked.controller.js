@@ -73,14 +73,11 @@
         ];
         
         $scope.searchModels = function() {
-        	NProgress.start();console.log('1');
-        	ModelService.SearchModels(vm.search).then(function (response) {console.log('2');
+        	NProgress.start();
+        	ModelService.SearchModels(vm.search).then(function (response) {
         		if(response){
         			vm.searchResult = response.data;
         			console.log(vm.searchResult);
-        		}
-        		else{
-        			console.log('3');
         		}
         		NProgress.done();
         	});

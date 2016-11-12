@@ -58,6 +58,31 @@
             DTColumnDefBuilder.newColumnDef(13).notSortable(),
             DTColumnDefBuilder.newColumnDef(14).notSortable(),
         ];
+		
+        $scope.dzOptions = {
+			url : '/uploadMultipleFile',
+			acceptedFiles : 'image/jpeg, images/jpg, image/png',
+			paramName : 'photo',
+			maxFilesize : '2',
+			parallelUploads : 3,
+			addRemoveLinks : true,
+			autoProcessQueue : true,
+			dictDefaultMessage : 'Click o arrastra para agregar fotos',
+			dictRemoveFile : 'Eliminar foto',
+			dictResponseError : 'Error al subir foto'
+		};
+		
+		$scope.dzMethods = {};
+		
+		$scope.dzCallbacks = {
+			'addedfile' : function(file){
+				//cosas que pasan cuando se agregan fotos
+				$scope.dzMethods.processQueue();
+			},
+			'error' : function(file, xhr){
+				console.warn('Error al subir foto', file, xhr);
+			}
+		};
         
         initController();
         

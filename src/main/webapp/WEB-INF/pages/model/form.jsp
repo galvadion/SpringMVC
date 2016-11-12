@@ -178,3 +178,7 @@
     </div>
 
 </section>
+
+<div>
+	<div id="dropzone" class="dropzone sm" options="dzOptions" methods="dzMethods" callbacks="dzCallbacks" ng-dropzone></div>
+</div>

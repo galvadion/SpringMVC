@@ -26,7 +26,7 @@
         <link rel="stylesheet" type="text/css" href="static/js/dista/css/angular-datatables.css">
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
-        
+        <link rel="stylesheet" type="text/css" href="static/css/ng-dropzone.min.css">
 
     </head>
     <body>
@@ -56,6 +56,7 @@
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
 		<script type="text/javascript" src="static/js/moment.min.js"> </script>
         <script type="text/javascript" src="https://raw.githubusercontent.com/enyo/dropzone/master/dist/dropzone.js"></script>
+        <script type="text/javascript" src="static/js/ng-dropzone.min.js"> </script>
 		
 		<!--Maps-->
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCToOBKLzgMq3u02g7OO_v-txL_LnfEO_g&callback=initMap" type="text/javascript"></script>
