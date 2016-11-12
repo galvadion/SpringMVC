@@ -27,5 +27,10 @@ public class BrandDaoImpl extends GenericDaoImpl<Brand, Integer> implements Bran
 		Query query=currentSession().createQuery("from Brand where unavailable=false");
 		return query.getResultList();
 	}
+
+	public List<Brand> getNotEmpty() {
+		// TODO Auto-generated method stub
+		return currentSession().createQuery("from Brand where unavailable=false and models not empty").getResultList();
+	}
 	
 }
