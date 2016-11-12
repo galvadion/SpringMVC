@@ -9,4 +9,6 @@ public interface BrandDao extends GenericDao<Brand, Integer> {
 
 	public List<Brand> getAvailable();
 
+	public List<Brand> getNotEmpty();
+
 }

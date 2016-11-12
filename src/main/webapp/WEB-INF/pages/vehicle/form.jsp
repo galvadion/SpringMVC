@@ -26,16 +26,17 @@
 
 						<form form-on-change="checkFields()" name='form' class=""
 							role="form" ng-submit="saveVehicle()">
-							<div class="row">
-								<div class="form-group col-sm-6"
-									ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
-									<label for="name" class="control-label">* Nombre</label> <input
-										type="text" name="name" id="name" class="form-control"
-										id="name" ng-model="vm.vehicle.name" placeholder="Nombre"
+															<div class="form-group col-sm-6" class="form-group"
+									ng-class="{ 'has-error': form.licensePlate.$dirty && form.licensePlate.$error.required }">
+									<label for="licensePlate" class="control-label">*
+										Matricula</label> <input type="text"
+										ng-model="vm.vehicle.licensePlate" name="licensePlate"
+										id="licensePlate" class="form-control" placeholder="XXX- ####"
 										required> <span
-										ng-show="form.name.$dirty && form.name.$error.required"
-										class="help-block">Nombre es requerido</span>
+										ng-show="form.licensePlate.$dirty && form.licensePlate.$error.required"
+										class="help-block">Es necesario ingresar la matricula</span>
 								</div>
+							<div class="row">
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.branchOffice.$dirty && form.branchOffice.$error.required }">
 									<label for="branchOffice" class="control-label">Sucursal
@@ -77,16 +78,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="form-group col-sm-6" class="form-group"
-									ng-class="{ 'has-error': form.licensePlate.$dirty && form.licensePlate.$error.required }">
-									<label for="licensePlate" class="control-label">*
-										Matricula</label> <input type="text"
-										ng-model="vm.vehicle.licensePlate" name="licensePlate"
-										id="licensePlate" class="form-control" placeholder="XXX- ####"
-										required> <span
-										ng-show="form.licensePlate.$dirty && form.licensePlate.$error.required"
-										class="help-block">Es necesario ingresar la matricula</span>
-								</div>
+
 								<div class="form-group customDatePickers col-sm-6">
 									<div class="input-group date" id="licensePlateExpirationDate"
 										data-date="" data-date-format="dd-mm-yyyy"
