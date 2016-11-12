@@ -73,12 +73,16 @@
         ];
         
         $scope.searchModels = function() {
-        	console.log(vm.search);
-        	ModelService.SearchModels(vm.search).then(function (response) {
+        	NProgress.start();console.log('1');
+        	ModelService.SearchModels(vm.search).then(function (response) {console.log('2');
         		if(response){
         			vm.searchResult = response.data;
         			console.log(vm.searchResult);
         		}
+        		else{
+        			console.log('3');
+        		}
+        		NProgress.done();
         	});
         };
         
@@ -91,11 +95,18 @@
             
             if(vm.location[1] == "search"){
             	getAllOffices();
-            	vm.search.officeOriginId = parseInt($routeParams.origin);
-            	vm.search.officeEndId = parseInt($routeParams.destination);
-            	vm.search.beginDate = $routeParams.from;
-            	vm.search.endDate = $routeParams.to;
-            	
+            	if($routeParams.origin){
+            		vm.search.officeOriginId = parseInt($routeParams.origin);
+            	}
+            	if($routeParams.destination){
+            		vm.search.officeEndId = parseInt($routeParams.destination);
+            	}
+            	if($routeParams.from){
+            		vm.search.beginDate = $routeParams.from;
+            	}
+            	if($routeParams.to){
+            		vm.search.endDate = $routeParams.to;
+            	}
             	if(!vm.search.airConditioner){
             		vm.search.airConditioner = true;
             	}
@@ -105,7 +116,9 @@
             	if(!vm.search.luggage){
             		vm.search.luggage = 0;
             	}
-            	$scope.searchModels();
+            	if($routeParams.origin && $routeParams.destination && $routeParams.from && $routeParams.to){
+            		$scope.searchModels();
+            	}
             }
             else if(vm.location[2] == "edit"){
         		getBookedById($routeParams.id);
