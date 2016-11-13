@@ -99,6 +99,12 @@ public class PaymentTransactionController {
 		}
 	}
 	
+	@RequestMapping(value="/paypal-transaction-flow", method=RequestMethod.GET)
+	public ModelAndView paypalTransactionFlow(){
+		ModelAndView view = new ModelAndView("payment/paypal_iframe_transaction.jsp");
+		return view;
+	}
+	
 	private void validateItemList(List<TransactionItem> listItem) throws Exception{
 		System.out.println(listItem);
 		for(TransactionItem item : listItem){

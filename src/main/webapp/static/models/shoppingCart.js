@@ -158,14 +158,19 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
     }
 
     // submit form
+    var jsonData = JSON.stringify(datos);
+    var paypaliframe = document.createElement('iframe');
+    paypaliframe.src = "payment/paypal-transaction-flow";
+    paypaliframe.onLoad = "paypalRedirect(this.contentWindow.location)";
+    document.body.appendChild(paypaliframe);
         
     //form.submit();
-    paypal.checkout.setup('info-rentuy@gmail.com', {
-    	environment: 'sandbox',
-    	container: 'btnPaypalId'
-    })
-    var jsonData = JSON.stringify(datos);
-    paypal.checkout.initXO();
+    //paypal.checkout.setup('info-rentuy@gmail.com', {
+    //	environment: 'sandbox',
+    //	container: 'btnPaypalId'
+    //})
+    
+    //paypal.checkout.initXO();
 	$.support.cors = true;
 	$.ajax({
 		url:"/SpringMVC/payment/start-paypal",
@@ -181,8 +186,8 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
 	    },
 		
 		success:function(response){
-			
-			paypal.checkout.startFlow(response.token);
+			paypaliframe.contentWindow.paypalBeginTransaction(token);
+//			paypal.checkout.startFlow(response.token);
 		},
 		error: function(response){
 			console.log(response)
@@ -209,6 +214,10 @@ shoppingCart.prototype.addFormFields = function (form, data) {
 shoppingCart.prototype.toNumber = function (value) {
     value = value * 1;
     return isNaN(value) ? 0 : value;
+}
+
+function paypalRedirect(redirectUrl){
+	alert(redirectUrl);
 }
 
 //----------------------------------------------------------------
