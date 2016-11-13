@@ -4,7 +4,7 @@
 
     /***App Module Definition***/
     angular
-        .module('app', ['ngRoute', 'ngCookies','angularFileUpload','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps','thatisuday.dropzone'])
+        .module('app', ['ngRoute', 'ngCookies','angularFileUpload','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps'])
         .config(config)
         .run(run)
         .run(['$location', '$rootScope', function($location, $rootScope) {
@@ -19,8 +19,8 @@
 
     /***Routes Definitions***/
 
-    config.$inject = ['$routeProvider', '$locationProvider', 'dropzoneOpsProvider'];
-    function config($routeProvider, $locationProvider, dropzoneOpsProvider) {
+    config.$inject = ['$routeProvider', '$locationProvider'];
+    function config($routeProvider, $locationProvider) {
     	
     	$routeProvider
             .when('/home', {
