@@ -10,8 +10,10 @@
     function TariffService($http) {
         var service = {};
 
-        service.GetAllTariffs = GetAllTariffs;
-        service.InsertTariff = InsertTariff;
+        service.getAllFuelTypes = getAllFuelTypes;
+        service.getAllCategories =getAllCategories;
+        service.InsertCategory = InsertCategory;
+        service.InsertFuelType = InsertFuelType;
         service.DeleteTariff = DeleteTariff;
         
         
@@ -20,12 +22,20 @@
         
         // Tariff functions
         
-        function GetAllTariffs() {
-            return $http.get('/SpringMVC/tariff/getall').then(handleSuccess, handleError);
+        function getAllFuelTypes() {
+            return $http.get('/SpringMVC/fuelType/getall').then(handleSuccess, handleError);
         }
         
-        function InsertTariff(tariff) {
-            return $http.post('/SpringMVC/tariff/insert', tariff).then(handleSuccess, handleError);
+        function getAllCategories() {
+            return $http.get('/SpringMVC/category/getall').then(handleSuccess, handleError);
+        }
+        
+        function InsertFuelType(tariff) {
+            return $http.post('/SpringMVC/fuelType/insert', tariff).then(handleSuccess, handleError);
+        }
+        
+        function InsertCategory(tariff) {
+            return $http.post('/SpringMVC/category/insert', tariff).then(handleSuccess, handleError);
         }
         
         function DeleteTariff(id) {

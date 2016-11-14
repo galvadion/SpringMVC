@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Category implements Serializable{
@@ -24,6 +27,9 @@ public class Category implements Serializable{
 	@Column(name = "id")
 	private Integer id;
 	
+	@NotNull(message="The name can't be null")
+	@NotEmpty(message="The name can't be empty")
+	@Column(name = "name",unique =true)
 	private String name;
 	
 	@Min(value=0, message="The value can't be negative")

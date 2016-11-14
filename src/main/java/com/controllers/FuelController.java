@@ -21,7 +21,7 @@ import com.entities.Fuel;
 import com.services.FuelService;
 
 @Controller
-@RequestMapping(value = "fuel")
+@RequestMapping(value = "fuelType")
 public class FuelController {
 	
 	@Autowired

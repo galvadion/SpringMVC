@@ -5,9 +5,9 @@
         .module('app')
         .controller('VehicleController', VehicleController);
 
-    VehicleController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','VehicleService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','BrandService','ModelService', 'BranchofficeService'];
+    VehicleController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','VehicleService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','BrandService','ModelService', 'BranchofficeService','$routeParams'];
     
-    function VehicleController($location,UserService, $rootScope, $scope,$timeout,SessionService,VehicleService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,BrandService,ModelService, BranchofficeService) {
+    function VehicleController($location,UserService, $rootScope, $scope,$timeout,SessionService,VehicleService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,BrandService,ModelService, BranchofficeService,$routeParams) {
 
         var vm = this;
         initController();
@@ -17,6 +17,7 @@
         vm.modelsByBrand = [];
         vm.allOffices = [];
         vm.vehicle = {};
+        vm.brand = {};
         vm.vehicle.model = {};
         
 		var localDate = new Date();
@@ -66,8 +67,20 @@
         
         function initController() {
             NProgress.start();
-            getAllBrands();
-            getAllOffices();
+            vm.location = $location.path().split('/',3);
+            if(vm.location[2] == "edit"){
+        		getVehicleById($routeParams.id);
+                getAllBrands();
+                getAllOffices();
+        	}
+            else if(vm.location[2] == "create"){
+            	vm.vehicle.id = null;
+            	getAllBrands();
+            	getAllOffices();
+            }
+            else{
+            	getAllVehicles();
+            }
             NProgress.done();
         }
         
@@ -84,8 +97,21 @@
 			});
 		}
         
+        function getAllVehicles() {
+			VehicleService.GetAllVehicles().then(function(response) {
+				if (response.success) {
+					if (response.data.length > 0) {
+						vm.allVehicles = response.data;
+					}
+				} else {
+					vm.allVehicles = [];
+				}
+				NProgress.done();
+			});
+		}
+        
         function getAllBrands(){
-        	BrandService.GetAllBrands(vm.brand).then(function (response) {
+        	BrandService.GetAllBrands().then(function (response) {
         		if(response.success){
         			vm.allBrands = response.data;
         		}
@@ -97,7 +123,7 @@
         }
         
         $scope.getModelsByBrand = function(){
-        	ModelService.GetModelsByBrand(vm.vehicle.brand.id).then(function (response) {
+        	ModelService.GetModelsByBrand(vm.brand.id).then(function (response) {
         		if(response.success){
         			vm.modelsByBrand = response.data;
         			vm.vehicle.model.id = "";
@@ -121,6 +147,19 @@
 	    		NProgress.done();
 	    	});
         };
+        
+        function getVehicleById(id){
+        	VehicleService.GetVehicleById(id).then(function (response) {
+        		if(response.success){
+        			vm.vehicle = response.data;        			
+        		}
+        		else{
+        			vm.requestModel = [];
+        		}
+        		
+        		NProgress.done();
+        	});
+        }
 
     }
 

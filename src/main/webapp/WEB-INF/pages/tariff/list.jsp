@@ -97,7 +97,8 @@
 														<thead>
 															<tr>
 																<th>Nombre</th>
-																<th style="width: 20px;">Precio por dia</th>
+																<th>Precio por dia</th>
+																<th style="width: 20px;"></th>
 																<th style="width: 90px;">Acciones</th>
 																<th style="width: 70px;"></th>
 															</tr>
@@ -156,25 +157,24 @@
 
 													<div class="row">
 														<div class="form-group col-sm-6" class="form-group"
-															ng-class="{ 'has-error': form-fuel.name.$dirty && form-fuel.name.$error.required }">
+															ng-class="{ 'has-error': form-fuel.fuelType.$dirty && form-fuel.fuelType.$error.required }">
 															<label for="name" class="control-label">*
-																Nomenclacion de categoria</label> <input type="text"
-																ng-model="vm.category.name" name="catName" id="fuelName"
+																Nombre del tipo de combustible</label> <input type="text"
+																ng-model="vm.fuelType.fuelType" name="fuelType" id="fuelType"
 																class="form-control"
-																placeholder="Nomenclacion de la categoria" required>
+																placeholder="Nombre del tipo del combustible" required>
 															<span
-																ng-show="form-fuel.name.$dirty && form-fuel.name.$error.required"
-																class="help-block">Es necesario nombrar la
-																categoria</span>
+																ng-show="form-fuel.fuelType.$dirty && form-fuel.fuelType.$error.required"
+																class="help-block">Es necesario nombrar el tipo de combustible</span>
 														</div>
 														<div class="form-group col-sm-6" class="form-group"
-															ng-class="{ 'has-error': form-fuel.basePrice.$dirty && form-fuel.basePrice.$error.required }">
-															<label for="basePrice" class="control-label">*
+															ng-class="{ 'has-error': form-fuel.fuelPrice.$dirty && form-fuel.fuelPrice.$error.required }">
+															<label for="fuelPrice" class="control-label">*
 																Precio base por dia</label> <input type="number"
-																ng-model="vm.category.basePrice" name="basePrice"
+																ng-model="vm.fuelType.fuelPrice" name="fuelPrice"
 																id="basePrice" class="form-control"
 																placeholder="Precio base por dia" required> <span
-																ng-show="form-fuel.basePrice.$dirty && form-fuel.basePrice.$error.required"
+																ng-show="form-fuel.fuelPrice.$dirty && form-fuel.fuelPrice.$error.required"
 																class="help-block">Es necesario ingresar el
 																precio base</span>
 														</div>
@@ -201,27 +201,28 @@
 											<div class="tile-body table-custom p-0">
 												<div class="table-responsive">
 													<table datatable="ng" class="table mb-0 table-custom"
-														id="CategoryList" dt-options="vm.dtOptions"
+														id="FuelList" dt-options="vm.dtOptions"
 														dt-column-defs="vm.DTColumnDefs">
 														<thead>
 															<tr>
 																<th>Nombre</th>
-																<th style="width: 20px;">Precio por dia</th>
+																<th>Precio por dia</th>
+																<th style="width: 20px;"></th>
 																<th style="width: 90px;">Acciones</th>
 																<th style="width: 70px;"></th>
 															</tr>
 														</thead>
 														<tbody>
-															<tr ng-repeat="(key, value) in vm.categoryList">
-																<td>{{value.name}}</td>
-																<td>{{value.basePrice}}</td>
+															<tr ng-repeat="(key, value) in vm.fuelTypeList">
+																<td>{{value.fuelType}}</td>
+																<td>{{value.fuelPrice}}</td>
 																<td class="text-center plus" style="cursor: pointer;">
-																	<a title="Editar" ng-click="editCategory(value)"> <i
+																	<a title="Editar" ng-click="editFuelType(value)"> <i
 																		class="fa fa-pencil"></i><br> <small>Editar</small>
 																</a>
 																</td>
 																<td class="text-center delete"><a doing-action=""
-																	href data-toggle="" ng-click="deleteCategory(value.id)"
+																	href data-toggle="" ng-click="deleteFuelType(value.id)"
 																	confirm-if="checked"
 																	confirm="Esta seguro, eliminar categoria {{value.name}} ?"
 																	title="Eliminar"> <i class="fa fa-times"></i><br />

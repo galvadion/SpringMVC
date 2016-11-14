@@ -26,10 +26,11 @@
         }
         
         function GetVehicleById(id) {
-            return $http.get('/SpringMVC/vehicle/getbyid' + id).then(handleSuccess, handleError('Error getting vehicle by id'));
+            return $http.get('/SpringMVC/vehicle/getbyid?id=' + id).then(handleSuccess, handleError('Error getting vehicle by id'));
         }
         
         function InsertVehicle(vehicle) {
+        	vehicle.licensePlateExpirationDate = vehicle.licensePlateExpirationDate.replace(/-/g , "/");
             return $http.post('/SpringMVC/vehicle/insert', vehicle).then(handleSuccess, handleError('Error creating vehicle'));
         }
         
