@@ -15,6 +15,11 @@
 	<!-- Enable Autowire -->
 	<context:annotation-config />
 	<context:component-scan base-package="com" />
+	<bean name="Properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+            <value>classpath*:config.properties</value>
+    </property>
+</bean>
 	<mvc:annotation-driven >
 		<mvc:message-converters>
 			<!-- Use the HibernateAware mapper instead of the default -->
@@ -27,6 +32,7 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/images/**" location="file:${images}"/>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/springapp" />

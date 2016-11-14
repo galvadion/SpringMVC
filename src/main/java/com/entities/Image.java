@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Image implements Serializable {
 	
@@ -28,6 +30,7 @@ public class Image implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "model_id", nullable = false)
+	@JsonIgnore
 	private Model model;
 	
 	@Column(name="file_location")

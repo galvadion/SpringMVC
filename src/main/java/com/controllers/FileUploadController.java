@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,9 @@ public class FileUploadController {
 	
 	@Autowired
 	ImageService imageService;
+	
+	 @Value("${images}")
+	  private String webcontentPath;
 	/**
 	 * Upload single file using Spring Controller
 	 */
@@ -50,7 +54,7 @@ public class FileUploadController {
 
 				// Creating the directory to store file
 				String rootPath = System.getProperty("user.home");
-				File dir = new File(rootPath + File.separator + "tmpFiles");
+				File dir = new File(webcontentPath);
 				if (!dir.exists())
 					dir.mkdirs();
 
@@ -62,7 +66,7 @@ public class FileUploadController {
 				Model model=modelService.get(Integer.parseInt(id));
 				List<Image> imagesList=model.getImages();
 				Image image=new Image();
-				image.setFileLocation(serverFile.toString());
+				image.setFileLocation(id + " - " + LocalDate.now());
 				image.setModel(model);
 				imagesList.add(image);
 				imageService.saveOrUpdate(image);
