@@ -64,7 +64,7 @@
 						<br/>
 						
 						<div class="tile-header dvd dvd-btm">
-                            <h1 class="custom-font"><strong>Opciones </strong> adicionales</h1>
+                            <h1 class="custom-font"><strong>Búsqueda </strong> Avanzada</h1>
                             <button type="button" class="btn" data-toggle="collapse" data-target="#demo"><span class="glyphicon glyphicon-chevron-down"></span></button>
                         </div>
                         
@@ -104,21 +104,118 @@
 		<!-- /row -->
         </div>
         
+        <br/>
+        
         <div class="row">
         	<div class="col-md-12">
             	<section class="tile">
 					
-					<div class="tile-header dvd dvd-btm">
-                        <h1 class="custom-font"><strong>Resultados </strong></h1>
+					<div class="tile-header dvd dvd-btm" id="searchResult">
+                        <h1 class="custom-font"><strong>Tus resultados </strong></h1>
                     </div>
                     
-                    <div class="row" style="padding: 0 15px 0 15px;">
-                    	<div class="col-sm-12">
-                    		<div ng-repeat="(key, value) in vm.searchResult">
-                    			<p>{{value}}</p>
-                    		</div>
-                    	</div>
-                    </div>
+                    <br/>
+                    
+                    <!-- <div class="row" ng-repeat="(key, value) in vm.searchResult"> -->
+	                    <div class="row" style="padding: 15px;">
+	                    	<div class="col-sm-3">
+	                    		<img src="static/images/logo-wide-transparent.png" style="height:150px; max-width:240px;">
+	                    	</div>
+	                    	<div class="col-sm-2">
+	                    		<table>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Marca: Fiat</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Modelo: Fiorino</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Año: 2014</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Categoria: B</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Transmision: Manual</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Combustible: Nafta</p>
+	                    				</td>
+	                    			</tr>
+	                    		</table>
+	                    	</div>
+	                    	<div class="col-sm-6">
+	                    		<table>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Marca: Fiat</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Modelo: Fiorino</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Año: 2014</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Categoria: B</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Transmision: Manual</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Combustible: Nafta</p>
+	                    				</td>
+	                    			</tr>
+	                    		</table>
+	                    	</div>
+	                    	<div class="col-sm-1">
+	                    		<a href class="btn  btn-orange"><strong>Reservar</strong></a>
+	                    	</div>
+	                    </div>
+	                    
+	                    <hr class="line-dashed line-full"/>
+	                    
+	                    <div class="row" style="padding: 15px;">
+	                    	<div class="col-sm-3">
+	                    		<img src="static/images/logo-wide-transparent.png" style="height:130px; max-width:240px;">
+	                    	</div>
+	                    	<div class="col-sm-8">
+	                    		<table>
+	                    			<tr><td>1</td></tr>
+	                    			<tr><td>2</td></tr>
+	                    			<tr><td>3</td></tr>
+	                    			<tr><td>4</td></tr>
+	                    			<tr><td>5</td></tr>
+	                    			<tr><td>6</td></tr>
+	                    		</table>
+	                    	</div>
+	                    	<div class="col-sm-1">
+	                    		<a href class="btn  btn-orange"><strong>Reservar</strong></a>
+	                    	</div>
+	                    </div>
+	                    
+					<!-- </div> -->
 
 				</section>
             </div>

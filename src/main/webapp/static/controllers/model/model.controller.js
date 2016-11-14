@@ -60,8 +60,6 @@
             DTColumnDefBuilder.newColumnDef(14).notSortable(),
         ];
 		
-        
-        
         initController();
         
         function initController() {
