@@ -97,7 +97,7 @@
 		<script type="text/javascript" src="static/js/src/plugins/select/angular-datatables.select.js"></script>
 		
 		<!-- PayPal -->
-        <script src="https://www.paypalobjects.com/api/checkout.js" async></script>
+        <!-- <script src="https://www.paypalobjects.com/api/checkout.js" async></script> -->
 
 		<!-- Models -->
 		<script src="static/models/shoppingCart.js"></script>

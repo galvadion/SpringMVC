@@ -15,8 +15,8 @@
 		
 		//*****************************************
 		// Item HARDCODED
-		myCart.addItem(1, "BMW z4", 8500, 1);
-		myCart.addItem(2, "GPS", 100, 1);
+		myCart.addItem(1, "BMW z4", 1000, 1);
+		myCart.addItem(2, "GPS", 5, 1);
 		//*****************************************
 		
 		return {

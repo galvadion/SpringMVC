@@ -127,26 +127,6 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         rm: "2",
         charset: "utf-8"
     };
-
-    // item data
-//    for (var i = 0; i < this.items.length; i++) {
-//        var item = this.items[i];
-//        var ctr = i + 1;
-//        data["item_number_" + ctr] = item.sku;
-//        data["item_name_" + ctr] = item.name;
-//        data["quantity_" + ctr] = item.quantity;
-//        data["amount_" + ctr] = item.price.toFixed(2);
-//    }
-//
-//    // build form
-//    var form = $('<form/></form>');
-//    form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
-//    form.attr("method", "POST");
-//    form.attr("style", "display:none;");
-//    form.attr("id", "paypalform")
-//    this.addFormFields(form, data);
-//    this.addFormFields(form, parms.options);
-//    $("body").append(form);
     
     var datos = [];
     
@@ -157,20 +137,14 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
     	datos.push(TransactionItem);
     }
 
-    // submit form
     var jsonData = JSON.stringify(datos);
     var paypaliframe = document.createElement('iframe');
     paypaliframe.src = "payment/paypal-transaction-flow";
-    paypaliframe.onLoad = "paypalRedirect(this.contentWindow.location)";
+    paypaliframe.id = "paypal-iframe";
+    paypaliframe.width = "0px";
+    paypaliframe.height = "0px";
     document.body.appendChild(paypaliframe);
-        
-    //form.submit();
-    //paypal.checkout.setup('info-rentuy@gmail.com', {
-    //	environment: 'sandbox',
-    //	container: 'btnPaypalId'
-    //})
-    
-    //paypal.checkout.initXO();
+
 	$.support.cors = true;
 	$.ajax({
 		url:"/SpringMVC/payment/start-paypal",
@@ -186,8 +160,7 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
 	    },
 		
 		success:function(response){
-			paypaliframe.contentWindow.paypalBeginTransaction(token);
-//			paypal.checkout.startFlow(response.token);
+			paypaliframe.contentWindow.paypalBeginTransaction(response.token);
 		},
 		error: function(response){
 			console.log(response)
@@ -197,7 +170,6 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
 	})
     
     this.clearCart = clearCart == null || clearCart;
-    //form.remove();
 }
 
 //utility methods
@@ -216,9 +188,26 @@ shoppingCart.prototype.toNumber = function (value) {
     return isNaN(value) ? 0 : value;
 }
 
-function paypalRedirect(redirectUrl){
-	alert(redirectUrl);
-}
+function getDetails(url){
+	
+	if(url.includes("accept-payment")){
+		var urlParts = url.split("?");
+		var parameters = urlParts[1].split("&");
+		var token, payerId;
+		parameters.forEach(function (p){
+			if(p.includes("token")){
+				token = p.split("=")[1];
+			}
+			else{
+				if(p.includes("PayerID")){
+					payerId = p.split("=")[1];
+				}
+			}
+		});
+		alert("Token = " + token + " and Payer ID = " + payerId);
+	}
+	$("#paypal-iframe").remove();
+};
 
 //----------------------------------------------------------------
 //checkout parameters (one per supported payment service)

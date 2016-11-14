@@ -41,7 +41,6 @@ public class PaymentTransactionController {
 			if(itemsList == null){
 				throw new Exception("Items list from client is empty.");
 			}
-			
 			validateItemList(itemsList);
 
 			Map<String, String> response = paypalService.beginTransaction(itemsList);
@@ -83,8 +82,8 @@ public class PaymentTransactionController {
 		return view;
 	}
 	
-	@RequestMapping(value="/accept-payment", method=RequestMethod.GET)
-	public ModelAndView acceptPayment(@RequestParam("token") String token, @RequestParam("PayerID") String PayerID) throws Exception{
+	@RequestMapping(value="/details-payment", method=RequestMethod.GET)
+	public ModelAndView detailsPayment(@RequestParam("token") String token, @RequestParam("PayerID") String PayerID) throws Exception{
 		
 		try{
 			PayPalTransaction transaction = paypalService.getTransactionDetails(token);
@@ -100,13 +99,21 @@ public class PaymentTransactionController {
 	}
 	
 	@RequestMapping(value="/paypal-transaction-flow", method=RequestMethod.GET)
-	public ModelAndView paypalTransactionFlow(){
-		ModelAndView view = new ModelAndView("payment/paypal_iframe_transaction.jsp");
-		return view;
+	public String paypalTransactionFlow(){
+		return "payment/paypal_iframe_transaction";
+	}
+	
+	@RequestMapping(value="/cancel-payment", method=RequestMethod.GET)
+	public String paypalCancelPayment(String token){
+		return "payment/paypal_iframe_transaction";
+	}
+	
+	@RequestMapping(value="/accept-payment", method=RequestMethod.GET)
+	public String paypalAceptPayment(String token){
+		return "payment/paypal_iframe_transaction";
 	}
 	
 	private void validateItemList(List<TransactionItem> listItem) throws Exception{
-		System.out.println(listItem);
 		for(TransactionItem item : listItem){
 			if(item.getName() == null || item.getName().equals("")){
 				throw new Exception("An item name is empty");
