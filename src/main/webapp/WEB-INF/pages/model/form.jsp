@@ -146,11 +146,9 @@
 	                    
 	                    <div class="form-group col-md-12 legend"> <h4><strong>Imagen</strong></h4><p></p> </div>
 	                    
-	                    <div class="row" ng-if="!vm.requestModel.image">
+	                    <div class="row" ng-if="!vm.requestModel.images[0]">
 	                    	<div  class="form-group col-sm-6">
-								  <input type="file" ngf-select ng-model="vm.file" name="file"    
-             accept="image/*" ngf-max-size="2MB" required
-             ngf-model-invalid="errorFile">
+								  <input type="file" ngf-select ng-model="vm.file" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
 								<br/>
 								<span class="help-block" style="padding-left:0px">
 									<strong>Archivos compatibles: gif, png, jpg. Tamaño Maximo 1Mb</strong>
@@ -160,17 +158,15 @@
 	                    
 	                    <br/><br/>
 	                    
-	                    <div class="row" ng-if="vm.requestModel.image">
+	                    <div class="row" ng-if="vm.requestModel.images[0]" style="padding: 15px;">
 	                    	<div  class="form-group col-sm-12">
-	                    		<small>Vista minimizada</small>
-	                    		<br/>
-	                    		<img src="static/images/logo-wide-transparent.png" style="height: 60px">
+	                    		<img src="images/{{vm.requestModel.images[0].fileLocation}}" style="height: 160px">
 	                    	</div>
 	                    </div>
 
                         <!-- Buttons -->
 
-                        <div class="form-group text-right">
+                        <div class="form-group text-right" style="padding: 15px;">
                             <a href="#/model" class="btn btn-lightred">Cancelar</a>
                             <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Guardar</button>
                         </div>

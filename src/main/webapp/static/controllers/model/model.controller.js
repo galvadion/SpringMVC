@@ -116,8 +116,6 @@
         		if(response.success){
         			vm.requestModel = response.data;
         			vm.requestModel.airConditioner=vm.requestModel.airConditioner.toString();
-        			console.log(response.data);
-        			console.log(vm.requestModel.image)
         		}
         		else{
         			vm.requestModel = [];
