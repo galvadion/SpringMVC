@@ -47,7 +47,7 @@ public class FileUploadController {
 	 */
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file,
-			@RequestParam("id") String id) {
+			@RequestParam("id") String id,@RequestParam("index") String index) {
 		if (!file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
@@ -59,14 +59,14 @@ public class FileUploadController {
 					dir.mkdirs();
 
 				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath() + File.separator + id + " - " + LocalDate.now());
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + id + "-" +index +  " - " + LocalDate.now());
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();
 				Model model=modelService.get(Integer.parseInt(id));
 				List<Image> imagesList=model.getImages();
 				Image image=new Image();
-				image.setFileLocation(id + " - " + LocalDate.now());
+				image.setFileLocation(id + "-" +index +  " - " + LocalDate.now());
 				image.setModel(model);
 				imagesList.add(image);
 				imageService.saveOrUpdate(image);
@@ -83,34 +83,39 @@ public class FileUploadController {
 	 * Upload multiple file using Spring Controller
 	 */
 	@RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
-	public @ResponseBody String uploadMultipleFileHandler(@RequestParam("name") String[] names,
+	public @ResponseBody String uploadMultipleFileHandler(@RequestParam("id") String id,
 			@RequestParam("file") MultipartFile[] files) {
 
-		if (files.length != names.length)
+		if (files.length != files.length)
 			return "Mandatory information missing";
 
 		String message = "";
 		for (int i = 0; i < files.length; i++) {
 			MultipartFile file = files[i];
-			String name = names[i];
 			try {
 				byte[] bytes = file.getBytes();
 
 				// Creating the directory to store file
 				String rootPath = System.getProperty("user.home");
-				File dir = new File(rootPath + File.separator + "tmpFiles");
+				File dir = new File(webcontentPath);
 				if (!dir.exists())
 					dir.mkdirs();
 
 				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + id + "-" +i + " - " + LocalDate.now());
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();
-				
-				message = message + "You successfully uploaded file=" + name;
+				Model model=modelService.get(Integer.parseInt(id));
+				List<Image> imagesList=model.getImages();
+				Image image=new Image();
+				image.setFileLocation(id + " - " + LocalDate.now());
+				image.setModel(model);
+				imagesList.add(image);
+				imageService.saveOrUpdate(image);
+				message = message + "You successfully uploaded file=" + id;
 			} catch (Exception e) {
-				return "You failed to upload " + name + " => " + e.getMessage();
+				return "You failed to upload " + id + " => " + e.getMessage();
 			}
 		}
 		return message;

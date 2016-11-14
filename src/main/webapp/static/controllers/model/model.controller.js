@@ -199,12 +199,16 @@
         	        console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
         	    });
         };*/
-        $scope.uploadPic = function(file,id) {
+        $scope.uploadPic = function(files,id) {
         	console.log(file);
-            file.upload = Upload.upload({
-              url: '/SpringMVC/upload/uploadFile',
-              data: {id: id, file: file},
-            });
+        	for(var i = 0; i < files.length; i++){
+        		var file = files[i];
+        		file.upload = Upload.upload({
+                    url: '/SpringMVC/upload/uploadFile',
+                    data: {id: id, file: file,index:i},
+                  });
+        	}
+            
         }
 
         

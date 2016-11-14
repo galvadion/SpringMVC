@@ -150,7 +150,7 @@
 	                    	<div  class="form-group col-sm-6">
 								  <input type="file" ngf-select ng-model="vm.file" name="file"    
              accept="image/*" ngf-max-size="2MB" required
-             ngf-model-invalid="errorFile">
+             ngf-model-invalid="errorFile" ngf-multiple="true"> 
 								<br/>
 								<span class="help-block" style="padding-left:0px">
 									<strong>Archivos compatibles: gif, png, jpg. Tamaño Maximo 1Mb</strong>
