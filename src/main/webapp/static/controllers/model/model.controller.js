@@ -5,9 +5,9 @@
         .module('app')
         .controller('ModelController', ModelController);
 
-    ModelController.$inject = ['$location','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams','TariffService','ngDialog'];
+    ModelController.$inject = ['$location','$rootScope','$scope','$timeout','SessionService','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams','TariffService','ngDialog','Upload'];
     
-    function ModelController($location, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams,TariffService,ngDialog) {
+    function ModelController($location, $rootScope, $scope,$timeout,SessionService,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams,TariffService,ngDialog,Upload) {
 
         var vm = this;
         
@@ -173,12 +173,9 @@
         	NProgress.start();
         	ModelService.CreateModel(vm.requestModel).then(function (response) {
         		if(response.success){
-        			if(!angular.isUndefined($scope.file.queue[0])){
-        				$scope.file.queue[0].id = response.data.id;
-        				$scope.file.queue[0].name = response.data.id + "-" +response.data.name;
-        				console.log($scope.file.queue[0]);
-        				$scope.file.queue[0].upload();
-        			}
+        		          $scope.uploadPic(vm.file,response.data.id);
+        		          
+        		        
         			$rootScope.doFlashMessage("Modelo guardado con exito",'/model','success');
         		}
         		else{
@@ -192,23 +189,23 @@
         
         //File uploader methods
         
-        var file = $scope.file = new FileUploader({
-            url: '/SpringMVC/upload/uploadFile',
-            queueLimit: 1,  
-            removeAfterUpload: true
-        });
+    /*    $scope.upload = function (file,id) {
+        	 Upload.upload({
+        	        url: '/SpringMVC/upload/uploadFile',
+        	        fields: {'model_id': id}, // additional data to send
+        	        file: file
+        	    }).success(function (data, status, headers, config) {
+        	        console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+        	    });
+        };*/
+        $scope.uploadPic = function(file,id) {
+        	console.log(file);
+            file.upload = Upload.upload({
+              url: '/SpringMVC/upload/uploadFile',
+              data: {id: id, file: file},
+            });
+        }
 
-        file.filters.push({
-            name: 'imageFilter',
-            fn: function(item,options) {
-                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                return '|jpeg|jpg|png|gif|'.indexOf(type) !== -1;
-            }
-        });
-
-        file.onWhenAddingFileFailed = function(item ,filter, options) {
-            $rootScope.doFlashMessage("Error, formatos permitidos: gif, png, jpg. Tamaño máximo 1Mb",'','error');
-        };
         
         //End - File uploader methods
 

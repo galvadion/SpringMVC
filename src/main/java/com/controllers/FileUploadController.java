@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,8 @@ public class FileUploadController {
 	 * Upload single file using Spring Controller
 	 */
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file) {
-		String name = "mifoto";
-		String id = "9";
+	public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file,
+			@RequestParam("id") String id) {
 		if (!file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
@@ -55,7 +55,7 @@ public class FileUploadController {
 					dir.mkdirs();
 
 				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + id + " - " + LocalDate.now());
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();
@@ -66,12 +66,12 @@ public class FileUploadController {
 				image.setModel(model);
 				imagesList.add(image);
 				imageService.saveOrUpdate(image);
-				return "You successfully uploaded file=" + name;
+				return "You successfully uploaded file=" + id;
 			} catch (Exception e) {
-				return "You failed to upload " + name + " => " + e.getMessage();
+				return "You failed to upload " + id + " => " + e.getMessage();
 			}
 		} else {
-			return "You failed to upload " + name + " because the file was empty.";
+			return "You failed to upload " + id + " because the file was empty.";
 		}
 	}
 

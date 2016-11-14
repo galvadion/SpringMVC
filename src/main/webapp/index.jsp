@@ -47,7 +47,8 @@
 		<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="static/js/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="static/js/angular-ui-router.js"></script>
-        <script type="text/javascript" src="static/js/angular-file-upload.js"></script>
+        <script type="text/javascript" src="static/js/vendor/ng-file-upload/ng-file-upload-shim.min.js"></script>
+        <script type="text/javascript" src="static/js/vendor/ng-file-upload/ng-file-upload.min.js"></script>
         <script type="text/javascript" src="static/js/angular-confirm.js"></script>
         <script type="text/javascript" src="static/js/nprogress.js"></script>
         <script type="text/javascript" src="static/js/ngDialog.js"></script>

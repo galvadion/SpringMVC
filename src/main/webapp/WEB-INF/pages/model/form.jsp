@@ -148,7 +148,9 @@
 	                    
 	                    <div class="row" ng-if="!vm.requestModel.image">
 	                    	<div  class="form-group col-sm-6">
-								<input type="file" nv-file-select="" uploader="file"/>
+								  <input type="file" ngf-select ng-model="vm.file" name="file"    
+             accept="image/*" ngf-max-size="2MB" required
+             ngf-model-invalid="errorFile">
 								<br/>
 								<span class="help-block" style="padding-left:0px">
 									<strong>Archivos compatibles: gif, png, jpg. Tamaño Maximo 1Mb</strong>
