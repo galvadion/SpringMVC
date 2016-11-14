@@ -13,7 +13,6 @@
         service.GetAllModels = GetAllModels;
         service.GetModelById = GetModelById;
         service.CreateModel = CreateModel;
-        service.UpdateModel = UpdateModel;
         service.DeleteModel = DeleteModel;
         service.SearchModels = SearchModels;
         service.GetModelsByBrand = GetModelsByBrand;
@@ -36,16 +35,12 @@
         	return $http.get('/SpringMVC/model/getmodelsbyid?id=' + id).then(handleSuccess, handleError('Error getting model by id'));
         }
         
-        function CreateModel(model) { console.log(model);
+        function CreateModel(model) {
             return $http.post('/SpringMVC/model/insert', model).then(handleSuccess, handleError('Error creating model'));
         }
         
-        function UpdateModel(model) {
-            return $http.put('/SpringMVC/model/update', model).then(handleSuccess, handleError('Error updating model'));
-        }
-        
         function DeleteModel(id) {
-            return $http.delete('/SpringMVC/model/delete?id=', id).then(handleSuccess, handleError('Error deleting model'));
+            return $http.delete('/SpringMVC/model/delete?id=' + id).then(handleSuccess, handleError('Error deleting model'));
         }
         
         function SearchModels(searchObject) {

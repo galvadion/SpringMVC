@@ -22,7 +22,7 @@
             		<!-- tile body -->
                     <div class="tile-body">
             			
-            			<form  form-on-change="checkFields()" name='form' class="" role="form" ng-submit="saveModel()">
+            			<form  form-on-change="checkFields()" name='form' class="" role="form" ng-submit="saveModel()" enctype="multipart/form-data">
 
                         <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
                             <label for="name" class="control-label">* Nombre</label>
@@ -66,7 +66,7 @@
 	
 							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.passangers.$dirty && form.passangers.$error.required }">
 	                            <label for="passangers" class="control-label">* Cantidad de pasajeros</label>
-	                            <input type="number" min="1" ng-model="vm.requestModel.passangers" name="passangers" id="passangers" class="form-control" placeholder="1" required>
+	                            <input type="number" min="2" ng-model="vm.requestModel.passangers" name="passangers" id="passangers" class="form-control" placeholder="2" required>
 								<span ng-show="form.passangers.$dirty && form.passangers.$error.required" class="help-block">Cantidad de pasajeros es requerido</span>
 	                        </div>
 	                    </div>
@@ -90,7 +90,7 @@
 	                        
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.luggage.$dirty && form.luggage.$error.required }">
 	                            <label for="luggage" class="control-label">* Cantidad de valijas</label>
-	                            <input type="number" min="0" ng-model="vm.requestModel.luggage" name="luggage" id="luggage" class="form-control" placeholder="0" required>
+	                            <input type="number" min="1" ng-model="vm.requestModel.luggage" name="luggage" id="luggage" class="form-control" placeholder="1" required>
 								<span ng-show="form.luggage.$dirty && form.luggage.$error.required" class="help-block">Cantidad de valias es requerido</span>
 	                        </div>
 	                    </div>
@@ -144,32 +144,37 @@
 	                        </div>
 	                    </div>
 	                    
-	                    <div class="form-group col-md-12 legend"> <h4><strong>Imagenes</strong></h4><p></p> </div>
+	                    <div class="form-group col-md-12 legend"> <h4><strong>Imagen</strong></h4><p></p> </div>
 	                    
-	                    <div class="row">
+	                    <div class="row" ng-if="!vm.requestModel.image">
 	                    	<div  class="form-group col-sm-6">
-								<label class="customFileInput clearfix">
-									<div class="btn btn-success fileinput-button">
-										<i class="glyphicon glyphicon-plus"></i>
-										<span>Agregar...</span>
-										<input class="upload-appIcon filestyle" type="file" nv-file-select="" uploader="file" />
-									</div>
-								</label>
+								<input type="file" nv-file-select="" uploader="file"/>
+								<br/>
 								<span class="help-block" style="padding-left:0px">
-									<br/>
 									<strong>Archivos compatibles: gif, png, jpg. Tamaño Maximo 1Mb</strong>
-									<small>{{vm.user.imagesURL}}</small>
 								</span>
 							</div>
+	                    </div>
+	                    
+	                    <br/><br/>
+	                    
+	                    <div class="row" ng-if="vm.requestModel.image">
+	                    	<div  class="form-group col-sm-12">
+	                    		<small>Vista minimizada</small>
+	                    		<br/>
+	                    		<img src="static/images/logo-wide-transparent.png" style="height: 60px">
+	                    	</div>
 	                    </div>
 
                         <!-- Buttons -->
 
                         <div class="form-group text-right">
                             <a href="#/model" class="btn btn-lightred">Cancelar</a>
-                            <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
+                            <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Guardar</button>
                         </div>
-            	
+                        
+            		</form>
+            		</div>
             	</section>
             </div>
 		<!-- /row -->

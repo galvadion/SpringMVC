@@ -41,9 +41,9 @@ public class FileUploadController {
 	 * Upload single file using Spring Controller
 	 */
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	public @ResponseBody String uploadFileHandler(@RequestParam("name") String name,@RequestParam("id") String id,
-			@RequestParam("file") MultipartFile file) {
-
+	public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file) {
+		String name = "mifoto";
+		String id = "9";
 		if (!file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();

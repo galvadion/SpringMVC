@@ -5,9 +5,9 @@
         .module('app')
         .controller('ModelController', ModelController);
 
-    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams','TariffService'];
+    ModelController.$inject = ['$location','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams','TariffService','ngDialog'];
     
-    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams,TariffService) {
+    function ModelController($location, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams,TariffService,ngDialog) {
 
         var vm = this;
         
@@ -19,6 +19,7 @@
         vm.cylinders=[];
         vm.fuelType=[];
         vm.category=[];
+        vm.images = [];
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -58,6 +59,8 @@
             DTColumnDefBuilder.newColumnDef(13).notSortable(),
             DTColumnDefBuilder.newColumnDef(14).notSortable(),
         ];
+		
+        
         
         initController();
         
@@ -168,10 +171,19 @@
         
         $scope.saveModel = function() {
         	NProgress.start();
-        	console.log(vm.requestModel);
         	ModelService.CreateModel(vm.requestModel).then(function (response) {
-        		console.log(response);
-        		
+        		if(response.success){
+        			if(!angular.isUndefined($scope.file.queue[0])){
+        				$scope.file.queue[0].id = response.data.id;
+        				$scope.file.queue[0].name = response.data.id + "-" +response.data.name;
+        				console.log($scope.file.queue[0]);
+        				$scope.file.queue[0].upload();
+        			}
+        			$rootScope.doFlashMessage("Modelo guardado con exito",'/model','success');
+        		}
+        		else{
+        			$rootScope.doFlashMessage("Error al guardar",'','error');
+        		}
         		NProgress.done();
         	});
         };
@@ -181,7 +193,7 @@
         //File uploader methods
         
         var file = $scope.file = new FileUploader({
-            url: 'front.justmob/upload.php',
+            url: '/SpringMVC/upload/uploadFile',
             queueLimit: 1,  
             removeAfterUpload: true
         });
@@ -195,33 +207,34 @@
         });
 
         file.onWhenAddingFileFailed = function(item ,filter, options) {
-            
-            $rootScope.doFlashMessage("Error File upload Allowed files: gif, png, jpg. Max file size 1Mb",'','error');
-        };
-        
-        file.onAfterAddingAll = function(addedFileItems) {
-            if(!angular.isUndefined($scope.file.queue[0])){
-                var newFileName = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for( var i=0; i < 16; i++ ){
-                newFileName += possible.charAt(Math.floor(Math.random() * possible.length));
-            }
-            //var extension = $scope.file.queue[0].file.name.split('.').pop();
-            //$scope.file.queue[0].file.name = newFileName + '.' + extension;
-            $scope.file.queue[0].file.nam = vm.user.id + "_" + $scope.file.queue[0].file.name;
-            $scope.file.queue[0].upload();
-            }
-         };
-
-        file.onSuccessItem = function(fileItem, response, status, headers) {
-            if(response.answer=='completed'){
-                vm.user.avatarURL = window.location.protocol + "//" + window.location.host + "/front.justmob/uploads/" +$scope.file.queue[0].file.name;  
-            }
+            $rootScope.doFlashMessage("Error, formatos permitidos: gif, png, jpg. Tamaño máximo 1Mb",'','error');
         };
         
         //End - File uploader methods
+
         
+        $scope.deleteModel = function (id) {
+        	NProgress.start();
+        	ModelService.DeleteModel(id).then(function (response) {
+        		if(response.success){
+        			$rootScope.doFlashMessage('Modelo eliminado con éxito','','success');
+        			initController();
+        		}
+        		else{
+        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+        		}
+        		NProgress.done();
+        	});
+        };
         
+        $scope.openDialog = function (model) {
+        	vm.auxModel = angular.copy(model);
+            ngDialog.openConfirm({
+                template: 'modalDialog',
+                className: 'ngdialog-theme-default',
+                scope: $scope,
+            }).then(function (value) {}, function (reason) {});
+        };
         
     }
 

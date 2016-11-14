@@ -22,7 +22,7 @@
     config.$inject = ['$routeProvider', '$locationProvider'];
     function config($routeProvider, $locationProvider) {
     	
-        $routeProvider
+    	$routeProvider
             .when('/home', {
                 controller: 'HomeController',
                 templateUrl: 'home/home',
@@ -237,10 +237,17 @@
                 controllerAs: 'vm'
             })
             
+            .when('/search', {
+                controller: 'BookedController',
+                templateUrl: 'booked/search',
+                title: 'Rent-UY - Buscar',
+                controllerAs: 'vm'
+            })
+            
             .when('/search/origin=:origin&destination=:destination&from=:from&to=:to', {
                 controller: 'BookedController',
                 templateUrl: 'booked/search',
-                title: 'Rent-UY - Búsqueda',
+                title: 'Rent-UY - Buscar',
                 controllerAs: 'vm'
             })
 

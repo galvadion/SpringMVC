@@ -15,7 +15,7 @@
 
         <div class="row">
         	<div class="col-md-12">
-            	<section class="tile" style="height: 400px !important;">
+            	<section class="tile">
 					<br/>
 					<br/>
 					<form name='form' class="" role="form" ng-submit="searchModels()">
@@ -60,13 +60,42 @@
 								<span ng-show="form.officeEndId.$dirty && form.officeEndId.$error.required" class="help-block">Sucursal es requerido</span>
 							</div>
 						</div>
+						
+						<br/>
+						
+						<div class="tile-header dvd dvd-btm">
+                            <h1 class="custom-font"><strong>Opciones </strong> adicionales</h1>
+                            <button type="button" class="btn" data-toggle="collapse" data-target="#demo"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                        </div>
+                        
+                        <br/>
+					
+						<div class="row collapse" style="padding: 0 10px 0 10px;" id="demo">
+							<div class="form-group col-sm-3" class="form-group">
+								<label for="passangers" class="control-label">Cantidad de pasajeros</label>
+									<input type="number" min="0" ng-model="vm.search.passangers" name="passangers" id="passangers" class="form-control" placeholder="0">
+							</div>
+							
+							<div class="form-group col-sm-3" class="form-group">
+								<label for="luggage" class="control-label">Disponibilidad de valijas</label>
+									<input type="number" min="0" ng-model="vm.search.luggage" name="luggage" id="luggage" class="form-control" placeholder="0">
+							</div>
+							
+							<div class="form-group col-sm-3" class="form-group">
+								<label for="airConditioner" class="control-label">Aire acondicionado</label>
+								<br/>
+								<input type="checkbox" ng-model="vm.search.airConditioner" name="airConditioner" id="airConditioner" class="">
+							</div>
+						</div>
 
-						<br /> <br />
+						<br/>
 
 						<!-- Buttons -->
 						<div class="form-group text-right" style="margin-right: 15px;">
 							<button type="submit" id="submit" ng-disabled="form.$invalid || endDateError" class="btn  btn-orange">Buscar ahora</button>
 						</div>
+						
+						<br/>
 					</form>
 
 				</section>
@@ -74,7 +103,28 @@
             </div>
 		<!-- /row -->
         </div>
+        
+        <div class="row">
+        	<div class="col-md-12">
+            	<section class="tile">
+					
+					<div class="tile-header dvd dvd-btm">
+                        <h1 class="custom-font"><strong>Resultados </strong></h1>
+                    </div>
+                    
+                    <div class="row" style="padding: 0 15px 0 15px;">
+                    	<div class="col-sm-12">
+                    		<div ng-repeat="(key, value) in vm.searchResult">
+                    			<p>{{value}}</p>
+                    		</div>
+                    	</div>
+                    </div>
 
+				</section>
+            </div>
+        </div>
+        
+        
     </div>
 
 </section>
