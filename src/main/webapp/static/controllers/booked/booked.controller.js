@@ -42,6 +42,12 @@
 			}
 		};
 		
+		$scope.scrollTo = function(element) {
+        	$( 'html, body').animate({
+        		scrollTop: $(element).offset().top
+        	}, 2000);
+        }
+		
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
         .withDisplayLength(10)
@@ -76,8 +82,11 @@
         	NProgress.start();
         	ModelService.SearchModels(vm.search).then(function (response) {
         		if(response){
-        			vm.searchResult = response.data;
-        			console.log(vm.searchResult);
+        			if(vm.searchResult.length > 0){
+        				vm.searchResult = response.data;
+        				$scope.scrollTo( "#searchResult");
+        				console.log(vm.searchResult);
+        			}
         		}
         		NProgress.done();
         	});
