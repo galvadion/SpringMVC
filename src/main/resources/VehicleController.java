@@ -17,10 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.entities.Model;
 import com.entities.StatusBetweenDates;
 import com.entities.Vehicle;
 import com.models.MaintenanceModel;
@@ -94,7 +92,6 @@ public class VehicleController {
 				availability.setBeginDate(LocalDate.now());
 				availability.setEndDate(LocalDate.now().plusYears(5));
 				availability.setVehicle(requestModel);
-				availability.setStatus(Vehicle_Status.Available);
 				availability.setBranchOffice(branchService.get(requestModel.getBranchOffice().getId()));
 				statusService.saveOrUpdate(availability);
 				return ResponseEntity.ok((Object) requestModel);
@@ -107,7 +104,6 @@ public class VehicleController {
 	@RequestMapping(value = "/maintenance", method = RequestMethod.POST)
 	public ResponseEntity<Object> sendToMaintenance(@RequestBody MaintenanceModel requestModel){
 		Vehicle vehicle=vehicleService.get(requestModel.getVehicleId());
-		vehicleService.abortNewEvents(vehicle);
 		StatusBetweenDates current=statusService.getCurrentStatus(vehicle,requestModel.getFirstDate());
 		current.setEndDate(requestModel.getFirstDate());
 		statusService.saveOrUpdate(current);
@@ -141,22 +137,5 @@ public class VehicleController {
 		}
 	}
 	
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> delete(String id) {
-		Vehicle vehicle=vehicleService.get(Integer.parseInt(id));
-		vehicle.setUnavailable(true);
-		vehicleService.abortNewEvents(vehicle);
-		
-		return ResponseEntity.ok((Object)"It has been removed");
-	}
 	
-	@RequestMapping(value = "/getbyid", method = RequestMethod.GET)
-	public ResponseEntity<Vehicle> getbyid(@RequestParam("id") Integer id) { 
-		if (vehicleService.get(id) != null) {
-			return ResponseEntity.ok(vehicleService.get(id));
-		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-		}
-		
-	}
 }
