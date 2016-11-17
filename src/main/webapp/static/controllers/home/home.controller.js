@@ -13,10 +13,10 @@
 		vm.roladmin = $rootScope.roladmin;
 		vm.allOffices = [];
 		vm.search = {};
-		vm.searchResult = [];
 
 		var localDate = new Date();
-		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1) + '-' + localDate.getDate();
+		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
+				+ '-' + localDate.getDate();
 		$('.date').datetimepicker({
 			language : 'es',
 			weekStart : 1,
@@ -28,8 +28,11 @@
 			startDate : localDate
 		});
 
-		$scope.checkEndDate = function(varDate) {
-			if (Date.parse(vm.search.beginDate) > Date.parse(vm.search.endDate)) {
+		$scope.checkEndDate = function() {
+			var firstDate = moment(vm.search.beginDate, "dd/mm/yyyy");
+			var lastDate = moment(vm.search.endDate, "dd/mm/yyyy");
+			var isAfter = firstDate.isAfter(lastDate);
+			if (isAfter) {
 				$scope.endDateError = true;
 			} else {
 				$scope.endDateError = false;
@@ -49,17 +52,14 @@
 			scrollwheel : false
 		};
 
-
 		$scope.searchModels = function() {
 			NProgress.start();
-        	$location.path("/search/origin=" + vm.search.officeOriginId + "&destination=" + vm.search.officeEndId + "&from=" + vm.search.beginDate + "&to=" + vm.search.endDate);
+			$location.path("/search/origin=" + vm.search.officeOriginId + "&destination=" + vm.search.officeEndId + "&from=" + vm.search.beginDate + "&to=" + vm.search.endDate);
 		};
 
-
-		
-        $scope.onClick = function(marker, eventName, model) {
-            model.show = !model.show;
-        };
+		$scope.onClick = function(marker, eventName, model) {
+			model.show = !model.show;
+		};
 
 		$scope.closeClick = function() {
 			$scope.windowOptions.visible = false;
@@ -69,7 +69,6 @@
 
 		function initController() {
 			NProgress.start();
-
 			getAllOffers();
 			getAllOffices();
 			NProgress.done();
@@ -82,7 +81,7 @@
 		function getAllOffices() {
 			BranchofficeService.GetAllBranchoffices().then(function(response) {
 				if (response.success) {
-					if(response.data.length > 0){
+					if (response.data.length > 0) {
 						vm.allOffices = response.data;
 						angular.forEach(vm.allOffices, function(value, key) {
 							$scope.map.markers.push({

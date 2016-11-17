@@ -5,9 +5,9 @@
         .module('app')
         .controller('BookedController', BookedController);
 
-    BookedController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','BookedService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams'];
+    BookedController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','BookedService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams','ModelService','BranchofficeService'];
     
-    function BookedController($location, UserService, $rootScope, $scope, $timeout, SessionService, BookedService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams) {
+    function BookedController($location, UserService, $rootScope, $scope, $timeout, SessionService, BookedService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams,ModelService,BranchofficeService) {
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
@@ -15,7 +15,39 @@
         vm.allBookeds = [];
         vm.search = {};
         vm.searchResult = [];
+        vm.allOffices = [];
         
+        var localDate = new Date();
+		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
+				+ '-' + localDate.getDate();
+		$('.date').datetimepicker({
+			language : 'es',
+			weekStart : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0,
+			startDate : localDate
+		});
+
+		$scope.checkEndDate = function() {
+			var firstDate = moment(vm.search.beginDate, "dd/mm/yyyy");
+			var lastDate = moment(vm.search.endDate, "dd/mm/yyyy");
+			var isAfter = firstDate.isAfter(lastDate);
+			if (isAfter) {
+				$scope.endDateError = true;
+			} else {
+				$scope.endDateError = false;
+			}
+		};
+		
+		$scope.scrollTo = function(element) {
+        	$( 'html, body').animate({
+        		scrollTop: $(element).offset().top
+        	}, 2000);
+        }
+		
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
         .withDisplayLength(10)
@@ -46,6 +78,20 @@
             DTColumnDefBuilder.newColumnDef(3).notSortable(),
         ];
         
+        $scope.searchModels = function() {
+        	NProgress.start();
+        	ModelService.SearchModels(vm.search).then(function (response) {
+        		if(response){
+        			if(vm.searchResult.length > 0){
+        				vm.searchResult = response.data;
+        				$scope.scrollTo( "#searchResult");
+        				console.log(vm.searchResult);
+        			}
+        		}
+        		NProgress.done();
+        	});
+        };
+        
         initController();
         
         function initController() {
@@ -54,15 +100,31 @@
             vm.location = $location.path().split('/',3);
             
             if(vm.location[1] == "search"){
-            	vm.search.officeOriginId = $routeParams.origin;
-            	vm.search.officeEndId = $routeParams.destination;
-            	vm.search.beginDate = $routeParams.from;
-            	vm.search.endDate = $routeParams.to;
-            	vm.search.airConditioner = true;
-                vm.search.passangers = 0;
-                vm.search.luggage = 0;
-            	console.log(vm.search);
-            	searchModels();
+            	getAllOffices();
+            	if($routeParams.origin){
+            		vm.search.officeOriginId = parseInt($routeParams.origin);
+            	}
+            	if($routeParams.destination){
+            		vm.search.officeEndId = parseInt($routeParams.destination);
+            	}
+            	if($routeParams.from){
+            		vm.search.beginDate = $routeParams.from;
+            	}
+            	if($routeParams.to){
+            		vm.search.endDate = $routeParams.to;
+            	}
+            	if(!vm.search.airConditioner){
+            		vm.search.airConditioner = true;
+            	}
+            	if(!vm.search.passangers){
+            		vm.search.passangers = 0;
+            	}
+            	if(!vm.search.luggage){
+            		vm.search.luggage = 0;
+            	}
+            	if($routeParams.origin && $routeParams.destination && $routeParams.from && $routeParams.to){
+            		$scope.searchModels();
+            	}
             }
             else if(vm.location[2] == "edit"){
         		getBookedById($routeParams.id);
@@ -78,9 +140,18 @@
             NProgress.done();
         }
         
-        function searchModels() {
-        	
-        };
+        function getAllOffices() {
+			BranchofficeService.GetAllBranchoffices().then(function(response) {
+				if (response.success) {
+					if (response.data.length > 0) {
+						vm.allOffices = response.data;
+					}
+				} else {
+					vm.allOffices = [];
+				}
+				NProgress.done();
+			});
+		}
         
         function getAllBookeds(){
         	BookedService.GetAllBookeds().then(function (response) {

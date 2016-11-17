@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.FuelDao;
 import com.dao.ModelDao;
+import com.entities.Brand;
 import com.entities.Fuel;
 import com.entities.Model;
 import com.models.SearchFilter;
@@ -46,6 +47,12 @@ public class ModelDaoImpl extends GenericDaoImpl<Model, Integer> implements Mode
 	public List<Model> getAvailable() {
 		// TODO Auto-generated method stub
 		return currentSession().createQuery("from Model where unavailable=false").getResultList();
+	}
+
+	public List<Model> getAvailableByBrand(Brand byId) {
+		Query query=currentSession().createQuery("from Model where unavailable=false and brand=:brand");
+		query.setParameter("brand", byId);
+		return query.getResultList();
 	}
 
 	

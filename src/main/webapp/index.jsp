@@ -25,8 +25,6 @@
         <link rel="stylesheet" type="text/css" href="static/js/dista/plugins/bootstrap/datatables.bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="static/js/dista/css/angular-datatables.css">
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-datetimepicker.min.css">
-        
-        
 
     </head>
     <body>
@@ -36,11 +34,10 @@
         
         <!--Core-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="//code.angularjs.org/1.2.1/angular.js"></script>
-        <script src="//code.angularjs.org/1.2.1/angular-route.js"></script>
-        <script src="//code.angularjs.org/1.2.1/angular-cookies.js"></script>
-        <script src="//code.angularjs.org/1.2.1/angular-aria.js"></script>
-        <script src="//code.angularjs.org/1.2.1/angular-animate.js"></script>
+        <script src="//code.angularjs.org/1.4.8/angular.js"></script>
+        <script src="//code.angularjs.org/1.4.8/angular-route.js"></script>
+        <script src="//code.angularjs.org/1.4.8/angular-cookies.js"></script>
+        <script src="//code.angularjs.org/1.4.8/angular-animate.js"></script>
         <script type="text/javascript" src="static/app.js"></script>
 
 
@@ -50,11 +47,13 @@
 		<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="static/js/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="static/js/angular-ui-router.js"></script>
-        <script type="text/javascript" src="static/js/angular-file-upload.js"></script>
+        <script type="text/javascript" src="static/js/vendor/ng-file-upload/ng-file-upload-shim.min.js"></script>
+        <script type="text/javascript" src="static/js/vendor/ng-file-upload/ng-file-upload.min.js"></script>
         <script type="text/javascript" src="static/js/angular-confirm.js"></script>
         <script type="text/javascript" src="static/js/nprogress.js"></script>
         <script type="text/javascript" src="static/js/ngDialog.js"></script>
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
+		<script type="text/javascript" src="static/js/moment.min.js"> </script>
 		
 		<!--Maps-->
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCToOBKLzgMq3u02g7OO_v-txL_LnfEO_g&callback=initMap" type="text/javascript"></script>

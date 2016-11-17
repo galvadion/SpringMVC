@@ -53,5 +53,10 @@ public class BrandServiceImpl extends GenericServiceImpl<Brand, Integer> impleme
 		return brandDao.getAvailable();
 	}
 
+	public List<Brand> getNotEmpty() {
+		// TODO Auto-generated method stub
+		return brandDao.getNotEmpty();
+	}
+
 	
 }

@@ -15,6 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.configuration.LocalDateDeserializer;
+import com.configuration.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.models.Vehicle_Status;
 
 
@@ -38,6 +42,8 @@ public class Vehicle implements Serializable{
 	
 	private String observations;
 	
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)  
 	@Column(name = "license_plate_expiration_date")
 	private LocalDate licensePlateExpirationDate;
 	
@@ -60,9 +66,6 @@ public class Vehicle implements Serializable{
 	@JoinColumn(name="model_id", nullable=false)
 	private Model model;
 	
-	@ManyToOne
-	@JoinColumn(name="fuel_id", nullable=false)
-	private Fuel fuel;
 	
 	@ManyToOne
 	@JoinColumn(name="branch_office_id", nullable=false)
@@ -163,14 +166,6 @@ public class Vehicle implements Serializable{
 
 	public void setModel(Model model) {
 		this.model = model;
-	}
-
-	public Fuel getFuel() {
-		return fuel;
-	}
-
-	public void setFuel(Fuel fuel) {
-		this.fuel = fuel;
 	}
 
 

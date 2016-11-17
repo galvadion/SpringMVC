@@ -4,7 +4,7 @@
 
     /***App Module Definition***/
     angular
-        .module('app', ['ngRoute', 'ngCookies','angularFileUpload','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps'])
+        .module('app', ['ngFileUpload','ngRoute', 'ngCookies','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps'])
         .config(config)
         .run(run)
         .run(['$location', '$rootScope', function($location, $rootScope) {
@@ -22,7 +22,7 @@
     config.$inject = ['$routeProvider', '$locationProvider'];
     function config($routeProvider, $locationProvider) {
     	
-        $routeProvider
+    	$routeProvider
             .when('/home', {
                 controller: 'HomeController',
                 templateUrl: 'home/home',
@@ -237,10 +237,17 @@
                 controllerAs: 'vm'
             })
             
+            .when('/search', {
+                controller: 'BookedController',
+                templateUrl: 'booked/search',
+                title: 'Rent-UY - Buscar',
+                controllerAs: 'vm'
+            })
+            
             .when('/search/origin=:origin&destination=:destination&from=:from&to=:to', {
                 controller: 'BookedController',
                 templateUrl: 'booked/search',
-                title: 'Rent-UY - Búsqueda',
+                title: 'Rent-UY - Buscar',
                 controllerAs: 'vm'
             })
 		

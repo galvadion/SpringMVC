@@ -13,9 +13,9 @@
         service.GetAllModels = GetAllModels;
         service.GetModelById = GetModelById;
         service.CreateModel = CreateModel;
-        service.UpdateModel = UpdateModel;
         service.DeleteModel = DeleteModel;
         service.SearchModels = SearchModels;
+        service.GetModelsByBrand = GetModelsByBrand;
         
         
         return service;
@@ -28,22 +28,24 @@
         }
         
         function GetModelById(id) {
-            return $http.get('/SpringMVC/model/getbyid' + id).then(handleSuccess, handleError('Error getting model by id'));
+            return $http.get('/SpringMVC/model/getbyid?id=' + id).then(handleSuccess, handleError('Error getting model by id'));
         }
         
-        function CreateModel(model) { console.log(model);
+        function GetModelsByBrand(id){
+        	return $http.get('/SpringMVC/model/getmodelsbyid?id=' + id).then(handleSuccess, handleError('Error getting model by id'));
+        }
+        
+        function CreateModel(model) {
             return $http.post('/SpringMVC/model/insert', model).then(handleSuccess, handleError('Error creating model'));
         }
         
-        function UpdateModel(model) {
-            return $http.put('/SpringMVC/model/update', model).then(handleSuccess, handleError('Error updating model'));
-        }
-        
         function DeleteModel(id) {
-            return $http.delete('/SpringMVC/model/delete', id).then(handleSuccess, handleError('Error deleting model'));
+            return $http.delete('/SpringMVC/model/delete?id=' + id).then(handleSuccess, handleError('Error deleting model'));
         }
         
         function SearchModels(searchObject) {
+        	searchObject.beginDate = searchObject.beginDate.replace(/-/g , "/");
+        	searchObject.endDate = searchObject.endDate.replace(/-/g , "/");
             return $http.post('/SpringMVC/model/search', searchObject).then(handleSuccess, handleError('Error searching models'));
         }
 

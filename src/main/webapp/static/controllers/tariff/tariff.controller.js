@@ -11,8 +11,10 @@
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
-        vm.tariff = {};
-        vm.allTariffs = [];
+        vm.category = {};
+        vm.fuelType ={};
+        vm.categoryList = [];
+        vm.fuelTypeList =[];
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -48,39 +50,80 @@
         
         function initController() {
             NProgress.start();
-            getAllTariffs();
+            getAllCategories();
+            getAllFuelTypes();
         }
         
-        function getAllTariffs(){
-        	TariffService.GetAllTariffs().then(function (response) {
+        function getAllCategories(){
+        	TariffService.getAllCategories().then(function (response) {
         		if(response.success){
-        			vm.allTariffs = response.data;
+        			vm.categoryList = response.data;
         		}
         		else{
-        			vm.allTariffs = [];
+        			vm.categoryList = [];
         		}
         		NProgress.done();
         	});
         }
         
-        $scope.saveTariff = function() {
+        function getAllFuelTypes(){
+        	TariffService.getAllFuelTypes().then(function (response) {
+        		if(response.success){
+        			vm.fuelTypeList = response.data;
+        		}
+        		else{
+        			vm.fuelTypeList = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        
+        $scope.saveCategory = function() {
         	NProgress.start();
         	var mgsSuccess = "";
         	var mgsError = "";
         	
-        	if(vm.tariff.id){
-        		mgsSuccess = "Marca editada con éxito";
-        		mgsError = "Error al editar marca";
+        	if(vm.category.id){
+        		mgsSuccess = "Categoria editada con éxito";
+        		mgsError = "Categoria al editar marca";
         		
         	}
         	else{
-        		mgsSuccess = "Marca creada con éxito";
-        		mgsError = "Marca ya existente";
+        		mgsSuccess = "Categoria creada con éxito";
+        		mgsError = "Categoria ya existente";
         	}
         	
-        	TariffService.InsertTariff(vm.tariff).then(function (response) {
+        	TariffService.InsertCategory(vm.category).then(function (response) {
         		if(response.success){
-        			getAllTariffs();
+        			getAllCategories();
+        			$rootScope.doFlashMessage(mgsSuccess,'','success');
+        			$scope.cleanInput();
+        		}
+        		else{
+        			$rootScope.doFlashMessage(mgsError,'','error');
+        		}
+        		NProgress.done();
+        	});
+        };
+        
+        $scope.saveFuelType = function() {
+        	NProgress.start();
+        	var mgsSuccess = "";
+        	var mgsError = "";
+        	
+        	if(vm.fuelType.id){
+        		mgsSuccess = "Tipo de combustible editada con éxito";
+        		mgsError = "Tipo de combustible al editar marca";
+        		
+        	}
+        	else{
+        		mgsSuccess = "Tipo de combustible creada con éxito";
+        		mgsError = "Tipo de combustible ya existente";
+        	}
+        	
+        	TariffService.InsertFuelType(vm.fuelType).then(function (response) {
+        		if(response.success){
+        			getAllFuelTypes();
         			$rootScope.doFlashMessage(mgsSuccess,'','success');
         			$scope.cleanInput();
         		}
@@ -92,12 +135,14 @@
         };
         
         $scope.cleanInput = function() {
-        	vm.tariff = {};
-        	$scope.form.$setPristine();
+        	vm.category = {};
+        	vm.fuelType= {};
+        	$scope.form-fuel.$setPristine();
+        	$scope.form-cat.$setPristine();
         };
         
-        $scope.editTariff = function(brand) {
-        	vm.tariff = angular.copy(brand);
+        $scope.editCategory = function(brand) {
+        	vm.category = angular.copy(brand);
         	$scope.scrollTo( "#wrap");
         };
         

@@ -5,9 +5,9 @@
         .module('app')
         .controller('ModelController', ModelController);
 
-    ModelController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','FileUploader','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
+    ModelController.$inject = ['$location','$rootScope','$scope','$timeout','SessionService','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams','TariffService','ngDialog','Upload'];
     
-    function ModelController($location,UserService, $rootScope, $scope,$timeout,SessionService,FileUploader,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+    function ModelController($location, $rootScope, $scope,$timeout,SessionService,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams,TariffService,ngDialog,Upload) {
 
         var vm = this;
         
@@ -16,6 +16,10 @@
         vm.allBrands = [];
         vm.allModels = [];
         vm.lastYears = [];
+        vm.cylinders=[];
+        vm.fuelType=[];
+        vm.category=[];
+        vm.images = [];
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -55,14 +59,32 @@
             DTColumnDefBuilder.newColumnDef(13).notSortable(),
             DTColumnDefBuilder.newColumnDef(14).notSortable(),
         ];
-        
+		
         initController();
         
         function initController() {
             NProgress.start();
-            getAllBrands();
-            getLastYears();
-            getAllModels();
+            vm.location = $location.path().split('/',3);
+            if(vm.location[2] == "edit"){
+        		getModelById($routeParams.id);
+                getAllBrands();
+                getLastYears();
+                getCylinders();
+                getFuelTypes();
+                getCategories();
+        	}
+            else if(vm.location[2] == "create"){
+            	vm.requestModel.id = null;
+            	getAllBrands();
+            	getLastYears();
+                getCylinders();
+                getFuelTypes();
+                getCategories();
+            }
+            else{
+            	getAllModels();
+            }
+            NProgress.done();
         }
         
         function getAllBrands(){
@@ -89,21 +111,73 @@
         	});
         }
         
+        function getModelById(id){
+        	ModelService.GetModelById(id).then(function (response) {
+        		if(response.success){
+        			vm.requestModel = response.data;
+        			vm.requestModel.airConditioner=vm.requestModel.airConditioner.toString();
+        		}
+        		else{
+        			vm.requestModel = [];
+        		}
+        		
+        		NProgress.done();
+        	});
+        }
+        
         function getLastYears(){
-        	var today = new Date();
-            vm.lastYears.push(today.getFullYear());
-            vm.lastYears.push(today.getFullYear() - 1);
-            vm.lastYears.push(today.getFullYear() - 2);
-            vm.lastYears.push(today.getFullYear() - 3);
-            vm.lastYears.push(today.getFullYear() - 4);
+        	var today = new Date();        	
+            vm.lastYears.push({'year':today.getFullYear()});
+            vm.lastYears.push({'year':today.getFullYear()-1});
+            vm.lastYears.push({'year':today.getFullYear()-2});
+            vm.lastYears.push({'year':today.getFullYear()-3});
+            vm.lastYears.push({'year':today.getFullYear()-4});
+        }
+        
+        function getCylinders(){
+        	vm.cylinders.push({'value':800});
+        	vm.cylinders.push({'value':1000});
+        	vm.cylinders.push({'value':1200});
+        	vm.cylinders.push({'value':1400});
+        	vm.cylinders.push({'value':1600});
+        	vm.cylinders.push({'value':1800});
+        	vm.cylinders.push({'value':2000});
+        }
+        function getCategories(){
+        	TariffService.getAllCategories().then(function (response) {
+        		if(response.success){
+        			vm.category = response.data;
+        		}
+        		else{
+        			vm.category = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        function getFuelTypes(){
+        	TariffService.getAllFuelTypes().then(function (response) {
+        		if(response.success){
+        			vm.fuelType = response.data;
+        		}
+        		else{
+        			vm.fuelType = [];
+        		}
+        		NProgress.done();
+        	});
         }
         
         $scope.saveModel = function() {
         	NProgress.start();
-        	console.log(vm.requestModel);
         	ModelService.CreateModel(vm.requestModel).then(function (response) {
-        		console.log(response);
-        		
+        		if(response.success){
+        		          $scope.uploadPic(vm.file,response.data.id);
+        		          
+        		        
+        			$rootScope.doFlashMessage("Modelo guardado con exito",'/model','success');
+        		}
+        		else{
+        			$rootScope.doFlashMessage("Error al guardar",'','error');
+        		}
         		NProgress.done();
         	});
         };
@@ -112,48 +186,53 @@
         
         //File uploader methods
         
-        var file = $scope.file = new FileUploader({
-            url: 'front.justmob/upload.php',
-            queueLimit: 1,  
-            removeAfterUpload: true
-        });
-
-        file.filters.push({
-            name: 'imageFilter',
-            fn: function(item,options) {
-                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                return '|jpeg|jpg|png|gif|'.indexOf(type) !== -1;
-            }
-        });
-
-        file.onWhenAddingFileFailed = function(item ,filter, options) {
+    /*    $scope.upload = function (file,id) {
+        	 Upload.upload({
+        	        url: '/SpringMVC/upload/uploadFile',
+        	        fields: {'model_id': id}, // additional data to send
+        	        file: file
+        	    }).success(function (data, status, headers, config) {
+        	        console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+        	    });
+        };*/
+        $scope.uploadPic = function(files,id) {
+        	console.log(file);
+        	for(var i = 0; i < files.length; i++){
+        		var file = files[i];
+        		file.upload = Upload.upload({
+                    url: '/SpringMVC/upload/uploadFile',
+                    data: {id: id, file: file,index:i},
+                  });
+        	}
             
-            $rootScope.doFlashMessage("Error File upload Allowed files: gif, png, jpg. Max file size 1Mb",'','error');
-        };
-        
-        file.onAfterAddingAll = function(addedFileItems) {
-            if(!angular.isUndefined($scope.file.queue[0])){
-                var newFileName = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for( var i=0; i < 16; i++ ){
-                newFileName += possible.charAt(Math.floor(Math.random() * possible.length));
-            }
-            //var extension = $scope.file.queue[0].file.name.split('.').pop();
-            //$scope.file.queue[0].file.name = newFileName + '.' + extension;
-            $scope.file.queue[0].file.nam = vm.user.id + "_" + $scope.file.queue[0].file.name;
-            $scope.file.queue[0].upload();
-            }
-         };
+        }
 
-        file.onSuccessItem = function(fileItem, response, status, headers) {
-            if(response.answer=='completed'){
-                vm.user.avatarURL = window.location.protocol + "//" + window.location.host + "/front.justmob/uploads/" +$scope.file.queue[0].file.name;  
-            }
-        };
         
         //End - File uploader methods
+
         
+        $scope.deleteModel = function (id) {
+        	NProgress.start();
+        	ModelService.DeleteModel(id).then(function (response) {
+        		if(response.success){
+        			$rootScope.doFlashMessage('Modelo eliminado con éxito','','success');
+        			initController();
+        		}
+        		else{
+        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+        		}
+        		NProgress.done();
+        	});
+        };
         
+        $scope.openDialog = function (model) {
+        	vm.auxModel = angular.copy(model);
+            ngDialog.openConfirm({
+                template: 'modalDialog',
+                className: 'ngdialog-theme-default',
+                scope: $scope,
+            }).then(function (value) {}, function (reason) {});
+        };
         
     }
 

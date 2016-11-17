@@ -58,6 +58,17 @@ public class BrandController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/getnotempty", method = RequestMethod.GET)
+	public ResponseEntity<List<Brand>> getnotempty() {
+		List<Brand> list = brandService.getNotEmpty();
+		if (list != null) {
+			return ResponseEntity.ok(list);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		
+	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<Object> getSaved(@RequestBody Brand brand) {

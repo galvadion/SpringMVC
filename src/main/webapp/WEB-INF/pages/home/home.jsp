@@ -20,15 +20,15 @@
 					  <!-- Wrapper for slides -->
 					  <div class="carousel-inner" role="listbox">
 					    <div class="item active">
-					      <img src="http://www.autostlalpan.com/wp-content/uploads/2016/05/09042016sliderventa-autos-tlalpan-seminuevos-carros-usados-160409014-142-1280x720.jpg" alt="Chania">
+					      <img src="static/images/slyder2.jpg" alt="">
 					    </div>
 					
 					    <div class="item">
-					      <img src="https://i.ytimg.com/vi/QaocTfH4hYM/maxresdefault.jpg" alt="Chania">
+					      <img src="static/images/slyder1.jpg" alt="">
 					    </div>
 					
 					    <div class="item">
-					      <img src="https://image.jimcdn.com/app/cms/image/transf/none/path/sb171f10b2887615a/image/i1e0ff4564417b3c4/version/1419699490/image.jpg" alt="Flower">
+					      <img src="static/images/slyder3.jpg" alt="">
 					    </div>
 					  </div>
 					
@@ -49,7 +49,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<section class="tile" style="height: 400px !important;">
+				<section class="tile home-tile">
 					<br/>
 					<h3 class="text-center">Encuentra tu vehículo</h3>
 					<br/>
@@ -58,7 +58,7 @@
 
 						<div class="row" style="padding: 0 10px 0 10px;">
 
-							<div class="form-group customDatePickers col-sm-6" ng-init="vm.search.beginDate = '10-11-2016'">
+							<div class="form-group customDatePickers col-sm-6">
 								<div class="input-group date" id="beginDate" data-date="" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
 									<label for="beginDate" class="control-label">Fecha de recogida</label>
 									<input class="form-control" size="16" type="text" name="beginDate" placeholder="DD-MM-YYYY" ng-model="vm.search.beginDate" ng-change="checkEndDate()" readonly required>
@@ -79,7 +79,7 @@
 
 						<div class="row" style="padding: 0 10px 0 10px;">
 
-							<div class="form-group customDatePickers col-sm-6" ng-init="vm.search.endDate = '10-11-2016'">
+							<div class="form-group customDatePickers col-sm-6">
 								<div class="input-group date" id="endDate" data-date="" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
 									<label for="endDate" class="control-label">Fecha de entrega</label>
 									<input class="form-control" size="16" type="text" name="endDate" placeholder="DD-MM-YYYY" ng-model="vm.search.endDate" ng-change="checkEndDate()" readonly required>
@@ -104,14 +104,12 @@
 
 						<!-- Buttons -->
 						<div class="form-group text-right" style="margin-right: 15px;">
-							<button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Buscar ahora</button>
+							<button type="submit" id="submit" ng-disabled="form.$invalid || endDateError" class="btn  btn-orange">Buscar ahora</button>
 						</div>
 					</form>
 
 				</section>
 			</div>
-
-			<!--div class="col-md-1"></div-->
 
 			<div class="col-md-6">
 				<section class="tile text-center">

@@ -22,7 +22,7 @@
             		<!-- tile body -->
                     <div class="tile-body">
             			
-            			<form  form-on-change="checkFields()" name='form' class="" role="form" ng-submit="saveModel()">
+            			<form  form-on-change="checkFields()" name='form' class="" role="form" ng-submit="saveModel()" enctype="multipart/form-data">
 
                         <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
                             <label for="name" class="control-label">* Nombre</label>
@@ -33,18 +33,18 @@
 						<div class="row">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.brand.$dirty && form.brand.$error.required }">
 	                            <label for="brand" class="control-label">* Marca</label>
-	                            <select ng-model="vm.requestModel.brand.id" name="brand" id="brand" class="form-control" required>
+	                            <select ng-model="vm.requestModel.brand.id" ng-options="item.id as item.name for item in vm.allBrands" name="brand" id="brand" class="form-control" required>
 									<option value=""> Seleccione una marca</option> 
-									<option ng-repeat="(key, value) in vm.allBrands" value="{{value.id}}">{{value.name}}</option>
+									<!-- <option ng-repeat="(key, value) in vm.allBrands" value="{{value.id}}">{{value.name}}</option>  -->
 								</select>
 								<span ng-show="form.brand.$dirty && form.brand.$error.required" class="help-block">Marca es requerida</span>
 	                        </div>
 	
 							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.year.$dirty && form.year.$error.required }">
 	                            <label for="year" class="control-label">* Año</label>
-	                            <select ng-model="vm.requestModel.year" name="year" id="year" class="form-control" required>
+	                            <select ng-model="vm.requestModel.year" ng-options="item.year as item.year for item in vm.lastYears"  name="year" id="year" class="form-control" required>
 									<option value=""> Seleccione el año</option> 
-									<option ng-repeat="(key, value) in vm.lastYears" value="{{value}}">{{value}}</option>
+								<!--	<option ng-repeat="(key, value) in vm.lastYears" value="{{value}}">{{value}}</option> -->
 								</select>
 								<span ng-show="form.year.$dirty && form.year.$error.required" class="help-block">Año es requerido</span>
 	                        </div>
@@ -53,20 +53,20 @@
 	                    <div class="row">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.category.$dirty && form.category.$error.required }">
 	                            <label for="category" class="control-label">* Categoria</label>
-	                            <select ng-model="vm.requestModel.category.id" name="category" id="category" class="form-control" required>
+	                            <select ng-model="vm.requestModel.category.id" name="category" ng-options="item.id as item.name for item in vm.category" id="category" class="form-control" required>
 									<option value=""> Seleccione una categoria</option> 
-									<option value="1">S</option>
+								<!-- 	<option value="1">S</option>
 									<option value="2">A</option>
 									<option value="3">B</option>
 									<option value="4">C</option>
-									<option value="4">D</option>
+									<option value="5">D</option>  -->
 								</select>
 								<span ng-show="form.category.$dirty && form.category.$error.required" class="help-block">Marca es requerida</span>
 	                        </div>
 	
 							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.passangers.$dirty && form.passangers.$error.required }">
 	                            <label for="passangers" class="control-label">* Cantidad de pasajeros</label>
-	                            <input type="number" min="1" ng-model="vm.requestModel.passangers" name="passangers" id="passangers" class="form-control" placeholder="1" required>
+	                            <input type="number" min="2" ng-model="vm.requestModel.passangers" name="passangers" id="passangers" class="form-control" placeholder="2" required>
 								<span ng-show="form.passangers.$dirty && form.passangers.$error.required" class="help-block">Cantidad de pasajeros es requerido</span>
 	                        </div>
 	                    </div>
@@ -74,23 +74,23 @@
                       	<div class="row">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.cylinders.$dirty && form.cylinders.$error.required }">
 	                            <label for="cylinders" class="control-label">* Cilindrada</label>
-	                            <select ng-model="vm.requestModel.cylinders" name="cylinders" id="cylinders" class="form-control" required>
+	                            <select ng-model="vm.requestModel.cylinders" name="cylinders" id="cylinders" ng-options="item.value as item.value for item in vm.cylinders" class="form-control" required>
 									<option value=""> Seleccione tipo</option> 
-									<option value="800">800</option>
+								<!-- 	<option value="800">800</option>
 									<option value="1000">1000</option>
 									<option value="1200">1200</option>
 									<option value="1300">1300</option>
 									<option value="1400">1400</option>
 									<option value="1600">1600</option>
 									<option value="1800">1800</option>
-									<option value="2000">2000</option>
+									<option value="2000">2000</option> -->
 								</select>
 								<span ng-show="form.cylinders.$dirty && form.cylinders.$error.required" class="help-block">Cilindrada es requerido</span>
 	                        </div>
 	                        
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.luggage.$dirty && form.luggage.$error.required }">
 	                            <label for="luggage" class="control-label">* Cantidad de valijas</label>
-	                            <input type="number" min="0" ng-model="vm.requestModel.luggage" name="luggage" id="luggage" class="form-control" placeholder="0" required>
+	                            <input type="number" min="1" ng-model="vm.requestModel.luggage" name="luggage" id="luggage" class="form-control" placeholder="1" required>
 								<span ng-show="form.luggage.$dirty && form.luggage.$error.required" class="help-block">Cantidad de valias es requerido</span>
 	                        </div>
 	                    </div>
@@ -98,10 +98,10 @@
 	                    <div class="row">
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.fuel.$dirty && form.fuel.$error.required }">
 	                            <label for="fuel" class="control-label">* Tipo Combustible</label>
-	                            <select ng-model="vm.requestModel.fuel.id" name="fuel" id="fuel" class="form-control" required>
+	                            <select ng-model="vm.requestModel.fuel.id" name="fuel" id="fuel" ng-options="item.id as item.fuelType for item in vm.fuelType" class="form-control" required>
 									<option value=""> Seleccione un tipo de combustible</option> 
-									<option value="1">Nafta</option>
-									<option value="2">Gas Oil</option>
+								<!-- 	<option value="1">Nafta</option>
+									<option value="2">Gas Oil</option>  -->
 								</select>
 								<span ng-show="form.fuel.$dirty && form.fuel.$error.required" class="help-block">Tipo de combustible es requerido</span>
 	                        </div>
@@ -146,34 +146,38 @@
 	                    
 	                    <div class="form-group col-md-12 legend"> <h4><strong>Imagenes</strong></h4><p></p> </div>
 	                    
-	                    <div class="row">
+	                    <div class="row" ng-if="!vm.requestModel.images[2]">
 	                    	<div  class="form-group col-sm-6">
-								<label class="customFileInput clearfix">
-									<div class="btn btn-success fileinput-button">
-										<i class="glyphicon glyphicon-plus"></i>
-										<span>Agregar...</span>
-										<input class="upload-appIcon filestyle" type="file" nv-file-select="" uploader="file" />
-									</div>
-								</label>
+								  <input type="file" ngf-select ng-model="vm.file" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile" ngf-multiple="true"> 
+								<br/>
 								<span class="help-block" style="padding-left:0px">
-									<br/>
 									<strong>Archivos compatibles: gif, png, jpg. Tamaño Maximo 1Mb</strong>
-									<small>{{vm.user.imagesURL}}</small>
 								</span>
 							</div>
+	                    </div>
+	                    
+	                    <br/><br/>
+	                    
+	                    <div class="row" ng-if="vm.requestModel.images[0]" style="padding: 15px;">
+	                    	<div  class="form-group col-sm-2" ng-repeat="(key, value) in vm.requestModel.images">
+	                    		<img src="images/{{value.fileLocation}}" style="height: 160px; float: left;">
+	                    		<div class="text-center delete remove-image" style="float: left; position: absolute; background-color: #EDEDED;">
+	                    			<a ng-click="deleteImage(value)" style="cursor: pointer;" title="Eliminar">
+	                    				<span class="glyphicon glyphicon-remove"></span>
+	                    			</a>
+	                    		</div>
+	                    	</div>
 	                    </div>
 
                         <!-- Buttons -->
 
-                        <div class="form-group text-right">
+                        <div class="form-group text-right" style="padding: 15px;">
                             <a href="#/model" class="btn btn-lightred">Cancelar</a>
-                            <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
+                            <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Guardar</button>
                         </div>
-
-                    </form>
-            			
+                        
+            		</form>
             		</div>
-            	
             	</section>
             </div>
 		<!-- /row -->
