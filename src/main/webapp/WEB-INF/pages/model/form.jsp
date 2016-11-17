@@ -144,14 +144,11 @@
 	                        </div>
 	                    </div>
 	                    
-	                    <div class="form-group col-md-12 legend"> <h4><strong>Imagen</strong></h4><p></p> </div>
+	                    <div class="form-group col-md-12 legend"> <h4><strong>Imagenes</strong></h4><p></p> </div>
 	                    
-	                    <div class="row" ng-if="!vm.requestModel.images[0]">
+	                    <div class="row" ng-if="!vm.requestModel.images[2]">
 	                    	<div  class="form-group col-sm-6">
-								  <input type="file" ngf-select ng-model="vm.file" name="file"    
-             accept="image/*" ngf-max-size="2MB" required
-             ngf-model-invalid="errorFile" ngf-multiple="true"> 
-
+								  <input type="file" ngf-select ng-model="vm.file" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile" ngf-multiple="true"> 
 								<br/>
 								<span class="help-block" style="padding-left:0px">
 									<strong>Archivos compatibles: gif, png, jpg. Tamaño Maximo 1Mb</strong>
@@ -162,8 +159,13 @@
 	                    <br/><br/>
 	                    
 	                    <div class="row" ng-if="vm.requestModel.images[0]" style="padding: 15px;">
-	                    	<div  class="form-group col-sm-12">
-	                    		<img src="images/{{vm.requestModel.images[0].fileLocation}}" style="height: 160px">
+	                    	<div  class="form-group col-sm-2" ng-repeat="(key, value) in vm.requestModel.images">
+	                    		<img src="images/{{value.fileLocation}}" style="height: 160px; float: left;">
+	                    		<div class="text-center delete remove-image" style="float: left; position: absolute; background-color: #EDEDED;">
+	                    			<a ng-click="deleteImage(value)" style="cursor: pointer;" title="Eliminar">
+	                    				<span class="glyphicon glyphicon-remove"></span>
+	                    			</a>
+	                    		</div>
 	                    	</div>
 	                    </div>
 

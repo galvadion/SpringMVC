@@ -20,15 +20,15 @@
 					  <!-- Wrapper for slides -->
 					  <div class="carousel-inner" role="listbox">
 					    <div class="item active">
-					      <img src="http://www.autostlalpan.com/wp-content/uploads/2016/05/09042016sliderventa-autos-tlalpan-seminuevos-carros-usados-160409014-142-1280x720.jpg" alt="Chania">
+					      <img src="static/images/slyder2.jpg" alt="">
 					    </div>
 					
 					    <div class="item">
-					      <img src="https://i.ytimg.com/vi/QaocTfH4hYM/maxresdefault.jpg" alt="Chania">
+					      <img src="static/images/slyder1.jpg" alt="">
 					    </div>
 					
 					    <div class="item">
-					      <img src="https://image.jimcdn.com/app/cms/image/transf/none/path/sb171f10b2887615a/image/i1e0ff4564417b3c4/version/1419699490/image.jpg" alt="Flower">
+					      <img src="static/images/slyder3.jpg" alt="">
 					    </div>
 					  </div>
 					
@@ -49,7 +49,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<section class="tile" style="height: 400px !important;">
+				<section class="tile home-tile">
 					<br/>
 					<h3 class="text-center">Encuentra tu vehículo</h3>
 					<br/>
@@ -110,8 +110,6 @@
 
 				</section>
 			</div>
-
-			<!--div class="col-md-1"></div-->
 
 			<div class="col-md-6">
 				<section class="tile text-center">
