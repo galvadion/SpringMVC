@@ -61,31 +61,29 @@
 		            </div>
 		            
 		            
-		            <div class="input-group datepicker" ng-class="{ 'has-error': (form.birthDate.$dirty && form.birthDate.$error.required) || birthDateError }">
-                    	<ng-datepicker class="input-group underline-input" locale="es" format="YYYY-MM-DD" view-format="YYYY-MM-DD" placeholder="Nacimiento YYYY-MM-DD" ng-model="vm.user.birthDate" name="birthDate" ng-change="checkBirthDateErr(vm.user.birthDate)"></ng-datepicker>
-                        <span ng-show="form.birthDate.$dirty && form.birthDate.$error.required" class="help-block">Fecha de nacimiento es requerido</span>
-                        <span ng-show="form.birthDate.$dirty && birthDateError" class="help-block">Fecha de nacimiento debe ser menor</span>
-		            </div>
+		            <div class="form-group">
+						<div class="input-group date" id="birthDate" data-date="" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
+							<input class="form-control underline-input" size="16" type="text" name="birthDate" placeholder="Fecha de nacimiento DD-MM-YYYY" ng-model="vm.user.birthDate" readonly required>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                       </div>
+                    </div>
 		            
-		            <br/>
-		            
-		            <div class="input-group datepicker" ng-class="{ 'has-error': (form.licenseExpirationDate.$dirty && form.licenseExpirationDate.$error.required) || licenseExpirationDate }">
-                    	<ng-datepicker class="input-group underline-input" locale="es" format="YYYY-MM-DD" view-format="YYYY-MM-DD" placeholder="Vencimiento licencia YYYY-MM-DD" ng-model="vm.user.licenseExpirationDate" name="licenseExpirationDate" ng-change="checkLicenseExpirationDateErr(vm.user.licenseExpirationDate)"></ng-datepicker>
-                        <span ng-show="form.licenseExpirationDate.$dirty && form.licenseExpirationDate.$error.required" class="help-block">Vencimiento de licencia es requerido</span>
-                        <span ng-show="form.licenseExpirationDate.$dirty && licenseExpirationDate" class="help-block">Vencimiento debe ser mayor</span>
-		            </div>
-		            
-		             <br/>
+		            <div class="form-group">
+						<div class="input-group date" id="licenseExpirationDate" data-date="" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
+							<input class="form-control underline-input" size="16" type="text" name="licenseExpirationDate" placeholder="Fecha de vencimiento de licencia DD-MM-YYYY" ng-model="vm.user.licenseExpirationDate" readonly required>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                       </div>
+                    </div>
 		            
 		
 		            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty &&  vm.user.password.length <= 1 }">
 						<input type="password"  name="password" id="password" placeholder="Contraseña" class="form-control underline-input" ng-model="vm.user.password" ng-keyup="checkPaswords()" >
-						<span ng-show="form.password.$dirty && vm.user.password.length <= 1 " class="help-block">Contraseña es requerida</span>
+						<span ng-show="form.password.$dirty && vm.user.password.length <= 1 " class="help-block" style="color:red">Contraseña es requerida</span>
 					</div>
 
 					<div class="form-group" ng-class="{ 'has-error': form.newpassword.$dirty && vm.user.password != vm.newpassword }">
 						<input type="password"  name="newpassword" id="newpassword" placeholder="Confirmar Contraseña" class="form-control underline-input" ng-model="vm.newpassword" ng-disabled="vm.user.id > 0" ng-keyup="checkPaswords()">										
-						<span ng-show="form.newpassword.$dirty && vm.user.password != vm.newpassword" class="help-block">Contraseñas no concuerdan</span>
+						<span ng-show="form.newpassword.$dirty && vm.user.password != vm.newpassword" class="help-block" style="color:red">Contraseñas no concuerdan</span>
 					</div>
 		            
 		

@@ -1,7 +1,7 @@
 package com.dao;
 
 import java.time.LocalDate;
-
+import java.util.List;
 
 import com.entities.BranchOffice;
 import com.entities.StatusBetweenDates;
@@ -22,4 +22,6 @@ public interface StatusBetweenDatesDao extends GenericDao<StatusBetweenDates, In
 	public void editStatusAtBooking(Vehicle vehicle,LocalDate initialDate,LocalDate endDate,BranchOffice finalBranchOffice);
 
 	public StatusBetweenDates getActualStatus(Vehicle vehicle,LocalDate date);
+
+	public List<StatusBetweenDates> getNextStatus(Vehicle vehicle);
 }

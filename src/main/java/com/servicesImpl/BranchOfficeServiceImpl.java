@@ -33,5 +33,10 @@ public class BranchOfficeServiceImpl extends GenericServiceImpl<BranchOffice, In
 		branchOfficeDao.saveOrUpdate(entity);
 	}
 
+	public List<BranchOffice> getAvailable() {
+		// TODO Auto-generated method stub
+		return branchOfficeDao.getAvailable();
+	}
+
 	
 }

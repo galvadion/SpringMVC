@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -14,6 +16,10 @@ import javax.validation.ValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -143,4 +149,40 @@ public class ApiRestController {
 			}
 		}
 	}
+	
+    @Autowired
+    private JavaMailSender mailSender;
+     
+    @RequestMapping(value = "/api/sendMail", method = RequestMethod.GET)
+    public String doSendEmail() {
+        // takes input from e-mail form
+        String recipientAddress = "urashimasan@gmail.com";
+        String subject = "POrueba mail";
+        String message = "Este es un amil de prueba";
+         
+        // prints debug info
+        System.out.println("To: " + recipientAddress);
+        System.out.println("Subject: " + subject);
+        System.out.println("Message: " + message);
+         
+        // creates a simple e-mail object
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(recipientAddress);
+        email.setSubject(subject);
+        email.setText(message);
+         
+        // sends the e-mail
+        mailSender.send(new MimeMessagePreparator() {
+        	  public void prepare(MimeMessage mimeMessage) throws MessagingException {
+        	    MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+        	    message.setFrom("info.rentuy@gmail.com");
+        	    message.setTo("urashimasan@gmail.com");
+        	    message.setSubject("A file for you");
+        	    message.setText("<b>See the attached</b>", true);
+        	  }
+        	});
+         
+        // forwards to the view named "Result"
+        return "Result";
+    }
 }

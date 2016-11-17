@@ -4,7 +4,7 @@
 
     /***App Module Definition***/
     angular
-        .module('app', ['ngRoute', 'ngCookies','jkuri.datepicker','angularFileUpload','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons'])
+        .module('app', ['ngRoute', 'ngCookies','angularFileUpload','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps'])
         .config(config)
         .run(run)
         .run(['$location', '$rootScope', function($location, $rootScope) {
@@ -21,6 +21,7 @@
 
     config.$inject = ['$routeProvider', '$locationProvider'];
     function config($routeProvider, $locationProvider) {
+    	
         $routeProvider
             .when('/home', {
                 controller: 'HomeController',
@@ -89,7 +90,7 @@
                 controllerAs: 'vm'
             })
             
-            .when('/employee/edit', {
+            .when('/employee/edit/:id', {
                 controller: 'UserController',
                 templateUrl: 'employee/edit',
                 title: 'Rent-UY - Editar Empleado',
@@ -110,7 +111,7 @@
                 controllerAs: 'vm'
             })
             
-            .when('/client/edit', {
+            .when('/client/edit/:id', {
                 controller: 'UserController',
                 templateUrl: 'client/edit',
                 title: 'Rent-UY - Editar Cliente',
@@ -138,7 +139,7 @@
                 controllerAs: 'vm'
             })
             
-            .when('/model/edit', {
+            .when('/model/edit/:id', {
                 controller: 'ModelController',
                 templateUrl: 'model/edit',
                 title: 'Rent-UY - Editar Modelo',
@@ -159,7 +160,7 @@
                 controllerAs: 'vm'
             })
             
-            .when('/vehicle/edit', {
+            .when('/vehicle/edit/:id', {
                 controller: 'VehicleController',
                 templateUrl: 'vehicle/edit',
                 title: 'Rent-UY - Editar Vehículo',
@@ -180,7 +181,7 @@
                 controllerAs: 'vm'
             })
             
-            .when('/branchoffice/edit', {
+            .when('/branchoffice/edit/:id', {
                 controller: 'BranchofficeController',
                 templateUrl: 'branchoffice/edit',
                 title: 'Rent-UY - Editar Sucursal',
@@ -229,14 +230,21 @@
                 controllerAs: 'vm'
             })
             
-            .when('/booked/edit', {
+            .when('/booked/edit/:id', {
                 controller: 'BookedController',
                 templateUrl: 'booked/edit',
                 title: 'Rent-UY - Editar Reserva',
                 controllerAs: 'vm'
             })
             
-            .when('/payment/example', {
+            .when('/search/origin=:origin&destination=:destination&from=:from&to=:to', {
+                controller: 'BookedController',
+                templateUrl: 'booked/search',
+                title: 'Rent-UY - Búsqueda',
+                controllerAs: 'vm'
+            })
+		
+	    .when('/payment/example', {
             	controller: 'PaymentController',
             	templateUrl:'payment/example',
             	title: 'Paypal payment example',

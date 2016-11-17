@@ -55,9 +55,6 @@ public class Rent implements Serializable{
 	@OneToMany(mappedBy="rent")
 	private List<RentLine> rentLine;
 	
-	@ManyToOne
-	@JoinColumn(name ="client_id")
-	private Client client;
 	
 	@Column(name="status_at_return")
 	private String statusAtReturn;
@@ -133,15 +130,6 @@ public class Rent implements Serializable{
 
 	public void setRentLine(List<RentLine> rentLine) {
 		this.rentLine = rentLine;
-	}
-
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
 	}
 
 	public String getStatusAtReturn() {

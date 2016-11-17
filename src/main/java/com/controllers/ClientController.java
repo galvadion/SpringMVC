@@ -45,8 +45,9 @@ public class ClientController {
 		return view;
 	}
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<Object> getSaved(@RequestBody Client users) {
+		System.out.println(users);
 		try {
 			userServices.saveOrUpdate(users);
 			return ResponseEntity.ok((Object) users);

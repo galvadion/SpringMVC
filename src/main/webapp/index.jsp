@@ -12,7 +12,6 @@
 
         <!--Styles-->
         <link rel="stylesheet" type="text/css" href="static/css/vendor/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="static/css/ngDatepicker.css">
         <link rel="stylesheet" type="text/css" href="static/css/nprogress.css">
         <link rel="stylesheet" type="text/css" href="static/css/ngDialog.css">
         <link rel="stylesheet" type="text/css" href="static/css/ngDialog-theme-default.css">
@@ -25,6 +24,8 @@
         <link rel="stylesheet" type="text/css" href="static/fonts/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="static/js/dista/plugins/bootstrap/datatables.bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="static/js/dista/css/angular-datatables.css">
+        <link rel="stylesheet" type="text/css" href="static/css/bootstrap-datetimepicker.min.css">
+        
         
 
     </head>
@@ -35,16 +36,18 @@
         
         <!--Core-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="//code.angularjs.org/1.5.5/angular.js"></script>
-        <script src="//code.angularjs.org/1.5.5/angular-route.js"></script>
-        <script src="//code.angularjs.org/1.5.5/angular-cookies.js"></script>
-        <script src="//code.angularjs.org/1.5.5/angular-aria.js"></script>
-        <script src="//code.angularjs.org/1.5.5/angular-animate.js"></script>
+        <script src="//code.angularjs.org/1.2.1/angular.js"></script>
+        <script src="//code.angularjs.org/1.2.1/angular-route.js"></script>
+        <script src="//code.angularjs.org/1.2.1/angular-cookies.js"></script>
+        <script src="//code.angularjs.org/1.2.1/angular-aria.js"></script>
+        <script src="//code.angularjs.org/1.2.1/angular-animate.js"></script>
         <script type="text/javascript" src="static/app.js"></script>
 
 
 		<!--Extensions-->
-        <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="static/js/bootstrap-datetimepicker.min.js"></script>
+		<script type="text/javascript" src="static/js/bootstrap-datetimepicker.es.js"></script>
+		<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="static/js/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="static/js/angular-ui-router.js"></script>
         <script type="text/javascript" src="static/js/angular-file-upload.js"></script>
@@ -52,9 +55,16 @@
         <script type="text/javascript" src="static/js/nprogress.js"></script>
         <script type="text/javascript" src="static/js/ngDialog.js"></script>
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
-		<script type="text/javascript" src="static/js/ngDatepicker.min.js"></script>
-		<script type="text/javascript" src="static/js/moment.min.js"></script>
-		<script type="text/javascript" src="static/js/moment-with-locales.js"></script>
+		
+		<!--Maps-->
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCToOBKLzgMq3u02g7OO_v-txL_LnfEO_g&callback=initMap" type="text/javascript"></script>
+		<script type="text/javascript" src="static/js/maps/lodash.core.js"></script>
+		<script type="text/javascript" src="static/js/maps/angular-simple-logger.js"></script>
+		<script type="text/javascript" src="static/js/maps/angular-google-maps.min.js"></script>
+		
+		
+		
+		
 		
 
 		<!-- Data Tablbes -->
@@ -100,7 +110,7 @@
         <!-- <script src="https://www.paypalobjects.com/api/checkout.js" async></script> -->
 
 		<!-- Models -->
-		<script src="static/models/shoppingCart.js"></script>
+		
 
         <!--Services-->
         <script src="static/services/authentication.service.js"></script>
@@ -132,6 +142,8 @@
         <script src="static/controllers/rent/rent.controller.js"></script>
         <script src="static/controllers/tariff/tariff.controller.js"></script>
         <script src="static/controllers/payment/payment.controller.js"></script>
+        
+        <script src="static/models/shoppingCart.js"></script>
 
         <div id="wrap">
           <div ng-view></div>

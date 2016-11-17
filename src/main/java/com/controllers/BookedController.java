@@ -29,16 +29,13 @@ public class BookedController {
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView getEditPage() {
-		ModelAndView view = new ModelAndView("user/form");
+		ModelAndView view = new ModelAndView("booked/form");
 		return view;
 	}
 	
-	/*
-	 * return the searchView
-	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView getPage() {
-		ModelAndView view = new ModelAndView("booking/search");
+	public ModelAndView getSearchPage() {
+		ModelAndView view = new ModelAndView("booked/search");
 		return view;
 	}
 

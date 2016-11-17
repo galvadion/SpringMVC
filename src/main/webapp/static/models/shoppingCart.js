@@ -204,7 +204,26 @@ function getDetails(url){
 				}
 			}
 		});
-		alert("Token = " + token + " and Payer ID = " + payerId);
+		var inputToken = document.createElement("input");
+		inputToken.hidden = "true";
+		inputToken.value = token;
+		inputToken.id = "token";
+		
+		var inputPayerId = document.createElement("input");
+		inputPayerId.hidden = "true";
+		inputPayerId.value = payerId;
+		inputPayerId.id = "payerId";
+		
+		document.body.appendChild(inputToken);
+		document.body.appendChild(inputPayerId);
+		$("#paymentDetails").click();
+		//alert("Token = " + token + " and Payer ID = " + payerId);
+//		var scope = angular.element(document.getElementById('PaymentController')).scope();
+//		scope.$apply(function(){
+//			scope.getDetails(token, payerId);
+//		})
+//		var f = angular.element(document.getElementById('wrap')).scope().getDetails(token, payerId);
+//		f.$apply();
 	}
 	$("#paypal-iframe").remove();
 };
@@ -213,17 +232,17 @@ function getDetails(url){
 //checkout parameters (one per supported payment service)
 //
 function checkoutParameters(serviceName, merchantID, options) {
- this.serviceName = serviceName;
- this.merchantID = merchantID;
- this.options = options;
+	 this.serviceName = serviceName;
+	 this.merchantID = merchantID;
+	 this.options = options;
 }
 
 //----------------------------------------------------------------
 //items in the cart
 //
 function cartItem(sku, name, price, quantity) {
- this.sku = sku;
- this.name = name;
- this.price = price * 1;
- this.quantity = quantity * 1;
+	 this.sku = sku;
+	 this.name = name;
+	 this.price = price * 1;
+	 this.quantity = quantity * 1;
 }

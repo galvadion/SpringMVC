@@ -21,7 +21,7 @@
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                     	<h2 class="custom-font"><strong>Gestion:</strong></h2>
-                        <a href="#/vehicle/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Vehiculo</a>
+                        <a href="#/branchoffice/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nueva Sucursal</a>
                     </div>
                     <!-- /tile header -->
 
@@ -32,45 +32,41 @@
             				<table datatable="ng" class="table mb-0 table-custom" id="VehicleList" dt-options="vm.dtOptions" dt-column-defs="vm.DTColumnDefs">
                                 <thead>
                                    <tr>
-                                   		<th>Matricula</th>
-                                        <th>Marca</th>
-                                        <th>Modelo</th>
-                                        <th>Estado</th>
-                                        <th>Vencimiento Patente</th>
+                                   		<th>Nombre</th>
+                                        <th>Ciudad</th>
+                                        <th>Dirección</th>
+                                        <th>Apertura</th>
+                                        <th>Cierre</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="(key, value) in vm.allVehicles">
+                                    <tr ng-repeat="(key, value) in vm.allBranchoffices">
                                     	<td>
-                                            SBF 562                                             
+                                            {{value.name}}
                                         </td>
                                         <td>
-                                            Fiat                                             
+                                            {{value.city}}
                                         </td>
                                         <td>
-                                            Uno                                             
+                                            {{value.address}}
                                         </td>
                                         <td>
-                                            Disponible
+                                            {{value.apertureHour}}
                                         </td>
                                         <td>
-                                            23/10/2017
+                                            {{value.closingHour}}
                                         </td>
+                                        <td></td>
                                         <td class="text-center plus">
-                                             <a ng-href="#/vehicle/{{value.id}}" title="Alquilar Vehiculo">
-                                             	<i class="fa fa-automobile"></i><br><small>Alquilar</small>
-                                             </a>
-                                        </td>
-                                        <td class="text-center plus">
-                                             <a ng-href="#/vehicle/{{value.id}}" title="Editar">
+                                             <a ng-href="#/branchoffice/edit/{{value.id}}" title="Editar">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
                                              </a>
                                         </td>
-                                        <td class="text-center delete">
-                                            <a doing-action="" href id="vehic-{{$index}}" href data-toggle="" ng-click="deleteVehicle(value,$index)" confirm-if="checked" confirm="Esta seguro, eliminar vehiculo id {{value.id}} ?" title="Eliminar">
+                                        <td class="text-center delete" style="cursor: pointer !important;">
+                                            <a href ng-click="openDialog(value)" title="Eliminar">
                                                 <i class="fa fa-times"></i><br />
                                                 <small>Eliminar</small>
                                             </a>
@@ -89,3 +85,18 @@
     </div>
 
 </section>
+
+<script type="text/ng-template" id="modalDialog">
+	<div class="ngdialog-message modal-content">
+	<div class="modal-header">
+	<h3 class="modal-title custom-font">Eliminar</h3>
+	</div>
+	<div class="modal-body">
+	Esta seguro, eliminar <strong>{{vm.auxBranchoffice.name}}</strong>?
+	</div>                     
+	<div class="modal-footer  ngdialog-buttons">
+	<button type="button" class="ngdialog-button btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" ng-click="closeThisDialog('button')"><i class="fa fa-arrow-left"></i>Cancelar</button>
+	<button type="button" class="ngdialog-button btn btn-success btn-ef btn-ef-3 btn-ef-3c" ng-click="confirm();deleteBranch(vm.auxBranchoffice.id)"><i class="fa fa-arrow-right"></i> Confirmar</button>
+	</div>
+	</div>
+</script>

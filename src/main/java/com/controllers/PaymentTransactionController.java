@@ -83,18 +83,48 @@ public class PaymentTransactionController {
 	}
 	
 	@RequestMapping(value="/details-payment", method=RequestMethod.GET)
-	public ModelAndView detailsPayment(@RequestParam("token") String token, @RequestParam("PayerID") String PayerID) throws Exception{
+	public ResponseEntity<PayPalTransaction> detailsPayment(@RequestParam("token") String token, @RequestParam("PayerID") String PayerID) throws Exception{
 		
 		try{
 			PayPalTransaction transaction = paypalService.getTransactionDetails(token);
-			ModelAndView view = new ModelAndView("payment/details");
-			view.addObject(transaction);
-			
-			return view;
+			return ResponseEntity.ok(transaction);
 		}
 		catch(Exception ex){
 			log.error(ex.getMessage());
 			throw ex;
+		}
+	}
+	
+	@RequestMapping(value="/confirm-transaction", method=RequestMethod.GET)
+	public ResponseEntity<String> confirmTransaction(@RequestParam("token") String token, 
+													 @RequestParam("PayerID") String PayerID,
+													 @RequestParam("itemTotal") String itemTotal,
+													 @RequestParam("orderTotal") String orderTotal){
+		try{
+			PayPalTransaction transaction = paypalService.confirmTransaction(token, PayerID, itemTotal, orderTotal);
+			switch(transaction.getAck()){
+			case "SUCCESS":
+				// AQUI EL TRANSACTION ID!!
+				String transactionId = transaction.getTransactionID();
+				
+				System.out.println(transactionId);
+				
+				return ResponseEntity.ok("Transaction complete!");
+				
+			case "FAILURE":
+				String error = transaction.getErrorMessage();
+				log.error(error);
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
+				
+			default:
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
+			}
+			
+			
+		}
+		catch(Exception ex){
+			log.error(ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
 		}
 	}
 	

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.entities.Brand;
 import com.entities.User;
 import com.services.UserServices;
 
@@ -32,8 +33,16 @@ public class UserController {
 		return view;
 	}
 	
+	@RequestMapping(value="/edit/{id}",method =RequestMethod.GET)
+	public ModelAndView getEdit(String id){
+		ModelAndView view=new ModelAndView("user/form");
+		view.addObject(userServices.get(Integer.parseInt(id)));
+		return view;
+	}
+	
 	@RequestMapping(value="/saveOrUpdate", method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> getSaved(User users){
+		System.out.println(users);
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		userServices.saveOrUpdate(users);
@@ -84,7 +93,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@RequestParam("id") Integer id){
-		User user=userServices.get(id);
+		User user=userServices.get(Integer.valueOf(id));
 		user.setActive(false);
 		userServices.saveOrUpdate(user);
 		return ResponseEntity.ok((Object)"It has been removed");

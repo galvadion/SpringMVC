@@ -3,7 +3,7 @@
 <section id="content">
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<div class="col-md-4 col-sm-12">
+			<div ng-if="vm.booleano" class="col-md-4 col-sm-12">
 				<table class="table table-bordered">
 					
 					<!-- header -->
@@ -29,7 +29,7 @@
 	                				ng-click="cart.addItem(item.sku, item.name, item.price, +1)"></button>
 	                			<button
 	                				class="btn btn-inverse" type="button"
-	                				ng-disabled="item.quantity <= 0"
+	                				ng-disabled="item.quantity < 0"
 	                				ng-click="cart.addItem(item.sku, item.name, item.price, -1)"></button>
 	                		</div>
 	                	</td>
@@ -61,7 +61,46 @@
 	                </button>   
 	            </p>
 			</div>
+			<div ng-if="!vm.booleano" class="col-md-4 col-sm-12">
+				<h1>Thank you!!!</h1>
+				<h3>Please, review your booking before confirm</h3>
+				
+				<div ng-repeat="item in vm.items">
+					<div class="row">
+						<div class="col-sm-2">Name: </div>
+						<div class="col-sm-2">{{item.name}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">Amount: </div>
+						<div class="col-sm-2">{{item.amount}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">Quantity: </div>
+						<div class="col-sm-2">{{item.quantity}}</div>
+					</div>
+					<br/>
+					
+				</div>
+				<div>
+					<div class="row">
+						<div class="col-sm-2">Total: </div>
+						<div class="col-sm-2">{{vm.itemTotal}}</div>
+					</div>
+					<br/>
+				</div>
+				<div>
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="btn btn-info" ng-click="ConfirmBooking()">Confirm</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="btn btn-danger" ng-click="CancelBooking()">Cancel</div>						
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+		<input id="paymentDetails" type="button" hidden="true" ng-click="getDetails()"/>
 	</div>
 	
 	

@@ -19,7 +19,7 @@ import com.services.RentService;
 @Service
 public class RentServiceImpl extends GenericServiceImpl<Rent, Integer> implements RentService{
 
-	private RentDao RentDao;
+	private RentDao rentDao;
 	
 	public RentServiceImpl(){
 		
@@ -29,17 +29,21 @@ public class RentServiceImpl extends GenericServiceImpl<Rent, Integer> implement
     public RentServiceImpl(
             @Qualifier("rentDaoImpl") GenericDao<Rent, Integer> genericDao) {
         super(genericDao);
-        this.RentDao = (RentDao) genericDao;
+        this.rentDao = (RentDao) genericDao;
     }
 
 	public void confirmRent(Booked book) {
 		Rent rent=new Rent();
 		rent.setDeliveryDate(LocalDate.now());
 		rent.setBooked(book);
-		rent.setClient(book.getClient());
-		RentDao.saveOrUpdate(rent);
+		rentDao.saveOrUpdate(rent);
 		// TODO Auto-generated method stub
 		
+	}
+
+	public List<Rent> getBetweenDates(LocalDate initialDate, LocalDate finalDate) {
+		// TODO Auto-generated method stub
+		return rentDao.getBetweenDates(initialDate,finalDate);
 	}
 
 	

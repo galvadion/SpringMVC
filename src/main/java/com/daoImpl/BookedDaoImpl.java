@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dao.BookedDao;
 import com.entities.Booked;
 import com.entities.Client;
+import com.entities.Vehicle;
 
 @Repository
 @Transactional
@@ -31,6 +32,12 @@ public class BookedDaoImpl extends GenericDaoImpl<Booked, Integer> implements Bo
 		query.setParameter("client", user);
 		query.setParameter("today",LocalDate.now());
 		return (Booked) query.getSingleResult();
+	}
+
+	public List<Booked> getNextBooked(Vehicle vehicle) {
+		Query query=currentSession().createQuery("from Booked where vehicle =:vehicle and beginbookedDate>CURRENT_DATE and canceled=false");
+		query.setParameter("vehicle", vehicle);
+		return query.getResultList();
 	}
 	
 }

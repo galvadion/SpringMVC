@@ -15,6 +15,9 @@ import com.models.PayPalTransaction;
 import com.models.TransactionItem;
 import com.services.PayPalService;
 
+import urn.ebay.api.PayPalAPI.DoExpressCheckoutPaymentReq;
+import urn.ebay.api.PayPalAPI.DoExpressCheckoutPaymentRequestType;
+import urn.ebay.api.PayPalAPI.DoExpressCheckoutPaymentResponseType;
 import urn.ebay.api.PayPalAPI.GetExpressCheckoutDetailsReq;
 import urn.ebay.api.PayPalAPI.GetExpressCheckoutDetailsRequestType;
 import urn.ebay.api.PayPalAPI.GetExpressCheckoutDetailsResponseType;
@@ -25,6 +28,8 @@ import urn.ebay.api.PayPalAPI.SetExpressCheckoutResponseType;
 import urn.ebay.apis.CoreComponentTypes.BasicAmountType;
 import urn.ebay.apis.eBLBaseComponents.AckCodeType;
 import urn.ebay.apis.eBLBaseComponents.CurrencyCodeType;
+import urn.ebay.apis.eBLBaseComponents.DoExpressCheckoutPaymentRequestDetailsType;
+import urn.ebay.apis.eBLBaseComponents.DoExpressCheckoutPaymentResponseDetailsType;
 import urn.ebay.apis.eBLBaseComponents.ErrorType;
 import urn.ebay.apis.eBLBaseComponents.GetExpressCheckoutDetailsResponseDetailsType;
 import urn.ebay.apis.eBLBaseComponents.PayPalUserStatusCodeType;
@@ -32,6 +37,7 @@ import urn.ebay.apis.eBLBaseComponents.PayerInfoType;
 import urn.ebay.apis.eBLBaseComponents.PaymentActionCodeType;
 import urn.ebay.apis.eBLBaseComponents.PaymentDetailsItemType;
 import urn.ebay.apis.eBLBaseComponents.PaymentDetailsType;
+import urn.ebay.apis.eBLBaseComponents.PaymentInfoType;
 import urn.ebay.apis.eBLBaseComponents.SetExpressCheckoutRequestDetailsType;
 
 @Component("PayPalServiceImpl")
@@ -73,6 +79,7 @@ public class PayPalServiceImpl implements PayPalService {
 			orderTotal.setCurrencyID(CurrencyCodeType.fromValue("USD"));
 			orderTotal.setValue(String.valueOf(total));
 			paymentDetails.setOrderTotal(orderTotal);
+			paymentDetails.setPaymentAction(PaymentActionCodeType.fromValue("Sale"));
 			List<PaymentDetailsType> paymentDetailsList = new ArrayList<PaymentDetailsType>();
 			paymentDetailsList.add(paymentDetails);
 
@@ -161,7 +168,7 @@ public class PayPalServiceImpl implements PayPalService {
 				GetExpressCheckoutDetailsResponseDetailsType checkoutDetailsResponse = getExpressCheckoutDetailsResponse.getGetExpressCheckoutDetailsResponseDetails();
 				PayerInfoType payer = checkoutDetailsResponse.getPayerInfo();
 
-				transaction.setAck("success");
+				transaction.setAck(ack.toString());
 				transaction.setPayerMarketingEmail(checkoutDetailsResponse.getBuyerMarketingEmail());
 				transaction.setCheckoutStatus(checkoutDetailsResponse.getCheckoutStatus());
 				transaction.setInvoiceID(checkoutDetailsResponse.getInvoiceID());
@@ -194,7 +201,7 @@ public class PayPalServiceImpl implements PayPalService {
 
 				return transaction;
 			case "FAILURE":
-				transaction.setAck("failure");
+				transaction.setAck(ack.toString());
 				String errors = "";
 				for(ErrorType errorList : getExpressCheckoutDetailsResponse.getErrors()){
 					if(errors.equals("")){
@@ -218,4 +225,88 @@ public class PayPalServiceImpl implements PayPalService {
 		}
 
 	}
+
+	public PayPalTransaction confirmTransaction(String token, String payerId, String itemTotal, String orderTotal) throws Exception{
+		try{
+			PayPalTransaction transaction = new PayPalTransaction();
+			
+			PaymentDetailsType paymentDetail = new PaymentDetailsType();
+			paymentDetail.setNotifyURL("https://localhost:8443/SpringMVC/#/payment/example");
+			BasicAmountType orderTotalTransaction = new BasicAmountType();
+			orderTotalTransaction.setValue(orderTotal);
+			orderTotalTransaction.setCurrencyID(CurrencyCodeType.fromValue("USD"));
+			paymentDetail.setOrderTotal(orderTotalTransaction);
+			
+			BasicAmountType itemTotalTransaction = new BasicAmountType();
+			itemTotalTransaction.setValue(itemTotal);
+			itemTotalTransaction.setCurrencyID(CurrencyCodeType.fromValue("USD"));
+			paymentDetail.setItemTotal(itemTotalTransaction);
+			
+			paymentDetail.setPaymentAction(PaymentActionCodeType.fromValue("Sale"));
+			List<PaymentDetailsType> paymentDetails = new ArrayList<PaymentDetailsType>();
+			paymentDetails.add(paymentDetail);
+			
+			DoExpressCheckoutPaymentRequestDetailsType doExpressCheckoutPaymentRequestDetails = new DoExpressCheckoutPaymentRequestDetailsType();
+			doExpressCheckoutPaymentRequestDetails.setToken(token);
+			doExpressCheckoutPaymentRequestDetails.setPayerID(payerId);
+			doExpressCheckoutPaymentRequestDetails.setPaymentDetails(paymentDetails);
+			
+			DoExpressCheckoutPaymentRequestType doExpressCheckoutPaymentRequest = new DoExpressCheckoutPaymentRequestType(doExpressCheckoutPaymentRequestDetails);
+			doExpressCheckoutPaymentRequest.setVersion("204.0");
+			
+			DoExpressCheckoutPaymentReq doExpressCheckoutPaymentReq = new DoExpressCheckoutPaymentReq();
+			doExpressCheckoutPaymentReq.setDoExpressCheckoutPaymentRequest(doExpressCheckoutPaymentRequest);
+			
+			Map<String, String> sdkConfig = new HashMap<String, String>();
+			sdkConfig.put("mode", "sandbox");
+			sdkConfig.put("acct1.UserName", env.getProperty("PayPalUser"));
+			sdkConfig.put("acct1.Password", env.getProperty("PayPalPass"));
+			sdkConfig.put("acct1.Signature", env.getProperty("PayPalSignature"));
+			PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(sdkConfig);
+			
+			DoExpressCheckoutPaymentResponseType doExpressCheckoutPaymentResponse = service.doExpressCheckoutPayment(doExpressCheckoutPaymentReq); 
+			
+			
+			
+			AckCodeType ack = doExpressCheckoutPaymentResponse.getAck();
+			
+			switch(ack.name()){
+			case "SUCCESS" : 
+				DoExpressCheckoutPaymentResponseDetailsType responseDetails = doExpressCheckoutPaymentResponse.getDoExpressCheckoutPaymentResponseDetails();
+
+				transaction.setAck(ack.toString());
+				
+				List<PaymentInfoType> paymentInfoList = responseDetails.getPaymentInfo();
+				
+				for(PaymentInfoType paymentInfo : paymentInfoList){
+					transaction.setTransactionID(paymentInfo.getTransactionID());
+					System.out.println("PayPalService: TransactionID = " + paymentInfo.getTransactionID());
+				}
+				
+				break;
+				
+			case "FAILURE" : 
+				transaction.setAck(ack.toString());
+				String errors = "";
+				for(ErrorType errorList : doExpressCheckoutPaymentResponse.getErrors()){
+					if(errors.equals("")){
+						errors = "Short Message: " + errorList.getShortMessage();
+						errors += " - Long Message: " + errorList.getLongMessage();
+					}
+					else{
+						errors += " - " + errorList.getLongMessage();
+					}
+				}
+				transaction.setErrorMessage(errors);
+			}
+			
+			
+			return transaction;
+		}
+		catch(Exception ex){
+			log.error(ex);
+			throw new Exception(ex.getMessage());
+		}
+	}
+
 }

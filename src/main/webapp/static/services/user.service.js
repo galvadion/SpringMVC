@@ -12,16 +12,13 @@
 
         service.GetAllUsers = GetAllUsers;
         service.GetUserById = GetUserById;
+        service.DeleteUser = DeleteUser;
         
         service.GetAllClients = GetAllClients;
-        service.CreateClient = CreateClient;
-        service.UpdateClient = UpdateClient;
-        service.DeleteClient = DeleteClient;
+        service.InsertClient = InsertClient;
         
         service.GetAllEmployees = GetAllEmployees;
-        service.CreateEmployee = CreateEmployee;
-        service.UpdateEmployee = UpdateEmployee;
-        service.DeleteEmployee = DeleteEmployee;
+        service.InsertEmployee = InsertEmployee;
         
         return service;
 
@@ -35,41 +32,30 @@
             return $http.get('/SpringMVC/user/getbyid?id=' + id).then(handleSuccess, handleError);
         }
         
+        function DeleteUser(id) {
+            return $http.delete('/SpringMVC/user/delete?id=' + id).then(handleSuccess, handleError);
+        }
+        
+        
         //Client functions
 
         function GetAllClients() {
             return $http.get('/SpringMVC/client/getall').then(handleSuccess, handleError);
         }
         
-        function CreateClient(client) {
-            return $http.post('/SpringMVC/client/register', client).then(handleSuccess, handleError);
+        function InsertClient(client) {
+            return $http.post('/SpringMVC/client/insert', client).then(handleSuccess, handleError);
         }
         
-        function UpdateClient(client) {
-            return $http.put('/SpringMVC/client/update', client).then(handleSuccess, handleError);
-        }
-        
-        function DeleteClient(id) {
-            return $http.delete('/SpringMVC/client/delete', id).then(handleSuccess, handleError);
-        }
 
-        
         //Employee functions
         
         function GetAllEmployees() {
             return $http.get('/SpringMVC/employee/getall').then(handleSuccess, handleError);
         }
         
-        function CreateEmployee(employee) {
-            return $http.post('/SpringMVC/employee/register', employee).then(handleSuccess, handleError);
-        }
-        
-        function UpdateEmployee(employee) {
-            return $http.put('/SpringMVC/employee/update', employee).then(handleSuccess, handleError);
-        }
-        
-        function DeleteEmployee(id) {
-            return $http.delete('/SpringMVC/employee/delete', id).then(handleSuccess, handleError);
+        function InsertEmployee(employee) {
+            return $http.post('/SpringMVC/employee/insert', employee).then(handleSuccess, handleError);
         }
 
         

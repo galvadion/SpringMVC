@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Entity
-public class Images implements Serializable {
+public class Image implements Serializable {
 	
 	/**
 	 * 

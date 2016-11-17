@@ -16,4 +16,6 @@ public interface PayPalService  {
 	Map<String, String> beginTransaction(List<TransactionItem> items) throws Exception;
 	
 	PayPalTransaction getTransactionDetails(String token) throws Exception;
+	
+	PayPalTransaction confirmTransaction(String token, String payerId, String itemTotal, String orderTotal) throws Exception;
 }
