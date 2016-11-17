@@ -14,7 +14,7 @@
             </ol>
         </div>
 
-        <div class="row">
+		<div class="row">
         	<div class="col-md-12">
             	
             	<section class="tile">
@@ -54,13 +54,13 @@
 	                        <div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.category.$dirty && form.category.$error.required }">
 	                            <label for="category" class="control-label">* Categoria</label>
 	                            <select ng-model="vm.requestModel.category.id" name="category" ng-options="item.id as item.name for item in vm.category" id="category" class="form-control" required>
-									<option value=""> Seleccione una categoria</option> 
-								<!-- 	<option value="1">S</option>
+									<option value=""> Seleccione una categoria</option>
+										<!-- 	<option value="1">S</option>
 									<option value="2">A</option>
 									<option value="3">B</option>
 									<option value="4">C</option>
 									<option value="5">D</option>  -->
-								</select>
+									</select>
 								<span ng-show="form.category.$dirty && form.category.$error.required" class="help-block">Marca es requerida</span>
 	                        </div>
 	

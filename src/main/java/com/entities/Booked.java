@@ -38,6 +38,10 @@ public class Booked implements Serializable{
 	@Column(name= "last_booked_date")
 	private LocalDate lastbookedDate;
 	
+	@ManyToOne
+	@JoinColumn(name="promotion_code")	
+	private Promotion promotionCode;
+	
 	private boolean canceled=false;
 	
 	@Column(name = "transaction_number")
@@ -101,14 +105,6 @@ public class Booked implements Serializable{
 
 	public void setLastbookedDate(LocalDate lastbookedDate) {
 		this.lastbookedDate = lastbookedDate;
-	}
-
-	public Vehicle getVehicule() {
-		return vehicle;
-	}
-
-	public void setVehicule(Vehicle model) {
-		this.vehicle = model;
 	}
 
 	public String getTransactionNr() {
@@ -203,5 +199,22 @@ public class Booked implements Serializable{
 		this.canceled = canceled;
 	}
 
+	public Promotion getPromotionCode() {
+		return promotionCode;
+	}
+
+	public void setPromotionCode(Promotion promotionCode) {
+		this.promotionCode = promotionCode;
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+	
+	
 	
 }

@@ -51,7 +51,7 @@ public class ReportController {
 
 	@Autowired
 	StatusBetweenDatesService statusService;
-	
+
 	@Autowired
 	RentService rentService;
 
@@ -63,10 +63,10 @@ public class ReportController {
 
 	@RequestMapping(value = "/getpickuptoday", method = RequestMethod.GET)
 	public ResponseEntity<List<PickedModel>> getpickedupToday() {
-		List<PickedModel> result=new ArrayList();
-		for(BranchOffice bo:branchService.getAvailable()){
-			for(Vehicle vehicle: vehicleService.getPickedUpToday(bo)){
-				PickedModel pm=new PickedModel();
+		List<PickedModel> result = new ArrayList();
+		for (BranchOffice bo : branchService.getAvailable()) {
+			for (Vehicle vehicle : vehicleService.getPickedUpToday(bo)) {
+				PickedModel pm = new PickedModel();
 				pm.setVehicle(vehicle);
 				pm.setBoo(bo);
 				result.add(pm);
@@ -74,12 +74,13 @@ public class ReportController {
 		}
 		return ResponseEntity.ok(result);
 	}
+
 	@RequestMapping(value = "/getreturnedtoday", method = RequestMethod.GET)
 	public ResponseEntity<List<PickedModel>> getreturnedToday() {
-		List<PickedModel> result=new ArrayList();
-		for(BranchOffice bo:branchService.getAvailable()){
-			for(Vehicle vehicle: vehicleService.getReturnedToday(bo)){
-				PickedModel pm=new PickedModel();
+		List<PickedModel> result = new ArrayList();
+		for (BranchOffice bo : branchService.getAvailable()) {
+			for (Vehicle vehicle : vehicleService.getReturnedToday(bo)) {
+				PickedModel pm = new PickedModel();
 				pm.setVehicle(vehicle);
 				pm.setBoo(bo);
 				result.add(pm);
@@ -87,15 +88,15 @@ public class ReportController {
 		}
 		return ResponseEntity.ok(result);
 	}
-	
+
 	@RequestMapping(value = "/getBookedBetweenDates", method = RequestMethod.POST)
-	public ResponseEntity<List<PickedModel>> bookedInDates(ReportSearch rs){
-		List<PickedModel> result=new ArrayList();
-		for(Rent rent:rentService.getBetweenDates(rs.getInitialDate(),rs.getFinalDate())){
-			PickedModel pm=new PickedModel();
+	public ResponseEntity<List<PickedModel>> bookedInDates(ReportSearch rs) {
+		List<PickedModel> result = new ArrayList();
+		for (Rent rent : rentService.getBetweenDates(rs.getInitialDate(), rs.getFinalDate())) {
+			PickedModel pm = new PickedModel();
 			pm.setBoe(rent.getBooked().getEndOffice());
 			pm.setBoo(rent.getBooked().getOriginOffice());
-			pm.setVehicle(rent.getBooked().getVehicule());
+			pm.setVehicle(rent.getBooked().getVehicle());
 		}
 		return ResponseEntity.ok(result);
 	}
