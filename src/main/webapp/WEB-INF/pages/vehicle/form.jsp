@@ -165,7 +165,7 @@
 							<div class="form-group text-right">
 								<a href="#/vehicle" class="btn btn-lightred">Cancelar</a>
 								<button type="submit" id="submit" ng-disabled="form.$invalid"
-									class="btn  btn-orange">Crear</button>
+									class="btn  btn-orange">Guardar</button>
 							</div>
 
 						</form>

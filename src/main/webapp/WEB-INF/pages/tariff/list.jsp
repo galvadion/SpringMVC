@@ -129,7 +129,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
@@ -242,17 +242,111 @@
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<a data-toggle="collapse" data-parent="#accordion"
-										data-target="#collapse3">Collapsible Group 3</a>
+										data-target="#collapse3">Extras</a>
 								</h4>
 							</div>
 							<div id="collapse3" class="panel-collapse collapse">
-								<div class="panel-body">Lorem ipsum dolor sit amet,
-									consectetur adipisicing elit, sed do eiusmod tempor incididunt
-									ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-									nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-									commodo consequat.</div>
+								<div class="panel-body">
+										<section class="tile">
+
+											<!-- tile header -->
+											<div class="tile-header dvd dvd-btm">
+												<h2 class="custom-font">
+													<strong>Agregar</strong>
+												</h2>
+											</div>
+											<!-- /tile header -->
+
+											<!-- tile body -->
+											<div class="tile-body">
+
+												<form form-on-change="checkFields()" name='form-extra'
+													class="" role="form" ng-submit="saveExtra()">
+
+													<div class="row">
+														<div class="form-group col-sm-6" class="form-group"
+															ng-class="{ 'has-error': form-extra.extra.$dirty && form-extra.extra.$error.required }">
+															<label for="name" class="control-label">*
+																Nombre del extra</label> <input type="text"
+																ng-model="vm.extra.name" name="name" id="name"
+																class="form-control"
+																placeholder="Nombre del extra" required>
+															<span
+																ng-show="form-extra.extra.$dirty && form-extra.extra.$error.required"
+																class="help-block">Es necesario nombrar el Extra</span>
+														</div>
+														<div class="form-group col-sm-6" class="form-group"
+															ng-class="{ 'has-error': form-extra.price.$dirty && form-extra.price.$error.required }">
+															<label for="price" class="control-label">*
+																Precio base por dia</label> <input type="number"
+																ng-model="vm.extra.price" name="price"
+																id="price" class="form-control"
+																placeholder="Precio base por dia" required> <span
+																ng-show="form-extra.price.$dirty && form-extra.price.$error.required"
+																class="help-block">Es necesario ingresar el
+																precio base</span>
+														</div>
+													</div>
+													<!-- Buttons -->
+													<div class="form-group text-right">
+														<a class="btn btn-lightred"
+															ng-click="cleanInput();cleanMessagges();">Cancelar</a>
+														<button type="submit" id="submit"
+															ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
+													</div>
+												</form>
+											</div>
+										</section>
+										<section class="tile">
+											<!-- tile header -->
+											<div class="tile-header dvd dvd-btm">
+												<h2 class="custom-font">
+													<strong>Listado</strong>
+												</h2>
+											</div>
+											<!-- /tile header -->
+											<!-- tile body -->
+											<div class="tile-body table-custom p-0">
+												<div class="table-responsive">
+													<table datatable="ng" class="table mb-0 table-custom"
+														id="ExtrasList" dt-options="vm.dtOptions"
+														dt-column-defs="vm.DTColumnDefs">
+														<thead>
+															<tr>
+																<th>Nombre</th>
+																<th>Precio por dia</th>
+																<th style="width: 20px;"></th>
+																<th style="width: 90px;">Acciones</th>
+																<th style="width: 70px;"></th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr ng-repeat="(key, value) in vm.extrasList">
+																<td>{{value.name}}</td>
+																<td>{{value.price}}</td>
+																<td class="text-center plus" style="cursor: pointer;">
+																	<a title="Editar" ng-click="editExtra(value)"> <i
+																		class="fa fa-pencil"></i><br> <small>Editar</small>
+																</a>
+																</td>
+																<td class="text-center delete"><a doing-action=""
+																	href data-toggle="" ng-click="deleteExtra(value.id)"
+																	confirm-if="checked"
+																	confirm="Esta seguro, eliminar categoria {{value.name}} ?"
+																	title="Eliminar"> <i class="fa fa-times"></i><br />
+																		<small>Eliminar</small>
+																</a></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+
+										</section>
+									</div>
 							</div>
 						</div>
+					</div>
 					</div>
 				</section>
 			</div>

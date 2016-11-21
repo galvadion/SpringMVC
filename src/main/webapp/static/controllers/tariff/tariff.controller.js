@@ -15,6 +15,7 @@
         vm.fuelType ={};
         vm.categoryList = [];
         vm.fuelTypeList =[];
+        vm.extrasList = [];
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -52,6 +53,7 @@
             NProgress.start();
             getAllCategories();
             getAllFuelTypes();
+            getAllExtras();
         }
         
         function getAllCategories(){
@@ -73,6 +75,18 @@
         		}
         		else{
         			vm.fuelTypeList = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        
+        function getAllExtras(){
+        	TariffService.getAllExtras().then(function (response) {
+        		if(response.success){
+        			vm.extrasList = response.data;
+        		}
+        		else{
+        			vm.extrasList = [];
         		}
         		NProgress.done();
         	});
@@ -124,6 +138,34 @@
         	TariffService.InsertFuelType(vm.fuelType).then(function (response) {
         		if(response.success){
         			getAllFuelTypes();
+        			$rootScope.doFlashMessage(mgsSuccess,'','success');
+        			$scope.cleanInput();
+        		}
+        		else{
+        			$rootScope.doFlashMessage(mgsError,'','error');
+        		}
+        		NProgress.done();
+        	});
+        };
+        
+        $scope.saveExtra = function() {
+        	NProgress.start();
+        	var mgsSuccess = "";
+        	var mgsError = "";
+        	
+        	if(vm.fuelType.id){
+        		mgsSuccess = "Extra editada con éxito";
+        		mgsError = "Error a editar el extra";
+        		
+        	}
+        	else{
+        		mgsSuccess = "Extra creada con éxito";
+        		mgsError = "Extra ya existente";
+        	}
+        	
+        	TariffService.InsertExtra(vm.extra).then(function (response) {
+        		if(response.success){
+        			getAllExtras();
         			$rootScope.doFlashMessage(mgsSuccess,'','success');
         			$scope.cleanInput();
         		}

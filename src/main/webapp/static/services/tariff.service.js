@@ -12,9 +12,11 @@
 
         service.getAllFuelTypes = getAllFuelTypes;
         service.getAllCategories =getAllCategories;
+        service.getAllExtras= getAllExtras;
         service.InsertCategory = InsertCategory;
         service.InsertFuelType = InsertFuelType;
         service.DeleteTariff = DeleteTariff;
+        service.InsertExtra= InsertExtra;
         
         
         return service;
@@ -30,12 +32,20 @@
             return $http.get('/SpringMVC/category/getall').then(handleSuccess, handleError);
         }
         
+        function getAllExtras() {
+            return $http.get('/SpringMVC/extras/getall').then(handleSuccess, handleError);
+        }
+        
         function InsertFuelType(tariff) {
             return $http.post('/SpringMVC/fuelType/insert', tariff).then(handleSuccess, handleError);
         }
         
         function InsertCategory(tariff) {
             return $http.post('/SpringMVC/category/insert', tariff).then(handleSuccess, handleError);
+        }
+        
+        function InsertExtra(tariff) {
+            return $http.post('/SpringMVC/extras/insert', tariff).then(handleSuccess, handleError);
         }
         
         function DeleteTariff(id) {

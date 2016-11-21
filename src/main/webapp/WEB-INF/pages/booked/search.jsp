@@ -14,7 +14,7 @@
         </div>
 
         <div class="row">
-        	<div class="col-md-12">
+        	<div class="col-md-5">
             	<section class="tile">
 					<br/>
 					<br/>
@@ -101,13 +101,9 @@
 				</section>
             	
             </div>
-		<!-- /row -->
-        </div>
-        
-        <br/>
-        
-        <div class="row">
-        	<div class="col-md-12">
+
+
+        	<div class="col-md-7">
             	<section class="tile">
 					
 					<div class="tile-header dvd dvd-btm" id="searchResult">
@@ -155,7 +151,7 @@
 	                    			</tr>
 	                    		</table>
 	                    	</div>
-	                    	<div class="col-sm-6">
+	                    	<div class="col-sm-5">
 	                    		<table>
 	                    			<tr>
 	                    				<td>
@@ -198,16 +194,74 @@
 	                    
 	                    <div class="row" style="padding: 15px;">
 	                    	<div class="col-sm-3">
-	                    		<img src="static/images/logo-wide-transparent.png" style="height:130px; max-width:240px;">
+	                    		<img src="static/images/logo-wide-transparent.png" style="height:150px; max-width:240px;">
 	                    	</div>
-	                    	<div class="col-sm-8">
+	                    	<div class="col-sm-2">
 	                    		<table>
-	                    			<tr><td>1</td></tr>
-	                    			<tr><td>2</td></tr>
-	                    			<tr><td>3</td></tr>
-	                    			<tr><td>4</td></tr>
-	                    			<tr><td>5</td></tr>
-	                    			<tr><td>6</td></tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Marca: Fiat</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Modelo: Fiorino</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Año: 2014</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Categoria: B</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Transmision: Manual</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Combustible: Nafta</p>
+	                    				</td>
+	                    			</tr>
+	                    		</table>
+	                    	</div>
+	                    	<div class="col-sm-5">
+	                    		<table>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Marca: Fiat</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Modelo: Fiorino</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Año: 2014</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Categoria: B</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Transmision: Manual</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Combustible: Nafta</p>
+	                    				</td>
+	                    			</tr>
 	                    		</table>
 	                    	</div>
 	                    	<div class="col-sm-1">
