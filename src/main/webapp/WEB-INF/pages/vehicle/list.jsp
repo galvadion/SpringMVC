@@ -6,10 +6,10 @@
     <div class="page page-dashboard">
 
         <div class="pageheader">
-        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Vehiculos </strong> Listado</h1>
+        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Vehículos </strong> Listado</h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Inicio</a></li>
-                <li class="breadcrumb-active">Vehiculos</li>
+                <li class="breadcrumb-active">Vehículos</li>
             </ol>
         </div>
 
@@ -21,7 +21,7 @@
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                     	<h2 class="custom-font"><strong>Gestion:</strong></h2>
-                        <a href="#/vehicle/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Vehiculo</a>
+                        <a href="#/vehicle/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Vehículo</a>
                     </div>
                     <!-- /tile header -->
 
@@ -66,7 +66,7 @@
                                              </a>
                                         </td>
                                         <td class="text-center delete">
-                                            <a doing-action="" href ng-click="deleteVehicle(value,$index)" confirm-if="checked" confirm="Esta seguro, eliminar vehiculo id {{value.id}} ?" title="Eliminar">
+                                            <a doing-action="" href ng-click="deleteVehicle(value,$index)" confirm-if="checked" confirm="Esta seguro, eliminar vehículo id {{value.id}} ?" title="Eliminar">
                                                 <i class="fa fa-times"></i><br />
                                                 <small>Eliminar</small>
                                             </a>
