@@ -10,7 +10,7 @@
     function VehicleController($location,UserService, $rootScope, $scope,$timeout,SessionService,VehicleService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,BrandService,ModelService, BranchofficeService,$routeParams) {
 
         var vm = this;
-        initController();
+        
         vm.roladmin = $rootScope.roladmin;
         vm.allVehicles = [];
         vm.allBrands = [];
@@ -65,13 +65,15 @@
             DTColumnDefBuilder.newColumnDef(7).notSortable(),
         ];
         
+        initController();
+        
         function initController() {
             NProgress.start();
             vm.location = $location.path().split('/',3);
             if(vm.location[2] == "edit"){
-        		getVehicleById($routeParams.id);
                 getAllBrands();
                 getAllOffices();
+                getVehicleById($routeParams.id);
         	}
             else if(vm.location[2] == "create"){
             	vm.vehicle.id = null;
@@ -123,7 +125,7 @@
         }
         
         $scope.getModelsByBrand = function(){
-        	ModelService.GetModelsByBrand(vm.brand.id).then(function (response) {
+        	ModelService.GetModelsByBrand(vm.vehicle.model.brand.id).then(function (response) {
         		if(response.success){
         			vm.modelsByBrand = response.data;
         			vm.vehicle.model.id = "";
@@ -151,7 +153,11 @@
         function getVehicleById(id){
         	VehicleService.GetVehicleById(id).then(function (response) {
         		if(response.success){
-        			vm.vehicle = response.data;        			
+        			
+        			vm.vehicle.model.brand.id = response.data.model.brand.id;
+        			$scope.getModelsByBrand();
+        			vm.vehicle = response.data;
+        		//	$scope.$apply();
         		}
         		else{
         			vm.requestModel = [];

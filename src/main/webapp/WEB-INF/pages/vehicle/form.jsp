@@ -6,13 +6,17 @@
 	<div class="page page-dashboard">
 
 		<div class="pageheader">
-			<h1 class="custom-font" style="margin-top: -10px !important;">
+			<h1 class="custom-font" style="margin-top: -10px !important;" ng-if="vm.location[2] == 'create'">
 				<strong>Vehículos </strong> Crear
+			</h1>
+			<h1 class="custom-font" style="margin-top: -10px !important;" ng-if="vm.location[2] == 'edit'">
+				<strong>Vehículos </strong> Editar
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#/home">Dashboard</a></li>
 				<li><a href="#/vehicle">Vehículos</a></li>
-				<li class="breadcrumb-active">Nuevo Vehículo</li>
+				<li ng-if="vm.location[2] == 'create'" class="breadcrumb-active">Nuevo Vehículo</li>
+				<li ng-if="vm.location[2] == 'edit'" class="breadcrumb-active">Editar Vehículo</li>
 			</ol>
 		</div>
 
@@ -55,7 +59,7 @@
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.brand.$dirty && form.brand.$error.required }">
 									<label for="brand" class="control-label">* Marca</label>
-									 <select ng-model="vm.brand.id" name="brand" id="brand"
+									 <select ng-model="vm.vehicle.model.brand.id" name="brand" id="brand"
 										ng-change="getModelsByBrand()" ng-options="item.id as item.name for item in vm.allBrands" class="form-control" required>
 										<option value="">Seleccione una marca</option>
 									</select> <span
