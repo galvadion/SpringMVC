@@ -19,6 +19,7 @@
         vm.vehicle = {};
         vm.brand = {};
         vm.vehicle.model = {};
+        vm.vehicle.model.brand = {};
         
 		var localDate = new Date();
 		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
@@ -153,8 +154,7 @@
         
         function getVehicleById(id){
         	VehicleService.GetVehicleById(id).then(function (response) {
-        		if(response.success){
-        			vm.vehicle = response.data;    
+        		if(response.success){  
         			vm.vehicle.model.brand.id = response.data.model.brand.id;
         			$scope.getModelsByBrand();
         			vm.vehicle = response.data;

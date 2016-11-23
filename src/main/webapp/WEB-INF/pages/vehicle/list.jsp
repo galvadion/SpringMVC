@@ -35,7 +35,6 @@
                                    		<th>Matricula</th>
                                         <th>Marca</th>
                                         <th>Modelo</th>
-                                        <th>Estado</th>
                                         <th>Vencimiento Patente</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
@@ -45,19 +44,17 @@
                                 <tbody>
                                     <tr ng-repeat="(key, value) in vm.allVehicles">
                                     	<td>
-                                            SBF 562                                             
+                                            {{value.licensePlate}}                                             
                                         </td>
                                         <td>
-                                            Fiat                                             
+                                            {{value.model.brand.name}}                                             
                                         </td>
                                         <td>
-                                            Uno                                             
+                                            {{value.model.name}}                                             
                                         </td>
+                                        
                                         <td>
-                                            Disponible
-                                        </td>
-                                        <td>
-                                            23/10/2017
+                                            {{value.licensePlateExpirationDate}}
                                         </td>
                                         <td class="text-center plus"></td>
                                         <td class="text-center plus">

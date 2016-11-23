@@ -6,7 +6,7 @@
 	<div class="page page-dashboard">
 
 		<div class="pageheader">
-			<h1 class="custom-font" style="margin-top: -10px !important; ng-if="vm.location[2] == 'create'"">
+			<h1 class="custom-font" style="margin-top: -10px !important;" ng-if="vm.location[2] == 'create'">
 				<strong>Vehículos </strong> Crear
 			</h1>
 			<h1 class="custom-font" style="margin-top: -10px !important;" ng-if="vm.location[2] == 'edit'">

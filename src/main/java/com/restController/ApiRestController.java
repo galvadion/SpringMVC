@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.entities.Booked;
+import com.entities.BranchOffice;
 import com.entities.Brand;
 import com.entities.Client;
 import com.entities.Model;
@@ -33,6 +34,7 @@ import com.entities.User;
 import com.models.BookingModel;
 import com.models.SearchFilter;
 import com.services.BookedService;
+import com.services.BranchOfficeService;
 import com.services.BrandService;
 import com.services.ModelService;
 import com.services.RentService;
@@ -55,6 +57,9 @@ public class ApiRestController {
 
 	@Autowired
 	BrandService brandService;
+	
+	@Autowired
+	BranchOfficeService branchOfficeService;
 
 	private static Validator validator;
 
@@ -191,5 +196,9 @@ public class ApiRestController {
 	public ResponseEntity<List<Model>> searchModels(@RequestBody SearchFilter search) {
 		System.out.println(search);
 		return ResponseEntity.ok(modelService.getModelsBetweenFilter(search));
+	}
+	@RequestMapping(value = "/api/allOffices", method = RequestMethod.GET)
+	public ResponseEntity<List<BranchOffice>> getAllOffices() {
+		return ResponseEntity.ok(branchOfficeService.getAll());
 	}
 }
