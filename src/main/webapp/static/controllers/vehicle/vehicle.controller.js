@@ -63,7 +63,6 @@
             DTColumnDefBuilder.newColumnDef(4).notSortable(),
             DTColumnDefBuilder.newColumnDef(5).notSortable(),
             DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            DTColumnDefBuilder.newColumnDef(7).notSortable(),
         ];
         
         initController();
