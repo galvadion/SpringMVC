@@ -10,7 +10,8 @@
     function VehicleController($location,UserService, $rootScope, $scope,$timeout,SessionService,VehicleService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,BrandService,ModelService, BranchofficeService,$routeParams) {
 
         var vm = this;
-        
+   
+        vm.aux;
         vm.roladmin = $rootScope.roladmin;
         vm.allVehicles = [];
         vm.allBrands = [];
@@ -63,7 +64,6 @@
             DTColumnDefBuilder.newColumnDef(4).notSortable(),
             DTColumnDefBuilder.newColumnDef(5).notSortable(),
             DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            DTColumnDefBuilder.newColumnDef(7).notSortable(),
         ];
         
         initController();
@@ -72,7 +72,6 @@
             NProgress.start();
             vm.location = $location.path().split('/',3);
             if(vm.location[2] == "edit"){
-        		
                 getAllBrands();
                 getAllOffices();
                 getVehicleById($routeParams.id);
@@ -86,6 +85,8 @@
             	getAllVehicles();
             }
             NProgress.done();
+            
+            
         }
         
         function getAllOffices() {
@@ -97,7 +98,6 @@
 				} else {
 					vm.allOffices = [];
 				}
-				NProgress.done();
 			});
 		}
         
@@ -110,7 +110,6 @@
 				} else {
 					vm.allVehicles = [];
 				}
-				NProgress.done();
 			});
 		}
         
@@ -122,20 +121,19 @@
         		else{
         			vm.allBrands = [];
         		}
-        		NProgress.done();
         	});
         }
         
         $scope.getModelsByBrand = function(){
-        	ModelService.GetModelsByBrand(vm.vehicle.model.brand.id).then(function (response) {
+        	ModelService.GetModelsByBrand(vm.brand.id).then(function (response) {
         		if(response.success){
         			vm.modelsByBrand = response.data;
         			vm.vehicle.model.id = "";
+        			
         		}
         		else{
         			vm.modelsByBrand = [];
         		}
-        		NProgress.done();
         	});
         }
         
@@ -148,25 +146,37 @@
 	    		else{
 	    			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
 	    		}
-	    		NProgress.done();
 	    	});
         };
         
         function getVehicleById(id){
         	VehicleService.GetVehicleById(id).then(function (response) {
         		if(response.success){  
-        			vm.vehicle.model.brand.id = response.data.model.brand.id;
+        			vm.brand.id = response.data.model.brand.id;
         			$scope.getModelsByBrand();
         			vm.vehicle = response.data;
+        			console.log(vm.vehicle.model.id)
+        			vm.aux=vm.vehicle.model.id;
+        			console.log("da");
+                    $("#model").val(parseInt(vm.aux));
+                    console.log(vm.aux);
+                    vm.vehicle.model.id=vm.aux;
+                    $timeout(function(){
+                    	 console.log("Running after the digest cycle");
+                    	 vm.vehicle.model.id=vm.aux;
+                    	},0,false);
         		}
         		else{
         			vm.requestModel = [];
         		}
-        		
-        		NProgress.done();
         	});
         }
-
+        $scope.$$postDigest(function() {
+        	vm.vehicle.model.id=vm.aux;
+        	console.log(vm.vehicle.model.id);
+          });
     }
+    
+    
 
 })();

@@ -112,40 +112,40 @@
                     <br/>
                     
                     <!-- <div class="row" ng-repeat="(key, value) in vm.searchResult"> -->
-	                    <div class="row" style="padding: 15px;">
-	                    	<div class="col-sm-3">
-	                    		<img src="static/images/logo-wide-transparent.png" style="height:150px; max-width:240px;">
+	                    <div ng-repeat="(key, value) in vm.searchResult"  class="row" style="padding: 15px;">
+	                    	<div class="col-sm-3" ng-repeat="(keyI, valueI) in value.images"> 
+	                    		<img src="images/{{valueI.fileLocation}}" style="height:150px; max-width:240px;">
 	                    	</div>
 	                    	<div class="col-sm-2">
 	                    		<table>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Marca: Fiat</p>
+	                    					<p>Marca: {{value.brand.name}}</p>
 	                    				</td>
 	                    			</tr>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Modelo: Fiorino</p>
+	                    					<p>Modelo: {{value.name}}</p>
 	                    				</td>
 	                    			</tr>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Año: 2014</p>
+	                    					<p>Año: {{value.year}}</p>
 	                    				</td>
 	                    			</tr>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Categoria: B</p>
+	                    					<p>Categoria: {{value.category.name}}</p>
 	                    				</td>
 	                    			</tr>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Transmision: Manual</p>
+	                    					<p>Transmision: {{value.transmission}}</p>
 	                    				</td>
 	                    			</tr>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Combustible: Nafta</p>
+	                    					<p>Combustible: {{value.fuel.fuelType}}</p>
 	                    				</td>
 	                    			</tr>
 	                    		</table>
@@ -191,24 +191,7 @@
 	                    
 	                    <hr class="line-dashed line-full"/>
 	                    
-	                    <div class="row" style="padding: 15px;">
-	                    	<div class="col-sm-3">
-	                    		<img src="static/images/logo-wide-transparent.png" style="height:130px; max-width:240px;">
-	                    	</div>
-	                    	<div class="col-sm-2">
-	                    		<table>
-	                    			<tr><td>1</td></tr>
-	                    			<tr><td>2</td></tr>
-	                    			<tr><td>3</td></tr>
-	                    			<tr><td>4</td></tr>
-	                    			<tr><td>5</td></tr>
-	                    			<tr><td>6</td></tr>
-	                    		</table>
-	                    	</div>
-	                    	<div class="col-sm-1">
-	                    		<a href class="btn  btn-orange"><strong>Reservar</strong></a>
-	                    	</div>
-	                    </div>
+	                    
 	                    
 					<!-- </div> -->
 

@@ -82,7 +82,9 @@
         	NProgress.start();
         	ModelService.SearchModels(vm.search).then(function (response) {
         		if(response){
-        			if(vm.searchResult.length > 0){
+        			console.log(response.data)
+        			if(response.data.length > 0){
+        				console.log("?")
         				vm.searchResult = response.data;
         				$scope.scrollTo( "#searchResult");
         				console.log(vm.searchResult);
