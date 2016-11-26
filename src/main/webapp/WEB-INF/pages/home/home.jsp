@@ -76,7 +76,6 @@
 								<span ng-show="form.officeOriginId.$dirty && form.officeOriginId.$error.required" class="help-block">Sucursal es requerido</span>
 							</div>
 						</div>
-
 						<div class="row" style="padding: 0 10px 0 10px;">
 
 							<div class="form-group customDatePickers col-sm-6">
