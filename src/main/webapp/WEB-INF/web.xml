@@ -35,14 +35,10 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>SpringMVC</web-resource-name>
-			<url-pattern>
-				/*
-			</url-pattern>
+			<url-pattern>/*</url-pattern>
 		</web-resource-collection>
 		<user-data-constraint>
-			<transport-guarantee>
-				CONFIDENTIAL
-			</transport-guarantee>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
 </web-app>

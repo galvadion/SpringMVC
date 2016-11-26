@@ -88,7 +88,6 @@
 								</div>
 								<span ng-show="endDateError" class="help-block" style="color: red">Fecha de entrega debe ser posterior a la de recogida</span>
 							</div>
-
 							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.officeEndId.$dirty && form.officeEndId.$error.required }">
 								<label for="officeEndId" class="control-label">Sucursal de entrega</label>
 									<select ng-model="vm.search.officeEndId" name="officeEndId" id="officeEndId" class="form-control" required>
