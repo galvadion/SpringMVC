@@ -25,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href="static/js/dista/plugins/bootstrap/datatables.bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="static/js/dista/css/angular-datatables.css">
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="static/js/chat/comet.chat.css">
 
     </head>
     <body>
@@ -62,10 +63,6 @@
 		<script type="text/javascript" src="static/js/maps/angular-google-maps.min.js"></script>
 		
 		
-		
-		
-		
-
 		<!-- Data Tablbes -->
 		<script type="text/javascript" src="static/js/vendor/datatables/media/js/jquery.dataTables.js"></script>
 		<script type="text/javascript" src="static/js/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
@@ -105,6 +102,18 @@
 		<script type="text/javascript" src="static/js/src/plugins/buttons/angular-datatables.buttons.js"></script>
 		<script type="text/javascript" src="static/js/src/plugins/select/angular-datatables.select.js"></script>
 
+		<!-- Chat -->
+		<script type="text/javascript" src="static/js/chat/org/cometd.js"></script>
+		<script type="text/javascript" src="static/js/chat/org/cometd/AckExtension.js"></script>
+		<script type="text/javascript" src="static/js/chat/org/cometd/ReloadExtension.js"></script>
+		 
+		<script type="text/javascript" src="static/js/chat/jquery/jquery.cookie.js"></script>
+		<script type="text/javascript" src="static/js/chat/jquery/jquery.cometd.js"></script>
+		<script type="text/javascript" src="static/js/chat/jquery/jquery.cometd-reload.js"></script>
+		<script type="text/javascript" src="static/js/chat/chat.window.js"></script>
+		<script type="text/javascript" src="static/js/chat/comet.chat.js"></script>
+		
+		
 
         <!--Services-->
         <script src="static/services/authentication.service.js"></script>
@@ -144,3 +153,54 @@
 
     </body>
 </html>
+<script type="text/javascript">
+    
+    var chatWindowArray = [];
+    
+    var config = {
+        contextPath: '${pageContext.request.contextPath}'
+    };
+	
+	function getChatWindowByUserPair(loginUserName, peerUserName) {
+		
+		var chatWindow;
+		
+		for(var i = 0; i < chatWindowArray.length; i++) {
+			var windowInfo = chatWindowArray[i];
+			if (windowInfo.loginUserName == loginUserName && windowInfo.peerUserName == peerUserName) {
+				chatWindow =  windowInfo.windowObj;
+			}
+		}
+		
+		return chatWindow;
+	}
+	
+	function createWindow(loginUserName, peerUserName) {
+		
+		var chatWindow = getChatWindowByUserPair(loginUserName, peerUserName);
+		
+		if (chatWindow == null) { //Not chat window created before for this user pair.
+			chatWindow = new ChatWindow(); //Create new chat window.
+			chatWindow.initWindow({
+				loginUserName:loginUserName, 
+				peerUserName:peerUserName,
+				windowArray:chatWindowArray});
+			
+			//collect all chat windows opended so far.
+			var chatWindowInfo = { peerUserName:peerUserName, 
+					               loginUserName:loginUserName,
+					               windowObj:chatWindow 
+					             };
+			
+			chatWindowArray.push(chatWindowInfo);
+    	}
+		
+		chatWindow.show();
+		
+		return chatWindow;
+	}
+
+	function join(userName){
+		$.cometChat.join(userName);
+	}
+</script>

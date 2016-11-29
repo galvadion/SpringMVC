@@ -266,8 +266,7 @@
         //Session persistance: keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
 
-        if ($rootScope.globals.currentUser) {
-
+        if ($rootScope.globals.currentUser) {        	
         	if($rootScope.globals.currentUser.rol == "Admin"){
         		$rootScope.roladmin = true;
         	}
@@ -336,6 +335,28 @@
         	AuthenticationService.ClearCredentials();
         	$rootScope.roladmin = false;
         	$location.path('/home');
+        }
+        
+        $rootScope.initChat = function () {
+        	var userName = '';
+        	if ($rootScope.globals.currentUser) {        	
+            	if($rootScope.globals.currentUser.rol == "Admin"){//            		
+            		userName ='Emp_'+$rootScope.globals.currentUser.name;
+            	}
+            	else if($rootScope.globals.currentUser.rol == "Client"){//            		
+            		userName ='Cli_'+$rootScope.globals.currentUser.name;
+            	}else if($rootScope.globals.currentUser.rol == "Employee"){
+            		userName ='Emp_'+$rootScope.globals.currentUser.name;
+            	}
+        	}else {
+	            var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	            for( var i=0; i < 7; i++ ){
+	                userName += possible.charAt(Math.floor(Math.random() * possible.length));
+	            }
+	            userName='Unk_'+userName;
+        	}
+        		$.cometChat.onLoad({memberListContainerID:'members'});
+        		join(userName);        	
         }
 
     }
