@@ -98,6 +98,20 @@
 										
 								</div>
 								
+								<div class="row" ng-if="vm.location[1] == 'employee'">
+										<div class="form-group col-sm-6" class="form-group"
+									ng-class="{ 'has-error': form.branchOffice.$dirty && form.branchOffice.$error.required }">
+									<label for="branchOffice" class="control-label">Sucursal de trabajo</label> <select
+										ng-model="vm.user.branchOffice.id" name="branchOffice"
+										id="branchOffice" ng-options="item.id as item.name for item in vm.allOffices" class="form-control" required>
+										<option value="">Seleccione sucursal</option>
+										
+									</select> <span
+										ng-show="form.branchOffice.$dirty && form.branchOffice.$error.required"
+										class="help-block">Sucursal es requerido</span>
+								</div>
+							</div>
+								
 								<div class="form-group text-right">
 									<a ng-if="vm.location[1] == 'client'" href="#/client" class="btn btn-lightred">Cancelar</a>
 									<a ng-if="vm.location[1] == 'employee'" href="#/employee" class="btn btn-lightred">Cancelar</a>

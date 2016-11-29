@@ -1,9 +1,7 @@
 package com.services;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import com.entities.Booked;
 import com.entities.StatusBetweenDates;
 import com.entities.Vehicle;
 import com.models.BookingModel;

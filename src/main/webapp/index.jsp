@@ -119,6 +119,7 @@
         <script src="static/services/promotion.service.js"></script>
         <script src="static/services/rent.service.js"></script>
         <script src="static/services/tariff.service.js"></script>
+        <script src="static/services/report.service.js"></script>
 
 
         <!--Controllers-->
@@ -135,7 +136,7 @@
         <script src="static/controllers/promotion/promotion.controller.js"></script>
         <script src="static/controllers/rent/rent.controller.js"></script>
         <script src="static/controllers/tariff/tariff.controller.js"></script>
-        
+        <script src="static/controllers/report/report.controller.js"></script>
         
 
         <div id="wrap">

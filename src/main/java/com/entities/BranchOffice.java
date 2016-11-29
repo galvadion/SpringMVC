@@ -59,6 +59,9 @@ public class BranchOffice implements Serializable{
 	
 	@OneToMany(mappedBy="branchOffice")
 	private List<Vehicle> vehicles;
+	
+	@OneToMany(mappedBy="branchOffice")
+	private List<Employee> employee;
 
 	@OneToMany(mappedBy="branchOffice")
 	private List<StatusBetweenDates> statusDates;
@@ -164,6 +167,14 @@ public class BranchOffice implements Serializable{
 
 	public void setClosed(boolean closed) {
 		this.closed = closed;
+	}
+
+	public List<Employee> getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(List<Employee> employee) {
+		this.employee = employee;
 	}
 
 	

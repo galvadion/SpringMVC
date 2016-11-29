@@ -192,11 +192,9 @@
         	        fields: {'model_id': id}, // additional data to send
         	        file: file
         	    }).success(function (data, status, headers, config) {
-        	        console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
         	    });
         };*/
         $scope.uploadPic = function(files,id) {
-        	console.log(file);
         	for(var i = 0; i < files.length; i++){
         		var file = files[i];
         		file.upload = Upload.upload({

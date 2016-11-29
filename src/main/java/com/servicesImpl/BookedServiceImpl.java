@@ -2,7 +2,6 @@ package com.servicesImpl;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,7 +21,6 @@ import com.entities.BranchOffice;
 import com.entities.Client;
 import com.entities.Model;
 import com.entities.StatusBetweenDates;
-import com.entities.User;
 import com.entities.Vehicle;
 import com.models.BookingModel;
 import com.services.BookedService;

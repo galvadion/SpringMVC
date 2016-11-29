@@ -31,6 +31,7 @@ public class BranchOfficeDaoImpl extends GenericDaoImpl<BranchOffice, Integer> i
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<BranchOffice> getAvailable() {
 		// TODO Auto-generated method stub
 		return currentSession().createQuery("from BranchOffice where closed=false").getResultList();

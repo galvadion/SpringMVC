@@ -1,27 +1,19 @@
 package com.servicesImpl;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.dao.GenericDao;
 import com.dao.StatusBetweenDatesDao;
 import com.dao.VehicleDao;
-import com.dao.BookedDao;
 import com.dao.BranchOfficeDao;
-import com.entities.Booked;
 import com.entities.BranchOffice;
-import com.entities.Model;
 import com.entities.StatusBetweenDates;
 import com.entities.Vehicle;
 import com.models.BookingModel;
-import com.services.BookedService;
 import com.services.StatusBetweenDatesService;
 
 @Service

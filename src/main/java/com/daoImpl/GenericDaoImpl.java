@@ -52,7 +52,7 @@ public abstract class GenericDaoImpl<T, K extends Serializable> implements Gener
     }
      
     public List<T> getAll() {
-        return currentSession().createCriteria(daoType).list();
+    	return currentSession().createQuery("from " +daoType.getName()).getResultList();
     }
 
 

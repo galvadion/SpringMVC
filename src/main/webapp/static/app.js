@@ -250,6 +250,13 @@
                 title: 'Rent-UY - Buscar',
                 controllerAs: 'vm'
             })
+            
+            .when('/report', {
+                controller: 'ReportController',
+                templateUrl: 'report',
+                title: 'Rent-UY - Alquileres',
+                controllerAs: 'vm'
+            })
 
             .otherwise({ redirectTo: '/' });
     }

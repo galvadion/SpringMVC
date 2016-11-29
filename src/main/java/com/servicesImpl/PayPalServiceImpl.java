@@ -32,7 +32,6 @@ import urn.ebay.apis.eBLBaseComponents.DoExpressCheckoutPaymentRequestDetailsTyp
 import urn.ebay.apis.eBLBaseComponents.DoExpressCheckoutPaymentResponseDetailsType;
 import urn.ebay.apis.eBLBaseComponents.ErrorType;
 import urn.ebay.apis.eBLBaseComponents.GetExpressCheckoutDetailsResponseDetailsType;
-import urn.ebay.apis.eBLBaseComponents.PayPalUserStatusCodeType;
 import urn.ebay.apis.eBLBaseComponents.PayerInfoType;
 import urn.ebay.apis.eBLBaseComponents.PaymentActionCodeType;
 import urn.ebay.apis.eBLBaseComponents.PaymentDetailsItemType;

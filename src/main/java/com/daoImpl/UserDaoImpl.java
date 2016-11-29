@@ -31,10 +31,12 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDa
 		User user=(User) query.getSingleResult();
 		return user;
 	}
+	@SuppressWarnings("unchecked")
 	public List<Employee> getAllEmployees() {
 		Query query=currentSession().createQuery("from Employee where active=true");
 		return query.getResultList();
 	}
+	@SuppressWarnings("unchecked")
 	public List<Client> getAllClients() {
 		Query query=currentSession().createQuery("from Client where active=true");
 		return query.getResultList();

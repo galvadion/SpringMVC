@@ -112,45 +112,78 @@
                     <br/>
                     
                     <!-- <div class="row" ng-repeat="(key, value) in vm.searchResult"> -->
-	                    <div ng-repeat="(key, value) in vm.searchResult"  class="row" style="padding: 15px;">
-	                    	<div class="col-sm-3" ng-repeat="(keyI, valueI) in value.images">
-							<img src="images/{{valueI.fileLocation}}" style="height:150px; max-width:240px;">
+	                    <div class="row" style="padding: 15px;">
+	                    	<div class="col-sm-3">
+	                    		<img src="static/images/logo-wide-transparent.png" style="height:150px; max-width:240px;">
 	                    	</div>
 	                    	<div class="col-sm-2">
 	                    		<table>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Marca: {{value.brand.name}}</p>
+	                    					<p>Marca: Fiat</p>
 	                    				</td>
 	                    			</tr>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Modelo: {{value.name}}</p>
+	                    					<p>Modelo: Fiorino</p>
 	                    				</td>
 	                    			</tr>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Año: {{value.year}}</p>
+	                    					<p>Año: 2014</p>
 	                    				</td>
 	                    			</tr>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Categoria: {{value.category.name}}</p>
+	                    					<p>Categoria: B</p>
 	                    				</td>
 	                    			</tr>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Transmision: {{value.transmission}}</p>
+	                    					<p>Transmision: Manual</p>
 	                    				</td>
 	                    			</tr>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Combustible: {{value.fuel.fuelType}}</p>
+	                    					<p>Combustible: Nafta</p>
 	                    				</td>
 	                    			</tr>
 	                    		</table>
 	                    	</div>
-	                    	
+	                    	<div class="col-sm-5">
+	                    		<table>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Marca: Fiat</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Modelo: Fiorino</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Año: 2014</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Categoria: B</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Transmision: Manual</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Combustible: Nafta</p>
+	                    				</td>
+	                    			</tr>
+	                    		</table>
+	                    	</div>
 	                    	<div class="col-sm-1">
 	                    		<a href class="btn  btn-orange"><strong>Reservar</strong></a>
 	                    	</div>

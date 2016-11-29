@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Client;
-import com.entities.Employee;
 import com.entities.User;
 import com.services.UserServices;
 
