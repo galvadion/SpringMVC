@@ -11,6 +11,8 @@
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
+        vm.rolemployee = $rootScope.rolemployee;
+        vm.rolclient = $rootScope.rolclient;
         vm.category = {};
         vm.fuelType ={};
         vm.categoryList = [];

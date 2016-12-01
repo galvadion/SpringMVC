@@ -10,10 +10,11 @@
         
         var vm = this;
 
+        vm.roladmin = $rootScope.roladmin;
+        vm.rolemployee = $rootScope.rolemployee;
+        vm.rolclient = $rootScope.rolclient;
         vm.user = {};
         vm.allUsers = [];
-        vm.roladmin = $rootScope.roladmin;
-        vm.rolclient = false
         vm.allOffices = [];
         vm.newpassword = "";
         vm.location = "";

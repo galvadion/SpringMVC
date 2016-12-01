@@ -14,6 +14,7 @@
         service.GetVehicleById = GetVehicleById;
         service.InsertVehicle = InsertVehicle;
         service.DeleteVehicle = DeleteVehicle;
+        service.DeleteImage = DeleteImage;
         
         
         return service;
@@ -35,8 +36,12 @@
         }
         
         function DeleteVehicle(id) {
-            return $http.delete('/SpringMVC/vehicle/delete', id).then(handleSuccess, handleError('Error deleting vehicle'));
+            return $http.delete('/SpringMVC/vehicle/delete?id=' + id).then(handleSuccess, handleError('Error deleting vehicle'));
         }
+
+        function DeleteImage(id) {
+            return $http.delete('/SpringMVC/vehicle/deleteimage?id=' + id).then(handleSuccess, handleError('Error deleting vehicle'));
+        }        
 
         
         // private functions

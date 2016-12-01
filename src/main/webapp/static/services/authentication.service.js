@@ -36,6 +36,9 @@
             if(rol == "Admin"){
             	$rootScope.roladmin = true;
             }
+            else if(rol == "Employee"){
+                $rootScope.rolemployee = true;
+            }
             else if(rol == "Client"){
             	$rootScope.rolclient = true;
             }

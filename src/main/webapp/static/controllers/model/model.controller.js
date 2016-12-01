@@ -5,13 +5,15 @@
         .module('app')
         .controller('ModelController', ModelController);
 
-    ModelController.$inject = ['$location','$rootScope','$scope','$timeout','SessionService','BrandService','ModelService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams','TariffService','ngDialog','Upload'];
+    ModelController.$inject = ['$location','$rootScope','$scope','$timeout','SessionService','BrandService','ModelService','VehicleService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','$routeParams','TariffService','ngDialog','Upload'];
     
-    function ModelController($location, $rootScope, $scope,$timeout,SessionService,BrandService,ModelService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams,TariffService,ngDialog,Upload) {
+    function ModelController($location, $rootScope, $scope,$timeout,SessionService,BrandService,ModelService, VehicleService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,$routeParams,TariffService,ngDialog,Upload) {
 
         var vm = this;
         
         vm.roladmin = $rootScope.roladmin;
+        vm.rolemployee = $rootScope.rolemployee;
+        vm.rolclient = $rootScope.rolclient;
         vm.requestModel = {};
         vm.allBrands = [];
         vm.allModels = [];
@@ -231,6 +233,20 @@
                 scope: $scope,
             }).then(function (value) {}, function (reason) {});
         };
+
+        $scope.deleteImage = function (image) {
+            NProgress.start();
+            VehicleService.DeleteImage(image.id).then(function (response) {
+                if(response.success){
+                    $rootScope.doFlashMessage('Imagen eliminada','','success');
+                    initController();
+                }
+                else{
+                    $rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+                }
+                NProgress.done();
+            });
+        }
         
     }
 

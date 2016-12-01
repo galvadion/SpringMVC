@@ -11,6 +11,8 @@
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
+        vm.rolemployee = $rootScope.rolemployee;
+        vm.rolclient = $rootScope.rolclient;
         vm.branchoffice = {};
         vm.branchoffice.location= {};
         vm.auxBranchoffice = {};
