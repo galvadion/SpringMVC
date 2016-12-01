@@ -62,7 +62,6 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		booked.setBeginbookedDate(model.getStartDate());
 		booked.setLastbookedDate(model.getEndDate());
 		booked.setVehicle(vehicle);
-		booked.setWithGps(model.isWithGps());
 		booked.setWithFullTank(model.isWithFullTank());
 		booked.setWithInsurance(model.isWithInsurance());
 		booked.setTransactionDate(LocalDate.now());
