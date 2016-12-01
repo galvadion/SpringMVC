@@ -20,11 +20,11 @@
         // Rent functions
         
         function getReturnedToday() {
-            return $http.post('/SpringMVC/report/getall').then(handleSuccess, handleError);
+            return $http.get('/SpringMVC/report/getreturnedtoday').then(handleSuccess, handleError);
         }
         
         function getPickedToday() {
-            return $http.post('/SpringMVC/report/insert').then(handleSuccess, handleError);
+            return $http.get('/SpringMVC/report/getpickuptoday').then(handleSuccess, handleError);
         }
         
 
