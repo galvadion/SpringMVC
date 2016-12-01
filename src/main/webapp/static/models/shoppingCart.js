@@ -217,13 +217,6 @@ function getDetails(url){
 		document.body.appendChild(inputToken);
 		document.body.appendChild(inputPayerId);
 		$("#paymentDetails").click();
-		//alert("Token = " + token + " and Payer ID = " + payerId);
-//		var scope = angular.element(document.getElementById('PaymentController')).scope();
-//		scope.$apply(function(){
-//			scope.getDetails(token, payerId);
-//		})
-//		var f = angular.element(document.getElementById('wrap')).scope().getDetails(token, payerId);
-//		f.$apply();
 	}
 	$("#paypal-iframe").remove();
 };

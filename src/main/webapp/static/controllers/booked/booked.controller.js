@@ -206,6 +206,15 @@
         		NProgress.done();
         	});
         };
+        
+        $scope.reservar = function(){
+        	$rootScope.dateInitial = vm.search.beginDate;
+        	$rootScope.dateEnding = vm.search.endDate;
+        	$rootScope.officeInitial = vm.search.officeOriginId;
+        	$rootScope.officeEnding = vm.search.officeEndId;
+        	
+        	$location.path("/payment/booking");
+        }
 
     }
 

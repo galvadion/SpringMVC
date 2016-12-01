@@ -98,7 +98,7 @@ public class ApiRestController {
 		booking.setWithGps(true);
 		booking.setWithInsurance(false);
 		booking.setIdModel(1);
-		bookedService.registerBoot(booking, (Client) userService.get(1));
+		bookedService.registerBook(booking, (Client) userService.get(1), "Transaction_ID_test", "PayPal_Payer_ID");
 	}
 
 	@RequestMapping(value = "/api/confirm", method = RequestMethod.GET)

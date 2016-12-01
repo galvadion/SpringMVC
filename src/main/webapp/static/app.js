@@ -250,6 +250,13 @@
                 title: 'Rent-UY - Buscar',
                 controllerAs: 'vm'
             })
+            
+            .when('/payment/booking', {
+            	controller: 'PaymentController',
+            	templateUrl:'payment/booking',
+            	title: 'Rent-UY - Reserva',
+            	controllerAs: 'vm'
+            })
 
             .otherwise({ redirectTo: '/' });
     }
@@ -262,6 +269,11 @@
 
     	$rootScope.roladmin = false;
     	$rootScope.rolclient = false;
+    	
+    	$rootScope.dateInitial;
+    	$rootScope.dateEnding;
+    	$rootScope.officeInitial;
+    	$rootScope.officeEnding;
     	
         //Session persistance: keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};

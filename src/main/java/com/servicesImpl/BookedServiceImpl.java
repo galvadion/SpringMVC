@@ -58,7 +58,7 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-	public void registerBoot(BookingModel model,Client client) {
+	public void registerBook(BookingModel model,Client client, String transactionId, String payerId) {
 		Vehicle vehicle=vehicleDao.getVehiculeAvailable(model);
 		BranchOffice originBO=branchOfficeDao.getById(model.getOriginBranchOfficeId());
 		BranchOffice finalBO=branchOfficeDao.getById(model.getEndBranchOfficeId());
@@ -72,6 +72,8 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		booked.setTransactionDate(LocalDate.now());
 		booked.setOriginOffice(originBO);
 		booked.setEndOffice(finalBO);
+		booked.setTransactionNr(transactionId);
+		booked.setPayerId(payerId);
 		Model vehiculeModel=vehicle.getModel();
 		float gpsByDay=0,insuranceByDay=0;
 		if(model.isWithGps()){

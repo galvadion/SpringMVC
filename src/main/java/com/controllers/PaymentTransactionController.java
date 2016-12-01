@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import org.jboss.logging.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.entities.Client;
+import com.models.BookingModel;
 import com.models.PayPalTransaction;
 import com.models.TransactionItem;
 import com.services.PayPalService;
@@ -75,6 +76,14 @@ public class PaymentTransactionController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
+	
+	@RequestMapping(value="/booking", method=RequestMethod.GET)
+	public ModelAndView bookingVehicle(){
+		
+//		@RequestParam("modelId") int modelId
+		ModelAndView view = new ModelAndView("payment/booking");
+		return view;
+	}
 
 	@RequestMapping(value="/example", method=RequestMethod.GET)
 	public ModelAndView getExamplePage(){
@@ -106,7 +115,10 @@ public class PaymentTransactionController {
 			case "SUCCESS":
 				// AQUI EL TRANSACTION ID!!
 				String transactionId = transaction.getTransactionID();
-				
+				BookedController bookedController = new BookedController();
+				BookingModel model = new BookingModel();
+				Client client = new Client();
+				bookedController.registerBooking(model, client, transactionId, transaction.getPayerPayPalID());
 				System.out.println(transactionId);
 				
 				return ResponseEntity.ok("Transaction complete!");

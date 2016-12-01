@@ -25,6 +25,8 @@
         <link rel="stylesheet" type="text/css" href="static/js/dista/plugins/bootstrap/datatables.bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="static/js/dista/css/angular-datatables.css">
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="static/css/bootstrap-switch.min.css">
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
     </head>
     <body>
@@ -54,6 +56,8 @@
         <script type="text/javascript" src="static/js/ngDialog.js"></script>
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
 		<script type="text/javascript" src="static/js/moment.min.js"> </script>
+		<script type="text/javascript" src="static/js/bootstrap-switch.min.js"></script>
+		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 		
 		<!--Maps-->
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCToOBKLzgMq3u02g7OO_v-txL_LnfEO_g&callback=initMap" type="text/javascript"></script>
@@ -119,6 +123,7 @@
         <script src="static/services/promotion.service.js"></script>
         <script src="static/services/rent.service.js"></script>
         <script src="static/services/tariff.service.js"></script>
+        <script src="static/services/payment.service.js"></script>
 
 
         <!--Controllers-->
@@ -135,8 +140,10 @@
         <script src="static/controllers/promotion/promotion.controller.js"></script>
         <script src="static/controllers/rent/rent.controller.js"></script>
         <script src="static/controllers/tariff/tariff.controller.js"></script>
+        <script src="static/controllers/payment/payment.controller.js"></script>
         
         
+        <script src="static/models/shoppingCart.js"></script>
 
         <div id="wrap">
           <div ng-view></div>
