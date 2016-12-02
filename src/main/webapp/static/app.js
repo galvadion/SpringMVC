@@ -268,6 +268,7 @@
     function run($rootScope, $location, $cookieStore, $http,FlashService, UserService, $window, AuthenticationService) {
 
     	$rootScope.roladmin = false;
+        $rootScope.rolcemployee = false;
     	$rootScope.rolclient = false;
     	
         //Session persistance: keep user logged in after page refresh
@@ -278,6 +279,9 @@
         	if($rootScope.globals.currentUser.rol == "Admin"){
         		$rootScope.roladmin = true;
         	}
+            else if($rootScope.globals.currentUser.rol == "Employee"){
+                $rootScope.rolemployee = true;
+            }
         	else if($rootScope.globals.currentUser.rol == "Client"){
         		$rootScope.rolclient = true;
         	}
@@ -342,6 +346,7 @@
         $rootScope.logOut = function () {
         	AuthenticationService.ClearCredentials();
         	$rootScope.roladmin = false;
+            $rootScope.rolemployee = false;
         	$location.path('/home');
         }
 

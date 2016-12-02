@@ -10,13 +10,28 @@
         
         var vm = this;
 
+        vm.roladmin = $rootScope.roladmin;
+        vm.rolemployee = $rootScope.rolemployee;
+        vm.rolclient = $rootScope.rolclient;
         vm.user = {};
         vm.allUsers = [];
-        vm.roladmin = $rootScope.roladmin;
-        vm.rolclient = false
         vm.allOffices = [];
         vm.newpassword = "";
         vm.location = "";
+        
+        var localDate = new Date();
+		localDate = localDate.getFullYear() + '/' + (localDate.getMonth() + 1)
+				+ '/' + localDate.getDate();
+		$('.date').datetimepicker({
+			language : 'es',
+			weekStart : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0,
+			startDate : localDate
+		});
 
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -64,6 +79,7 @@
             }
             else if(vm.location[2] == "edit"){
         		getUserById($routeParams.id);
+        		getAllOffices();
         	}
             else if(vm.location[2] == "create"){
             	vm.user.id = null;

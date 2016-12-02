@@ -20,7 +20,7 @@ public class Employee extends User implements Serializable{
 	}
 	
 	@ManyToOne
-	@JoinColumn(name="branch_office_id", nullable=false)
+	@JoinColumn(name="branch_office_id", nullable=true)
 	private BranchOffice branchOffice;
 
 	public BranchOffice getBranchOffice() {

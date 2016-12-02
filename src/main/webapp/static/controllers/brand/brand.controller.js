@@ -11,6 +11,8 @@
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
+        vm.rolemployee = $rootScope.rolemployee;
+        vm.rolclient = $rootScope.rolclient;
         vm.brand = {};
         vm.allBrands = [];
         
@@ -49,6 +51,7 @@
         function initController() {
             NProgress.start();
             getAllBrands();
+            $scope.button="Crear"
         }
         
         function getAllBrands(){
@@ -83,6 +86,7 @@
         			getAllBrands();
         			$rootScope.doFlashMessage(mgsSuccess,'','success');
         			$scope.cleanInput();
+        			$scope.button="Crear";
         		}
         		else{
         			$rootScope.doFlashMessage(mgsError,'','error');
@@ -98,6 +102,7 @@
         
         $scope.editBrand = function(brand) {
         	vm.brand = angular.copy(brand);
+        	$scope.button="Editar";
         	$scope.scrollTo( "#wrap");
         };
         
