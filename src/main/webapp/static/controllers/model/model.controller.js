@@ -126,6 +126,17 @@
         		NProgress.done();
         	});
         }
+        function getImages(id){
+        	ModelService.GetModelById(id).then(function (response) {
+        		if(response.success){
+        			vm.requestModel.images = response.data.images;
+        		}
+        		else{
+        		}
+        		
+        		NProgress.done();
+        	});
+        }
         
         function getLastYears(){
         	var today = new Date();        	
@@ -239,7 +250,7 @@
             VehicleService.DeleteImage(image.id).then(function (response) {
                 if(response.success){
                     $rootScope.doFlashMessage('Imagen eliminada','','success');
-                    initController();
+                    getImages($routeParams.id);
                 }
                 else{
                     $rootScope.doFlashMessage("Error, intente nuevamente",'','error');

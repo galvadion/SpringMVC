@@ -56,6 +56,9 @@
             getAllCategories();
             getAllFuelTypes();
             getAllExtras();
+            $scope.buttonFuel="Crear";
+            $scope.buttonCategory="Crear";
+            $scope.buttonExtras="Crear";
         }
         
         function getAllCategories(){
@@ -102,7 +105,7 @@
         	if(vm.category.id){
         		mgsSuccess = "Categoria editada con éxito";
         		mgsError = "Categoria al editar marca";
-        		
+        		 $scope.buttonCategory="Crear";
         	}
         	else{
         		mgsSuccess = "Categoria creada con éxito";
@@ -113,7 +116,7 @@
         		if(response.success){
         			getAllCategories();
         			$rootScope.doFlashMessage(mgsSuccess,'','success');
-        			$scope.cleanInput();
+        			$scope.cleanInputCat();
         		}
         		else{
         			$rootScope.doFlashMessage(mgsError,'','error');
@@ -130,7 +133,7 @@
         	if(vm.fuelType.id){
         		mgsSuccess = "Tipo de combustible editada con éxito";
         		mgsError = "Tipo de combustible al editar marca";
-        		
+        		 $scope.buttonFuelType="Crear";
         	}
         	else{
         		mgsSuccess = "Tipo de combustible creada con éxito";
@@ -141,7 +144,7 @@
         		if(response.success){
         			getAllFuelTypes();
         			$rootScope.doFlashMessage(mgsSuccess,'','success');
-        			$scope.cleanInput();
+        			$scope.cleanInputFuel();
         		}
         		else{
         			$rootScope.doFlashMessage(mgsError,'','error');
@@ -158,7 +161,7 @@
            	if(vm.fuelType.id){
            		mgsSuccess = "Extra editada con éxito";
            		mgsError = "Error a editar el extra";
-           		
+           		$scope.buttonExtras="Crear";
            	}
            	else{
            		mgsSuccess = "Extra creada con éxito";
@@ -169,7 +172,7 @@
            		if(response.success){
            			getAllExtras();
            			$rootScope.doFlashMessage(mgsSuccess,'','success');
-           			$scope.cleanInput();
+           			$scope.cleanInputExtra();
            		}
            		else{
            			$rootScope.doFlashMessage(mgsError,'','error');
@@ -178,17 +181,21 @@
            	});
            };
         
-        $scope.cleanInput = function() {
-        	vm.category = {};
-        	vm.fuelType= {};
+        $scope.cleanInputExtra = function() {
+        	vm.extra = {};
+        	$scope.form-extra.$setPristine();
+        };
+        
+        $scope.cleanInputFuel = function() {
+        	vm.fuelType = {};
         	$scope.form-fuel.$setPristine();
+        };
+        
+        $scope.cleanInputCat = function() {
+        	vm.category = {};
         	$scope.form-cat.$setPristine();
         };
         
-        $scope.editCategory = function(brand) {
-        	vm.category = angular.copy(brand);
-        	$scope.scrollTo( "#wrap");
-        };
         
         $scope.deleteTariff = function(id) {
         	NProgress.start();
@@ -209,6 +216,24 @@
                 scrollTop: $(element).offset().top
             }, 500);
         }
+        
+        $scope.editExtra = function(extra) {
+        	vm.extra = angular.copy(extra);
+        	$scope.buttonExtras="Editar";
+        	$scope.scrollTo( "#wrap");
+        };
+        
+        $scope.editFuelType = function(fuel) {
+        	vm.fuelType = angular.copy(fuel);
+        	$scope.buttonFuelType="Editar";
+        	$scope.scrollTo( "#wrap");
+        };
+        
+        $scope.editCategory = function(category) {
+        	vm.category = angular.copy(category);
+        	$scope.buttonCategory="Editar";
+        	$scope.scrollTo( "#wrap");
+        };
 
     }
 
