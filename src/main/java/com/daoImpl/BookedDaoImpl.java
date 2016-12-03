@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.BookedDao;
 import com.entities.Booked;
+import com.entities.BranchOffice;
 import com.entities.Client;
 import com.entities.Vehicle;
 
@@ -38,6 +39,15 @@ public class BookedDaoImpl extends GenericDaoImpl<Booked, Integer> implements Bo
 	public List<Booked> getNextBooked(Vehicle vehicle) {
 		Query query=currentSession().createQuery("from Booked where vehicle =:vehicle and beginbookedDate>CURRENT_DATE and canceled=false");
 		query.setParameter("vehicle", vehicle);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Booked> getDelivered(BranchOffice branch, LocalDate date) {
+		Query query=currentSession().createQuery("from Booked where beginbookedDate=:date and canceled=false and originOffice=:office");
+		query.setParameter("office", branch);
+		query.setParameter("date",date);
 		return query.getResultList();
 	}
 	

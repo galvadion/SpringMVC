@@ -2,6 +2,7 @@ package com.servicesImpl;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -96,6 +97,12 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 	public Booked getBookedByClient(Client user) {
 
 		return bookedDao.getBookedByClient(user);
+	}
+
+	@Override
+	public List<Booked> getBookedByDayAndOffice(BranchOffice branch, LocalDate date) {
+		// TODO Auto-generated method stub
+		return bookedDao.getDelivered(branch,date);
 	}
 
 }

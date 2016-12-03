@@ -46,16 +46,43 @@
             DTColumnDefBuilder.newColumnDef(3).notSortable(),
         ];
         
-        initController();
+        initController(new Date());
         
-        function initController() {
+        function initController(date) {
             NProgress.start();
-            getPickedToday();
-            getReturnedToday();
+            var localDate = date;
+            getPickedToday(formatDate(localDate));
+            getReturnedToday(formatDate(localDate));
+            $scope.yesterdayPick =new Date();
+            $scope.yesterdayReturn=new Date();
+            $scope.tomorrowPick=new Date();
+            $scope.tomorrowReturn=new Date();
+            $scope.tomorrowPick.setDate(localDate.getDate()+1);
+            $scope.tomorrowReturn.setDate(localDate.getDate()+1);
+            $scope.yesterdayPick.setDate(localDate.getDate()-1);
+            $scope.yesterdayReturn.setDate(localDate.getDate()-1);
+            console.log($scope.yesterdayPick);
+            console.log(localDate)
+            $scope.hoy="hoy";
+            $scope.hoyRet="hoy";
         }
         
-        function getPickedToday(){
-        	ReportService.getPickedToday().then(function (response) {
+        
+        
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+        
+        function getPickedToday(date){
+        	ReportService.getPickedToday(date).then(function (response) {
         		if(response.success){
         			vm.pickedToday = response.data;
         		}
@@ -66,8 +93,22 @@
         	});
         }
         
-        function getReturnedToday(){
-        	ReportService.getReturnedToday().then(function (response) {
+        $scope.pickedup = function(date){
+        	getPickedToday(formatDate(date));$scope.hoy=formatDate(date);
+        	$scope.yesterdayPick.setDate(date.getDate()-1);
+        	$scope.tomorrowPick.setDate(date.getDate()+1);
+        }
+        
+        $scope.returned = function(date){
+        	getReturnedToday(formatDate(date));$scope.hoyRet=formatDate(date);
+        	$scope.yesterdayReturn.setDate(date.getDate()-1);
+        	$scope.tomorrowReturn.setDate(date.getDate()+1);
+        }
+        
+        
+        
+        function getReturnedToday(date){
+        	ReportService.getReturnedToday(date).then(function (response) {
         		if(response.success){
         			vm.returnedToday = response.data;
         		}
