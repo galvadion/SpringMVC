@@ -6,13 +6,17 @@
 	<div class="page page-dashboard">
 
 		<div class="pageheader">
-			<h1 class="custom-font" style="margin-top: -10px !important;">
+			<h1 class="custom-font" style="margin-top: -10px !important;" ng-if="vm.location[2] == 'create'">
 				<strong>Vehículos </strong> Crear
+			</h1>
+			<h1 class="custom-font" style="margin-top: -10px !important;" ng-if="vm.location[2] == 'edit'">
+				<strong>Vehículos </strong> Editar
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#/home">Dashboard</a></li>
 				<li><a href="#/vehicle">Vehículos</a></li>
-				<li class="breadcrumb-active">Nuevo Vehículo</li>
+				<li ng-if="vm.location[2] == 'create'" class="breadcrumb-active">Nuevo Vehículo</li>
+				<li ng-if="vm.location[2] == 'edit'" class="breadcrumb-active">Editar Vehículo</li>
 			</ol>
 		</div>
 
@@ -65,12 +69,14 @@
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.model.$dirty && form.model.$error.required }">
 									<label for="model" class="control-label">* Modelo</label> 
-									<select	ng-model="vm.vehicle.model.id" ng-options="item.id as item.name for item in vm.modelsByBrand" name="model" id="model"
+									<select	ng-model="vm.vehicle.model.id" name="model" id="model"
 										class="form-control" required>
-										<option value="">Seleccione un modelo</option>
-									</select> <span
-										ng-show="form.model.$dirty && form.model.$error.required"
+										<option value="">Seleccione un modelo 222</option>
+										<option ng-repeat="(key, value) in vm.modelsByBrand" value="{{value.id}}">{{value.name}}</option>
+									</select>
+									<span ng-show="form.model.$dirty && form.model.$error.required"
 										class="help-block">Modelo es requerida</span>
+										{{vm.vehicle.model.id}}
 								</div>
 							</div>
 							<div class="row">

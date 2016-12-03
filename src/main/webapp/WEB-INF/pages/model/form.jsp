@@ -24,7 +24,7 @@
             			
             			<form  form-on-change="checkFields()" name='form' class="" role="form" ng-submit="saveModel()" enctype="multipart/form-data">
 
-                        <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+							<div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
                             <label for="name" class="control-label">* Nombre</label>
                             <input type="text" name="name" id="name" class="form-control" id="name" ng-model="vm.requestModel.name" placeholder="Nombre" required>
                             <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Nombre es requerido</span>

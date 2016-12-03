@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Client;
+import com.entities.Model;
 import com.models.BookingModel;
 import com.models.PayPalTransaction;
+import com.models.Reservation;
 import com.models.TransactionItem;
+import com.services.BookedService;
+import com.services.ModelService;
 import com.services.PayPalService;
+import com.services.UserServices;
 
 @Controller
 @RequestMapping(value="payment")
@@ -30,6 +36,15 @@ public class PaymentTransactionController {
 
 	@Resource(name="PayPalServiceImpl")
 	PayPalService paypalService;
+	
+	@Autowired
+	ModelService modelService;
+	
+	@Autowired
+	UserServices userService;
+	
+	@Autowired
+	BookedService bookedService;
 
 	@RequestMapping(value="/start-paypal",method =RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> paypalPaymentBegin(@RequestBody List<TransactionItem> itemsList){
@@ -80,9 +95,18 @@ public class PaymentTransactionController {
 	@RequestMapping(value="/booking", method=RequestMethod.GET)
 	public ModelAndView bookingVehicle(){
 		
-//		@RequestParam("modelId") int modelId
+//		
 		ModelAndView view = new ModelAndView("payment/booking");
 		return view;
+	}
+	
+	@RequestMapping(value="/model", method=RequestMethod.GET)
+	public ResponseEntity<Model> getModelDetails(@RequestParam("modelId") int modelId){
+		if (modelService.get(modelId) != null) {
+			return ResponseEntity.ok(modelService.get(modelId));
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
 	}
 
 	@RequestMapping(value="/example", method=RequestMethod.GET)
@@ -104,21 +128,25 @@ public class PaymentTransactionController {
 		}
 	}
 	
-	@RequestMapping(value="/confirm-transaction", method=RequestMethod.GET)
-	public ResponseEntity<String> confirmTransaction(@RequestParam("token") String token, 
-													 @RequestParam("PayerID") String PayerID,
-													 @RequestParam("itemTotal") String itemTotal,
-													 @RequestParam("orderTotal") String orderTotal){
+	@RequestMapping(value="/confirm-transaction", method=RequestMethod.POST)
+	public ResponseEntity<String> confirmTransaction(@RequestBody Reservation reservation){
 		try{
+			
+			String token = reservation.getToken();
+			String PayerID = reservation.getPayerId();
+			String itemTotal = reservation.getItemTotal();
+			String orderTotal = reservation.getOrderTotal();
+			BookingModel bookingCar = reservation.getBookingModel();
+			int clientId = reservation.getClientId();
 			PayPalTransaction transaction = paypalService.confirmTransaction(token, PayerID, itemTotal, orderTotal);
 			switch(transaction.getAck()){
 			case "SUCCESS":
-				// AQUI EL TRANSACTION ID!!
 				String transactionId = transaction.getTransactionID();
 				BookedController bookedController = new BookedController();
-				BookingModel model = new BookingModel();
-				Client client = new Client();
-				bookedController.registerBooking(model, client, transactionId, transaction.getPayerPayPalID());
+				Client client = (Client)userService.get(clientId);
+				System.out.println("Client Id: " + clientId);
+				System.out.println(client);
+				bookedService.registerBook(bookingCar, client, transactionId, transaction.getPayerPayPalID());
 				System.out.println(transactionId);
 				
 				return ResponseEntity.ok("Transaction complete!");
@@ -126,7 +154,7 @@ public class PaymentTransactionController {
 			case "FAILURE":
 				String error = transaction.getErrorMessage();
 				log.error(error);
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Paypal has fail!");
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
 				
 			default:
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
@@ -135,7 +163,7 @@ public class PaymentTransactionController {
 			
 		}
 		catch(Exception ex){
-			log.error(ex.getMessage());
+			log.error(ex);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
 		}
 	}

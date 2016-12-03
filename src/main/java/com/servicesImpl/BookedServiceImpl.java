@@ -65,7 +65,7 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		Booked booked=new Booked();
 		booked.setBeginbookedDate(model.getStartDate());
 		booked.setLastbookedDate(model.getEndDate());
-		booked.setVehicule(vehicle);
+		booked.setVehicle(vehicle);
 		booked.setWithGps(model.isWithGps());
 		booked.setWithFullTank(model.isWithFullTank());
 		booked.setWithInsurance(model.isWithInsurance());
@@ -81,19 +81,18 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		}if(model.isWithInsurance()){
 			insuranceByDay=vehiculeModel.getInsurance();
 		}
-		float initialAmount=vehiculeModel.getCategory().getBasePrice()+gpsByDay+insuranceByDay;
-		long days=model.getStartDate().until(model.getEndDate(), ChronoUnit.DAYS);
-		if(days>1){
-			initialAmount = (float) ((initialAmount*days)*(0.8));
+		float initialAmount = vehiculeModel.getCategory().getBasePrice() + gpsByDay + insuranceByDay;
+		long days = model.getStartDate().until(model.getEndDate(), ChronoUnit.DAYS);
+		if (days > 1) {
+			initialAmount = (float) ((initialAmount * days) * (0.8));
 		}
-		if(model.isWithFullTank()){
+		if (model.isWithFullTank()) {
 			initialAmount += vehiculeModel.getFullTank();
 		}
 		booked.setInitialAmount(initialAmount);
 		System.out.println(client);
 		booked.setClient(client);
 		//Missing booked set client waiting for Oauth implementation
-		//missing data related to the paypal callback
 		bookedDao.saveOrUpdate(booked);
 		statusBetweenDao.editStatusAtBooking(vehicle, model.getStartDate(), model.getEndDate(), finalBO);
 		

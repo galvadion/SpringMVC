@@ -13,26 +13,27 @@
 		
 		var GetPaymentDetails = GetPaymentDetails;
 		var ConfirmPayment = ConfirmPayment;
+		var GetModelDetails = GetModelDetails;
 		
 		myCart.addCheckoutParameters("PayPal", "info-rentuy@gmail.com");
-		
-		//*****************************************
-		// Item HARDCODED
-		myCart.addItem(1, "BMW z4", 1000, 1);
-		//*****************************************
 		
 		return {
 			cart: myCart,
 			GetPaymentDetails,
-			ConfirmPayment
+			ConfirmPayment,
+			GetModelDetails
 		};
+		
+		function GetModelDetails(modelId){
+			return $http.get('/SpringMVC/payment/model?modelId=' + modelId).then(handleSuccess, handleError);
+		}
 		
 		function GetPaymentDetails(token, payerId){
 			return $http.get('/SpringMVC/payment/details-payment?token=' + token +"&PayerID=" + payerId).then(handleSuccess, handleError);
 		}
 		
-		function ConfirmPayment(token, payerId, itemTotal, orderTotal){
-			return $http.get('/SpringMVC/payment/confirm-transaction?token='+token+'&PayerID='+payerId+"&itemTotal="+itemTotal+"&orderTotal="+orderTotal).then(handleSuccess, handleError);
+		function ConfirmPayment(data){
+			return $http.post('/SpringMVC/payment/confirm-transaction', data).then(handleSuccess, handleError);
 		}
 		
 		// private functions

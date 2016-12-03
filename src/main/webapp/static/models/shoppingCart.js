@@ -133,7 +133,6 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
     for(var i = 0; i < this.items.length; i++){
     	var item = this.items[i];
     	var TransactionItem = {'name' : item.name, 'amount' : item.price.toFixed(2), 'quantity' : item.quantity};
-    	console.log(TransactionItem);
     	datos.push(TransactionItem);
     }
 

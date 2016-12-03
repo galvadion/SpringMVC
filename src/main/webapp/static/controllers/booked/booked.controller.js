@@ -82,7 +82,9 @@
         	NProgress.start();
         	ModelService.SearchModels(vm.search).then(function (response) {
         		if(response){
-        			if(vm.searchResult.length > 0){
+        			console.log(response.data)
+        			if(response.data.length > 0){
+        				console.log("?")
         				vm.searchResult = response.data;
         				$scope.scrollTo( "#searchResult");
         				console.log(vm.searchResult);
@@ -207,7 +209,8 @@
         	});
         };
         
-        $scope.reservar = function(){
+        $scope.reservar = function(modelId){
+        	$rootScope.modelId = modelId;
         	$rootScope.dateInitial = vm.search.beginDate;
         	$rootScope.dateEnding = vm.search.endDate;
         	$rootScope.officeInitial = vm.search.officeOriginId;

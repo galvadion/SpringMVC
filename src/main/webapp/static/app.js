@@ -270,6 +270,7 @@
     	$rootScope.roladmin = false;
     	$rootScope.rolclient = false;
     	
+    	$rootScope.modelId;
     	$rootScope.dateInitial;
     	$rootScope.dateEnding;
     	$rootScope.officeInitial;

@@ -8,28 +8,38 @@
 				<div class="col-md-8 col-sm-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<div class="row"><center><h3>Nombre de clase de vehículo</h3></center></div>
+							<div class="row"><center><h3>{{model.brand.name}} {{model.name}}</h3></center></div>
 						</div>
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-xs-8">
-									<img class="img-responsive" src="http://www.bmw.co.cr/content/dam/bmw/common/all-models/i-series/i8/2014/model-card/BMW-i8_ModelCard.png" alt="car-picture">
+									<!--<img class="img-responsive" src="{{vm.model.image[0]}}" alt="car-picture"> -->
+									 <img class="img-responsive" src="https://www.bmw.co.cr/content/dam/bmw/common/all-models/i-series/i8/2014/model-card/BMW-i8_ModelCard.png" alt="car-picture">  
 								</div>
 								<div class="col-xs-4">
 									<div class="row">
-										<label>Ruedas: 4</label>
+										<label>Category: {{model.category.name}}</label>
 									</div>
 									<div class="row">
-										<label>Puertas: 2</label>
+										<label>Year: {{model.year}}</label>
 									</div>
 									<div class="row">
-										<label>Año: 2016</label>
+										<label>Passengers: {{model.passangers}}</label>
 									</div>
 									<div class="row">
-										<label>Velocidad máxima: 250 km/h</label>
+										<label>Luggage: {{model.luggage}}</label>
 									</div>
 									<div class="row">
-										<label>Capacidad tanque: 40 litros</label>
+										<label>Transmission: {{model.transmission}}</label>
+									</div>
+									<div class="row">
+										<label>Cylinders: {{model.cylinders}}</label>
+									</div>
+									<div class="row">
+										<label>Fuel: {{model.fuel.fuelType}}</label>
+									</div>
+									<div class="row">
+										<label>Price per day: $<strong>{{model.category.basePrice}}</strong></label>
 									</div>
 								</div>
 							</div>
@@ -46,7 +56,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class = "col-xs-offset-1 col-xs-9">
-									<label>GPS</label>
+									<label>GPS ($ {{gpsPrice}} per day)</label>
 								</div>
 								<div class="col-xs-2">
 									<input type="checkbox" ng-model="vm.gpsCheck" ng-change="addItem(-1, 'GPS', vm.gpsPrice, vm.gpsCheck)" data-toggle="toggle">
@@ -54,18 +64,18 @@
 							</div>
 							<div class="row">
 								<div class = "col-xs-offset-1 col-xs-9">
-									<label>Insurance</label>
+									<label>Insurance ($ {{insurancePrice}} per day)</label>
 								</div>
 								<div class = "col-xs-2">
-									<input type="checkbox" ng-model="vm.insuranceCheck" ng-change="addItem(-2, 'Insurance', vm.insurancePrice, vm.insuranceCheck)" data-toggle="toggle">
+									<input type="checkbox" ng-model="vm.insuranceCheck" ng-change="addItem(-2, 'Insurance', {{insurancePrice}}, vm.insuranceCheck)" data-toggle="toggle">
 								</div>
 							</div>
 							<div class="row">
 								<div class = "col-xs-offset-1 col-xs-9">
-									<label>Full tank</label>
+									<label>Full tank ($ {{fulltankPrice}})</label>
 								</div>
 								<div class = "col-xs-2">
-									<input type="checkbox" ng-model="vm.fulltankCheck" ng-change="addItem(-3, 'Full Tank', vm.fulltankPrice, vm.fulltankCheck)" data-toggle="toggle">
+									<input type="checkbox" ng-model="vm.fulltankCheck" ng-change="addItem(-3, 'Full Tank', {{fulltankPrice}}, vm.fulltankCheck)" data-toggle="toggle">
 								</div>
 							</div>
 	<!-- 						<div class="row"> -->
@@ -103,23 +113,26 @@
 						<div class="panel-body">
 							<div ng-repeat="item in cart.items">
 								<div class="row">
-									<div class="col-xs-offset-1 col-xs-6">{{item.name}}</div>
+									<div class="col-xs-offset-1 col-xs-5">{{item.name}}</div>
 									<div class="col-xs-2">x {{item.quantity}}</div>
-									<div class="col-xs-2">{{item.price * item.quantity}}</div>
+									<div class="col-xs-3">$ {{item.price * item.quantity}}</div>
 								</div>
 							</div>
 						</div>
 						<div class="panel-footer">
 							<div class="row">
-								<div class="col-xs-offset-1 col-xs-6">Total</div>
+								<div class="col-xs-offset-1 col-xs-5">Total</div>
 								<div class="col-xs-2">x {{cart.getTotalCount()}}</div>
-								<div class="col-xs-2">{{cart.getTotalPrice()}}</div>
+								<div class="col-xs-3">$ {{cart.getTotalPrice()}}</div>
 							</div>
 						</div>
 					</div>
 					<div class="panel panel-default">
+						<div class="panel-heading">
+							<center><h3>Pay with:</h3></center>
+						</div>
 						<div class="panel-body">
-							<div class="col-xs-6">
+							<div class="col-xs-offset-5 col-xs-6">
 								<button id="btnPaypalId"
 				                    class="btn btn-block btn-link"
 				                    ng-click="cart.checkout('PayPal')"
@@ -128,35 +141,38 @@
 				                </button>
 							</div>
 						</div>
+						<div class="panel-footer">
+							<div class="btn btn-danger" ng-click="volver()">Volver</div>
+						</div>
 					</div>
 				</div>
 				
 				
 				
 				</div>
-			<div ng-switch-when="details" class="col-md-4 col-sm-12">
+			<div ng-switch-when="details" class="col-md-6 col-sm-12">
 				<h1>Thank you!!!</h1>
 				<h3>Please, review your booking before confirm</h3>
 				
 				<div ng-repeat="item in vm.items">
 					<div class="row">
-						<div class="col-sm-2">Name: </div>
-						<div class="col-sm-2">{{item.name}}</div>
+						<div class="col-sm-3">Name: </div>
+						<div class="col-sm-3">{{item.name}}</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-2">Amount: </div>
-						<div class="col-sm-2">{{item.amount}}</div>
+						<div class="col-sm-3">Amount: </div>
+						<div class="col-sm-3">{{item.amount}}</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-2">Quantity: </div>
-						<div class="col-sm-2">{{item.quantity}}</div>
+						<div class="col-sm-3">Quantity: </div>
+						<div class="col-sm-3">{{item.quantity}}</div>
 					</div>
 					<br/>
 				</div>
 				<div>
 					<div class="row">
-						<div class="col-sm-2">Total: </div>
-						<div class="col-sm-2">{{vm.itemTotal}}</div>
+						<div class="col-sm-3">Total: </div>
+						<div class="col-sm-3">{{vm.itemTotal}}</div>
 					</div>
 					<br/>
 				</div>

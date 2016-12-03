@@ -3,13 +3,22 @@ package com.models;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.configuration.LocalDateDeserializer;
+import com.configuration.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class BookingModel implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer idModel;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
 	private LocalDate startDate;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
 	private LocalDate endDate;
 	private Integer originBranchOfficeId;
 	private Integer endBranchOfficeId;
