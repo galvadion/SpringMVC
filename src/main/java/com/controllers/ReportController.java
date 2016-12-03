@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.configuration.LocalDateDeserializer;
 import com.configuration.LocalDateSerializer;
+import com.entities.Booked;
 import com.entities.BranchOffice;
 import com.entities.Rent;
 import com.entities.Vehicle;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.models.PickedModel;
 import com.models.ReportSearch;
+import com.services.BookedService;
 import com.services.BranchOfficeService;
 import com.services.ModelService;
 import com.services.RentService;
@@ -50,6 +52,9 @@ public class ReportController {
 
 	@Autowired
 	RentService rentService;
+	
+	@Autowired
+	BookedService bookedService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView getListPage() {
@@ -59,36 +64,21 @@ public class ReportController {
 
 
 	@RequestMapping(value = "/getpickup", method = RequestMethod.GET)
-	public ResponseEntity<List<PickedModel>> getpickedupToday(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+	public ResponseEntity<List<Booked>> getpickedupToday(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 		/*DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");
 		LocalDate day = LocalDate.parse(date, dtf);*/
 		System.out.println(date);
-		List<PickedModel> result = new ArrayList<PickedModel>();
-		for (BranchOffice bo : branchService.getAvailable()) {
-			for (Vehicle vehicle : vehicleService.getPickedUpToday(bo)) {
-				PickedModel pm = new PickedModel();
-				pm.setVehicle(vehicle);
-				pm.setBoo(bo);
-				result.add(pm);
-			}
-		}
-		return ResponseEntity.ok(result);
+		BranchOffice branch=new BranchOffice();
+		return ResponseEntity.ok(bookedService.getBookedByDayAndOffice(branch, date));
 	}
 	
 	@RequestMapping(value = "/getreturned", method = RequestMethod.GET)
-	public ResponseEntity<List<PickedModel>> getreturnedToday(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+	public ResponseEntity<List<Rent>> getreturnedToday(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 	/*	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");
 		LocalDate day = LocalDate.parse(date, dtf);*/
-		List<PickedModel> result = new ArrayList<PickedModel>();
-		for (BranchOffice bo : branchService.getAvailable()) {
-			for (Vehicle vehicle : vehicleService.getReturnedToday(bo)) {
-				PickedModel pm = new PickedModel();
-				pm.setVehicle(vehicle);
-				pm.setBoo(bo);
-				result.add(pm);
-			}
-		}
-		return ResponseEntity.ok(result);
+		//Falta ver de donde sacar la oficina
+		BranchOffice branch=new BranchOffice();
+		return ResponseEntity.ok(rentService.getReturnedToday(branch, date));
 	}
 
 	@RequestMapping(value = "/getBookedBetweenDates", method = RequestMethod.POST)

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.RentDao;
+import com.entities.BranchOffice;
 import com.entities.Rent;
 
 @Repository
@@ -29,6 +30,15 @@ public class RentDaoImpl extends GenericDaoImpl<Rent, Integer> implements RentDa
 		Query query=currentSession().createQuery("from Rent where deliveryDate>:initialDate and returnDate<:finalDate");
 		query.setParameter("initialDate", initialDate);
 		query.setParameter("finalDate", finalDate);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Rent> getReturnedToday(BranchOffice branch, LocalDate day) {
+		Query query=currentSession().createQuery("from Rent where returnDate = :initialDate and bookeed.endOffice =:office");
+		query.setParameter("initialDate", day);
+		query.setParameter("office", branch);
+
 		return query.getResultList();
 	}
 	
