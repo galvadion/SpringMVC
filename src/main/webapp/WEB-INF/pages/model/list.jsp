@@ -58,7 +58,7 @@
                                             {{value.brand.name}}
                                         </td>
                                         <td>
-                                            {{value.category}}
+                                            {{value.category.name}}
                                         </td>
                                         <td>
                                             {{value.year}}

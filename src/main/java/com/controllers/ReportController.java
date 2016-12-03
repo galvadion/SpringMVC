@@ -69,6 +69,7 @@ public class ReportController {
 		LocalDate day = LocalDate.parse(date, dtf);*/
 		System.out.println(date);
 		BranchOffice branch=new BranchOffice();
+		branch=branchService.get(3);
 		return ResponseEntity.ok(bookedService.getBookedByDayAndOffice(branch, date));
 	}
 	
@@ -78,6 +79,7 @@ public class ReportController {
 		LocalDate day = LocalDate.parse(date, dtf);*/
 		//Falta ver de donde sacar la oficina
 		BranchOffice branch=new BranchOffice();
+		branch=branchService.get(3);
 		return ResponseEntity.ok(rentService.getReturnedToday(branch, date));
 	}
 

@@ -38,9 +38,13 @@ public class Rent implements Serializable{
 	@Column(name= "transaction_date")
 	private LocalDate transactionDate;
 	
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
 	@Column(name= "return_date")
 	private LocalDate returnDate;
 	
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
 	@Column(name= "delivery_date")
 	private LocalDate deliveryDate;
 	

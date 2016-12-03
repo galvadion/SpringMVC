@@ -56,7 +56,7 @@
             getAllCategories();
             getAllFuelTypes();
             getAllExtras();
-            $scope.buttonFuel="Crear";
+            $scope.buttonFuelType="Crear";
             $scope.buttonCategory="Crear";
             $scope.buttonExtras="Crear";
         }

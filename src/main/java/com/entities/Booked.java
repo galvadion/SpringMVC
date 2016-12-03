@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 
 import com.configuration.LocalDateDeserializer;
 import com.configuration.LocalDateSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -55,6 +56,8 @@ public class Booked implements Serializable{
 	@Column(name="initial_amount")
 	private Float initialAmount;
 	
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
 	@Column(name= "transaction_date")
 	private LocalDate transactionDate;
 	
@@ -65,9 +68,10 @@ public class Booked implements Serializable{
 	@Column(name="with_full_tank")
 	private boolean withFullTank;
 	
+    @JsonIgnore
 	@OneToOne
 	 @JoinColumn(
-		        name="rent_id", unique=true, nullable=false, updatable=true)
+		        name="rent_id", unique=true, updatable=true)
 	private Rent rent;
 	
 	@ManyToOne

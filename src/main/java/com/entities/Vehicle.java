@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 import com.configuration.LocalDateDeserializer;
 import com.configuration.LocalDateSerializer;
@@ -36,10 +37,13 @@ public class Vehicle implements Serializable{
 	private Integer id;
 	
 	@Column(name = "license_plate")
+	@Size(min=2, max=15)
 	private String licensePlate;
 	
+	@Size(min=2, max=1000)
 	private String description;
 	
+	@Size(min=2, max=500)
 	private String observations;
 	
 	@JsonDeserialize(using = LocalDateDeserializer.class)  
@@ -50,12 +54,15 @@ public class Vehicle implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Vehicle_Status state;
 	
+	@Size(min=2, max=20)
 	private String color;
 	
 	@Column(name = "chasis_number")
+	@Size(min=2, max=50)
 	private String chasisNr;
 	
 	@Column(name = "motor_number")
+	@Size(min=2, max=50)
 	private String motorNr;
 
 	private Integer kilometers;

@@ -35,7 +35,7 @@ public class RentDaoImpl extends GenericDaoImpl<Rent, Integer> implements RentDa
 
 	@SuppressWarnings("unchecked")
 	public List<Rent> getReturnedToday(BranchOffice branch, LocalDate day) {
-		Query query=currentSession().createQuery("from Rent where returnDate = :initialDate and bookeed.endOffice =:office");
+		Query query=currentSession().createQuery("Select r from Rent r join r.booked b where r.returnDate = :initialDate and b.endOffice =:office");
 		query.setParameter("initialDate", day);
 		query.setParameter("office", branch);
 
