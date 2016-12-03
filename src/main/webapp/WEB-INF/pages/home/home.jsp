@@ -166,6 +166,8 @@
 
 		</div>
 
+		<input type="button" value="Chat" ng-click="initChat()">
+		<div id="members"></div>
 
 	</div>
 
