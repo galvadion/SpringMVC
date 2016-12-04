@@ -100,9 +100,11 @@
 								<h2>{{value.brand.name}} {{value.name}} {{value.year}}</h2>
 							</div>
 							<div class="row" style="padding: 15px;">
+							<div class="col-sm-4">
 								<div class="col-sm-4" ng-repeat="(keyI, valueI) in value.images">
 									<img src="images/{{valueI.fileLocation}}"
 										style="height: 150px; max-width: 240px;">
+								</div>
 								</div>
 								<div class="col-sm-4">
 									<table>
