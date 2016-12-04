@@ -6,17 +6,21 @@
 	<div class="page page-dashboard">
 
 		<div class="pageheader">
-			<h1 class="custom-font" style="margin-top: -10px !important;" ng-if="vm.location[2] == 'create'">
+			<h1 class="custom-font" style="margin-top: -10px !important;"
+				ng-if="vm.location[2] == 'create'">
 				<strong>Vehículos </strong> Crear
 			</h1>
-			<h1 class="custom-font" style="margin-top: -10px !important;" ng-if="vm.location[2] == 'edit'">
+			<h1 class="custom-font" style="margin-top: -10px !important;"
+				ng-if="vm.location[2] == 'edit'">
 				<strong>Vehículos </strong> Editar
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#/home">Dashboard</a></li>
 				<li><a href="#/vehicle">Vehículos</a></li>
-				<li ng-if="vm.location[2] == 'create'" class="breadcrumb-active">Nuevo Vehículo</li>
-				<li ng-if="vm.location[2] == 'edit'" class="breadcrumb-active">Editar Vehículo</li>
+				<li ng-if="vm.location[2] == 'create'" class="breadcrumb-active">Nuevo
+					Vehículo</li>
+				<li ng-if="vm.location[2] == 'edit'" class="breadcrumb-active">Editar
+					Vehículo</li>
 			</ol>
 		</div>
 
@@ -41,15 +45,17 @@
 										ng-show="form.licensePlate.$dirty && form.licensePlate.$error.required"
 										class="help-block">Es necesario ingresar la matricula</span>
 								</div>
-							
+
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.branchOffice.$dirty && form.branchOffice.$error.required }">
 									<label for="branchOffice" class="control-label">Sucursal
 										donde estara el vehículo</label> <select
 										ng-model="vm.vehicle.branchOffice.id" name="branchOffice"
-										id="branchOffice" ng-options="item.id as item.name for item in vm.allOffices" class="form-control" required>
+										id="branchOffice"
+										ng-options="item.id as item.name for item in vm.allOffices"
+										class="form-control" required>
 										<option value="">Seleccione sucursal</option>
-										
+
 									</select> <span
 										ng-show="form.branchOffice.$dirty && form.branchOffice.$error.required"
 										class="help-block">Sucursal es requerido</span>
@@ -58,9 +64,11 @@
 							<div class="row">
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.brand.$dirty && form.brand.$error.required }">
-									<label for="brand" class="control-label">* Marca</label>
-									 <select ng-model="vm.vehicle.model.brand.id" name="brand" id="brand"
-										ng-change="getModelsByBrand()" ng-options="item.id as item.name for item in vm.allBrands" class="form-control" required>
+									<label for="brand" class="control-label">* Marca</label> <select
+										ng-model="vm.vehicle.model.brand.id" name="brand" id="brand"
+										ng-change="getModelsByBrand()"
+										ng-options="item.id as item.name for item in vm.allBrands"
+										class="form-control" required>
 										<option value="">Seleccione una marca</option>
 									</select> <span
 										ng-show="form.brand.$dirty && form.brand.$error.required"
@@ -68,9 +76,10 @@
 								</div>
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.model.$dirty && form.model.$error.required }">
-									<label for="model" class="control-label">* Modelo</label> 
-									<select	ng-model="vm.vehicle.model.id" ng-options="item.id as item.name for item in vm.modelsByBrand" name="model" id="model"
-										class="form-control" required>
+									<label for="model" class="control-label">* Modelo</label> <select
+										ng-model="vm.vehicle.model.id"
+										ng-options="item.id as item.name for item in vm.modelsByBrand"
+										name="model" id="model" class="form-control" required>
 										<option value="">Seleccione un modelo</option>
 									</select> <span
 										ng-show="form.model.$dirty && form.model.$error.required"
@@ -125,8 +134,8 @@
 							<div class="row">
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.kilometers.$dirty && form.kilometers.$error.required }">
-									<label for="kilometers" class="control-label">* Kilómetros
-										ya recorridos</label> <input type="number"
+									<label for="kilometers" class="control-label">*
+										Kilómetros ya recorridos</label> <input type="number"
 										ng-model="vm.vehicle.kilometers" name="kilometers"
 										id="kilometers" class="form-control" min="1"
 										placeholder="Kilómetros" required> <span
@@ -144,18 +153,8 @@
 								</div>
 							</div>
 
+
 							<div class="row">
-								<div class="form-group col-sm-12" class="form-group"
-									ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required }">
-									<label for="description" class="control-label">* Descripción</label>
-										 <textarea type="text" ng-model="vm.vehicle.description"
-										name="description" id="description" class="form-control"
-										placeholder="Descripción del vehículo" required /> <span
-										ng-show="form.description.$dirty && form.description.$error.required"
-										class="help-block">Es necesario escribir una descripción para el usuario</span>
-								</div>
-								</div>
-								<div class="row">
 								<div class="form-group col-sm-12" class="form-group">
 									<label for="observations" class="control-label">Observaciones</label>
 									<textarea type="text" ng-model="vm.vehicle.observations"

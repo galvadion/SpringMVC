@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -40,6 +41,9 @@ public class Model implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "brand_id", nullable = false)
 	private Brand brand;
+	
+	@Size(min=2, max=1000)
+	private String description;
 
 	@ManyToOne
 	@JoinColumn(name = "fuel_id")
@@ -135,6 +139,14 @@ public class Model implements Serializable {
 
 	public void setCylinders(int cylinders) {
 		this.cylinders = cylinders;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public boolean isAirConditioner() {

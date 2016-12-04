@@ -40,8 +40,7 @@ public class Vehicle implements Serializable{
 	@Size(min=2, max=15)
 	private String licensePlate;
 	
-	@Size(min=2, max=1000)
-	private String description;
+
 	
 	@Size(min=2, max=500)
 	private String observations;
@@ -111,13 +110,7 @@ public class Vehicle implements Serializable{
 		this.licensePlate = licensePlate;
 	}
 
-	public String getDescription() {
-		return description;
-	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	public String getObservations() {
 		return observations;
