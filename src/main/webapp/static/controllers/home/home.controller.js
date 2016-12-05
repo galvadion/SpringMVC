@@ -15,6 +15,7 @@
         vm.rolclient = $rootScope.rolclient;
 		vm.allOffices = [];
 		vm.search = {};
+		
 
 		var localDate = new Date();
 		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)

@@ -1340,7 +1340,7 @@ org.cometd.Cometd = function(name)
             var logger = window.console[level];
             if (_isFunction(logger))
             {
-                logger.apply(window.console, args);
+                //logger.apply(window.console, args);
             }
         }
     }

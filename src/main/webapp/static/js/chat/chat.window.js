@@ -161,6 +161,7 @@ function ChatWindow(config) {
     	var textClose = document.createElement("span");
     	textClose.setAttribute("class", "windowClose");
     	textClose.setAttribute("title", "Cerrar");
+    	textClose.setAttribute("onclick","closeChat()");
     	textClose.style.cursor = "pointer";
     	textClose.style.float = "right";
     	textClose.style.margin = "50 5px 0 0";
@@ -178,6 +179,7 @@ function ChatWindow(config) {
     	
     	var windowDIV = document.createElement("div");
     	windowDIV.setAttribute("id", this.getWindowID());
+    	windowDIV.setAttribute("class", "ventanaChat");
     	windowDIV.style.width  = this._windowWidth + "px"; 
     	windowDIV.style.height = this._windowHeight +"px";
     	windowDIV.style.backgroundColor = '#FFFFFF'; 
@@ -205,4 +207,10 @@ function ChatWindow(config) {
     	//focus text input just after opening window
     	this.focusTextInput();
     };
+}
+
+function closeChat() {
+	var elem = document.getElementById('chatBtn');
+    elem.parentNode.removeChild(elem);
+    return false;
 }

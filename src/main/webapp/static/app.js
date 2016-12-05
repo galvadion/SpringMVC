@@ -350,6 +350,8 @@
         	$location.path('/home');
         }
         
+        $rootScope.chat = false;
+
         $rootScope.initChat = function () {
         	var userName = '';
         	if ($rootScope.globals.currentUser) {        	
@@ -368,8 +370,9 @@
 	            }
 	            userName='Unk_'+userName;
         	}
-        		$.cometChat.onLoad({memberListContainerID:'members'});
-        		join(userName);        	
+    		$.cometChat.onLoad({memberListContainerID:'members'});
+    		join(userName);
+            $rootScope.chat = true;
         }
 
     }
