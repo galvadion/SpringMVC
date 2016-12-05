@@ -350,6 +350,8 @@
         	$location.path('/home');
         }
         
+        $rootScope.chat = false;
+
         $rootScope.initChat = function () {
         	var userName = '';
         	if ($rootScope.globals.currentUser) {        	
@@ -363,13 +365,14 @@
             	}
         	}else {
 	            var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	            for( var i=0; i < 7; i++ ){
+	            for( var i=0; i < 4; i++ ){
 	                userName += possible.charAt(Math.floor(Math.random() * possible.length));
 	            }
 	            userName='Unk_'+userName;
         	}
-        		$.cometChat.onLoad({memberListContainerID:'members'});
-        		join(userName);        	
+    		$.cometChat.onLoad({memberListContainerID:'members'});
+    		join(userName);
+            $rootScope.chat = true;
         }
 
     }

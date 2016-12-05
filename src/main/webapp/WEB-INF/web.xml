@@ -46,6 +46,7 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<filter>
         <filter-name>continuation</filter-name>
         <filter-class>org.eclipse.jetty.continuation.ContinuationFilter</filter-class>
+        <async-supported>true</async-supported>
     </filter>
     <filter-mapping>
         <filter-name>continuation</filter-name>

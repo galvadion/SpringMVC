@@ -166,8 +166,10 @@
 
 		</div>
 
-		<input type="button" value="Chat" ng-click="initChat()">
-		<div id="members"></div>
+		<a id="chatBtn" href ng-click="initChat()" ng-disabled="chat" class="btn  btn-primary" style="position: fixed; bottom: 0; right: 0; z-index: 100; margin-right: 10px;">
+			<p ng-if="!chat">Iniciar chat</p>
+			<p ng-if="chat">Solicitud iniciada..</p>
+		</a>
 
 	</div>
 
