@@ -71,7 +71,7 @@ public class Booked implements Serializable{
     @JsonIgnore
 	@OneToOne
 	 @JoinColumn(
-		        name="rent_id", unique=true, updatable=true)
+		        name="rent_id", updatable=true)
 	private Rent rent;
 	
 	@ManyToOne

@@ -209,9 +209,9 @@
                 controllerAs: 'vm'
             })
 
-            .when('/rent/view', {
+            .when('/rent/confirm/:id', {
                 controller: 'RentController',
-                templateUrl: 'rent/view',
+                templateUrl: 'rent/confirm',
                 title: 'Rent-UY - Alquiler',
                 controllerAs: 'vm'
             })

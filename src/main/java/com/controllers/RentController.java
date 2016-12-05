@@ -44,6 +44,18 @@ public class RentController {
 		return view;
 	}
 	
+	@RequestMapping(value="/confirm",method =RequestMethod.GET)
+	public ModelAndView getConfirmationPage(){
+		ModelAndView view=new ModelAndView("rent/confirm");
+		return view;
+	}
+	
+	@RequestMapping(value="/return",method =RequestMethod.GET)
+	public ModelAndView getReturnPage(){
+		ModelAndView view=new ModelAndView("rent/return");
+		return view;
+	}
+	
 	@RequestMapping(value = "/getBooked", method = RequestMethod.GET)
 	private ResponseEntity<List<Booked>> getRentByName(@RequestParam("id") String id){
 		Client client=(Client) userServices.get(Integer.parseInt(id));

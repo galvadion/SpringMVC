@@ -74,13 +74,13 @@ public class ReportController {
 	}
 	
 	@RequestMapping(value = "/getreturned", method = RequestMethod.GET)
-	public ResponseEntity<List<Rent>> getreturnedToday(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+	public ResponseEntity<List<Booked>> getreturnedToday(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 	/*	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");
 		LocalDate day = LocalDate.parse(date, dtf);*/
 		//Falta ver de donde sacar la oficina
 		BranchOffice branch=new BranchOffice();
 		branch=branchService.get(3);
-		return ResponseEntity.ok(rentService.getReturnedToday(branch, date));
+		return ResponseEntity.ok(bookedService.getReturnedToday(branch, date));
 	}
 
 	@RequestMapping(value = "/getBookedBetweenDates", method = RequestMethod.POST)

@@ -50,5 +50,13 @@ public class BookedDaoImpl extends GenericDaoImpl<Booked, Integer> implements Bo
 		query.setParameter("date",date);
 		return query.getResultList();
 	}
+
+	@Override
+	public List<Booked> getReturned(BranchOffice branch, LocalDate date) {
+		Query query=currentSession().createQuery("from Booked where lastbookedDate=:date and canceled=false and endOffice=:office");
+		query.setParameter("office", branch);
+		query.setParameter("date",date);
+		return query.getResultList();
+	}
 	
 }

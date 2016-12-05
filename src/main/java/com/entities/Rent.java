@@ -61,7 +61,7 @@ public class Rent implements Serializable{
 	@Column(name="status_at_return")
 	private String statusAtReturn;
 	
-    @OneToOne(optional=false, mappedBy="rent")
+    @OneToOne(mappedBy="rent")
     private Booked booked;
 
 	public Integer getId() {
