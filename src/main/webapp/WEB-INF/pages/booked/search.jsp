@@ -157,27 +157,7 @@
 	                    </div>
 	                    
 	                    <hr class="line-dashed line-full"/>
-	                    
-	                    <div class="row" style="padding: 15px;">
-	                    	<div class="col-sm-3">
-	                    		<img src="static/images/logo-wide-transparent.png" style="height:130px; max-width:240px;">
-	                    	</div>
-	                    	<div class="col-sm-2">
-	                    		<table>
-	                    			<tr><td>1</td></tr>
-	                    			<tr><td>2</td></tr>
-	                    			<tr><td>3</td></tr>
-	                    			<tr><td>4</td></tr>
-	                    			<tr><td>5</td></tr>
-	                    			<tr><td>6</td></tr>
-	                    		</table>
-	                    	</div>
-	                    	<div class="col-sm-1">
-	                    		<a href class="btn  btn-orange"><strong>Reservar</strong></a>
-	                    	</div>
-	                    </div>
-	                    
-					<!-- </div> -->
+	                    <!-- </div> -->
 
 				</section>
             </div>

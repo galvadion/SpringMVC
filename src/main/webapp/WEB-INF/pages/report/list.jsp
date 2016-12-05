@@ -41,7 +41,7 @@
 
 					<div class="row" ng-repeat="(key, value) in vm.pickedToday">
 						<div class="row" style="padding: 15px;">
-							<div class="col-sm-2">
+							<div class="col-sm-8">
 								<table>
 									<tr>
 										<td>
@@ -50,105 +50,28 @@
 									</tr>
 									<tr>
 										<td>
-											<p>Cliente: {{value.client.name}}
-												{{value.client.lastName}}</p>
+											<p>Modelo:{{value.vehicle.model.brand.name}} {{value.vehicle.model.name}}</p>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<p>Año: 2014</p>
+											<p>Entrega en: {{value.endOffice.city}}</p>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<p>Categoria: B</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Transmision: Manual</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Combustible: Nafta</p>
+											<p>Cliente: {{value.client.name}} {{value.client.lastName}}</p>
 										</td>
 									</tr>
 								</table>
 							</div>
-							<div class="col-sm-5">
-								<table>
-									<tr>
-										<td>
-											<p>Marca: Fiat</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Modelo: Fiorino</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Año: 2014</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Categoria: B</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Transmision: Manual</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Combustible: Nafta</p>
-										</td>
-									</tr>
-								</table>
-							</div>
+
 							<div class="col-sm-1">
-								<a href class="btn  btn-orange"><strong>Reservar</strong></a>
+								<a href class="btn  btn-orange"><strong>Gestionar entrega</strong></a>
 							</div>
 						</div>
 
 						<hr class="line-dashed line-full" />
-
-						<div class="row" style="padding: 15px;">
-							<div class="col-sm-3">
-								<img src="static/images/logo-wide-transparent.png"
-									style="height: 130px; max-width: 240px;">
-							</div>
-							<div class="col-sm-2">
-								<table>
-									<tr>
-										<td>1</td>
-									</tr>
-									<tr>
-										<td>2</td>
-									</tr>
-									<tr>
-										<td>3</td>
-									</tr>
-									<tr>
-										<td>4</td>
-									</tr>
-									<tr>
-										<td>5</td>
-									</tr>
-									<tr>
-										<td>6</td>
-									</tr>
-								</table>
-							</div>
-							<div class="col-sm-1">
-								<a href class="btn  btn-orange"><strong>Reservar</strong></a>
-							</div>
-						</div>
-
 					</div>
 
 				</section>
@@ -170,7 +93,7 @@
 							dia anterior
 						</button>
 						<button class="pull-right btn btn-blue"
-							ng-click='returned(tomorrowReturnF)'>
+							ng-click='returned(tomorrowReturn)'>
 							Ver dia despues<span class="glyphicon glyphicon-chevron-right"
 								aria-hidden="true"></span>
 						</button>
@@ -181,112 +104,34 @@
 					<div class="row" ng-repeat="(key, value) in vm.returnedToday">
 						<div class="row" style="padding: 15px;">
 
-							<div class="col-sm-2">
+							<div class="col-sm-8">
 								<table>
 									<tr>
 										<td>
-											<p>Marca: Fiat</p>
+											<p>Vehiculo: {{value.booked.vehicle.licensePlate}}</p>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<p>Modelo: Fiorino</p>
+											<p>Modelo:{{value.booked.vehicle.model.brand.name}} {{value.vehicle.model.name}}</p>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<p>Año: 2014</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Categoria: B</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Transmision: Manual</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Combustible: Nafta</p>
+											<p>Cliente: {{value.booked.client.name}} {{value.client.lastName}}</p>
 										</td>
 									</tr>
 								</table>
 							</div>
-							<div class="col-sm-5">
-								<table>
-									<tr>
-										<td>
-											<p>Marca: Fiat</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Modelo: Fiorino</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Año: 2014</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Categoria: B</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Transmision: Manual</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Combustible: Nafta</p>
-										</td>
-									</tr>
-								</table>
-							</div>
+							
 							<div class="col-sm-1">
-								<a href class="btn  btn-orange"><strong>Reservar</strong></a>
+								<a href class="btn  btn-orange"><strong>Gestionar devolucion</strong></a>
 							</div>
 						</div>
 
 						<hr class="line-dashed line-full" />
 
-						<div class="row" style="padding: 15px;">
-							<div class="col-sm-3">
-								<img src="static/images/logo-wide-transparent.png"
-									style="height: 130px; max-width: 240px;">
-							</div>
-							<div class="col-sm-2">
-								<table>
-									<tr>
-										<td>1</td>
-									</tr>
-									<tr>
-										<td>2</td>
-									</tr>
-									<tr>
-										<td>3</td>
-									</tr>
-									<tr>
-										<td>4</td>
-									</tr>
-									<tr>
-										<td>5</td>
-									</tr>
-									<tr>
-										<td>6</td>
-									</tr>
-								</table>
-							</div>
-							<div class="col-sm-1">
-								<a href class="btn  btn-orange"><strong>Reservar</strong></a>
-							</div>
-						</div>
+						
 
 						<!-- </div> -->
 				</section>

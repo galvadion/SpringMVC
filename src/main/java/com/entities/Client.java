@@ -31,6 +31,8 @@ public class Client extends User implements Serializable{
 	@Column(name= "license_expiration_date")
 	private LocalDate licenseExpirationDate;
 	
+	private boolean allowNotification;
+	
 	@OneToMany(mappedBy="client")
 	private List<Booked> booked;
 	
@@ -63,6 +65,12 @@ public class Client extends User implements Serializable{
 	public String toString() {
 		return "Client [birthDate=" + birthDate + ", licenseExpirationDate=" + licenseExpirationDate + ", booked="
 				+ booked + "]";
+	}
+	public boolean isAllowNotification() {
+		return allowNotification;
+	}
+	public void setAllowNotification(boolean allowNotification) {
+		this.allowNotification = allowNotification;
 	}
 	
 	
