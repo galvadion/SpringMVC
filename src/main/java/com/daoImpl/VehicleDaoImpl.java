@@ -34,20 +34,23 @@ public class VehicleDaoImpl extends GenericDaoImpl<Vehicle, Integer> implements 
 		query.setParameter("branchId", model.getOriginBranchOfficeId());
 		return (Vehicle) query.getSingleResult();
 	}
+	@SuppressWarnings("unchecked")
 	public List<Vehicle> getAvailable() {
 		// TODO Auto-generated method stub
 		return currentSession().createQuery("from Vehicle where unavailable=false").getResultList();
 	}
+	@SuppressWarnings("unchecked")
 	public List<Vehicle> getPickedUpToday(BranchOffice bo) {
 		// TODO Auto-generated method stub
-		Query query=currentSession().createQuery("Select v from Vehicle v join v.booked s where v.unavailable=false and s.id in (Select s.id from Booked s where s.endOffice =:branchOffice  and s.initialDate=CURRENT_DATE)");
+		Query query=currentSession().createQuery("Select v from Vehicle v join v.booked s where v.unavailable=false and s.id in (Select s.id from Booked s where s.endOffice =:branchOffice  and s.beginbookedDate=CURRENT_DATE)");
 		query.setParameter("branchOffice", bo);
 		return query.getResultList();	
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Vehicle> getReturnedToday(BranchOffice bo) {
 		// TODO Auto-generated method stub
-		Query query=currentSession().createQuery("Select v from Vehicle v join v.booked s where v.unavailable=false and s.id in (Select s.id from Booked s where s.originOffice =:branchOffice  and s.endDate=CURRENT_DATE)");
+		Query query=currentSession().createQuery("Select v from Vehicle v join v.booked s where v.unavailable=false and s.id in (Select s.id from Booked s where s.originOffice =:branchOffice  and s.lastbookedDate=CURRENT_DATE)");
 		query.setParameter("branchOffice", bo);
 		return query.getResultList();
 	}

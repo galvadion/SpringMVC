@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +24,7 @@ public class RentDaoImpl extends GenericDaoImpl<Rent, Integer> implements RentDa
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Rent> getBetweenDates(LocalDate initialDate, LocalDate finalDate) {
 		Query query=currentSession().createQuery("from Rent where deliveryDate>:initialDate and returnDate<:finalDate");
 		query.setParameter("initialDate", initialDate);

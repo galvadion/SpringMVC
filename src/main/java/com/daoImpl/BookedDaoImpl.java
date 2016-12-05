@@ -34,6 +34,7 @@ public class BookedDaoImpl extends GenericDaoImpl<Booked, Integer> implements Bo
 		return (Booked) query.getSingleResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Booked> getNextBooked(Vehicle vehicle) {
 		Query query=currentSession().createQuery("from Booked where vehicle =:vehicle and beginbookedDate>CURRENT_DATE and canceled=false");
 		query.setParameter("vehicle", vehicle);

@@ -108,6 +108,7 @@
 		<script type="text/javascript" src="static/js/src/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
 		<script type="text/javascript" src="static/js/src/plugins/buttons/angular-datatables.buttons.js"></script>
 		<script type="text/javascript" src="static/js/src/plugins/select/angular-datatables.select.js"></script>
+		<script type="text/javascript" src="static/js/angular-checklist-model.js"></script>
 
 
         <!--Services-->
@@ -123,6 +124,7 @@
         <script src="static/services/promotion.service.js"></script>
         <script src="static/services/rent.service.js"></script>
         <script src="static/services/tariff.service.js"></script>
+        <script src="static/services/report.service.js"></script>
         <script src="static/services/payment.service.js"></script>
 
 
@@ -140,10 +142,11 @@
         <script src="static/controllers/promotion/promotion.controller.js"></script>
         <script src="static/controllers/rent/rent.controller.js"></script>
         <script src="static/controllers/tariff/tariff.controller.js"></script>
+        <script src="static/controllers/report/report.controller.js"></script>
         <script src="static/controllers/payment/payment.controller.js"></script>
         
-        
         <script src="static/models/shoppingCart.js"></script>
+        
 
         <div id="wrap">
           <div ng-view></div>

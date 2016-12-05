@@ -9,11 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.dao.GenericDao;
 import com.dao.RentDao;
-import com.dao.UserDao;
 import com.entities.Booked;
-import com.entities.Client;
 import com.entities.Rent;
-import com.entities.User;
 import com.services.RentService;
 
 @Service

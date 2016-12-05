@@ -3,18 +3,18 @@
 
     angular
         .module('app')
-        .controller('RentController', RentController);
+        .controller('ReportController', ReportController);
 
-    RentController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','RentService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
+    ReportController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','ReportService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
     
-    function RentController($location, UserService, $rootScope, $scope, $timeout, SessionService, RentService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+    function ReportController($location, UserService, $rootScope, $scope, $timeout, SessionService, ReportService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
         vm.rolemployee = $rootScope.rolemployee;
         vm.rolclient = $rootScope.rolclient;
-        vm.rent = {};
-        vm.allRents = [];
+        vm.pickedToday = [];
+        vm.returnedToday =[];
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -50,72 +50,35 @@
         
         function initController() {
             NProgress.start();
-            getAllRents();
+            getPickedToday();
+            getReturnedToday();
         }
         
-        function getAllRents(){
-        	RentService.GetAllRents().then(function (response) {
+        function getPickedToday(){
+        	ReportService.getPickedToday().then(function (response) {
         		if(response.success){
-        			vm.allRents = response.data;
+        			vm.pickedToday = response.data;
         		}
         		else{
-        			vm.allRents = [];
+        			vm.pickedToday = [];
         		}
         		NProgress.done();
         	});
         }
         
-        $scope.saveRent = function() {
-        	NProgress.start();
-        	var mgsSuccess = "";
-        	var mgsError = "";
-        	
-        	if(vm.rent.id){
-        		mgsSuccess = "Marca editada con éxito";
-        		mgsError = "Error al editar marca";
-        		
-        	}
-        	else{
-        		mgsSuccess = "Marca creada con éxito";
-        		mgsError = "Marca ya existente";
-        	}
-        	
-        	RentService.InsertRent(vm.rent).then(function (response) {
+        function getReturnedToday(){
+        	ReportService.getReturnedToday().then(function (response) {
         		if(response.success){
-        			getAllRents();
-        			$rootScope.doFlashMessage(mgsSuccess,'','success');
-        			$scope.cleanInput();
+        			vm.returnedToday = response.data;
         		}
         		else{
-        			$rootScope.doFlashMessage(mgsError,'','error');
+        			vm.returnedToday = [];
         		}
         		NProgress.done();
         	});
-        };
+        }
         
-        $scope.cleanInput = function() {
-        	vm.rent = {};
-        	$scope.form.$setPristine();
-        };
         
-        $scope.editRent = function(brand) {
-        	vm.rent = angular.copy(brand);
-        	$scope.scrollTo( "#wrap");
-        };
-        
-        $scope.deleteRent = function(id) {
-        	NProgress.start();
-        	RentService.DeleteRent(id).then(function (response) {
-        		if(response.success){
-        			getAllRents();
-        			$rootScope.doFlashMessage('Marca eliminada','','success');
-        		}
-        		else{
-        			$rootScope.doFlashMessage('Error al eliminar','','error');
-        		}
-        		NProgress.done();
-        	});
-        };
         
         $scope.scrollTo = function(element) {
             $( 'html, body').animate({

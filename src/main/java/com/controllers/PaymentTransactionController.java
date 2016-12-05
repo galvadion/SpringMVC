@@ -18,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Client;
+import com.entities.Extras;
 import com.entities.Model;
 import com.models.BookingModel;
+import com.models.ModelAndExtras;
 import com.models.PayPalTransaction;
 import com.models.Reservation;
 import com.models.TransactionItem;
 import com.services.BookedService;
+import com.services.ExtrasService;
 import com.services.ModelService;
 import com.services.PayPalService;
 import com.services.UserServices;
@@ -45,6 +48,9 @@ public class PaymentTransactionController {
 	
 	@Autowired
 	BookedService bookedService;
+	
+	@Autowired
+	ExtrasService extrasService;
 
 	@RequestMapping(value="/start-paypal",method =RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> paypalPaymentBegin(@RequestBody List<TransactionItem> itemsList){
@@ -101,9 +107,14 @@ public class PaymentTransactionController {
 	}
 	
 	@RequestMapping(value="/model", method=RequestMethod.GET)
-	public ResponseEntity<Model> getModelDetails(@RequestParam("modelId") int modelId){
+	public ResponseEntity<ModelAndExtras> getModelDetails(@RequestParam("modelId") int modelId){
 		if (modelService.get(modelId) != null) {
-			return ResponseEntity.ok(modelService.get(modelId));
+			Model model = modelService.get(modelId);
+			List<Extras> extras = extrasService.getAll();
+			ModelAndExtras response = new ModelAndExtras();
+			response.setModel(model);
+			response.setExtras(extras);
+			return ResponseEntity.ok(response);
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
@@ -142,12 +153,8 @@ public class PaymentTransactionController {
 			switch(transaction.getAck()){
 			case "SUCCESS":
 				String transactionId = transaction.getTransactionID();
-				BookedController bookedController = new BookedController();
 				Client client = (Client)userService.get(clientId);
-				System.out.println("Client Id: " + clientId);
-				System.out.println(client);
 				bookedService.registerBook(bookingCar, client, transactionId, transaction.getPayerPayPalID());
-				System.out.println(transactionId);
 				
 				return ResponseEntity.ok("Transaction complete!");
 				

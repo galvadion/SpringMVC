@@ -58,11 +58,7 @@
                                             {{value.brand.name}}
                                         </td>
                                         <td>
-                                            <p ng-if="value.category.id == 1">S</p>
-                                            <p ng-if="value.category.id == 2">A</p>
-                                            <p ng-if="value.category.id == 3">B</p>
-                                            <p ng-if="value.category.id == 4">C</p>
-                                            <p ng-if="value.category.id == 5">D</p>
+                                            {{value.category}}
                                         </td>
                                         <td>
                                             {{value.year}}

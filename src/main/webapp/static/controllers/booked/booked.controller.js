@@ -11,6 +11,8 @@
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
+        vm.rolemployee = $rootScope.rolemployee;
+        vm.rolclient = $rootScope.rolclient;
         vm.booked = {};
         vm.allBookeds = [];
         vm.search = {};
@@ -82,12 +84,9 @@
         	NProgress.start();
         	ModelService.SearchModels(vm.search).then(function (response) {
         		if(response){
-        			console.log(response.data)
         			if(response.data.length > 0){
-        				console.log("?")
         				vm.searchResult = response.data;
         				$scope.scrollTo( "#searchResult");
-        				console.log(vm.searchResult);
         			}
         		}
         		NProgress.done();

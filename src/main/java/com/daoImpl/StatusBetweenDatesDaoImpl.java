@@ -39,7 +39,6 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		query.setParameter("vehicule", vehicle);
 		StatusBetweenDates status=(StatusBetweenDates) query.getSingleResult();
 		status.setEndDate(initialDate);
-		System.out.println(status);
 		this.saveOrUpdate(status);
 		StatusBetweenDates booked=new StatusBetweenDates();
 		booked.setBeginDate(initialDate);
@@ -48,7 +47,6 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		booked.setStatus(Vehicle_Status.Unavailable);
 		booked.setVehicle(vehicle);
 		booked.setBranchOffice(finalBranchOffice);
-		System.out.println(booked);
 		this.saveOrUpdate(booked);
 		StatusBetweenDates newDisponibility=new StatusBetweenDates();
 		newDisponibility.setBeginDate(finalDate);
@@ -56,7 +54,6 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		newDisponibility.setBranchOffice(finalBranchOffice);
 		newDisponibility.setStatus(Vehicle_Status.Available);
 		newDisponibility.setVehicle(vehicle);
-		System.out.println(newDisponibility);
 		this.saveOrUpdate(newDisponibility);
 	}
 
@@ -69,6 +66,7 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<StatusBetweenDates> getNextStatus(Vehicle vehicle) {
 		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicle =:vehicle and s.beginDate > CURRENT_DATE");
 		query.setParameter("vehicule", vehicle);

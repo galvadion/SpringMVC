@@ -3,19 +3,14 @@ package com.daoImpl;
 import java.util.List;
 
 import javax.persistence.*;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dao.FuelDao;
 import com.dao.ModelDao;
 import com.entities.Brand;
-import com.entities.Fuel;
 import com.entities.Model;
 import com.models.SearchFilter;
 import com.models.Vehicle_Status;
-import com.entities.Model;
 
 @Repository
 @Transactional
@@ -40,15 +35,18 @@ public class ModelDaoImpl extends GenericDaoImpl<Model, Integer> implements Mode
 		query.setParameter("status", Vehicle_Status.Available);
 		query.setParameter("branchId", filter.getOfficeOriginId());
 		//System.out.println(filter.getEndDate());
+		@SuppressWarnings("unchecked")
 		List<Model> resultList = (List<Model>) query.getResultList();
 		return resultList;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Model> getAvailable() {
 		// TODO Auto-generated method stub
 		return currentSession().createQuery("from Model where unavailable=false").getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Model> getAvailableByBrand(Brand byId) {
 		Query query=currentSession().createQuery("from Model where unavailable=false and brand=:brand");
 		query.setParameter("brand", byId);

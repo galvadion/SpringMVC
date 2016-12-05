@@ -2,13 +2,18 @@ package com.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -53,8 +58,6 @@ public class Booked implements Serializable{
 	@Column(name= "transaction_date")
 	private LocalDate transactionDate;
 	
-	@Column(name="with_gps")
-	private boolean withGps;
 	
 	@Column(name="with_insurance")
 	private boolean withInsurance;
@@ -64,7 +67,7 @@ public class Booked implements Serializable{
 	
 	@OneToOne
 	 @JoinColumn(
-		        name="rent_id", unique=true, nullable=true, updatable=true)
+		        name="rent_id", unique=true, nullable=false, updatable=true)
 	private Rent rent;
 	
 	@ManyToOne
@@ -89,6 +92,13 @@ public class Booked implements Serializable{
 	public Integer getId() {
 		return id;
 	}
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "extra_booked", catalog = "public", joinColumns = {
+			@JoinColumn(name = "usedIn", nullable = false, updatable = false) },
+			inverseJoinColumns = { @JoinColumn(name = "extra_id",
+					nullable = false, updatable = false) })
+	private List<Extras> extrasList;
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -162,13 +172,6 @@ public class Booked implements Serializable{
 		return serialVersionUID;
 	}
 
-	public boolean isWithGps() {
-		return withGps;
-	}
-
-	public void setWithGps(boolean withGps) {
-		this.withGps = withGps;
-	}
 
 	public boolean isWithInsurance() {
 		return withInsurance;
@@ -226,5 +229,13 @@ public class Booked implements Serializable{
 		this.payerId = payerId;
 	}
 
+	public List<Extras> getExtrasList() {
+		return extrasList;
+	}
+
+	public void setExtrasList(List<Extras> extrasList) {
+		this.extrasList = extrasList;
+	}
+	
 	
 }

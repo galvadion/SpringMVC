@@ -75,7 +75,7 @@
 														<a class="btn btn-lightred"
 															ng-click="cleanInput();cleanMessagges();">Cancelar</a>
 														<button type="submit" id="submit"
-															ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
+															ng-disabled="form.$invalid" class="btn  btn-orange">{{buttonCategory}}</button>
 													</div>
 												</form>
 											</div>
@@ -107,6 +107,7 @@
 															<tr ng-repeat="(key, value) in vm.categoryList">
 																<td>{{value.name}}</td>
 																<td>{{value.basePrice}}</td>
+																<td></td>
 																<td class="text-center plus" style="cursor: pointer;">
 																	<a title="Editar" ng-click="editCategory(value)"> <i
 																		class="fa fa-pencil"></i><br> <small>Editar</small>
@@ -184,7 +185,7 @@
 														<a class="btn btn-lightred"
 															ng-click="cleanInput();cleanMessagges();">Cancelar</a>
 														<button type="submit" id="submit"
-															ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
+															ng-disabled="form.$invalid" class="btn  btn-orange">{{buttonFuelType}}</button>
 													</div>
 												</form>
 											</div>
@@ -216,6 +217,7 @@
 															<tr ng-repeat="(key, value) in vm.fuelTypeList">
 																<td>{{value.fuelType}}</td>
 																<td>{{value.fuelPrice}}</td>
+																<td></td>
 																<td class="text-center plus" style="cursor: pointer;">
 																	<a title="Editar" ng-click="editFuelType(value)"> <i
 																		class="fa fa-pencil"></i><br> <small>Editar</small>
@@ -292,7 +294,7 @@
 														<a class="btn btn-lightred"
 															ng-click="cleanInput();cleanMessagges();">Cancelar</a>
 														<button type="submit" id="submit"
-															ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
+															ng-disabled="form.$invalid" class="btn  btn-orange">{{buttonExtras}}</button>
 													</div>
 												</form>
 											</div>
@@ -324,6 +326,7 @@
 															<tr ng-repeat="(key, value) in vm.extrasList">
 																<td>{{value.name}}</td>
 																<td>{{value.price}}</td>
+																<td></td>
 																<td class="text-center plus" style="cursor: pointer;">
 																	<a title="Editar" ng-click="editExtra(value)"> <i
 																		class="fa fa-pencil"></i><br> <small>Editar</small>

@@ -2,7 +2,6 @@ package com.servicesImpl;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,7 +21,6 @@ import com.entities.BranchOffice;
 import com.entities.Client;
 import com.entities.Model;
 import com.entities.StatusBetweenDates;
-import com.entities.User;
 import com.entities.Vehicle;
 import com.models.BookingModel;
 import com.services.BookedService;
@@ -66,7 +64,6 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		booked.setBeginbookedDate(model.getStartDate());
 		booked.setLastbookedDate(model.getEndDate());
 		booked.setVehicle(vehicle);
-		booked.setWithGps(model.isWithGps());
 		booked.setWithFullTank(model.isWithFullTank());
 		booked.setWithInsurance(model.isWithInsurance());
 		booked.setTransactionDate(LocalDate.now());
@@ -90,7 +87,6 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 			initialAmount += vehiculeModel.getFullTank();
 		}
 		booked.setInitialAmount(initialAmount);
-		System.out.println(client);
 		booked.setClient(client);
 		//Missing booked set client waiting for Oauth implementation
 		bookedDao.saveOrUpdate(booked);

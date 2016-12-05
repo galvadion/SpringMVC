@@ -1,6 +1,5 @@
 package com.servicesImpl;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,7 +13,9 @@ import com.services.ExtrasService;
 @Service
 public class ExtrasServiceImpl extends GenericServiceImpl<Extras, Integer> implements ExtrasService{
 
+	@SuppressWarnings("unused")
 	private ExtrasDao extrasDao;
+	
 	public ExtrasServiceImpl(){
 		
 	}

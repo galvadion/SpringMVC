@@ -19,8 +19,6 @@
 		vm.orderTotal;
 		vm.initDate;
 		vm.endDate;
-		vm.gpsCheck = false;
-		vm.gpsPrice = "4.00";
 		vm.insuranceCheck = false;
 		vm.fulltankCheck = false;
 		vm.babySeat1 = 0;
@@ -32,12 +30,7 @@
 		$scope.gpsPrice = vm.gpsPrice;
 		$scope.insurancePrice;
 		$scope.fulltankPrice;
-		
-		console.log("Model Id: " + $rootScope.modelId);
-		console.log("Initial Date: " + $rootScope.dateInitial);
-		console.log("EndDate: " + $rootScope.dateEnding);
-		console.log("InitialOfficeId: " + $rootScope.officeInitial);
-		console.log("EndOfficeId: " + $rootScope.officeEnding);
+		$scope.extras;
 		
 		initController();
 		
@@ -56,13 +49,14 @@
 			else{
 				PaymentService.GetModelDetails(id).then(function(response){
 					if(response.success){
-						$scope.model = response.data;
-						console.log($scope.model);
+						$scope.model = response.data.model;
+						$scope.extras = response.data.extras;
 						$scope.insurancePrice = $scope.model.insurance;
 						$scope.fulltankPrice = $scope.model.fullTank;
 						vm.bookingDays = Math.round(((new Date($rootScope.dateEnding.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$2/$1/$3")).getTime()) - (new Date($rootScope.dateInitial.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$2/$1/$3")).getTime()))/(1000*60*60*24));
 						$scope.cart.addItem($scope.model.id, $scope.model.brand.name + " " + $scope.model.name, $scope.model.category.basePrice, vm.bookingDays);
 						vm.estado = "booking";
+						console.log($scope.extras);
 					}
 					else{
 						alert(response.data);
@@ -73,7 +67,7 @@
 		}
 		
 		$scope.volver = function(){
-			$location.path("/search/origin=" + $rootScope.officeInitial + "&destination=" + $rootScope.officeEnding + "&from=" + $rootScope.dateInitial + "&to=" + $rootScope.dateEnding);
+			$location.path("search/origin=" + $rootScope.officeInitial + "&destination=" + $rootScope.officeEnding + "&from=" + $rootScope.dateInitial + "&to=" + $rootScope.dateEnding);
 		}
 		
 		$scope.addItem = function(id, name, price, checked){

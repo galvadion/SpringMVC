@@ -11,6 +11,8 @@
 
 		var vm = this;
 		vm.roladmin = $rootScope.roladmin;
+        vm.rolemployee = $rootScope.rolemployee;
+        vm.rolclient = $rootScope.rolclient;
 		vm.allOffices = [];
 		vm.search = {};
 
@@ -29,8 +31,8 @@
 		});
 
 		$scope.checkEndDate = function() {
-			var firstDate = moment(vm.search.beginDate, "dd/mm/yyyy");
-			var lastDate = moment(vm.search.endDate, "dd/mm/yyyy");
+			var firstDate = moment(vm.search.beginDate, "DD-MM-YYYY");
+			var lastDate = moment(vm.search.endDate, "DD-MM-YYYY");
 			var isAfter = firstDate.isAfter(lastDate);
 			if (isAfter) {
 				$scope.endDateError = true;

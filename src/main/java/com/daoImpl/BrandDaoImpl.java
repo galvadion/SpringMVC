@@ -23,13 +23,15 @@ public class BrandDaoImpl extends GenericDaoImpl<Brand, Integer> implements Bran
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Brand> getAvailable() {
 		Query query=currentSession().createQuery("from Brand where unavailable=false");
-		return query.getResultList();
+		List<Brand> resultList = query.getResultList();
+		return resultList;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Brand> getNotEmpty() {
-		// TODO Auto-generated method stub
 		return currentSession().createQuery("from Brand where unavailable=false and models not empty").getResultList();
 	}
 	

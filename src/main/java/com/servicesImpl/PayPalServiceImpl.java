@@ -32,7 +32,6 @@ import urn.ebay.apis.eBLBaseComponents.DoExpressCheckoutPaymentRequestDetailsTyp
 import urn.ebay.apis.eBLBaseComponents.DoExpressCheckoutPaymentResponseDetailsType;
 import urn.ebay.apis.eBLBaseComponents.ErrorType;
 import urn.ebay.apis.eBLBaseComponents.GetExpressCheckoutDetailsResponseDetailsType;
-import urn.ebay.apis.eBLBaseComponents.PayPalUserStatusCodeType;
 import urn.ebay.apis.eBLBaseComponents.PayerInfoType;
 import urn.ebay.apis.eBLBaseComponents.PaymentActionCodeType;
 import urn.ebay.apis.eBLBaseComponents.PaymentDetailsItemType;
@@ -280,7 +279,6 @@ public class PayPalServiceImpl implements PayPalService {
 				
 				for(PaymentInfoType paymentInfo : paymentInfoList){
 					transaction.setTransactionID(paymentInfo.getTransactionID());
-					System.out.println("PayPalService: TransactionID = " + paymentInfo.getTransactionID());
 				}
 				
 				break;

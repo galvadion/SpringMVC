@@ -54,12 +54,14 @@
 							<center><h3>Extras</h3></center>
 						</div>
 						<div class="panel-body">
-							<div class="row">
-								<div class = "col-xs-offset-1 col-xs-9">
-									<label>GPS ($ {{gpsPrice}} per day)</label>
-								</div>
-								<div class="col-xs-2">
-									<input type="checkbox" ng-model="vm.gpsCheck" ng-change="addItem(-1, 'GPS', vm.gpsPrice, vm.gpsCheck)" data-toggle="toggle">
+							<div ng-repeat="extra in extras">
+								<div class="row">
+									<div class = "col-xs-offset-1 col-xs-9">
+										<label>{{extra.name}} ($ {{extra.price}} per day)</label>
+									</div>
+									<div class="col-xs-2">
+										<input type="checkbox" checklist-model="extras" checklist-value="extra" ng-change="addItem((-1) * {{extra.id}}, {{extra.name}}, {{extra.price}}, checked)" data-toggle="toggle">
+									</div>
 								</div>
 							</div>
 							<div class="row">
@@ -78,30 +80,6 @@
 									<input type="checkbox" ng-model="vm.fulltankCheck" ng-change="addItem(-3, 'Full Tank', {{fulltankPrice}}, vm.fulltankCheck)" data-toggle="toggle">
 								</div>
 							</div>
-	<!-- 						<div class="row"> -->
-	<!-- 							<div class = "col-xs-offset-1 col-xs-9"> -->
-	<!-- 								<label>Baby Car Safety Seats(0 to 9 month)</label> -->
-	<!-- 							</div> -->
-	<!-- 							<div class = "col-xs-2"> -->
-	<!-- 								<input type="number" ng-model="vm.babySeat1" min="0" style="width:100%" value="0"> -->
-	<!-- 							</div> -->
-	<!-- 						</div> -->
-	<!-- 						<div class="row"> -->
-	<!-- 							<div class = "col-xs-offset-1 col-xs-9"> -->
-	<!-- 								<label>Baby Car Safety Seats(9 month to 4 years)</label> -->
-	<!-- 							</div> -->
-	<!-- 							<div class = "col-xs-2"> -->
-	<!-- 								<input type="number" ng-model="vm.babySeat2" min="0" style="width:100%" value="0"> -->
-	<!-- 							</div> -->
-	<!-- 						</div> -->
-	<!-- 						<div class="row"> -->
-	<!-- 							<div class = "col-xs-offset-1 col-xs-9"> -->
-	<!-- 								<label>Baby Car Safety Seats(4 to 6 years)</label> -->
-	<!-- 							</div> -->
-	<!-- 							<div class = "col-xs-2"> -->
-	<!-- 								<input type="number" ng-model="vm.babySeat3" min="0" style="width:100%" value="0"> -->
-	<!-- 							</div> -->
-	<!-- 						</div> -->
 						</div>
 					</div>
 					
@@ -128,21 +106,30 @@
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<div class="panel-heading">
+						<!-- <div class="panel-heading">
 							<center><h3>Pay with:</h3></center>
-						</div>
+						</div> -->
 						<div class="panel-body">
-							<div class="col-xs-offset-5 col-xs-6">
+							<p class="text-info">
 								<button id="btnPaypalId"
+				                    class="btn btn-block btn-primary"
+				                    ng-click="cart.checkout('PayPal')"
+				                    ng-disabled="cart.getTotalCount() < 1" >
+				                    <!-- <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" alt="checkout PayPal"/> -->
+				                    <span class="glyphicon glyphicon-ok"></span> check out using Paypal 
+				                </button>
+							</p>
+							<p class="text-info">
+								<button class="btn btn-block btn-danger" ng-click="volver()"><i class="glyphicon glyphicon-chevron-left" /> Volver</button>
+							</p>
+						</div>
+						<div class="panel-footer">
+							<button id="btnPaypalId"
 				                    class="btn btn-block btn-link"
 				                    ng-click="cart.checkout('PayPal')"
 				                    ng-disabled="cart.getTotalCount() < 1" >
-				                    <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" alt="checkout PayPal"/>
-				                </button>
-							</div>
-						</div>
-						<div class="panel-footer">
-							<div class="btn btn-danger" ng-click="volver()">Volver</div>
+				                    <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" alt="checkout PayPal" />
+				            </button>
 						</div>
 					</div>
 				</div>

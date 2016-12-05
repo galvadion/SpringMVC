@@ -13,6 +13,8 @@
    
         vm.aux;
         vm.roladmin = $rootScope.roladmin;
+        vm.rolemployee = $rootScope.rolemployee;
+        vm.rolclient = $rootScope.rolclient;
         vm.allVehicles = [];
         vm.allBrands = [];
         vm.modelsByBrand = [];

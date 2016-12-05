@@ -33,11 +33,11 @@
 					  </div>
 					
 					  <!-- Left and right controls -->
-					  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+					  <a class="left carousel-control" data-target="#myCarousel" role="button" data-slide="prev"  ng-non-bindable>
 					    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 					    <span class="sr-only">Previous</span>
 					  </a>
-					  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+					  <a class="right carousel-control" data-target="#myCarousel" role="button" data-slide="next"  ng-non-bindable>
 					    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 					    <span class="sr-only">Next</span>
 					  </a>
@@ -76,7 +76,6 @@
 								<span ng-show="form.officeOriginId.$dirty && form.officeOriginId.$error.required" class="help-block">Sucursal es requerido</span>
 							</div>
 						</div>
-
 						<div class="row" style="padding: 0 10px 0 10px;">
 
 							<div class="form-group customDatePickers col-sm-6">
@@ -89,7 +88,6 @@
 								</div>
 								<span ng-show="endDateError" class="help-block" style="color: red">Fecha de entrega debe ser posterior a la de recogida</span>
 							</div>
-
 							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.officeEndId.$dirty && form.officeEndId.$error.required }">
 								<label for="officeEndId" class="control-label">Sucursal de entrega</label>
 									<select ng-model="vm.search.officeEndId" name="officeEndId" id="officeEndId" class="form-control" required>

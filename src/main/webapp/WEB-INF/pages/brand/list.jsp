@@ -20,7 +20,7 @@
             		
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
-                    	<h2 class="custom-font"><strong>Crear</strong></h2>
+                    	<h2 class="custom-font"><strong>{{button}}</strong></h2>
                     </div>
                     <!-- /tile header -->
                     
@@ -36,10 +36,9 @@
                         </div>
 
                         <!-- Buttons -->
-
                         <div class="form-group text-right">
                             <a class="btn btn-lightred" ng-click="cleanInput();cleanMessagges();">Cancelar</a>
-                            <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">Crear</button>
+                            <button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange">{{button}}</button>
                         </div>
 
                     </form>

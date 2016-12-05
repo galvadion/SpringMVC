@@ -257,6 +257,12 @@
             	title: 'Rent-UY - Reserva',
             	controllerAs: 'vm'
             })
+            .when('/report', {
+                controller: 'ReportController',
+                templateUrl: 'report',
+                title: 'Rent-UY - Alquileres',
+                controllerAs: 'vm'
+            })
 
             .otherwise({ redirectTo: '/' });
     }
@@ -268,6 +274,7 @@
     function run($rootScope, $location, $cookieStore, $http,FlashService, UserService, $window, AuthenticationService) {
 
     	$rootScope.roladmin = false;
+        $rootScope.rolcemployee = false;
     	$rootScope.rolclient = false;
     	
     	$rootScope.modelId;
@@ -284,6 +291,9 @@
         	if($rootScope.globals.currentUser.rol == "Admin"){
         		$rootScope.roladmin = true;
         	}
+            else if($rootScope.globals.currentUser.rol == "Employee"){
+                $rootScope.rolemployee = true;
+            }
         	else if($rootScope.globals.currentUser.rol == "Client"){
         		$rootScope.rolclient = true;
         	}
@@ -348,9 +358,12 @@
         $rootScope.logOut = function () {
         	AuthenticationService.ClearCredentials();
         	$rootScope.roladmin = false;
+            $rootScope.rolemployee = false;
         	$location.path('/home');
         }
 
     }
 
 })();
+    	
+    	

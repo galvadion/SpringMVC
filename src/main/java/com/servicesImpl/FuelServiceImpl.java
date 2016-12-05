@@ -1,6 +1,5 @@
 package com.servicesImpl;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +13,7 @@ import com.services.FuelService;
 @Service
 public class FuelServiceImpl extends GenericServiceImpl<Fuel, Integer> implements FuelService{
 
+	@SuppressWarnings("unused")
 	private FuelDao FuelDao;
 	public FuelServiceImpl(){
 		

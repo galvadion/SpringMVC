@@ -162,7 +162,6 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
 			paypaliframe.contentWindow.paypalBeginTransaction(response.token);
 		},
 		error: function(response){
-			console.log(response)
 			paypal.checkout.closeFlow();
 			alert("Error");
 		}

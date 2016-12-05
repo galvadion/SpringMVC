@@ -6,10 +6,10 @@
     <div class="page page-dashboard">
 
         <div class="pageheader">
-        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Búsqueda</strong></h1>
+        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>BÃºsqueda</strong></h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Inicio</a></li>
-                <li class="breadcrumb-active">Búsqueda</li>
+                <li class="breadcrumb-active">BÃºsqueda</li>
             </ol>
         </div>
 
@@ -64,7 +64,7 @@
 						<br/>
 						
 						<div class="tile-header dvd dvd-btm">
-                            <h1 class="custom-font"><strong>Búsqueda </strong> Avanzada</h1>
+                            <h1 class="custom-font"><strong>BÃºsqueda </strong> Avanzada</h1>
                             <button type="button" class="btn" data-toggle="collapse" data-target="#demo"><span class="glyphicon glyphicon-chevron-down"></span></button>
                         </div>
                         
@@ -113,8 +113,8 @@
                     
                     <!-- <div class="row" ng-repeat="(key, value) in vm.searchResult"> -->
 	                    <div ng-repeat="(key, value) in vm.searchResult"  class="row" style="padding: 15px;">
-	                    	<div class="col-sm-3" ng-repeat="(keyI, valueI) in value.images"> 
-	                    		<img src="images/{{valueI.fileLocation}}" style="height:150px; max-width:240px;">
+	                    	<div class="col-sm-3" ng-repeat="(keyI, valueI) in value.images">
+							<img src="images/{{valueI.fileLocation}}" style="height:150px; max-width:240px;">
 	                    	</div>
 	                    	<div class="col-sm-2">
 	                    		<table>
@@ -130,7 +130,7 @@
 	                    			</tr>
 	                    			<tr>
 	                    				<td>
-	                    					<p>Año: {{value.year}}</p>
+	                    					<p>AÃ±o: {{value.year}}</p>
 	                    				</td>
 	                    			</tr>
 	                    			<tr>
@@ -150,50 +150,14 @@
 	                    			</tr>
 	                    		</table>
 	                    	</div>
-	                    	<div class="col-sm-5">
-	                    		<table>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Marca: Fiat</p>
-	                    				</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Modelo: Fiorino</p>
-	                    				</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Año: 2014</p>
-	                    				</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Categoria: B</p>
-	                    				</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Transmision: Manual</p>
-	                    				</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Combustible: Nafta</p>
-	                    				</td>
-	                    			</tr>
-	                    		</table>
-	                    	</div>
+	                    	
 	                    	<div class="col-sm-1">
 	                    		<a href class="btn  btn-orange" ng-click="reservar(value.id)"><strong>Reservar</strong></a>
 	                    	</div>
 	                    </div>
 	                    
 	                    <hr class="line-dashed line-full"/>
-	                    
-	                    
-	                    
-					<!-- </div> -->
+	                    <!-- </div> -->
 
 				</section>
             </div>

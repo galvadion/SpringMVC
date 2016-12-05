@@ -9,12 +9,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.BrandDao;
-import com.dao.FuelDao;
 import com.dao.GenericDao;
 import com.dao.ModelDao;
 import com.dao.VehicleDao;
 import com.entities.Brand;
-import com.entities.Fuel;
 import com.entities.Model;
 import com.entities.Vehicle;
 import com.models.SearchFilter;

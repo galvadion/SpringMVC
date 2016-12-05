@@ -11,6 +11,8 @@
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
+        vm.rolemployee = $rootScope.rolemployee;
+        vm.rolclient = $rootScope.rolclient;
         vm.branchoffice = {};
         vm.branchoffice.location= {};
         vm.auxBranchoffice = {};
@@ -18,11 +20,11 @@
         vm.location = "";
         
         $scope.map = {
-        		center: { 
-        			latitude: -34.901113,
-        			longitude: -56.164531
-        		},
-        		zoom: 14,
+        		center : {
+    				latitude : -32.75948505325886,
+    				longitude : -56.165714263916016
+    			},
+        		zoom: 6,
         		markers: [],
         	    events: {
         	        click: function(map, eventName, originalEventArgs) {
@@ -140,6 +142,14 @@
         	BranchofficeService.GetBranchofficeById(id).then(function (response) {
         		if(response.success){
         			vm.branchoffice = response.data;
+        			$scope.map.markers.push({
+						id : response.data.id,
+						coords : {
+							latitude : response.data.location.latitude,
+							longitude : response.data.location.longitude
+						},
+						title : response.data.name
+					});
         		}
         		NProgress.done();
         	});
