@@ -4,8 +4,8 @@ function ChatWindow(config) {
     var _peerUserName;
     var _loginUserName;
     var _config;
-    this._windowWidth  = 200;
-    this._windowHeight = 200;
+    this._windowWidth  = 250;
+    this._windowHeight = 300;
     this.lastUser      = null;
     this.windowArray   = [];
    
@@ -60,7 +60,6 @@ function ChatWindow(config) {
     };
     
     this.appendMessage = function(fromUser, text, loginUser) {
-    	
     	var userNameCssClass    = "";
     	var textMessageCssClass = "";
     	
@@ -76,7 +75,9 @@ function ChatWindow(config) {
     		fromUser = "...";
     	} else {
     		this.lastUser = fromUser;
-    		fromUser += ':';
+    		var userName = fromUser;
+    		userName = userName.split("_");
+    		fromUser = '<b>' + userName[1] + ':</b> ';
     	}
     	var chatContainer = $("#" + this.getMessageContainerID());
     	var sb = [];
@@ -95,11 +96,13 @@ function ChatWindow(config) {
     	var bodyDIV = document.createElement("div");
     	bodyDIV.setAttribute("id", this.getMessageContainerID()); 
     	bodyDIV.style.width     = this._windowWidth + "px";
-    	bodyDIV.style.height    = "140px";
+    	bodyDIV.style.height    = "220px";
     	bodyDIV.style.position  = 'absolute';
     	bodyDIV.style.left      = 0;
     	bodyDIV.style.bottom    = "30px";
     	bodyDIV.style.overflowY = 'auto';
+    	bodyDIV.style.padding = '5px';
+    	bodyDIV.innerHTML = '<p style="margin-left: 33px !important;">** Escribe tu consulta **</p><br/><br/>';
     	return bodyDIV;
     };
     
@@ -108,17 +111,20 @@ function ChatWindow(config) {
     	var footerDIV = document.createElement("div");
     	footerDIV.style.width  = this._windowWidth + "px";
     	footerDIV.style.height = "30px";
-    	footerDIV.style.backgroundColor = '#31B404'; 
+    	footerDIV.style.backgroundColor = '#3B5998'; 
     	footerDIV.style.position = 'absolute';
     	footerDIV.style.left     = 0;
     	footerDIV.style.bottom   = 0;
     	
     	//create text input
     	var textInput = document.createElement("input");
+    	textInput.setAttribute("size", "24");
     	textInput.setAttribute("id", this.getTextInputID());
     	textInput.setAttribute("type", "text");
     	textInput.setAttribute("name", "chatInput");
     	textInput.setAttribute("class", "chatInput");
+    	textInput.setAttribute("placeholder", "Mensaje..");
+    	textInput.style.margin = "2px 0 0 3px";
     	
     	$(textInput).attr('autocomplete', 'off');
         $(textInput).keyup(function(e) {
@@ -138,19 +144,28 @@ function ChatWindow(config) {
     	
     	var headerDIV = document.createElement("div");
     	headerDIV.style.width  = this._windowWidth + "px";
-    	headerDIV.style.height = "30px";
-    	headerDIV.style.backgroundColor = '#31B404'; 
+    	headerDIV.style.height = "40px";
+    	headerDIV.style.backgroundColor = '#3B5998'; 
     	headerDIV.style.position = 'relative';
-    	headerDIV.style.top      = 0;
-    	headerDIV.style.left     = 0;
+    	headerDIV.style.top = 0;
+    	headerDIV.style.left = 0;
+    	headerDIV.style.padding = "5px";
     	
     	var textUserName = document.createElement("span");
     	textUserName.setAttribute("class", "windowTitle");
-    	textUserName.innerHTML = this.getPeerUserName();
+    	textUserName.style.color = '#FFFFFF';
+    	var headerName = this.getPeerUserName();
+    	headerName = headerName.split("_");
+    	textUserName.innerHTML = '<b>' + headerName[1] + '</b>';
     	
     	var textClose = document.createElement("span");
     	textClose.setAttribute("class", "windowClose");
-    	textClose.innerHTML = "[X]";
+    	textClose.setAttribute("title", "Cerrar");
+    	textClose.style.cursor = "pointer";
+    	textClose.style.float = "right";
+    	textClose.style.margin = "50 5px 0 0";
+    	textClose.innerHTML = "<b>[X]</b>";
+    	textClose.style.color = '#FFFFFF';
     	this.addOnClickListener(textClose, this.hide, this);
     	
     	headerDIV.appendChild(textUserName);
@@ -166,11 +181,11 @@ function ChatWindow(config) {
     	windowDIV.style.width  = this._windowWidth + "px"; 
     	windowDIV.style.height = this._windowHeight +"px";
     	windowDIV.style.backgroundColor = '#FFFFFF'; 
-    	windowDIV.style.position = 'absolute';
+    	windowDIV.style.position = 'fixed';
     	windowDIV.style.bottom   = 0;
     	windowDIV.style.right    = this.getWindowLeftPosition() + "px"; 
     	windowDIV.style.zIndex   = 100;
-    	windowDIV.style.border   = '1px solid #31B404'; 
+    	windowDIV.style.border   = '1px solid #3B5998'; 
     	
     	windowDIV.appendChild(this.getWindowHeader()); 
     	windowDIV.appendChild(this.getWindowBody());
