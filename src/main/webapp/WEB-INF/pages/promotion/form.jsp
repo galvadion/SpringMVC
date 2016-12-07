@@ -8,19 +8,19 @@
 		<div class="pageheader">
 			<h1 class="custom-font" style="margin-top: -10px !important;"
 				ng-if="vm.location[2] == 'create'">
-				<strong>Vehículos </strong> Crear
+				<strong>Ofertas </strong> Crear
 			</h1>
 			<h1 class="custom-font" style="margin-top: -10px !important;"
 				ng-if="vm.location[2] == 'edit'">
-				<strong>Vehículos </strong> Editar
+				<strong>Ofertas </strong> Editar
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#/home">Dashboard</a></li>
-				<li><a href="#/vehicle">Vehículos</a></li>
-				<li ng-if="vm.location[2] == 'create'" class="breadcrumb-active">Nuevo
-					Vehículo</li>
+				<li><a href="#/vehicle">Ofertas</a></li>
+				<li ng-if="vm.location[2] == 'create'" class="breadcrumb-active">Nueva
+					Oferta</li>
 				<li ng-if="vm.location[2] == 'edit'" class="breadcrumb-active">Editar
-					Vehículo</li>
+					Oferta</li>
 			</ol>
 		</div>
 
@@ -33,7 +33,7 @@
 					<div class="tile-body">
 
 						<form form-on-change="checkFields()" name='form' class=""
-							role="form" ng-submit="saveVehicle()">
+							role="form" ng-submit="savePromotion()">
 							<div class="row">
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.licensePlate.$dirty && form.licensePlate.$error.required }">
@@ -45,7 +45,6 @@
 										ng-show="form.licensePlate.$dirty && form.licensePlate.$error.required"
 										class="help-block">Es necesario ingresar la matricula</span>
 								</div>
-
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.branchOffice.$dirty && form.branchOffice.$error.required }">
 									<label for="branchOffice" class="control-label">Sucursal
@@ -130,6 +129,7 @@
 										chasis</span>
 								</div>
 							</div>
+							
 
 							<div class="row">
 								<div class="form-group col-sm-6" class="form-group"
