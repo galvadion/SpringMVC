@@ -101,16 +101,16 @@
 							</div>
 							<div class="row" style="padding: 15px;">
 							<div class="col-sm-4">
-								<div class="col-sm-4" ng-repeat="(keyI, valueI) in value.images">
-									<img src="images/{{valueI.fileLocation}}"
-										style="height: 150px; max-width: 240px;">
+								<div class="col-sm-4">
+									<img ng-if="!value.images[0]" src="static/images/logo-wide-transparent.png" style="height: 150px; max-width: 240px;">
+									<img ng-if="value.images[0]" src="images/{{value.images[0].fileLocation}}" style="height: 150px; max-width: 240px;">
 								</div>
 								</div>
 								<div class="col-sm-4">
 									<table>
 										<tr>
 											<td>
-												<p>Segmento: {{value.category.name}}</p>
+												<p>Categoria: {{value.category.name}}</p>
 											</td>
 										</tr>
 										<tr>
@@ -148,7 +148,7 @@
 										</tr>
 										<tr>
 											<td>
-												Transimision:
+												Transimisión:
 												<p ng-if="value.transmission == 'M'">Manual</p>
 												<p ng-if="value.transmission == 'A'">Automática</p>
 												
@@ -159,7 +159,8 @@
 								</div>
 							</div>
 							<div class="row" style="padding: 15px;">
-								{{value.description}}</div>
+								<p style="margin-left: 10px;"><b>Descripción:</b> {{value.description}}</p>
+							</div>
 						</div>
 					</div>
 				</section>

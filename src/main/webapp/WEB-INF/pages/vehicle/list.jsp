@@ -16,7 +16,7 @@
         <div class="row">
         	<div class="col-md-12">
             	
-            	<section class="tile" ng-show="vm.roladmin">
+            	<section class="tile">
             		
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">

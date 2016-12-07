@@ -145,8 +145,8 @@
                         mm='0'+mm
                     } 
                     var today = dd+'/'+mm+'/'+yyyy;
-                    defaultSearch.officeOriginId = '1';
-            		defaultSearch.officeEndId = '1';
+                    defaultSearch.officeOriginId = '3';
+            		defaultSearch.officeEndId = '3';
             		defaultSearch.beginDate = today;
             		defaultSearch.endDate = today;
             		defaultSearch.airConditioner = true;
