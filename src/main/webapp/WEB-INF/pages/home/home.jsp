@@ -59,9 +59,9 @@
 						<div class="row" style="padding: 0 10px 0 10px;">
 
 							<div class="form-group customDatePickers col-sm-6">
-								<div class="input-group date" id="beginDate" data-date="" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
+								<div class="input-group date" id="beginDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
 									<label for="beginDate" class="control-label">Fecha de recogida</label>
-									<input class="form-control" size="16" type="text" name="beginDate" placeholder="DD-MM-YYYY" ng-model="vm.search.beginDate" ng-change="checkEndDate()" readonly required>
+									<input class="form-control" size="16" type="text" name="beginDate" placeholder="DD/MM/YYYY" ng-model="vm.search.beginDate" ng-change="checkEndDate()" readonly required>
 									<span class="input-group-addon customAddonSize">
 									<span class="glyphicon glyphicon-calendar"></span></span>
 								</div>
@@ -79,9 +79,9 @@
 						<div class="row" style="padding: 0 10px 0 10px;">
 
 							<div class="form-group customDatePickers col-sm-6">
-								<div class="input-group date" id="endDate" data-date="" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
+								<div class="input-group date" id="endDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
 									<label for="endDate" class="control-label">Fecha de entrega</label>
-									<input class="form-control" size="16" type="text" name="endDate" placeholder="DD-MM-YYYY" ng-model="vm.search.endDate" ng-change="checkEndDate()" readonly required>
+									<input class="form-control" size="16" type="text" name="endDate" placeholder="DD/MM/YYYY" ng-model="vm.search.endDate" ng-change="checkEndDate()" readonly required>
 									<span class="input-group-addon customAddonSize">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -166,7 +166,7 @@
 
 		</div>
 
-		<a id="chatBtn" href ng-click="initChat()" ng-disabled="chat" class="btn  btn-primary" style="position: fixed; bottom: 0; right: 0; z-index: 100; margin-right: 10px;">
+		<a id="chatBtn" href ng-click="initChat()" ng-disabled="chat" ng-if="!vm.roladmin" class="btn  btn-primary" style="position: fixed; bottom: 0; right: 0; z-index: 100; margin-right: 10px;">
 			<p ng-if="!chat">Iniciar chat</p>
 			<p ng-if="chat">Solicitud iniciada..</p>
 		</a>
