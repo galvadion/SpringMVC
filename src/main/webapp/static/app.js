@@ -202,6 +202,13 @@
                 controllerAs: 'vm'
             })
             
+            .when('/promotion/create', {
+                controller: 'PromotionController',
+                templateUrl: 'promotion/create',
+                title: 'Rent-UY - Promociones',
+                controllerAs: 'vm'
+            })
+            
             .when('/rent', {
                 controller: 'RentController',
                 templateUrl: 'rent',

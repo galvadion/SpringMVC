@@ -2,6 +2,8 @@ package com.controllers;
 
 import java.io.Serializable;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,9 @@ public class LoginController {
 
 	@Autowired
 	UserServices userService;
+	
+	@Autowired
+	 private HttpSession httpSession;
 	
 	@RequestMapping(value="/login",method =RequestMethod.GET)
 	public ModelAndView getPage(){
@@ -65,11 +70,24 @@ public class LoginController {
 			}else{
 				response.setRol("Employee");
 			}
+			httpSession.setAttribute("user", user.getId());
 			
 			return new ResponseEntity<LogInResonseBody>(response,HttpStatus.OK);
 		}else{
 			return new ResponseEntity<LogInResonseBody>(response,HttpStatus.CONFLICT);
 		}
+	}
+	
+	@RequestMapping(value="/validate",method =RequestMethod.GET)
+	public  boolean validateSession(){
+		try{
+			httpSession.getAttribute("user");
+			return true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+		
 	}
 	
 	public static class LogInRequestBody implements Serializable{

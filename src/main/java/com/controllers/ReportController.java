@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import com.configuration.LocalDateDeserializer;
 import com.configuration.LocalDateSerializer;
 import com.entities.Booked;
 import com.entities.BranchOffice;
+import com.entities.Employee;
 import com.entities.Rent;
 import com.entities.Vehicle;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -28,6 +30,7 @@ import com.services.BranchOfficeService;
 import com.services.ModelService;
 import com.services.RentService;
 import com.services.StatusBetweenDatesService;
+import com.services.UserServices;
 import com.services.VehicleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +57,13 @@ public class ReportController {
 	RentService rentService;
 	
 	@Autowired
+	UserServices userService;
+	
+	@Autowired
 	BookedService bookedService;
+	
+	@Autowired
+	 private HttpSession httpSession;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView getListPage() {
@@ -68,8 +77,8 @@ public class ReportController {
 		/*DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");
 		LocalDate day = LocalDate.parse(date, dtf);*/
 		System.out.println(date);
-		BranchOffice branch=new BranchOffice();
-		branch=branchService.get(3);
+		Employee employee=(Employee) userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
+		BranchOffice branch=(employee.getBranchOffice());
 		return ResponseEntity.ok(bookedService.getBookedByDayAndOffice(branch, date));
 	}
 	
@@ -78,8 +87,9 @@ public class ReportController {
 	/*	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");
 		LocalDate day = LocalDate.parse(date, dtf);*/
 		//Falta ver de donde sacar la oficina
-		BranchOffice branch=new BranchOffice();
-		branch=branchService.get(3);
+		Employee employee=(Employee) userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
+		BranchOffice branch=(employee.getBranchOffice());
+		System.out.println(branch);
 		return ResponseEntity.ok(bookedService.getReturnedToday(branch, date));
 	}
 

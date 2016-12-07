@@ -20,6 +20,8 @@ public class BookedController {
 	
 	@Autowired
 	BookedService bookedService;
+	
+	
 
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
