@@ -18306,3 +18306,11 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 #myNavbar ul li :hover {
 	background-color: #DDDDDD;
 }
+
+.custom-active :hover {
+	background-color: #3B5998 !important;
+}
+
+.dropdown-menu {
+	background-color: #FFFFFF !important;
+}

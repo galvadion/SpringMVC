@@ -53,9 +53,9 @@
 			NProgress.start();
 			vm.location = $location.path().split('/',3);
 			if(vm.location[2] == "confirm"){
-
 				getBookedById($routeParams.id);
 			}
+			NProgress.done();
 		}
 
 		function getAllRents(){
