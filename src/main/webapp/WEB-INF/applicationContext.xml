@@ -1,4 +1,5 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	 xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
@@ -10,6 +11,8 @@
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
 	http://www.springframework.org/schema/mvc 
 	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	http://www.springframework.org/schema/data/mongo
+    http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
 	http://www.springframework.org/schema/task
        http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 	<!-- Enable Autowire -->
@@ -82,4 +85,13 @@
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<!-- Activate Spring Data MongoDB repository support -->
+  	<mongo:repositories base-package="com.repository" />
+  	
+  	<!-- MongoDB host -->
+	<mongo:mongo host="${mongo.host.name}" port="${mongo.host.port}"/>
+
+	<!-- Template for performing MongoDB operations -->
+  	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate" 
+  			c:mongo-ref="mongo" c:databaseName="${mongo.db.name}"/>
 </beans>

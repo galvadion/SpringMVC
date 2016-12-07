@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,7 @@ public class FileUploadController {
 				Model model=modelService.get(Integer.parseInt(id));
 				List<Image> imagesList=model.getImages();
 				Image image=new Image();
-				image.setFileLocation(id + "-" +index +  " - " + LocalDate.now());
+				image.setFileLocation(id + "-" +index +  " - " + LocalDate.now() + LocalTime.now());
 				image.setModel(model);
 				imagesList.add(image);
 				imageService.saveOrUpdate(image);
