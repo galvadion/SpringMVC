@@ -57,7 +57,7 @@
 
 		$scope.searchModels = function() {
 			NProgress.start();
-			$location.path("/search/origin=" + vm.search.officeOriginId + "&destination=" + vm.search.officeEndId + "&from=" + vm.search.beginDate + "&to=" + vm.search.endDate);
+			$location.path("/search/origin=" + vm.search.officeOriginId + "&destination=" + vm.search.officeEndId + "&from=" + vm.search.beginDate.replace(/[/]/g , "-") + "&to=" + vm.search.endDate.replace(/[/]/g , "-"));
 		};
 
 		$scope.onClick = function(marker, eventName, model) {

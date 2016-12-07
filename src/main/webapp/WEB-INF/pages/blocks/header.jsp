@@ -36,7 +36,7 @@
 							      <li ng-show="vm.roladmin" ng-class=getClass('promotion') class=""><a href="#/promotion"><span class="nav-custom-font">Promociones</span></a></li>
 							      <li ng-show="vm.roladmin" ng-class=getClass('booked') class=""><a href="#/booked"><span class="nav-custom-font">Reservas</span></a></li>
 							      <li ng-show="vm.roladmin" ng-class=getClass('rent') class=""><a href="#/rent"><span class="nav-custom-font">Alquileres</span></a></li>
-							      <li ng-show="!vm.roladmin || !vm.rolemployee" ng-class=getClass('about') class=""><a href="#/about"><span class="nav-custom-font">Nosotros</span></a></li>
+							      <li ng-show="!vm.roladmin && !vm.rolemployee" ng-class=getClass('about') class=""><a href="#/about"><span class="nav-custom-font">Nosotros</span></a></li>
 							    </ul>
 							    <ul class="nav navbar-nav navbar-right nav-navigation" ng-if="globals.currentUser">
 							        <li ng-class=getClass('profile') class="dropdown">

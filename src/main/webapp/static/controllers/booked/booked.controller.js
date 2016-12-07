@@ -126,6 +126,21 @@
             	if($routeParams.origin && $routeParams.destination && $routeParams.from && $routeParams.to){
             		$scope.searchModels();
             	}
+            	else{
+            		/*var defaultSearch = {};
+            		defaultSearch.origin = '';
+            		defaultSearch.destination = '';
+            		defaultSearch.from = '';
+            		defaultSearch.to = '';
+            		ModelService.SearchModels(defaultSearch).then(function (response) {
+                		if(response){
+                			if(response.data.length > 0){
+                				vm.searchResult = response.data;
+                				$scope.scrollTo( "#searchResult");
+                			}
+                		}
+                	});*/
+            	}
             }
             else if(vm.location[2] == "edit"){
         		getBookedById($routeParams.id);
