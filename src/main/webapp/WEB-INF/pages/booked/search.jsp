@@ -18,7 +18,7 @@
             	<section class="tile">
 					<br/>
 					<br/>
-					<form name='form' class="" role="form" ng-submit="searchModels()">
+					<form name='form' class="" role="form" ng-submit="searchModels(vm.search)">
 
 						<div class="row" style="padding: 0 10px 0 10px;">
 
@@ -110,8 +110,7 @@
                     </div>
                     
                     <br/>
-                    
-                    <!-- <div class="row" ng-repeat="(key, value) in vm.searchResult"> -->
+                    	<h4 class="text-center" ng-if="vm.noResult">No se encontraron vehículos</h4>
 	                    <div ng-repeat="(key, value) in vm.searchResult"  class="row" style="padding: 15px;">
 	                    	<div class="col-sm-3" ng-repeat="(keyI, valueI) in value.images">
 							<img src="images/{{valueI.fileLocation}}" style="height:150px; max-width:240px;">
@@ -157,7 +156,6 @@
 	                    </div>
 	                    
 	                    <hr class="line-dashed line-full"/>
-	                    <!-- </div> -->
 
 				</section>
             </div>

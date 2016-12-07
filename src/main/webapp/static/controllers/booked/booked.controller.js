@@ -18,6 +18,7 @@
         vm.search = {};
         vm.searchResult = [];
         vm.allOffices = [];
+        vm.noResult = true;
         
         var localDate = new Date();
 		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
@@ -80,13 +81,18 @@
             DTColumnDefBuilder.newColumnDef(3).notSortable(),
         ];
         
-        $scope.searchModels = function() {
+        $scope.searchModels = function(searchObject) {
         	NProgress.start();
-        	ModelService.SearchModels(vm.search).then(function (response) {
+        	ModelService.SearchModels(searchObject).then(function (response) {
         		if(response){
         			if(response.data.length > 0){
         				vm.searchResult = response.data;
+        				vm.noResult = false;
         				$scope.scrollTo( "#searchResult");
+        			}
+        			else{
+        				vm.searchResult = [];
+        				vm.noResult = true;
         			}
         		}
         		NProgress.done();
@@ -124,22 +130,30 @@
             		vm.search.luggage = 0;
             	}
             	if($routeParams.origin && $routeParams.destination && $routeParams.from && $routeParams.to){
-            		$scope.searchModels();
+            		$scope.searchModels(vm.search);
             	}
             	else{
-            		/*var defaultSearch = {};
-            		defaultSearch.origin = '';
-            		defaultSearch.destination = '';
-            		defaultSearch.from = '';
-            		defaultSearch.to = '';
-            		ModelService.SearchModels(defaultSearch).then(function (response) {
-                		if(response){
-                			if(response.data.length > 0){
-                				vm.searchResult = response.data;
-                				$scope.scrollTo( "#searchResult");
-                			}
-                		}
-                	});*/
+            		var defaultSearch = {};
+            		var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth()+1; //January is 0!
+                    var yyyy = today.getFullYear();
+                    if(dd<10){
+                        dd='0'+dd
+                    } 
+                    if(mm<10){
+                        mm='0'+mm
+                    } 
+                    var today = dd+'/'+mm+'/'+yyyy;
+                    defaultSearch.officeOriginId = '1';
+            		defaultSearch.officeEndId = '1';
+            		defaultSearch.beginDate = today;
+            		defaultSearch.endDate = today;
+            		defaultSearch.airConditioner = true;
+            		defaultSearch.passangers = 0;
+            		defaultSearch.luggage = 0;
+            		$scope.searchModels(defaultSearch);
+            		
             	}
             }
             else if(vm.location[2] == "edit"){
