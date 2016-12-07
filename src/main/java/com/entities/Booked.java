@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import com.configuration.LocalDateDeserializer;
 import com.configuration.LocalDateSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -44,8 +46,7 @@ public class Booked implements Serializable{
 	@Column(name= "last_booked_date")
 	private LocalDate lastbookedDate;
 	
-	@ManyToOne
-	@JoinColumn(name="promotion_code")	
+	@DBRef
 	private Promotion promotionCode;
 	
 	private boolean canceled=false;
