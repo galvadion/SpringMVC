@@ -12,7 +12,7 @@
 			<ol class="breadcrumb">
 				<li><a href="#/home">Dashboard</a></li>
 				<li><a href="#/rent">Alquileres</a></li>
-				<li class="breadcrumb-active">Confirmar alquiler</li>
+				<li class="breadcrumb-active">Validar devolucion</li>
 			</ol>
 		</div>
 
