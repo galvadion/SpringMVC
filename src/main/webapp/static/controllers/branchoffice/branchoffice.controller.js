@@ -49,7 +49,7 @@
         };
         
         $scope.options = {
-        		scrollwheel: false
+        		scrollwheel: true
 	    };
         
        /* google.maps.event.addListener($scope.map, 'click', function( event ){
