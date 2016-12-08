@@ -4,7 +4,7 @@
 
     /***App Module Definition***/
     angular
-        .module('app', ['ngFileUpload','ngRoute', 'ngCookies','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps'])
+        .module('app', ['ngFileUpload','ngRoute', 'ngCookies','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps','isteven-multi-select'])
         .config(config)
         .run(run)
         .run(['$location', '$rootScope', function($location, $rootScope) {

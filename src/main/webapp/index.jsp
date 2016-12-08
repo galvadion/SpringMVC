@@ -25,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href="static/js/dista/plugins/bootstrap/datatables.bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="static/js/dista/css/angular-datatables.css">
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="static/css/isteven-multi-select.css">
         <link rel="stylesheet" type="text/css" href="static/js/chat/comet.chat.css">
 
     </head>
@@ -55,6 +56,7 @@
         <script type="text/javascript" src="static/js/ngDialog.js"></script>
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
 		<script type="text/javascript" src="static/js/moment.min.js"> </script>
+		<script type="text/javascript" src="static/js/isteven-multi-select.js"> </script>
 		
 		<!--Maps-->
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCToOBKLzgMq3u02g7OO_v-txL_LnfEO_g&callback=initMap" type="text/javascript"></script>

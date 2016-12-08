@@ -58,7 +58,7 @@
 										
 										<td class="text-center plus"></td>
 										<td class="text-center plus"><a
-											ng-href="#/pro/edit/{{value.id}}" title="Edit"> <i
+											ng-href="#/promotion/edit/{{value.id}}" title="Edit"> <i
 												class="fa fa-pencil"></i><br> <small>Editar</small>
 										</a></td>
 										<td class="text-center delete"><a doing-action="" href
