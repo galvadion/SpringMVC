@@ -5,9 +5,9 @@
         .module('app')
         .controller('PromotionController', PromotionController);
 
-    PromotionController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','PromotionService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
+    PromotionController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','PromotionService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','ModelService','BranchofficeService'];
     
-    function PromotionController($location, UserService, $rootScope, $scope, $timeout, SessionService, PromotionService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+    function PromotionController($location, UserService, $rootScope, $scope, $timeout, SessionService, PromotionService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,ModelService,BranchofficeService) {
 
         var vm = this;
         vm.roladmin = $rootScope.roladmin;
@@ -15,6 +15,8 @@
         vm.rolclient = $rootScope.rolclient;
         vm.promotion = {};
         vm.allPromotions = [];
+        vm.allModels= [];
+        vm.allOffices = [];
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -39,6 +41,20 @@
                 "previous":   "Anterior"
             },
         });
+        
+		var localDate = new Date();
+		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
+				+ '-' + localDate.getDate();
+		$('.date').datetimepicker({
+			language : 'es',
+			weekStart : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0,
+			startDate : localDate
+		});
 
         vm.DTColumnDefs = [
             DTColumnDefBuilder.newColumnDef(1).notSortable(),
@@ -51,6 +67,8 @@
         function initController() {
             NProgress.start();
             getAllPromotions();
+            getAllModels();
+            getAllOffices();
         }
         
         function getAllPromotions(){
@@ -60,6 +78,31 @@
         		}
         		else{
         			vm.allPromotions = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        
+        function getAllOffices() {
+			BranchofficeService.GetAllBranchoffices().then(function(response) {
+				if (response.success) {
+					if (response.data.length > 0) {
+						vm.allOffices = response.data;
+					}
+				} else {
+					vm.allOffices = [];
+				}
+				NProgress.done();
+			});
+		}
+        
+        function getAllModels(){
+        	ModelService.GetAllModels().then(function (response) {
+        		if(response.success){
+        			vm.allModels = response.data;
+        		}
+        		else{
+        			vm.allModels = [];
         		}
         		NProgress.done();
         	});
@@ -123,7 +166,8 @@
             }, 500);
         }
         $scope.generateText = function (){
-        	document.getElementById("texto").value=randomString(8,'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        	console.log("its generating");
+        	vm.promotionCode=randomString(8,'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
         }
         
         function randomString(length, chars) {

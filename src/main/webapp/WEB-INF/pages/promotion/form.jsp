@@ -35,131 +35,90 @@
 						<form form-on-change="checkFields()" name='form' class=""
 							role="form" ng-submit="savePromotion()">
 							<div class="row">
-								<div class="form-group col-sm-6" class="form-group"
-									ng-class="{ 'has-error': form.licensePlate.$dirty && form.licensePlate.$error.required }">
-									<label for="licensePlate" class="control-label">*
-										Matricula</label> <input type="text"
-										ng-model="vm.vehicle.licensePlate" name="licensePlate"
-										id="licensePlate" class="form-control" placeholder="XXX- ####"
-										required> <span
-										ng-show="form.licensePlate.$dirty && form.licensePlate.$error.required"
-										class="help-block">Es necesario ingresar la matricula</span>
+								<div class="form-group customDatePickers col-sm-6">
+									<div class="input-group date" id="beginDate" data-date=""
+										data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+										data-link-format="dd/mm/yyyy">
+										<label for="beginDate" class="control-label">Fecha de
+											inicio</label> <input class="form-control" size="16" type="text"
+											name="beginDate" placeholder="DD/MM/YYYY"
+											ng-model="vm.promotion.beginPromotionDate" readonly required> <span
+											class="input-group-addon customAddonSize"> <span
+											class="glyphicon glyphicon-calendar"></span></span>
+									</div>
 								</div>
-								<div class="form-group col-sm-6" class="form-group"
-									ng-class="{ 'has-error': form.branchOffice.$dirty && form.branchOffice.$error.required }">
-									<label for="branchOffice" class="control-label">Sucursal
-										donde estara el vehículo</label> <select
-										ng-model="vm.vehicle.branchOffice.id" name="branchOffice"
-										id="branchOffice"
-										ng-options="item.id as item.name for item in vm.allOffices"
-										class="form-control" required>
-										<option value="">Seleccione sucursal</option>
-
-									</select> <span
-										ng-show="form.branchOffice.$dirty && form.branchOffice.$error.required"
-										class="help-block">Sucursal es requerido</span>
+								<div class="form-group customDatePickers col-sm-6">
+									<div class="input-group date" id="endDate" data-date=""
+										data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+										data-link-format="dd/mm/yyyy">
+										<label for="beginDate" class="control-label">Fecha de
+											finalizacion</label> <input class="form-control" size="16"
+											type="text" name="beginDate" placeholder="DD/MM/YYYY"
+											ng-model="vm.promotion.lastPromotionDate" readonly required> <span
+											class="input-group-addon customAddonSize"> <span
+											class="glyphicon glyphicon-calendar"></span></span>
+									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-6" class="form-group"
-									ng-class="{ 'has-error': form.brand.$dirty && form.brand.$error.required }">
-									<label for="brand" class="control-label">* Marca</label> <select
-										ng-model="vm.vehicle.model.brand.id" name="brand" id="brand"
-										ng-change="getModelsByBrand()"
-										ng-options="item.id as item.name for item in vm.allBrands"
-										class="form-control" required>
-										<option value="">Seleccione una marca</option>
-									</select> <span
-										ng-show="form.brand.$dirty && form.brand.$error.required"
-										class="help-block">Marca es requerida</span>
+									ng-class="{ 'has-error': form.promotionCode.$dirty && form.promotionCode.$error.required }">
+									<label for="promotionCode" class="control-label">*
+										Codigo de promocion</label> <input type="text"
+										ng-model="vm.promotion.promotionCode" name="promotionCode"
+										id="promotionCode" class="form-control"
+										placeholder="Codigo de promocion" required> <span
+										ng-show="form.promotionCode.$dirty && form.promotionCode.$error.required"
+										class="help-block">Es necesario ingresar un codigo de
+										promocion</span>
+									<div class="btn btn-blue" ng-click="generateText()">Generar</div>
 								</div>
 								<div class="form-group col-sm-6" class="form-group"
+									ng-class="{ 'has-error': form.percentage.$dirty && form.percentage.$error.required }">
+									<label for="percentage" class="control-label">*
+										Porcentaje</label> <input type="number" ng-model="vm.promotion.percentage"
+										name="percentage" id="percentage" class="form-control"
+										placeholder="percentage" required> <span
+										ng-show="form.percentage.$dirty && form.percentage.$error.required"
+										class="help-block">Es necesario ingresar un valor para
+										el percentage de descuento</span>
+								</div>
+							</div>
+							<div class="row">
+							<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.model.$dirty && form.model.$error.required }">
-									<label for="model" class="control-label">* Modelo</label> <select
-										ng-model="vm.vehicle.model.id"
-										ng-options="item.id as item.name for item in vm.modelsByBrand"
-										name="model" id="model" class="form-control" required>
-										<option value="">Seleccione un modelo</option>
-									</select> <span
+									<label for="model" class="control-label">Modelos con descuentos</label> <isteven-multi-select    
+    input-model="vm.allModels"    
+    output-model="vm.promotion.models"
+    button-label="name year"
+    item-label="brand.name name year"
+    tick-property="unavailable"
+>
+</isteven-multi-select> <span
 										ng-show="form.model.$dirty && form.model.$error.required"
 										class="help-block">Modelo es requerida</span>
 								</div>
-							</div>
-							<div class="row">
-
-								<div class="form-group customDatePickers col-sm-6">
-									<div class="input-group date" id="licensePlateExpirationDate"
-										data-date="" data-date-format="dd-mm-yyyy"
-										data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
-										<label for="licensePlateExpirationDate" class="control-label">Vencimiento
-											de patente</label> <input class="form-control" size="16" type="text"
-											name="licensePlateExpirationDate" placeholder="DD-MM-YYYY"
-											ng-model="vm.vehicle.licensePlateExpirationDate"
-											ng-change="checklicensePlateExpirationDate()" readonly
-											required> <span
-											class="input-group-addon customAddonSize"> <span
-											class="glyphicon glyphicon-calendar"></span>
-										</span>
-									</div>
-									<span ng-show="licensePlateExpirationDateError"
-										class="help-block" style="color: red">Fecha de entrega
-										debe ser posterior a la de recogida</span>
+							<div class="form-group col-sm-6" class="form-group"
+									ng-class="{ 'has-error': form.branchOffice.$dirty && form.branchOffice.$error.required }">
+									<label for="model" class="control-label">Sucursales con descuentos</label><isteven-multi-select    
+    input-model="vm.allOffices"    
+    output-model="vm.promotion.offices"
+    button-label="name"
+    item-label="name"
+    tick-property="closed"
+>
+</isteven-multi-select> <span
+										ng-show="form.branchOffice.$dirty && form.branchOffice.$error.required"
+										class="help-block">Sucursal es requerido</span>
 								</div>
-							</div>
-
-							<div class="row">
-								<div class="form-group col-sm-6" class="form-group"
-									ng-class="{ 'has-error': form.motorNr.$dirty && form.motorNr.$error.required }">
-									<label for="motorNr" class="control-label">* Número de
-										motor</label> <input type="text" ng-model="vm.vehicle.motorNr"
-										name="motorNr" id="motorNr" class="form-control"
-										placeholder="Número de motor" required> <span
-										ng-show="form.motorNr.$dirty && form.motorNr.$error.required"
-										class="help-block">Es necesario ingresar el número de
-										motor</span>
-								</div>
-								<div class="form-group col-sm-6" class="form-group"
-									ng-class="{ 'has-error': form.chasisNr.$dirty && form.chasisNr.$error.required }">
-									<label for="chasisNr" class="control-label">* Número de
-										chasis</label> <input type="text" ng-model="vm.vehicle.chasisNr"
-										name="chasisNr" id="chasisNr" class="form-control"
-										placeholder="Número de chasis" required> <span
-										ng-show="form.chasisNr.$dirty && form.chasisNr.$error.required"
-										class="help-block">Es necesario ingresar el número de
-										chasis</span>
-								</div>
-							</div>
 							
-
-							<div class="row">
-								<div class="form-group col-sm-6" class="form-group"
-									ng-class="{ 'has-error': form.kilometers.$dirty && form.kilometers.$error.required }">
-									<label for="kilometers" class="control-label">*
-										Kilómetros ya recorridos</label> <input type="number"
-										ng-model="vm.vehicle.kilometers" name="kilometers"
-										id="kilometers" class="form-control" min="1"
-										placeholder="Kilómetros" required> <span
-										ng-show="form.kilometers.$dirty && form.kilometers.$error.required"
-										class="help-block">Es necesario ingresar los kilómetros
-										recorridos</span>
-								</div>
-								<div class="form-group col-sm-6" class="form-group"
-									ng-class="{ 'has-error': form.color.$dirty && form.color.$error.required }">
-									<label for="color" class="control-label">* Color</label> <input
-										type="text" ng-model="vm.vehicle.color" name="color"
-										id="color" class="form-control" placeholder="color" required>
-									<span ng-show="form.color.$dirty && form.color.$error.required"
-										class="help-block">Es necesario ingresar el color</span>
-								</div>
-							</div>
 
 
 							<div class="row">
 								<div class="form-group col-sm-12" class="form-group">
-									<label for="observations" class="control-label">Observaciones</label>
-									<textarea type="text" ng-model="vm.vehicle.observations"
-										name="observations" id="observations" class="form-control"
-										placeholder="Observaciones" />
+									<label for="descriptionText" class="control-label">Descripcion</label>
+									<textarea type="text" ng-model="vm.descriptionText"
+										name="descriptionText" id="descriptionText" class="form-control"/>
 								</div>
 							</div>
 
