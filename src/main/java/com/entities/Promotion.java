@@ -54,13 +54,13 @@ public class Promotion implements Serializable{
 		return promotionCode;
 	}
 	
-	@DBRef
+	
 	private List<Model> models;
 	
-	@DBRef
+	
 	private List<BranchOffice> offices;
 	
-	@DBRef
+	
 	private List<Client> clients;
 
 	public void setPromotionCode(String promotionCode) {

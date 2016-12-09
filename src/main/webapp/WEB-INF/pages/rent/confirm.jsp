@@ -82,7 +82,10 @@
 							</table>
 							
 						</div>
-					<a href="#/rent/confirmRent/{{value.id}}" class="btn  btn-orange"><strong>Confirmar</strong></a>
+					<a ng-click="confirmRent()" class="btn  btn-orange"><strong>Confirmar</strong></a>
+					<p>Agregar conductor: <button type="button" onclick="addDriver()" class="btn btn-info"><span class="glyphicon glyphicon-plus" id="conductor" ></span></button></p>
+					 <div id="drivers">
+					 </div>
 					</div>
 
 				</section>

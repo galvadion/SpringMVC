@@ -22,6 +22,8 @@ public class Client extends User implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private String document;
+	
 	@JsonDeserialize(using = LocalDateDeserializer.class)  
 	@JsonSerialize(using = LocalDateSerializer.class)  
 	@Column(name= "birth_date")
@@ -71,6 +73,12 @@ public class Client extends User implements Serializable{
 	}
 	public void setAllowNotification(boolean allowNotification) {
 		this.allowNotification = allowNotification;
+	}
+	public String getDocument() {
+		return document;
+	}
+	public void setDocument(String document) {
+		this.document = document;
 	}
 	
 	

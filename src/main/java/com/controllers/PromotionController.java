@@ -1,5 +1,6 @@
 package com.controllers;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -69,6 +70,17 @@ public class PromotionController {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body((Object) "There has been an error");
 			}
 		}
+	}
+	
+	@RequestMapping(value = "/getall", method = RequestMethod.GET)
+	public ResponseEntity<List<Promotion>> getAll() {
+		List<Promotion> list = promotionService.getAll();
+		if (list != null) {
+			return ResponseEntity.ok(list);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		
 	}
 
 }

@@ -54,7 +54,7 @@
 										<td>{{value.promotionCode}}</td>
 										<td>{{value.beginPromotionDate}}</td>
 										<td>{{value.lastPromotionDate}}</td>
-										<td>{{value.porcentage}}</td>
+										<td>{{value.percentage}}</td>
 										
 										<td class="text-center plus"></td>
 										<td class="text-center plus"><a

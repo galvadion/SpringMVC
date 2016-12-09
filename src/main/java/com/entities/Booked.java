@@ -46,8 +46,8 @@ public class Booked implements Serializable{
 	@Column(name= "last_booked_date")
 	private LocalDate lastbookedDate;
 	
-	@DBRef
-	private Promotion promotionCode;
+	
+	private String promotionCode_id;
 	
 	private boolean canceled=false;
 	
@@ -69,11 +69,8 @@ public class Booked implements Serializable{
 	@Column(name="with_full_tank")
 	private boolean withFullTank;
 	
-    @JsonIgnore
-	@OneToOne
-	 @JoinColumn(
-		        name="rent_id", updatable=true)
-	private Rent rent;
+	
+	private String rent;
 	
 	@ManyToOne
 	@JoinColumn(name="vehicle_id", nullable=false)
@@ -154,11 +151,11 @@ public class Booked implements Serializable{
 		this.transactionDate = transactionDate;
 	}
 
-	public Rent getRent() {
+	public String getRent() {
 		return rent;
 	}
 
-	public void setRent(Rent rent) {
+	public void setRent(String rent) {
 		this.rent = rent;
 	}
 
@@ -215,20 +212,20 @@ public class Booked implements Serializable{
 		this.canceled = canceled;
 	}
 
-	public Promotion getPromotionCode() {
-		return promotionCode;
-	}
-
-	public void setPromotionCode(Promotion promotionCode) {
-		this.promotionCode = promotionCode;
-	}
-
 	public List<Extras> getExtrasList() {
 		return extrasList;
 	}
 
 	public void setExtrasList(List<Extras> extrasList) {
 		this.extrasList = extrasList;
+	}
+
+	public String getPromotionCode_id() {
+		return promotionCode_id;
+	}
+
+	public void setPromotionCode_id(String promotionCode_id) {
+		this.promotionCode_id = promotionCode_id;
 	}
 	
 	

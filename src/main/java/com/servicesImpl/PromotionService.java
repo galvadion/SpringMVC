@@ -2,6 +2,7 @@ package com.servicesImpl;
 
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -55,6 +56,11 @@ public class PromotionService{
 		}else{
 			return false;
 		}
+	}
+
+	public List<Promotion> getAll() {
+		// TODO Auto-generated method stub
+		return promotionRepository.findAll();
 	}
 	
 	

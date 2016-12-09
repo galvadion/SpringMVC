@@ -32,6 +32,7 @@ import com.services.RentService;
 import com.services.StatusBetweenDatesService;
 import com.services.UserServices;
 import com.services.VehicleService;
+import com.servicesImpl.RentServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -52,12 +53,12 @@ public class ReportController {
 
 	@Autowired
 	StatusBetweenDatesService statusService;
-
-	@Autowired
-	RentService rentService;
 	
 	@Autowired
 	UserServices userService;
+	
+	@Autowired
+	RentServiceImpl rentServices;
 	
 	@Autowired
 	BookedService bookedService;
@@ -86,7 +87,6 @@ public class ReportController {
 	public ResponseEntity<List<Booked>> getreturnedToday(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 	/*	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");
 		LocalDate day = LocalDate.parse(date, dtf);*/
-		//Falta ver de donde sacar la oficina
 		Employee employee=(Employee) userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
 		BranchOffice branch=(employee.getBranchOffice());
 		System.out.println(branch);
@@ -96,11 +96,11 @@ public class ReportController {
 	@RequestMapping(value = "/getBookedBetweenDates", method = RequestMethod.POST)
 	public ResponseEntity<List<PickedModel>> bookedInDates(ReportSearch rs) {
 		List<PickedModel> result = new ArrayList<PickedModel>();
-		for (Rent rent : rentService.getBetweenDates(rs.getInitialDate(), rs.getFinalDate())) {
+		for (Rent rent : rentServices.getBetweenDates(rs.getInitialDate(), rs.getFinalDate())) {
 			PickedModel pm = new PickedModel();
-			pm.setBoe(rent.getBooked().getEndOffice());
+		/*	pm.setBoe(rent.getBooked().getEndOffice());
 			pm.setBoo(rent.getBooked().getOriginOffice());
-			pm.setVehicle(rent.getBooked().getVehicle());
+			pm.setVehicle(rent.getBooked().getVehicle());*/
 		}
 		return ResponseEntity.ok(result);
 	}

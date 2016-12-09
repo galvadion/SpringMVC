@@ -12,12 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.configuration.LocalDateDeserializer;
 import com.configuration.LocalDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-@Entity
+@Document
 public class Rent implements Serializable{
 
 	/**
@@ -28,7 +30,7 @@ public class Rent implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private Integer id;
+	private String id;
 	
 	@Column(name = "transaction_number")
 	private String transactionNr;
@@ -48,27 +50,21 @@ public class Rent implements Serializable{
 	@Column(name= "delivery_date")
 	private LocalDate deliveryDate;
 	
-	@Column(name="initial_amount")
 	private Float initialAmount;
 	
-	@Column(name ="final_amount")
 	private Float finalAmount;
 	
-	@OneToMany(mappedBy="rent")
 	private List<RentLine> rentLine;
 	
-	
-	@Column(name="status_at_return")
 	private String statusAtReturn;
 	
-    @OneToOne(mappedBy="rent")
-    private Booked booked;
+    private int booked_id;
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -142,13 +138,14 @@ public class Rent implements Serializable{
 		this.statusAtReturn = statusAtReturn;
 	}
 
-	public Booked getBooked() {
-		return booked;
+	public int getBooked_id() {
+		return booked_id;
 	}
 
-	public void setBooked(Booked booked) {
-		this.booked = booked;
+	public void setBooked_id(int booked_id) {
+		this.booked_id = booked_id;
 	}
+
 
 	
 	

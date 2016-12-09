@@ -167,7 +167,7 @@
         }
         $scope.generateText = function (){
         	console.log("its generating");
-        	vm.promotionCode=randomString(8,'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        	vm.promotion.promotionCode=randomString(8,'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
         }
         
         function randomString(length, chars) {
