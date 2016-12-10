@@ -58,6 +58,8 @@ public class Rent implements Serializable{
 	
 	private String statusAtReturn;
 	
+	private List<Drivers> driversList;
+	
     private int booked_id;
 
 	public String getId() {
@@ -144,6 +146,22 @@ public class Rent implements Serializable{
 
 	public void setBooked_id(int booked_id) {
 		this.booked_id = booked_id;
+	}
+
+	@Override
+	public String toString() {
+		return "Rent [id=" + id + ", transactionNr=" + transactionNr + ", transactionDate=" + transactionDate
+				+ ", returnDate=" + returnDate + ", deliveryDate=" + deliveryDate + ", initialAmount=" + initialAmount
+				+ ", finalAmount=" + finalAmount + ", rentLine=" + rentLine + ", statusAtReturn=" + statusAtReturn
+				+ ", booked_id=" + booked_id + ", driverList="+driversList+"]";
+	}
+
+	public List<Drivers> getDriversList() {
+		return driversList;
+	}
+
+	public void setDriversList(List<Drivers> driversList) {
+		this.driversList = driversList;
 	}
 
 

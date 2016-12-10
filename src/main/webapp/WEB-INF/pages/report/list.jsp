@@ -69,9 +69,10 @@
 							</div>
 
 							<div class="col-sm-1">
-								<a ng-hide="{{value.rent}} != null" href="#/rent/confirm/{{value.id}}" class="btn  btn-orange"><strong>Gestionar
+								<a ng-if="!value.rent" href="#/rent/confirm/{{value.id}}" class="btn  btn-orange">
+								<strong>Gestionar
 										entrega</strong></a>
-										<a ng-hide="{{value.rent}} == null"><strong>Ya fue entregado</strong></a>
+										<a ng-if="value.rent"><strong>Ya fue entregado</strong></a>
 							</div>
 						</div>
 
@@ -131,7 +132,7 @@
 							</div>
 
 							<div class="col-sm-1">
-								<a href class="btn  btn-orange"><strong>Gestionar
+								<a href="#/rent/return/{{value.id}}" class="btn  btn-orange"><strong>Gestionar
 										devolucion</strong></a>
 							</div>
 						</div>

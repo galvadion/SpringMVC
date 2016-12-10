@@ -25,64 +25,103 @@
 
 					<!-- tile body -->
 					<div class="tile-header dvd dvd-btm row">
+						<div class="row">
+							<div class="col-sm-6">
+								<table>
+									<tr>
+										<td>
+											<p>Fecha de inicio: {{vm.booked.beginbookedDate}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Fecha de devolucion prevista:
+												{{vm.booked.lastbookedDate}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Vehiculo: {{vm.booked.vehicle.licensePlate}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Devuelve en: {{vm.booked.endOffice.name}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Observaciones del vehiculo previas:
+												{{vm.booked.vehicle.observations}}</p>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div class="col-sm-6">
+								<table>
+									<tr>
+										<td>
+											<p>Nombre: {{vm.booked.client.name}}
+												{{vm.booked.client.lastName}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Document: {{vm.booked.client.document}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Telefono: {{vm.booked.client.phone}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Direccion: {{vm.booked.client.address}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Fecha de nacimiento: {{vm.booked.client.birthDate}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Vencimiento de licencia:
+												{{vm.booked.client.licenseExpirationDate}}</p>
+										</td>
+									</tr>
+								</table>
 
-						<div class="col-sm-4">
-							<table>
-								<tr>
-									<td>
-										<p>Fecha de inicio: {{vm.booked.beginbookedDate}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<p>Fecha de devolucion: {{vm.booked.lastbookedDate}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<p>Vehiculo: {{vm.booked.vehicle.licensePlate}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<p>Devuelve en: {{vm.booked.endOffice.name}}</p>
-									</td>
-								</tr>
-							</table>
+							</div>
 						</div>
-						<div class="col-sm-4">
-							<table>
-								<tr>
-									<td>
-										<p>Nombre: {{vm.booked.client.name}}
-											{{vm.booked.client.lastName}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<p>Telefono: {{vm.booked.client.phone}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<p>Direccion: {{vm.booked.client.address}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<p>Fecha de nacimiento: {{vm.booked.client.birthDate}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<p>Vencimiento de licencia:
-											{{vm.booked.client.licenseExpirationDate}}</p>
-									</td>
-								</tr>
-							</table>
+						<div class="row">
+							<div class="form-horizontal" role="form">
+								<div class="form-group">
+									<label class="control-label col-sm-1" for="text"><strong>Detalle:</strong></label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" id='codigo' ng-model="vm.detail.detail"
+											placeholder="Ingrese el detalle">
+									</div>
+									<label class="control-label col-sm-1" for="text"><strong>Precio:</strong></label>
+									<div class="col-sm-2">
+										<input type="number" class="form-control" id='monto' ng-model="vm.detail.amount"
+											placeholder="Precio" value="0">
+									</div>
+									<div class="col-sm-3">
+										<button class="btn btn-success pull-right" id="addFine"
+											onclick="addFine()">Agregar multa de existir</button>
+									</div>
+								</div>
+							</div>
+						</div>
+							<div id="fines">
+							</div>
+							<button class="btn  btn-orange">
+								<strong>Confirmar devolucion</strong>
+							</button>
 							
-						</div>
-					<a href="#/rent/confirmRent/{{value.id}}" class="btn  btn-orange"><strong>Confirmar</strong></a>
+						
 					</div>
 
 				</section>

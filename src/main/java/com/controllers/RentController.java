@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,16 +66,25 @@ public class RentController {
 		
 	}
 	
-	@RequestMapping(value = "/confirmRent", method = RequestMethod.GET)
-	private ResponseEntity<Object> confirmation(@RequestParam("id") String id){
-		Booked booked = bookedServices.get(Integer.parseInt(id));
-		Rent rent=new Rent();
-		rent.setBooked_id(booked.getId());
+	@RequestMapping(value = "/confirmRent", method = RequestMethod.POST)
+	private ResponseEntity<Object> confirmation(@RequestBody Rent rent){
+		Booked booked = bookedServices.get(rent.getBooked_id());
+		System.out.println(rent);
 		rent.setDeliveryDate(LocalDate.now());
-		rentServices.create(rent);
+		rent = rentServices.create(rent);
 		booked.setRent(rent.getId());
 		bookedServices.saveOrUpdate(booked);
 		return ResponseEntity.ok((Object)"It has been confirmed");
+		
+	}
+	
+	@RequestMapping(value = "/getbyid", method = RequestMethod.GET)
+	public ResponseEntity<Rent> getbyid(@RequestParam("id") String id) { 
+		if (rentServices.get(id) != null) {
+			return ResponseEntity.ok(rentServices.get(id));
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
 		
 	}
 
