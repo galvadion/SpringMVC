@@ -102,7 +102,7 @@
 							<div class="row" style="padding: 15px;">
 							<div class="col-sm-4">
 								<div class="col-sm-4">
-									<img ng-if="!value.images[0]" src="static/images/logo-wide-transparent.png" style="height: 150px; max-width: 240px;">
+									<img ng-if="!value.images[0]" src="static/images/noimage.png" style="height: 150px; max-width: 240px;">
 									<img ng-if="value.images[0]" src="images/{{value.images[0].fileLocation}}" style="height: 150px; max-width: 240px;">
 								</div>
 								</div>
@@ -161,6 +161,9 @@
 							<div class="row" style="padding: 15px;">
 								<p style="margin-left: 10px;"><b>Descripción:</b> {{value.description}}</p>
 							</div>
+							
+							<hr class="line-dashed line-full"/>
+							
 						</div>
 					</div>
 				</section>

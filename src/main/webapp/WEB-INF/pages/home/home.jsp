@@ -170,6 +170,7 @@
 			<p ng-if="!chat">Iniciar chat</p>
 			<p ng-if="chat">Solicitud iniciada..</p>
 		</a>
+		<!--div id="members"></div-->
 
 	</div>
 

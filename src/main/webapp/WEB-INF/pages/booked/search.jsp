@@ -112,8 +112,9 @@
                     <br/>
                     	<h4 class="text-center" ng-if="vm.noResult">No se encontraron vehículos</h4>
 	                    <div ng-repeat="(key, value) in vm.searchResult"  class="row" style="padding: 15px;">
-	                    	<div class="col-sm-3" ng-repeat="(keyI, valueI) in value.images">
-							<img src="images/{{valueI.fileLocation}}" style="height:150px; max-width:240px;">
+	                    	<div class="col-sm-3">
+								<img ng-if="!value.images[0]" src="static/images/noimage.png" style="height: 150px; max-width: 240px;">
+								<img ng-if="value.images[0]" src="images/{{value.images[0].fileLocation}}" style="height: 150px; max-width: 240px;">
 	                    	</div>
 	                    	<div class="col-sm-2">
 	                    		<table>

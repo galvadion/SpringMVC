@@ -78,8 +78,45 @@
             		</div>
             	
             	</section>
+            	
+            	<div class="tile" ng-show="!vm.roladmin">
+            	
+            		<div class="row">
+            			<div class="col-md-12">
+            				
+            			</div>
+            		</div>
+            		
+            		<div class="row">
+            			<div class="col-md-3" ng-repeat="(key, value) in vm.allBranchoffices" style="margin: 15px;">
+            				<h2>{{value.name}}</h2>
+            				<p>Ciudad {{value.city}}</p>
+            				<p>Horario de {{value.apertureHour}} a {{value.closingHour}}</p>
+            				<p>{{value.address}}</p>
+            			</div>
+            		</div>
+            		<div class="row">
+            			<br/><br/><br/>
+            			<hr class="line-dashed line-full"/>
+            			<h3 class="custom-font" style="margin-left: 25px">Localizanos:</h3>
+            		</div>
+            		<div class="row">
+	            		<div class="col-md-12">
+							<section class="tile text-center" style="margin-bottom: 0px !important;">
+								<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options"> 
+									<ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" title="m.title" click="onClick">
+										<ui-gmap-window show="show">
+										<div>{{m.title}}</div>
+										</ui-gmap-window>
+									</ui-gmap-marker>
+								</ui-gmap-google-map>
+							</section>
+						</div>
+					</div>
+					
+				</div>
+				
             </div>
-		<!-- /row -->
         </div>
 
     </div>
