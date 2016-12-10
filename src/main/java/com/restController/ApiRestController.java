@@ -55,10 +55,7 @@ public class ApiRestController {
 
 	@Autowired
 	BookedService bookedService;
-
-	@Autowired
-	RentService rentService;
-
+	
 	@Autowired
 	BrandService brandService;
 	
@@ -114,7 +111,7 @@ public class ApiRestController {
 		Promotion promo=new Promotion();
 		promo.setBeginPromotionDate(LocalDate.now());
 		promo.setDescriptionText("Esta promo es valida de hoy a ma");promo.setLastPromotionDate(LocalDate.now().plusDays(10));
-		promo.setPorcentage(40);
+		promo.setPercentage(40);
 		promo.setPromotionCode("ASD4521");
 		promo.setModels(modelService.getAll());
 		promotionService.create(promo);
@@ -135,11 +132,6 @@ public class ApiRestController {
 		bookedService.registerBoot(booking, (Client) userService.get(1));
 	}
 
-	@RequestMapping(value = "/api/confirm", method = RequestMethod.GET)
-	public void confirmRent() {
-		Booked booking = bookedService.getBookedByClient((Client) userService.get(1));
-		rentService.confirmRent(booking);
-	}
 
 	@RequestMapping(value = "/api/insertBrand", method = RequestMethod.GET)
 	public ResponseEntity<String> insertBrand() {

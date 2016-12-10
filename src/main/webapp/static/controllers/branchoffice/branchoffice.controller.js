@@ -49,7 +49,7 @@
         };
         
         $scope.options = {
-        		scrollwheel: false
+        		scrollwheel: true
 	    };
 
 		$scope.onClick = function(marker, eventName, model) {

@@ -16,6 +16,8 @@
 		vm.rent = {};
 		vm.allRents = [];
 		vm.booked={};
+		vm.drivers= 0;
+		vm.driverList=[];
 
 		vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
 		.withPaginationType('simple_numbers')
@@ -84,14 +86,14 @@
 			});
 		}
 
-		$scope.saveRent = function() {
+		$scope.confirmRent = function() {
 			NProgress.start();
 			var mgsSuccess = "";
 			var mgsError = "";
 
 			if(vm.rent.id){
-				mgsSuccess = "Marca editada con éxito";
-				mgsError = "Error al editar marca";
+				mgsSuccess = "Se ha confirmado correctamente con éxito";
+				mgsError = "Error al confirmar";
 
 			}
 			else{
@@ -99,7 +101,7 @@
 				mgsError = "Marca ya existente";
 			}
 
-			RentService.InsertRent(vm.rent).then(function (response) {
+			RentService.InsertRent($routeParams.id).then(function (response) {
 				if(response.success){
 					getAllRents();
 					$rootScope.doFlashMessage(mgsSuccess,'','success');
@@ -141,6 +143,37 @@
 				scrollTop: $(element).offset().top
 			}, 500);
 		}
+		
+		$scope.addDriver = function() {
+            vm.drivers += 1;
+            $("#drivers").append("<div id='driverNr" + vm.drivers + "' ><input type='hidden' value='0' id='driverSize' name='driverNum" + vm.drivers + "'>" +
+            		"<div class='form-group'><label class='control-label col-sm-1' for='text'>Nombre:</label><div class='col-sm-4'>" +
+                    "<input class='form-control' type='text' name='driverName" + cant + "' value='' />" +
+                    "</div>" +
+                    "<label class='control-label col-sm-1' for='text'>Cedula:</label>" +
+                    "<div class='col-sm-2'>" +
+                    "<input class='form-control' type='text' name='document" + cant + "' value='' />" +
+                    "</div>" +
+                    "<label class='control-label col-sm-1' for='text'>Contacto:</label>" +
+                    "<div class='col-sm-3'>" +
+                    "<input class='form-control' type='text' name='contactoHijo" + cant + "' value='' />" +
+                    "</div>" +
+                    "</div>" +
+                    "<div class='form-group'>" +
+                    "<label class='control-label col-sm-2' for='text'>Insercion educativa:</label>" +
+                    "<div class='col-sm-3'>" +
+                    "<input class='form-control' type='text' name='insercionHijo" + cant + "' value= '' />" +
+                    "</div>" +
+                    "<label class='control-label col-sm-2' for='fechaNacHijo' >Fecha Nacimiento</label>" +
+                    "<div class='input-group date col-sm-2'>" +
+                    "<input type='text' class='form-control'  id='fecha' name='fechaNacHijo" + cant + "' value=''/>" +
+                    "<span class='input-group-addon'>" +
+                    "<span class='glyphicon glyphicon-calendar'></span>" +
+                    "</span>" +
+                    "</div>" +
+                    " </div><div class='col-sm-1'><button type='button' onclick='removeDriver(" + vm.drivers + ")' class='btn btn-danger'><span class='glyphicon glyphicon-minus-sign' ></span></button></div></div>");
+            
+        }
 
 	}
 

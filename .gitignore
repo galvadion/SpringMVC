@@ -20,3 +20,5 @@ target/
 target/*
 target/**
 target/**/*
+src/main/webapp/static/js/bootstrap-datetimepicker.min.js
+src/main/resources/config.properties

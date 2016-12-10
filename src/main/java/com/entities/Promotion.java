@@ -43,7 +43,7 @@ public class Promotion implements Serializable{
 
 	private String promotionCode;
 	
-	private float porcentage;
+	private float percentage;
 	
 	@OneToMany(mappedBy="promotionCode")
 	private List<Booked> bookedList;
@@ -54,13 +54,13 @@ public class Promotion implements Serializable{
 		return promotionCode;
 	}
 	
-	@DBRef
+	
 	private List<Model> models;
 	
-	@DBRef
+	
 	private List<BranchOffice> offices;
 	
-	@DBRef
+	
 	private List<Client> clients;
 
 	public void setPromotionCode(String promotionCode) {
@@ -75,12 +75,12 @@ public class Promotion implements Serializable{
 		this.descriptionText = descriptionText;
 	}
 
-	public float getPorcentage() {
-		return porcentage;
+	public float getPercentage() {
+		return percentage;
 	}
 
-	public void setPorcentage(float porcentage) {
-		this.porcentage = porcentage;
+	public void setPercentage(float porcentage) {
+		this.percentage = porcentage;
 	}
 
 	public String getId() {

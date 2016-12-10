@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,14 +57,15 @@ public class FileUploadController {
 					dir.mkdirs();
 
 				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath() + File.separator + id + "-" +index +  " - " + LocalDate.now());
+				DateTimeFormatter format=DateTimeFormatter.ofPattern("HHmmss");
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + id + "-" +index +  "-" + LocalDate.now() + LocalTime.now().format(format));
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();
 				Model model=modelService.get(Integer.parseInt(id));
 				List<Image> imagesList=model.getImages();
 				Image image=new Image();
-				image.setFileLocation(id + "-" +index +  " - " + LocalDate.now() + LocalTime.now());
+				image.setFileLocation(id + "-" +index +  "-" + LocalDate.now() + LocalTime.now().format(format));
 				image.setModel(model);
 				imagesList.add(image);
 				imageService.saveOrUpdate(image);
