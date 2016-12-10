@@ -132,27 +132,14 @@
 
 		$scope.confirmRent = function() {
 			NProgress.start();
-			var mgsSuccess = "";
-			var mgsError = "";
-
-			if(vm.rent.id){
-				mgsSuccess = "Se ha confirmado correctamente con éxito";
-				mgsError = "Error al confirmar";
-
-			}
-			else{
-				mgsSuccess = "Marca creada con éxito";
-				mgsError = "Marca ya existente";
-			}
-
 			RentService.InsertRent(vm.rent).then(function (response) {
 				if(response.success){
 					getAllRents();
-					$rootScope.doFlashMessage(mgsSuccess,'','success');
+					$rootScope.doFlashMessage("Se ha confirmado correctamente con éxito",'','success');
 					$scope.cleanInput();
 				}
 				else{
-					$rootScope.doFlashMessage(mgsError,'','error');
+					$rootScope.doFlashMessage("Error al confirmar",'','error');
 				}
 				NProgress.done();
 			});
