@@ -363,6 +363,9 @@
         	$rootScope.roladmin = false;
             $rootScope.rolemployee = false;
         	$location.path('/home');
+        	setTimeout(function(){
+                $window.location.reload();
+        	},3000);
         }
         
         $rootScope.chat = false;
