@@ -173,7 +173,7 @@ public class PaymentTransactionController {
 			
 		}
 		catch(Exception ex){
-			log.error(ex);
+			log.error(ex.getStackTrace());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
 		}
 	}

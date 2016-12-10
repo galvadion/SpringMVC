@@ -16,6 +16,8 @@ public interface BookedDao extends GenericDao<Booked, Integer> {
 
 	public List<Booked> getDelivered(BranchOffice branch, LocalDate date);
 
+	public List<Booked> getReturned(BranchOffice branch, LocalDate date);
+
 
 
 }

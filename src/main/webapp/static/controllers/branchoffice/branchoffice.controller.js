@@ -49,32 +49,16 @@
         };
         
         $scope.options = {
-        		scrollwheel: false
+        		scrollwheel: true
 	    };
-        
-       /* google.maps.event.addListener($scope.map, 'click', function( event ){
-            
-            document.getElementById('coordinateX').value=event.latLng.lat();
-            document.getElementById('coordinateY').value=event.latLng.lng();
-            var marcador = new google.maps.LatLng(event.latLng.lat(),event.latLng.lng());
-            var marker = new google.maps.Marker({
-          position: marcador,
-          draggable:true,
-          animation: google.maps.Animation.DROP,
-          map: map,
-          title: ''
-      });
-      markers.push(marker);
-      if(markers.length==1){
-          markers[0].setMap(map);
-      }else{
-          markers[0].setMap(null);
-          markers.splice(0,1);
-          marker.setMap(map);    
-      }
-      
-            
-        });*/
+
+		$scope.onClick = function(marker, eventName, model) {
+			model.show = !model.show;
+		};
+
+		$scope.closeClick = function() {
+			$scope.windowOptions.visible = false;
+		};
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -130,6 +114,17 @@
         	BranchofficeService.GetAllBranchoffices().then(function (response) {
         		if(response.success){
         			vm.allBranchoffices = response.data;
+        			angular.forEach(vm.allBranchoffices, function(value, key) {
+						$scope.map.markers.push({
+							id : value.id,
+							coords : {
+								latitude : value.location.latitude,
+								longitude : value.location.longitude
+							},
+							title : value.name
+						});
+					});
+					$scope.$apply();
         		}
         		else{
         			vm.allBranchoffices = [];

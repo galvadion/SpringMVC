@@ -32,7 +32,7 @@ public class VehicleDaoImpl extends GenericDaoImpl<Vehicle, Integer> implements 
 		query.setParameter("endDate", model.getEndDate());
 		query.setParameter("status", Vehicle_Status.Available);
 		query.setParameter("branchId", model.getOriginBranchOfficeId());
-		return (Vehicle) query.getSingleResult();
+		return (Vehicle) query.getResultList().get(0);
 	}
 	@SuppressWarnings("unchecked")
 	public List<Vehicle> getAvailable() {

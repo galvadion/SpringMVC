@@ -25,7 +25,7 @@
         }
         
         function InsertRent(rent) {
-            return $http.post('/SpringMVC/rent/insert', rent).then(handleSuccess, handleError);
+            return $http.get('/SpringMVC/rent/confirmRent?id='+rent).then(handleSuccess, handleError);
         }
         
         function DeleteRent(id) {

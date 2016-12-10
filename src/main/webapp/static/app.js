@@ -4,7 +4,7 @@
 
     /***App Module Definition***/
     angular
-        .module('app', ['ngFileUpload','ngRoute', 'ngCookies','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps', 'checklist-model'])
+        .module('app', ['ngFileUpload','ngRoute', 'ngCookies','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps', 'checklist-model', 'isteven-multi-select'])
         .config(config)
         .run(run)
         .run(['$location', '$rootScope', function($location, $rootScope) {
@@ -202,6 +202,13 @@
                 controllerAs: 'vm'
             })
             
+            .when('/promotion/create', {
+                controller: 'PromotionController',
+                templateUrl: 'promotion/create',
+                title: 'Rent-UY - Promociones',
+                controllerAs: 'vm'
+            })
+            
             .when('/rent', {
                 controller: 'RentController',
                 templateUrl: 'rent',
@@ -209,9 +216,16 @@
                 controllerAs: 'vm'
             })
 
-            .when('/rent/view', {
+            .when('/rent/confirm/:id', {
                 controller: 'RentController',
-                templateUrl: 'rent/view',
+                templateUrl: 'rent/confirm',
+                title: 'Rent-UY - Alquiler',
+                controllerAs: 'vm'
+            })
+            
+            .when('/rent/return/:id', {
+                controller: 'RentController',
+                templateUrl: 'rent/return',
                 title: 'Rent-UY - Alquiler',
                 controllerAs: 'vm'
             })

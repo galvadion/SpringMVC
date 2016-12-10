@@ -1,128 +1,180 @@
 ﻿(function () {
-    'use strict';
+	'use strict';
 
-    angular
-        .module('app')
-        .controller('RentController', RentController);
+	angular
+	.module('app')
+	.controller('RentController', RentController);
 
-    RentController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','RentService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder'];
-    
-    function RentController($location, UserService, $rootScope, $scope, $timeout, SessionService, RentService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+	RentController.$inject = ['$location','UserService','$rootScope','$scope','$timeout','SessionService','RentService','DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','BookedService','$routeParams'];
 
-        var vm = this;
-        vm.roladmin = $rootScope.roladmin;
-        vm.rolemployee = $rootScope.rolemployee;
-        vm.rolclient = $rootScope.rolclient;
-        vm.rent = {};
-        vm.allRents = [];
-        
-        vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
-        .withPaginationType('simple_numbers')
-        .withDisplayLength(10)
-        .withLanguage({
-            "sEmptyTable":     "No hay entradas disponibles",
-            "sInfo":           "Mostrando _START_ - _END_ de _TOTAL_ entradas",
-            "sInfoEmpty":      "Mostrando 0 a 0 de 0 entradas",
-            "sInfoFiltered":   "(filtrando desde _MAX_ entradas totales)",
-            "sInfoPostFix":    "",
-            "sInfoThousands":  ",",
-            "sLengthMenu":     "_MENU_",
-            "sLoadingRecords": "Cargando...",
-            "sProcessing":     "Procesando...",
-            "sSearch":         "",
-            "sZeroRecords":    "No se encontraron resultados",
-            'sSearchPlaceholder': "Buscar...",
-            "paginate": {
-                "first":      "Primera",
-                "last":       "Última",
-                "next":       "Siguiente",
-                "previous":   "Anterior"
-            },
-        });
+	function RentController($location, UserService, $rootScope, $scope, $timeout, SessionService, RentService, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder,BookedService,$routeParams) {
 
-        vm.DTColumnDefs = [
-            DTColumnDefBuilder.newColumnDef(1).notSortable(),
-            DTColumnDefBuilder.newColumnDef(2).notSortable(),
-            DTColumnDefBuilder.newColumnDef(3).notSortable(),
-        ];
-        
-        initController();
-        
-        function initController() {
-            NProgress.start();
-            getAllRents();
+		var vm = this;
+		vm.roladmin = $rootScope.roladmin;
+		vm.rolemployee = $rootScope.rolemployee;
+		vm.rolclient = $rootScope.rolclient;
+		vm.rent = {};
+		vm.allRents = [];
+		vm.booked={};
+		vm.drivers= 0;
+		vm.driverList=[];
+
+		vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
+		.withPaginationType('simple_numbers')
+		.withDisplayLength(10)
+		.withLanguage({
+			"sEmptyTable":     "No hay entradas disponibles",
+			"sInfo":           "Mostrando _START_ - _END_ de _TOTAL_ entradas",
+			"sInfoEmpty":      "Mostrando 0 a 0 de 0 entradas",
+			"sInfoFiltered":   "(filtrando desde _MAX_ entradas totales)",
+			"sInfoPostFix":    "",
+			"sInfoThousands":  ",",
+			"sLengthMenu":     "_MENU_",
+			"sLoadingRecords": "Cargando...",
+			"sProcessing":     "Procesando...",
+			"sSearch":         "",
+			"sZeroRecords":    "No se encontraron resultados",
+			'sSearchPlaceholder': "Buscar...",
+			"paginate": {
+				"first":      "Primera",
+				"last":       "Última",
+				"next":       "Siguiente",
+				"previous":   "Anterior"
+			},
+		});
+
+		vm.DTColumnDefs = [
+		                   DTColumnDefBuilder.newColumnDef(1).notSortable(),
+		                   DTColumnDefBuilder.newColumnDef(2).notSortable(),
+		                   DTColumnDefBuilder.newColumnDef(3).notSortable(),
+		                   ];
+
+		initController();
+
+		function initController() {
+			NProgress.start();
+			vm.location = $location.path().split('/',3);
+			if(vm.location[2] == "confirm"){
+				getBookedById($routeParams.id);
+			}
+			NProgress.done();
+		}
+
+		function getAllRents(){
+			RentService.GetAllRents().then(function (response) {
+				if(response.success){
+					vm.allRents = response.data;
+				}
+				else{
+					vm.allRents = [];
+				}
+				NProgress.done();
+			});
+		}
+
+		function getBookedById(id){
+			BookedService.GetBookedById(id).then(function (response) {
+				if(response.success){  
+					vm.booked = response.data;
+					console.log(vm.booked)
+				}
+				else{
+					vm.booked = [];
+				}
+
+				NProgress.done();
+			});
+		}
+
+		$scope.confirmRent = function() {
+			NProgress.start();
+			var mgsSuccess = "";
+			var mgsError = "";
+
+			if(vm.rent.id){
+				mgsSuccess = "Se ha confirmado correctamente con éxito";
+				mgsError = "Error al confirmar";
+
+			}
+			else{
+				mgsSuccess = "Marca creada con éxito";
+				mgsError = "Marca ya existente";
+			}
+
+			RentService.InsertRent($routeParams.id).then(function (response) {
+				if(response.success){
+					getAllRents();
+					$rootScope.doFlashMessage(mgsSuccess,'','success');
+					$scope.cleanInput();
+				}
+				else{
+					$rootScope.doFlashMessage(mgsError,'','error');
+				}
+				NProgress.done();
+			});
+		};
+
+		$scope.cleanInput = function() {
+			vm.rent = {};
+			$scope.form.$setPristine();
+		};
+
+		$scope.editRent = function(brand) {
+			vm.rent = angular.copy(brand);
+			$scope.scrollTo( "#wrap");
+		};
+
+		$scope.deleteRent = function(id) {
+			NProgress.start();
+			RentService.DeleteRent(id).then(function (response) {
+				if(response.success){
+					getAllRents();
+					$rootScope.doFlashMessage('Marca eliminada','','success');
+				}
+				else{
+					$rootScope.doFlashMessage('Error al eliminar','','error');
+				}
+				NProgress.done();
+			});
+		};
+
+		$scope.scrollTo = function(element) {
+			$( 'html, body').animate({
+				scrollTop: $(element).offset().top
+			}, 500);
+		}
+		
+		$scope.addDriver = function() {
+            vm.drivers += 1;
+            $("#drivers").append("<div id='driverNr" + vm.drivers + "' ><input type='hidden' value='0' id='driverSize' name='driverNum" + vm.drivers + "'>" +
+            		"<div class='form-group'><label class='control-label col-sm-1' for='text'>Nombre:</label><div class='col-sm-4'>" +
+                    "<input class='form-control' type='text' name='driverName" + cant + "' value='' />" +
+                    "</div>" +
+                    "<label class='control-label col-sm-1' for='text'>Cedula:</label>" +
+                    "<div class='col-sm-2'>" +
+                    "<input class='form-control' type='text' name='document" + cant + "' value='' />" +
+                    "</div>" +
+                    "<label class='control-label col-sm-1' for='text'>Contacto:</label>" +
+                    "<div class='col-sm-3'>" +
+                    "<input class='form-control' type='text' name='contactoHijo" + cant + "' value='' />" +
+                    "</div>" +
+                    "</div>" +
+                    "<div class='form-group'>" +
+                    "<label class='control-label col-sm-2' for='text'>Insercion educativa:</label>" +
+                    "<div class='col-sm-3'>" +
+                    "<input class='form-control' type='text' name='insercionHijo" + cant + "' value= '' />" +
+                    "</div>" +
+                    "<label class='control-label col-sm-2' for='fechaNacHijo' >Fecha Nacimiento</label>" +
+                    "<div class='input-group date col-sm-2'>" +
+                    "<input type='text' class='form-control'  id='fecha' name='fechaNacHijo" + cant + "' value=''/>" +
+                    "<span class='input-group-addon'>" +
+                    "<span class='glyphicon glyphicon-calendar'></span>" +
+                    "</span>" +
+                    "</div>" +
+                    " </div><div class='col-sm-1'><button type='button' onclick='removeDriver(" + vm.drivers + ")' class='btn btn-danger'><span class='glyphicon glyphicon-minus-sign' ></span></button></div></div>");
+            
         }
-        
-        function getAllRents(){
-        	RentService.GetAllRents().then(function (response) {
-        		if(response.success){
-        			vm.allRents = response.data;
-        		}
-        		else{
-        			vm.allRents = [];
-        		}
-        		NProgress.done();
-        	});
-        }
-        
-        $scope.saveRent = function() {
-        	NProgress.start();
-        	var mgsSuccess = "";
-        	var mgsError = "";
-        	
-        	if(vm.rent.id){
-        		mgsSuccess = "Marca editada con éxito";
-        		mgsError = "Error al editar marca";
-        		
-        	}
-        	else{
-        		mgsSuccess = "Marca creada con éxito";
-        		mgsError = "Marca ya existente";
-        	}
-        	
-        	RentService.InsertRent(vm.rent).then(function (response) {
-        		if(response.success){
-        			getAllRents();
-        			$rootScope.doFlashMessage(mgsSuccess,'','success');
-        			$scope.cleanInput();
-        		}
-        		else{
-        			$rootScope.doFlashMessage(mgsError,'','error');
-        		}
-        		NProgress.done();
-        	});
-        };
-        
-        $scope.cleanInput = function() {
-        	vm.rent = {};
-        	$scope.form.$setPristine();
-        };
-        
-        $scope.editRent = function(brand) {
-        	vm.rent = angular.copy(brand);
-        	$scope.scrollTo( "#wrap");
-        };
-        
-        $scope.deleteRent = function(id) {
-        	NProgress.start();
-        	RentService.DeleteRent(id).then(function (response) {
-        		if(response.success){
-        			getAllRents();
-        			$rootScope.doFlashMessage('Marca eliminada','','success');
-        		}
-        		else{
-        			$rootScope.doFlashMessage('Error al eliminar','','error');
-        		}
-        		NProgress.done();
-        	});
-        };
-        
-        $scope.scrollTo = function(element) {
-            $( 'html, body').animate({
-                scrollTop: $(element).offset().top
-            }, 500);
-        }
 
-    }
+	}
 
 })();

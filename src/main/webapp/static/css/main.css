@@ -18316,6 +18316,18 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
     }
 }
 
+#myNavbar ul li :hover {
+	background-color: #DDDDDD;
+}
+
+.custom-active :hover {
+	background-color: #3B5998 !important;
+}
+
+.dropdown-menu {
+	background-color: #FFFFFF !important;
+}
+
 .fullSection{
 	height: 85vh;
 	padding:0;
@@ -18350,5 +18362,4 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 	background-color: rgba(255,255,255,0.7);
     margin-top: 20vh;
 }
-
 

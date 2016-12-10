@@ -50,7 +50,8 @@
 									</tr>
 									<tr>
 										<td>
-											<p>Modelo:{{value.vehicle.model.brand.name}} {{value.vehicle.model.name}}</p>
+											<p>Modelo:{{value.vehicle.model.brand.name}}
+												{{value.vehicle.model.name}}</p>
 										</td>
 									</tr>
 									<tr>
@@ -60,14 +61,17 @@
 									</tr>
 									<tr>
 										<td>
-											<p>Cliente: {{value.client.name}} {{value.client.lastName}}</p>
+											<p>Cliente: {{value.client.name}}
+												{{value.client.lastName}}</p>
 										</td>
 									</tr>
 								</table>
 							</div>
 
 							<div class="col-sm-1">
-								<a href class="btn  btn-orange"><strong>Gestionar entrega</strong></a>
+								<a ng-hide="{{value.rent}} != null" href="#/rent/confirm/{{value.id}}" class="btn  btn-orange"><strong>Gestionar
+										entrega</strong></a>
+										<a ng-hide="{{value.rent}} == null"><strong>Ya fue entregado</strong></a>
 							</div>
 						</div>
 
@@ -108,30 +112,33 @@
 								<table>
 									<tr>
 										<td>
-											<p>Vehiculo: {{value.booked.vehicle.licensePlate}}</p>
+											<p>Vehiculo: {{value.vehicle.licensePlate}}</p>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<p>Modelo:{{value.booked.vehicle.model.brand.name}} {{value.vehicle.model.name}}</p>
+											<p>Modelo:{{value.vehicle.model.brand.name}}
+												{{value.vehicle.model.name}}</p>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<p>Cliente: {{value.booked.client.name}} {{value.client.lastName}}</p>
+											<p>Cliente: {{value.client.name}}
+												{{value.client.lastName}}</p>
 										</td>
 									</tr>
 								</table>
 							</div>
-							
+
 							<div class="col-sm-1">
-								<a href class="btn  btn-orange"><strong>Gestionar devolucion</strong></a>
+								<a href class="btn  btn-orange"><strong>Gestionar
+										devolucion</strong></a>
 							</div>
 						</div>
 
 						<hr class="line-dashed line-full" />
 
-						
+
 
 						<!-- </div> -->
 				</section>

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.validation.ConstraintViolation;
@@ -32,15 +33,18 @@ import com.entities.Brand;
 import com.entities.Client;
 import com.entities.Extras;
 import com.entities.Model;
+import com.entities.Promotion;
 import com.entities.User;
 import com.models.BookingModel;
 import com.models.SearchFilter;
 import com.services.BookedService;
 import com.services.BranchOfficeService;
 import com.services.BrandService;
+import com.services.ExtrasService;
 import com.services.ModelService;
 import com.services.RentService;
 import com.services.UserServices;
+import com.servicesImpl.PromotionService;
 
 @RestController
 public class ApiRestController {
@@ -53,12 +57,15 @@ public class ApiRestController {
 
 	@Autowired
 	BookedService bookedService;
-
-	@Autowired
-	RentService rentService;
-
+	
 	@Autowired
 	BrandService brandService;
+	
+	@Autowired
+	ExtrasService extrasService;
+	
+	@Autowired
+	PromotionService promotionService;
 	
 	@Autowired
 	BranchOfficeService branchOfficeService;
@@ -92,6 +99,25 @@ public class ApiRestController {
 		map.put("models", modelService.getModelsBetweenFilter(filter));
 		return map;
 	}
+	
+	@RequestMapping(value = "/api/allExtras", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> getExtras(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("extras", extrasService.getAll());
+		map.put("status", "200");
+		return map;
+	}
+	
+	@RequestMapping(value = "/api/promotion",method =RequestMethod.GET)
+	public void createPromo(){
+		Promotion promo=new Promotion();
+		promo.setBeginPromotionDate(LocalDate.now());
+		promo.setDescriptionText("Esta promo es valida de hoy a ma");promo.setLastPromotionDate(LocalDate.now().plusDays(10));
+		promo.setPercentage(40);
+		promo.setPromotionCode("ASD4521");
+		promo.setModels(modelService.getAll());
+		promotionService.create(promo);
+	}
 
 	@RequestMapping(value = "/api/book", method = RequestMethod.POST)
 	public void bookVehicule() {
@@ -109,11 +135,6 @@ public class ApiRestController {
  		bookedService.registerBook(booking, (Client) userService.get(1), "Transaction_ID_test", "PayPal_Payer_ID", extras);
 	}
 
-	@RequestMapping(value = "/api/confirm", method = RequestMethod.GET)
-	public void confirmRent() {
-		Booked booking = bookedService.getBookedByClient((Client) userService.get(1));
-		rentService.confirmRent(booking);
-	}
 
 	@RequestMapping(value = "/api/insertBrand", method = RequestMethod.GET)
 	public ResponseEntity<String> insertBrand() {

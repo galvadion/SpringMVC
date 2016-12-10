@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import com.configuration.LocalDateDeserializer;
 import com.configuration.LocalDateSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -44,9 +46,8 @@ public class Booked implements Serializable{
 	@Column(name= "last_booked_date")
 	private LocalDate lastbookedDate;
 	
-	@ManyToOne
-	@JoinColumn(name="promotion_code")	
-	private Promotion promotionCode;
+	
+	private String promotionCode_id;
 	
 	private boolean canceled=false;
 	
@@ -68,14 +69,11 @@ public class Booked implements Serializable{
 	@Column(name="with_full_tank")
 	private boolean withFullTank;
 	
-    @JsonIgnore
-	@OneToOne
-	 @JoinColumn(
-		        name="rent_id", unique=true, updatable=true, nullable=true)
-	private Rent rent;
+	
+	private String rent;
 	
 	@ManyToOne
-	@JoinColumn(name="vehicle_id", nullable=true)
+	@JoinColumn(name="vehicle_id", nullable=false)
 	private Vehicle vehicle;
 	
 	@ManyToOne
@@ -156,11 +154,11 @@ public class Booked implements Serializable{
 		this.transactionDate = transactionDate;
 	}
 
-	public Rent getRent() {
+	public String getRent() {
 		return rent;
 	}
 
-	public void setRent(Rent rent) {
+	public void setRent(String rent) {
 		this.rent = rent;
 	}
 
@@ -217,12 +215,12 @@ public class Booked implements Serializable{
 		this.canceled = canceled;
 	}
 
-	public Promotion getPromotionCode() {
-		return promotionCode;
+	public List<Extras> getExtrasList() {
+		return extrasList;
 	}
 
-	public void setPromotionCode(Promotion promotionCode) {
-		this.promotionCode = promotionCode;
+	public void setExtrasList(List<Extras> extrasList) {
+		this.extrasList = extrasList;
 	}
 	
 	public String getPayerId() {
@@ -233,12 +231,12 @@ public class Booked implements Serializable{
 		this.payerId = payerId;
 	}
 
-	public List<Extras> getExtrasList() {
-		return extrasList;
+	public String getPromotionCode_id() {
+		return promotionCode_id;
 	}
 
-	public void setExtrasList(List<Extras> extrasList) {
-		this.extrasList = extrasList;
+	public void setPromotionCode_id(String promotionCode_id) {
+		this.promotionCode_id = promotionCode_id;
 	}
 	
 	

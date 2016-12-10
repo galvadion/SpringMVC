@@ -16,7 +16,7 @@
         <div class="row">
         	<div class="col-md-12">
             	
-            	<section class="tile" ng-show="vm.roladmin">
+            	<section class="tile">
             		
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
@@ -35,6 +35,7 @@
                                    		<th>Matricula</th>
                                         <th>Marca</th>
                                         <th>Modelo</th>
+                                        <th>Sucursal</th>
                                         <th>Vencimiento Patente</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
@@ -51,6 +52,8 @@
                                         </td>
                                         <td>
                                             {{value.model.name}}                                             
+                                        </td>
+                                        <td>{{value.branchOffice.name}}
                                         </td>
                                         
                                         <td>
@@ -75,6 +78,7 @@
             		</div>
             	
             	</section>
+
             </div>
 		<!-- /row -->
         </div>

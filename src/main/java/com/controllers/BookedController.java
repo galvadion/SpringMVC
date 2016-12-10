@@ -5,14 +5,19 @@ import java.util.Map;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Client;
 import com.models.BookingModel;
+import com.entities.Booked;
+import com.entities.Vehicle;
 import com.services.BookedService;
 
 @Controller
@@ -46,6 +51,16 @@ public class BookedController {
 	public ModelAndView getSearchPage() {
 		ModelAndView view = new ModelAndView("booked/search");
 		return view;
+	}
+	
+	@RequestMapping(value = "/getbyid", method = RequestMethod.GET)
+	public ResponseEntity<Booked> getbyid(@RequestParam("id") Integer id) { 
+		if (bookedService.get(id) != null) {
+			return ResponseEntity.ok(bookedService.get(id));
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		
 	}
 
 }

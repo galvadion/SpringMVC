@@ -17,6 +17,7 @@ import com.entities.Rent;
 import com.services.BookedService;
 import com.services.RentService;
 import com.services.UserServices;
+import com.servicesImpl.RentServiceImpl;
 
 
 @Controller
@@ -27,7 +28,7 @@ public class RentController {
 	UserServices userServices;
 	
 	@Autowired
-	RentService rentServices;
+	RentServiceImpl rentServices;
 	
 	@Autowired
 	BookedService bookedServices;
@@ -44,6 +45,18 @@ public class RentController {
 		return view;
 	}
 	
+	@RequestMapping(value="/confirm",method =RequestMethod.GET)
+	public ModelAndView getConfirmationPage(){
+		ModelAndView view=new ModelAndView("rent/confirm");
+		return view;
+	}
+	
+	@RequestMapping(value="/return",method =RequestMethod.GET)
+	public ModelAndView getReturnPage(){
+		ModelAndView view=new ModelAndView("rent/return");
+		return view;
+	}
+	
 	@RequestMapping(value = "/getBooked", method = RequestMethod.GET)
 	private ResponseEntity<List<Booked>> getRentByName(@RequestParam("id") String id){
 		Client client=(Client) userServices.get(Integer.parseInt(id));
@@ -55,9 +68,11 @@ public class RentController {
 	private ResponseEntity<Object> confirmation(@RequestParam("id") String id){
 		Booked booked = bookedServices.get(Integer.parseInt(id));
 		Rent rent=new Rent();
-		rent.setBooked(booked);
+		rent.setBooked_id(booked.getId());
 		rent.setDeliveryDate(LocalDate.now());
-		rentServices.saveOrUpdate(rent);
+		rentServices.create(rent);
+		booked.setRent(rent.getId());
+		bookedServices.saveOrUpdate(booked);
 		return ResponseEntity.ok((Object)"It has been confirmed");
 		
 	}

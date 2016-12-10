@@ -25,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href="static/js/dista/plugins/bootstrap/datatables.bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="static/js/dista/css/angular-datatables.css">
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="static/css/isteven-multi-select.css">
         <link rel="stylesheet" type="text/css" href="static/js/chat/comet.chat.css">
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-switch.min.css">
         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
@@ -59,6 +60,7 @@
 		<script type="text/javascript" src="static/js/moment.min.js"> </script>
 		<script type="text/javascript" src="static/js/bootstrap-switch.min.js"></script>
 		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+		<script type="text/javascript" src="static/js/isteven-multi-select.js"> </script>
 		
 		<!--Maps-->
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCToOBKLzgMq3u02g7OO_v-txL_LnfEO_g&callback=initMap" type="text/javascript"></script>
@@ -165,3 +167,54 @@
 
     </body>
 </html>
+
+<script type="text/javascript">
+    
+    var chatWindowArray = [];
+    
+    var config = {
+        contextPath: '${pageContext.request.contextPath}'
+    };
+	
+	function getChatWindowByUserPair(loginUserName, peerUserName) {
+		
+		var chatWindow;
+		
+		for(var i = 0; i < chatWindowArray.length; i++) {
+			var windowInfo = chatWindowArray[i];
+			if (windowInfo.loginUserName == loginUserName && windowInfo.peerUserName == peerUserName) {
+				chatWindow =  windowInfo.windowObj;
+			}
+		}
+		
+		return chatWindow;
+	}
+	
+	function createWindow(loginUserName, peerUserName) {
+		
+		var chatWindow = getChatWindowByUserPair(loginUserName, peerUserName);
+		
+		if (chatWindow == null) { //Not chat window created before for this user pair.
+			chatWindow = new ChatWindow(); //Create new chat window.
+			chatWindow.initWindow({
+				loginUserName:loginUserName, 
+				peerUserName:peerUserName,
+				windowArray:chatWindowArray});
+			
+			//collect all chat windows opended so far.
+			var chatWindowInfo = { peerUserName:peerUserName, 
+					               loginUserName:loginUserName,
+					               windowObj:chatWindow 
+					             };
+			
+			chatWindowArray.push(chatWindowInfo);
+    	}
+		
+		chatWindow.show();
+		
+		return chatWindow;
+	}
+	function join(userName){
+		$.cometChat.join(userName);
+	}
+</script>

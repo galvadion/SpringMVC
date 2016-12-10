@@ -11,12 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.configuration.LocalDateDeserializer;
 import com.configuration.LocalDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-@Entity
+@Document
 public class Promotion implements Serializable{
 	
 	/**
@@ -27,7 +30,7 @@ public class Promotion implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private Integer id;
+	private String id;
 	
 	@JsonDeserialize(using = LocalDateDeserializer.class)  
 	@JsonSerialize(using = LocalDateSerializer.class)  
@@ -40,7 +43,7 @@ public class Promotion implements Serializable{
 
 	private String promotionCode;
 	
-	private float porcentage;
+	private float percentage;
 	
 	@OneToMany(mappedBy="promotionCode")
 	private List<Booked> bookedList;
@@ -50,6 +53,15 @@ public class Promotion implements Serializable{
 	public String getPromotionCode() {
 		return promotionCode;
 	}
+	
+	
+	private List<Model> models;
+	
+	
+	private List<BranchOffice> offices;
+	
+	
+	private List<Client> clients;
 
 	public void setPromotionCode(String promotionCode) {
 		this.promotionCode = promotionCode;
@@ -63,12 +75,72 @@ public class Promotion implements Serializable{
 		this.descriptionText = descriptionText;
 	}
 
-	public float getPorcentage() {
-		return porcentage;
+	public float getPercentage() {
+		return percentage;
 	}
 
-	public void setPorcentage(float porcentage) {
-		this.porcentage = porcentage;
+	public void setPercentage(float porcentage) {
+		this.percentage = porcentage;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public LocalDate getBeginPromotionDate() {
+		return beginPromotionDate;
+	}
+
+	public void setBeginPromotionDate(LocalDate beginPromotionDate) {
+		this.beginPromotionDate = beginPromotionDate;
+	}
+
+	public LocalDate getLastPromotionDate() {
+		return lastPromotionDate;
+	}
+
+	public void setLastPromotionDate(LocalDate lastPromotionDate) {
+		this.lastPromotionDate = lastPromotionDate;
+	}
+
+	public List<Booked> getBookedList() {
+		return bookedList;
+	}
+
+	public void setBookedList(List<Booked> bookedList) {
+		this.bookedList = bookedList;
+	}
+
+	public List<Model> getModels() {
+		return models;
+	}
+
+	public void setModels(List<Model> models) {
+		this.models = models;
+	}
+
+	public List<BranchOffice> getOffices() {
+		return offices;
+	}
+
+	public void setOffices(List<BranchOffice> offices) {
+		this.offices = offices;
+	}
+
+	public List<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	

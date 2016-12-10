@@ -18,14 +18,14 @@
             	<section class="tile">
 					<br/>
 					<br/>
-					<form name='form' class="" role="form" ng-submit="searchModels()">
+					<form name='form' class="" role="form" ng-submit="searchModels(vm.search)">
 
 						<div class="row" style="padding: 0 10px 0 10px;">
 
 							<div class="form-group customDatePickers col-sm-6">
-								<div class="input-group date" id="beginDate" data-date="" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
+								<div class="input-group date" id="beginDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
 									<label for="beginDate" class="control-label">Fecha de recogida</label>
-									<input class="form-control" size="16" type="text" name="beginDate" placeholder="DD-MM-YYYY" ng-model="vm.search.beginDate" ng-change="checkEndDate()" readonly required>
+									<input class="form-control" size="16" type="text" name="beginDate" placeholder="DD/MM/YYYY" ng-model="vm.search.beginDate" ng-change="checkEndDate()" readonly required>
 									<span class="input-group-addon customAddonSize">
 									<span class="glyphicon glyphicon-calendar"></span></span>
 								</div>
@@ -42,9 +42,9 @@
 						<div class="row" style="padding: 0 10px 0 10px;">
 
 							<div class="form-group customDatePickers col-sm-6">
-								<div class="input-group date" id="endDate" data-date="" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
+								<div class="input-group date" id="endDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
 									<label for="endDate" class="control-label">Fecha de entrega</label>
-									<input class="form-control" size="16" type="text" name="endDate" placeholder="DD-MM-YYYY" ng-model="vm.search.endDate" ng-change="checkEndDate()" readonly required>
+									<input class="form-control" size="16" type="text" name="endDate" placeholder="DD/MM/YYYY" ng-model="vm.search.endDate" ng-change="checkEndDate()" readonly required>
 									<span class="input-group-addon customAddonSize">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -72,12 +72,12 @@
 					
 						<div class="row collapse" style="padding: 0 10px 0 10px;" id="demo">
 							<div class="form-group col-sm-3" class="form-group">
-								<label for="passangers" class="control-label">Cantidad de pasajeros</label>
+								<label for="passangers" class="control-label">Pasajeros</label>
 									<input type="number" min="0" ng-model="vm.search.passangers" name="passangers" id="passangers" class="form-control" placeholder="0">
 							</div>
 							
 							<div class="form-group col-sm-3" class="form-group">
-								<label for="luggage" class="control-label">Disponibilidad de valijas</label>
+								<label for="luggage" class="control-label">Valijas</label>
 									<input type="number" min="0" ng-model="vm.search.luggage" name="luggage" id="luggage" class="form-control" placeholder="0">
 							</div>
 							
@@ -110,60 +110,56 @@
                     </div>
                     
                     <br/>
-                    
-                    <!-- <div class="row" ng-repeat="(key, value) in vm.searchResult"> -->
+                    	<h4 class="text-center" ng-if="vm.noResult">No se encontraron veh�culos</h4>
 	                    <div ng-repeat="(key, value) in vm.searchResult"  class="row" style="padding: 15px;">
-	                    	<div class="col-sm-3" ng-repeat="(keyI, valueI) in value.images">
-								<img src="images/{{valueI.fileLocation}}" style="height:150px; max-width:240px;">
-	                    	</div>
-	                    	<div class="col-sm-2">
-	                    		<table>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Marca: {{value.brand.name}}</p>
-	                    				</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Modelo: {{value.name}}</p>
-	                    				</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Año: {{value.year}}</p>
-	                    				</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Categoria: {{value.category.name}}</p>
-	                    				</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Transmision: {{value.transmission}}</p>
-	                    				</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td>
-	                    					<p>Combustible: {{value.fuel.fuelType}}</p>
-	                    				</td>
-	                    			</tr>
-	                    		</table>
-	                    	</div>
-	                    	
-	                    	<div class="col-sm-1">
-	                    		<a href class="btn  btn-orange" ng-click="reservar(value.id)"><strong>Reservar</strong></a>
-	                    	</div>
-	                    </div>
-	                    
-	                    <hr class="line-dashed line-full"/>
-	                    <!-- </div> -->
+	                    <div class="col-sm-3">
+							<img ng-if="!value.images[0]" src="static/images/noimage.png" style="height: 150px; max-width: 240px;">
+							<img ng-if="value.images[0]" src="images/{{value.images[0].fileLocation}}" style="height: 150px; max-width: 240px;">
+						</div>
+                    	<div class="col-sm-2">
+                    		<table>
+                    			<tr>
+                    				<td>
+                    					<p>Marca: {{value.brand.name}}</p>
+                    				</td>
+                    			</tr>
+                    			<tr>
+                    				<td>
+                    					<p>Modelo: {{value.name}}</p>
+                    				</td>
+                    			</tr>
+                    			<tr>
+                    				<td>
+                    					<p>Año: {{value.year}}</p>
+                    				</td>
+                    			</tr>
+                    			<tr>
+                    				<td>
+                    					<p>Categoria: {{value.category.name}}</p>
+                    				</td>
+                    			</tr>
+                    			<tr>
+                    				<td>
+                    					<p>Transmision: {{value.transmission}}</p>
+                    				</td>
+                    			</tr>
+                    			<tr>
+                    				<td>
+                    					<p>Combustible: {{value.fuel.fuelType}}</p>
+                    				</td>
+                    			</tr>
+                    		</table>
+                    	</div>
+                    	
+                    	<div class="col-sm-1">
+                    		<a href class="btn  btn-orange" ng-click="reservar(value.id)"><strong>Reservar</strong></a>
+                    	</div>
+                    </div>
+                    
+                    <hr class="line-dashed line-full"/>
 
-				</section>
-            </div>
-        </div>
-        
-        
-    </div>
-
+			</section>
+           </div>
+       </div>
+   </div>
 </section>
