@@ -11,6 +11,7 @@
         var service = {};
 
         service.GetAllRents = GetAllRents;
+        service.GetRentById = GetRentById;
         service.InsertRent = InsertRent;
         service.DeleteRent = DeleteRent;
         
@@ -24,8 +25,12 @@
             return $http.get('/SpringMVC/rent/getall').then(handleSuccess, handleError);
         }
         
+        function GetRentById(id){
+        	return $http.get('/SpringMVC/rent/getbyid?id='+id).then(handleSuccess, handleError);
+        }
+        
         function InsertRent(rent) {
-            return $http.get('/SpringMVC/rent/confirmRent?id='+rent).then(handleSuccess, handleError);
+            return $http.post('/SpringMVC/rent/confirmRent',rent).then(handleSuccess, handleError);
         }
         
         function DeleteRent(id) {

@@ -16,8 +16,10 @@
 		vm.rent = {};
 		vm.allRents = [];
 		vm.booked={};
-		vm.drivers= 0;
-		vm.driverList=[];
+		vm.driver= {};
+		vm.rent.driversList=[];
+		vm.detail= {};
+		vm.rent.rentLine=[];
 
 		vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
 		.withPaginationType('simple_numbers')
@@ -42,6 +44,30 @@
 				"previous":   "Anterior"
 			},
 		});
+		
+		var localDate = new Date();
+        localDate = (localDate.getFullYear()-18) + '-' + (localDate.getMonth() + 1) + '-' +  localDate.getDate();
+		
+        $('#birthDate').datetimepicker({
+        	language:  'es',
+            weekStart: 1,
+        	autoclose: 1,
+        	todayHighlight: 1,
+        	startView: 2,
+        	minView: 2,
+        	forceParse: 0,
+        	endDate: localDate
+        });
+        
+        $('#licenseExpirationDate').datetimepicker({
+        	language:  'es',
+            weekStart: 1,
+        	autoclose: 1,
+        	todayHighlight: 1,
+        	startView: 2,
+        	minView: 2,
+        	forceParse: 0
+        });
 
 		vm.DTColumnDefs = [
 		                   DTColumnDefBuilder.newColumnDef(1).notSortable(),
@@ -56,6 +82,10 @@
 			vm.location = $location.path().split('/',3);
 			if(vm.location[2] == "confirm"){
 				getBookedById($routeParams.id);
+				
+			}else if( vm.location[2] == "return"){
+				getBookedById($routeParams.id);
+				getRentById(vm.booked.rent);
 			}
 			NProgress.done();
 		}
@@ -76,7 +106,21 @@
 			BookedService.GetBookedById(id).then(function (response) {
 				if(response.success){  
 					vm.booked = response.data;
-					console.log(vm.booked)
+					vm.rent.booked_id=vm.booked.id;
+				}
+				else{
+					vm.booked = [];
+				}
+
+				NProgress.done();
+			});
+		}
+		
+		function getRentById(id){
+			RentService.GetRentById(id).then(function (response) {
+				if(response.success){  
+					vm.rent = response.data;
+					console.log(vm.rent)
 				}
 				else{
 					vm.booked = [];
@@ -101,7 +145,7 @@
 				mgsError = "Marca ya existente";
 			}
 
-			RentService.InsertRent($routeParams.id).then(function (response) {
+			RentService.InsertRent(vm.rent).then(function (response) {
 				if(response.success){
 					getAllRents();
 					$rootScope.doFlashMessage(mgsSuccess,'','success');
@@ -113,6 +157,16 @@
 				NProgress.done();
 			});
 		};
+		
+		$scope.addFine = function(){
+			vm.rent.rentLine.push(vm.detail);
+			vm.detail={};
+			
+		}
+		$scope.addDriver = function() {
+            vm.rent.driversList.push(vm.driver);
+            vm.driver={};
+        }
 
 		$scope.cleanInput = function() {
 			vm.rent = {};
@@ -144,36 +198,7 @@
 			}, 500);
 		}
 		
-		$scope.addDriver = function() {
-            vm.drivers += 1;
-            $("#drivers").append("<div id='driverNr" + vm.drivers + "' ><input type='hidden' value='0' id='driverSize' name='driverNum" + vm.drivers + "'>" +
-            		"<div class='form-group'><label class='control-label col-sm-1' for='text'>Nombre:</label><div class='col-sm-4'>" +
-                    "<input class='form-control' type='text' name='driverName" + cant + "' value='' />" +
-                    "</div>" +
-                    "<label class='control-label col-sm-1' for='text'>Cedula:</label>" +
-                    "<div class='col-sm-2'>" +
-                    "<input class='form-control' type='text' name='document" + cant + "' value='' />" +
-                    "</div>" +
-                    "<label class='control-label col-sm-1' for='text'>Contacto:</label>" +
-                    "<div class='col-sm-3'>" +
-                    "<input class='form-control' type='text' name='contactoHijo" + cant + "' value='' />" +
-                    "</div>" +
-                    "</div>" +
-                    "<div class='form-group'>" +
-                    "<label class='control-label col-sm-2' for='text'>Insercion educativa:</label>" +
-                    "<div class='col-sm-3'>" +
-                    "<input class='form-control' type='text' name='insercionHijo" + cant + "' value= '' />" +
-                    "</div>" +
-                    "<label class='control-label col-sm-2' for='fechaNacHijo' >Fecha Nacimiento</label>" +
-                    "<div class='input-group date col-sm-2'>" +
-                    "<input type='text' class='form-control'  id='fecha' name='fechaNacHijo" + cant + "' value=''/>" +
-                    "<span class='input-group-addon'>" +
-                    "<span class='glyphicon glyphicon-calendar'></span>" +
-                    "</span>" +
-                    "</div>" +
-                    " </div><div class='col-sm-1'><button type='button' onclick='removeDriver(" + vm.drivers + ")' class='btn btn-danger'><span class='glyphicon glyphicon-minus-sign' ></span></button></div></div>");
-            
-        }
+
 
 	}
 
