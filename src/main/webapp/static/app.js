@@ -27,12 +27,6 @@
                 controller: 'HomeController',
                 templateUrl: 'home/home',
                 title: 'Rent-UY - Inicio',
-                /*resolve:{
-                    'AllAdvertiserData':
-                        ['$http', function($http) { return $http.get('/adv/adv'); }],
-                    'EmptyData':
-                        ['$http', function($http) { return ''; }],
-                },*/
                 controllerAs: 'vm'            
              })
              
@@ -40,6 +34,13 @@
                 controller: 'HomeController',
                 templateUrl: 'home/home',
                 title: 'Rent-UY - Inicio',
+                controllerAs: 'vm'            
+             })
+             
+             .when('/about', {
+                controller: 'HomeController',
+                templateUrl: 'home/about',
+                title: 'Rent-UY - Nosotros',
                 controllerAs: 'vm'            
              })
 
@@ -362,6 +363,9 @@
         	$rootScope.roladmin = false;
             $rootScope.rolemployee = false;
         	$location.path('/home');
+        	setTimeout(function(){
+                $window.location.reload();
+        	},3000);
         }
         
         $rootScope.chat = false;

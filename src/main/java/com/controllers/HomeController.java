@@ -15,4 +15,10 @@ public class HomeController {
 		ModelAndView view=new ModelAndView("home/home");
 		return view;
 	}
+	
+	@RequestMapping(value="/about",method =RequestMethod.GET)
+	public ModelAndView getAboutPage(){
+		ModelAndView view=new ModelAndView("home/about");
+		return view;
+	}
 }

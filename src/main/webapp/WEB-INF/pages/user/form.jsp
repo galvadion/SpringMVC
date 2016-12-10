@@ -118,7 +118,7 @@
 								<div class="form-group customDatePickers col-sm-6" >
 									<div class="input-group date" id="birthDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
 										<label for="form.birthDate.$dirty" class="control-label">* Fecha de	Nacimiento</label> 
-										<input class="form-control" size="16" type="text" name="birthDate" placeholder="Nacimiento DD-MM-YYYY" ng-model="vm.user.birthDate" ng-readonly="vm.edit" readonly required> 
+										<input class="form-control" size="16" type="text" name="birthDate" placeholder="Nacimiento DD/MM/YYYY" ng-model="vm.user.birthDate" ng-readonly="vm.edit" readonly required> 
 										<span class="input-group-addon customAddonSize">
 										<span class="glyphicon glyphicon-calendar"></span>
 										</span>
@@ -130,7 +130,7 @@
 										data-link-format="dd/mm/yyyy">
 										<label for="form.licenseExpirationDate.$dirty" class="control-label">* Vencimiento Licencia</label> 
 										<input class="form-control" size="16" type="text"
-											name="licenseExpirationDate" placeholder="Vencimiento licencia DD-MM-YYYY"
+											name="licenseExpirationDate" placeholder="Vencimiento licencia DD/MM/YYYY"
 										ng-model="vm.user.licenseExpirationDate" ng-readonly="vm.edit"
 										required /> <span
 											class="input-group-addon customAddonSize"> <span
@@ -142,6 +142,15 @@
 										class="help-block">Vencimiento de licencia es requerido</span>
 								</div>
 
+								<div class="form-group col-sm-6"
+									ng-class="{ 'has-error': form.document.$dirty && form.document.$error.required }">
+									<label for="document">* Documento</label> <input type="text"
+										class="form-control" id="document" name="document"
+										ng-model="vm.user.document" placeholder="Cédula o nro. de pasaporte" required>
+									<span
+										ng-show="form.document.$dirty && form.document.$error.required"
+										class="help-block">Documento es requerido</span>
+								</div>
 							</div>
 
 							<div class="row" ng-if="vm.location[1] == 'employee'">
