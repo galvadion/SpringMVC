@@ -116,10 +116,12 @@
 							</div>
 						</div>
 							<div id="fines">
-							</div>
-							<button class="btn  btn-orange">
-								<strong>Confirmar devolucion</strong>
-							</button>
+				<p ng-repeat="(key,value) in vm.rent.rentLines">{{value.detail}}
+					{{value.amount}}</p>
+			</div>
+			<button ng-click="doReturn()" class="btn  btn-orange">
+				<strong>Ir a devolucion de vehiculo</strong>
+			</button>
 							
 						
 					</div>
