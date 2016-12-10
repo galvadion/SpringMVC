@@ -4,7 +4,7 @@
 
     /***App Module Definition***/
     angular
-        .module('app', ['ngFileUpload','ngRoute', 'ngCookies','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps'])
+        .module('app', ['ngFileUpload','ngRoute', 'ngCookies','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps', 'checklist-model'])
         .config(config)
         .run(run)
         .run(['$location', '$rootScope', function($location, $rootScope) {
@@ -360,6 +360,31 @@
         	$rootScope.roladmin = false;
             $rootScope.rolemployee = false;
         	$location.path('/home');
+        }
+        
+        $rootScope.chat = false;
+
+        $rootScope.initChat = function () {
+        	var userName = '';
+        	if ($rootScope.globals.currentUser) {        	
+            	if($rootScope.globals.currentUser.rol == "Admin"){//            		
+            		userName ='Emp_'+$rootScope.globals.currentUser.name;
+            	}
+            	else if($rootScope.globals.currentUser.rol == "Client"){//            		
+            		userName ='Cli_'+$rootScope.globals.currentUser.name;
+            	}else if($rootScope.globals.currentUser.rol == "Employee"){
+            		userName ='Emp_'+$rootScope.globals.currentUser.name;
+            	}
+        	}else {
+	            var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	            for( var i=0; i < 4; i++ ){
+	                userName += possible.charAt(Math.floor(Math.random() * possible.length));
+	            }
+	            userName='Unk_'+userName;
+        	}
+    		$.cometChat.onLoad({memberListContainerID:'members'});
+    		join(userName);
+            $rootScope.chat = true;
         }
 
     }

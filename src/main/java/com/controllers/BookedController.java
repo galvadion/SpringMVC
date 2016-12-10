@@ -47,16 +47,5 @@ public class BookedController {
 		ModelAndView view = new ModelAndView("booked/search");
 		return view;
 	}
-	
-	public String registerBooking(BookingModel model,Client client, String transactionId, String payerId){
-		try{
-			bookedService.registerBook(model, client, transactionId, payerId);
-			return "ok";
-		}
-		catch(Exception ex){
-			log.error(ex);
-			return "error";
-		}
-	}
 
 }

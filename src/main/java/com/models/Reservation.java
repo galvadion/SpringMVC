@@ -1,6 +1,9 @@
 package com.models;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.entities.Extras;
 
 public class Reservation implements Serializable{
 	
@@ -17,6 +20,8 @@ public class Reservation implements Serializable{
 	private String orderTotal;
 	
 	private int clientId;
+	
+	private List<Extras> extras;
 
 	public BookingModel getBookingModel() {
 		return bookingModel;
@@ -65,6 +70,11 @@ public class Reservation implements Serializable{
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
-	
+	public List<Extras> getExtras() {
+		return extras;
+	}
+	public void setExtas(List<Extras> extas) {
+		this.extras = extas;
+	}
 	
 }

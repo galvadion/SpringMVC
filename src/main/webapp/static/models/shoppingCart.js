@@ -159,11 +159,16 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
 	    },
 		
 		success:function(response){
-			paypaliframe.contentWindow.paypalBeginTransaction(response.token);
+			if(response.status == 500){
+				alert(response.message);
+			}
+			else{
+				paypaliframe.contentWindow.paypalBeginTransaction(response.token);
+			}
 		},
 		error: function(response){
-			paypal.checkout.closeFlow();
-			alert("Error");
+			$("#paypal-iframe").remove();
+			throw response.responseJSON.message;
 		}
 	})
     

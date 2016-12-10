@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.dao.GenericDao;
 import com.dao.RentDao;
 import com.entities.Booked;
+import com.entities.BranchOffice;
 import com.entities.Rent;
 import com.services.RentService;
 
@@ -36,6 +37,10 @@ public class RentServiceImpl extends GenericServiceImpl<Rent, Integer> implement
 		rentDao.saveOrUpdate(rent);
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public List<Rent> getReturnedToday(BranchOffice branch,LocalDate day){
+		return rentDao.getReturnedToday(branch,day);
 	}
 
 	public List<Rent> getBetweenDates(LocalDate initialDate, LocalDate finalDate) {

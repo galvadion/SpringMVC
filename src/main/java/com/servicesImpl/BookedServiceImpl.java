@@ -2,6 +2,7 @@ package com.servicesImpl;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +20,7 @@ import com.dao.BranchOfficeDao;
 import com.entities.Booked;
 import com.entities.BranchOffice;
 import com.entities.Client;
+import com.entities.Extras;
 import com.entities.Model;
 import com.entities.StatusBetweenDates;
 import com.entities.Vehicle;
@@ -27,7 +29,7 @@ import com.services.BookedService;
 
 @Service
 @PropertySource("classpath:config.properties")
-public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> implements BookedService{
+public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> implements BookedService {
 
 	private BookedDao bookedDao;
 	private VehicleDao vehicleDao;
@@ -56,7 +58,7 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-	public void registerBook(BookingModel model,Client client, String transactionId, String payerId) {
+	public void registerBook(BookingModel model,Client client, String transactionId, String payerId, List<Extras> extras) {
 		Vehicle vehicle=vehicleDao.getVehiculeAvailable(model);
 		BranchOffice originBO=branchOfficeDao.getById(model.getOriginBranchOfficeId());
 		BranchOffice finalBO=branchOfficeDao.getById(model.getEndBranchOfficeId());
@@ -73,12 +75,13 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		booked.setPayerId(payerId);
 		Model vehiculeModel=vehicle.getModel();
 		float gpsByDay=0,insuranceByDay=0;
-		if(model.isWithGps()){
-			gpsByDay=Float.valueOf(env.getProperty("gps"));
-		}if(model.isWithInsurance()){
+		if(model.isWithInsurance()){
 			insuranceByDay=vehiculeModel.getInsurance();
 		}
 		float initialAmount = vehiculeModel.getCategory().getBasePrice() + gpsByDay + insuranceByDay;
+		for(Extras extra : extras){
+			initialAmount += extra.getPrice();
+		}
 		long days = model.getStartDate().until(model.getEndDate(), ChronoUnit.DAYS);
 		if (days > 1) {
 			initialAmount = (float) ((initialAmount * days) * (0.8));
@@ -86,6 +89,7 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		if (model.isWithFullTank()) {
 			initialAmount += vehiculeModel.getFullTank();
 		}
+		booked.setExtrasList(extras);
 		booked.setInitialAmount(initialAmount);
 		booked.setClient(client);
 		//Missing booked set client waiting for Oauth implementation
@@ -99,6 +103,10 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		return bookedDao.getBookedByClient(user);
 	}
 
+	@Override
+	public List<Booked> getBookedByDayAndOffice(BranchOffice branch, LocalDate date) {
+		// TODO Auto-generated method stub
+		return bookedDao.getDelivered(branch,date);
+	}
 
-	
 }

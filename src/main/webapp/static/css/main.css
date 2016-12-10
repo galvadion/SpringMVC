@@ -1,6 +1,10 @@
 @charset "UTF-8";
 @import url(http://fonts.googleapis.com/css?family=Dosis:300,700|Ubuntu+Mono|Lato:300,400,700,300italic,400italic&subset=latin,latin-ext);
 
+html{
+	height: 100%;
+}
+
 body {
   font-family: 'Raleway', sans-serif;
   color: #2a323d;
@@ -12,6 +16,15 @@ body {
   -ms-overflow-style: scrollbar;
   background-color: #ededed;
   color: #616f77;
+  min-height:100%;
+  margin: 0;
+  padding: 0;
+}
+
+.wrap, .wrap > div{
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 body a {
@@ -18302,3 +18315,40 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
         display:block !important;
     }
 }
+
+.fullSection{
+	height: 85vh;
+	padding:0;
+	margin:0
+}
+
+#paymentBookingSection{
+	background : url(https://buidln.clipdealer.com/001/528/628//previews/2--1528628-commerce%20soft%20white%20background%20greeting%20intro.jpg) no-repeat left top fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#paymentDetailsSection{
+	background : url(https://www.jaggedpeak.com/MerchantUploads/edgeJaggedPeakCorp/jaggedpeak-video-poster-girl.jpg) no-repeat; /* left top fixed; */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#paymentConfirmSection{
+	background : url(http://ecolodriver.com/wp-content/uploads/2014/04/Achat-de-voiture.jpg) no-repeat; /* left top fixed; */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#confirmMessage{
+	background-color: rgba(255,255,255,0.7);
+    margin-top: 20vh;
+}
+
+

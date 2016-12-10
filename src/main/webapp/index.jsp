@@ -25,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href="static/js/dista/plugins/bootstrap/datatables.bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="static/js/dista/css/angular-datatables.css">
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="static/js/chat/comet.chat.css">
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-switch.min.css">
         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
@@ -110,6 +111,16 @@
 		<script type="text/javascript" src="static/js/src/plugins/select/angular-datatables.select.js"></script>
 		<script type="text/javascript" src="static/js/angular-checklist-model.js"></script>
 
+		<!-- Chat -->
+		<script type="text/javascript" src="static/js/chat/org/cometd.js"></script>
+		<script type="text/javascript" src="static/js/chat/org/cometd/AckExtension.js"></script>
+		<script type="text/javascript" src="static/js/chat/org/cometd/ReloadExtension.js"></script>
+		 
+		<script type="text/javascript" src="static/js/chat/jquery/jquery.cookie.js"></script>
+		<script type="text/javascript" src="static/js/chat/jquery/jquery.cometd.js"></script>
+		<script type="text/javascript" src="static/js/chat/jquery/jquery.cometd-reload.js"></script>
+		<script type="text/javascript" src="static/js/chat/chat.window.js"></script>
+		<script type="text/javascript" src="static/js/chat/comet.chat.js"></script>
 
         <!--Services-->
         <script src="static/services/authentication.service.js"></script>
@@ -148,7 +159,7 @@
         <script src="static/models/shoppingCart.js"></script>
         
 
-        <div id="wrap">
+        <div id="wrap" class="wrap">
           <div ng-view></div>
         </div>
 

@@ -56,8 +56,10 @@ public class PaymentTransactionController {
 	public ResponseEntity<Map<String, Object>> paypalPaymentBegin(@RequestBody List<TransactionItem> itemsList){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("status", "500");
+//		map.put("message", "An error has ocurred");
+//		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 
-		// El metodo debe recibir una lista TransactionItems, validar su contenido y luego enviarlo al paypalService
 		try{
 			
 			if(itemsList == null){
@@ -149,12 +151,13 @@ public class PaymentTransactionController {
 			String orderTotal = reservation.getOrderTotal();
 			BookingModel bookingCar = reservation.getBookingModel();
 			int clientId = reservation.getClientId();
+			List<Extras> extras = reservation.getExtras();
 			PayPalTransaction transaction = paypalService.confirmTransaction(token, PayerID, itemTotal, orderTotal);
 			switch(transaction.getAck()){
 			case "SUCCESS":
 				String transactionId = transaction.getTransactionID();
 				Client client = (Client)userService.get(clientId);
-				bookedService.registerBook(bookingCar, client, transactionId, transaction.getPayerPayPalID());
+				bookedService.registerBook(bookingCar, client, transactionId, transaction.getPayerPayPalID(), extras);
 				
 				return ResponseEntity.ok("Transaction complete!");
 				

@@ -13,12 +13,15 @@
 		
 		var token, payerId;
 		
+		vm.roladmin = $rootScope.roladmin;
+        vm.rolemployee = $rootScope.rolemployee;
+        vm.rolclient = $rootScope.rolclient;
 		vm.estado = "";
 		vm.items = [];
 		vm.itemTotal;
 		vm.orderTotal;
-		vm.initDate;
-		vm.endDate;
+		vm.initDate = "";
+		vm.endDate = "";
 		vm.insuranceCheck = false;
 		vm.fulltankCheck = false;
 		vm.babySeat1 = 0;
@@ -27,10 +30,9 @@
 		vm.bookingDays = 0;
 		
 		$scope.model;
-		$scope.gpsPrice = vm.gpsPrice;
 		$scope.insurancePrice;
 		$scope.fulltankPrice;
-		$scope.extras;
+		$scope.extras = [];
 		
 		initController();
 		
@@ -47,19 +49,24 @@
 				$location.path("/");
 			}
 			else{
+				vm.initDate = $rootScope.dateInitial;
+				vm.endDate = $rootScope.dateEnding;
 				PaymentService.GetModelDetails(id).then(function(response){
 					if(response.success){
 						$scope.model = response.data.model;
-						$scope.extras = response.data.extras;
 						$scope.insurancePrice = $scope.model.insurance;
 						$scope.fulltankPrice = $scope.model.fullTank;
-						vm.bookingDays = Math.round(((new Date($rootScope.dateEnding.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$2/$1/$3")).getTime()) - (new Date($rootScope.dateInitial.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$2/$1/$3")).getTime()))/(1000*60*60*24));
+						vm.bookingDays = Math.round(((new Date(vm.endDate.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$2/$1/$3")).getTime()) - (new Date(vm.initDate.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$2/$1/$3")).getTime()))/(1000*60*60*24));
 						$scope.cart.addItem($scope.model.id, $scope.model.brand.name + " " + $scope.model.name, $scope.model.category.basePrice, vm.bookingDays);
+						var extras = response.data.extras;
+						for(var i in extras){
+							$scope.extras.push(new ExtraItems(extras[i].id, extras[i].name, extras[i].price, false));
+						}
 						vm.estado = "booking";
-						console.log($scope.extras);
+						//vm.estado = "confirm";
 					}
 					else{
-						alert(response.data);
+						$rootScope.doFlash(response.data, "", "error", 6);
 					}
 			
 				})
@@ -67,12 +74,12 @@
 		}
 		
 		$scope.volver = function(){
-			$location.path("search/origin=" + $rootScope.officeInitial + "&destination=" + $rootScope.officeEnding + "&from=" + $rootScope.dateInitial + "&to=" + $rootScope.dateEnding);
+			$location.path("/search/origin=" + $rootScope.officeInitial + "&destination=" + $rootScope.officeEnding + "&from=" + $rootScope.dateInitial.replace(/(\d{2})[/](\d{2})[/](\d{4})/, "$1-$2-$3") + "&to=" + $rootScope.dateEnding.replace(/(\d{2})[/](\d{2})[/](\d{4})/, "$1-$2-$3"));
 		}
 		
 		$scope.addItem = function(id, name, price, checked){
 			var quantity = 0;
-			if(id == -3){
+			if(id == "FullTank"){
 				quantity = 1;
 			}
 			else{
@@ -95,23 +102,32 @@
 					vm.items = response.data.itemsList;
 					vm.itemTotal = response.data.itemTotal;
 					vm.orderTotal = response.data.orderTotal;
+					$("#token").remove();
+					$("#payerId").remove();
+					vm.estado = "details";
+					
+				}
+				else{
+					$rootScope.doFlash(response.data, "", "error", 6);
 				}
 			})
-			$("#token").remove();
-			$("#payerId").remove();
-			vm.estado = "details";
 			NProgress.done();
 			
 		}
 		
 		$scope.ConfirmBooking = function(){
 			NProgress.start();
+			var selectedExtras = [];
+			for(var i in $scope.extras){
+				if($scope.extras[i].checked){
+					selectedExtras.push({ id : $scope.extras[i].id, name : $scope.extras[i].name, price : $scope.extras[i].price});
+				}
+			}
 			var booking = {	'idModel' : $scope.model.id, 
-							'startDate' : ($rootScope.dateInitial.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$1/$2/$3")),
-							'endDate' : ($rootScope.dateEnding.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$1/$2/$3")),
+							'startDate' : (vm.initDate.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$1/$2/$3")),
+							'endDate' : (vm.endDate.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$1/$2/$3")),
 							'originBranchOfficeId' : $rootScope.officeInitial,
 							'endBranchOfficeId' : $rootScope.officeEnding,
-							'withGps' : vm.gpsCheck,
 							'withInsurance' : vm.insuranceCheck,
 							'withFullTank' : $scope.fulltankPrice
 						   };
@@ -121,15 +137,15 @@
 					"payerId" : payerId,
 					"itemTotal" : vm.itemTotal,
 					"orderTotal" : vm.orderTotal,
+					'extras' : selectedExtras,
 					"clientId" : $rootScope.globals.currentUser.id
 			}
-			console.log($rootScope.globals.currentUser.id);
 			PaymentService.ConfirmPayment(data).then(function(response){
 				if(response.success){
-					alert(response.data);
+					vm.estado = "confirm";
 				}
 				else{
-					alert(response.data);
+					$rootScope.doFlash(response.data, "", "error", 6);
 				}
 			})
 			NProgress.done();
@@ -138,6 +154,13 @@
 		$scope.CancelBooking = function(){
 			vm.estado = "booking";
 		}
+	}
+	
+	function ExtraItems(id, name, price, checked){
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.checked = checked;
 	}
 	
 	
