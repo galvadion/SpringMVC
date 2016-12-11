@@ -87,6 +87,9 @@ public class Booked implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="client_id", nullable=false)
 	private Client client;
+	
+	@Column(name="payer_id", nullable=true)
+	private String payerId;
 
 	public Integer getId() {
 		return id;
@@ -218,6 +221,14 @@ public class Booked implements Serializable{
 
 	public void setExtrasList(List<Extras> extrasList) {
 		this.extrasList = extrasList;
+	}
+	
+	public String getPayerId() {
+		return payerId;
+	}
+	
+	public void setPayerId(String payerId) {
+		this.payerId = payerId;
 	}
 
 	public String getPromotionCode_id() {

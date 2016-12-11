@@ -55,7 +55,7 @@
 										ng-options="item.id as item.name for item in vm.allOffices"
 										class="form-control" required>
 										<option value="">Seleccione sucursal</option>
-
+										
 									</select> <span
 										ng-show="form.branchOffice.$dirty && form.branchOffice.$error.required"
 										class="help-block">Sucursal es requerido</span>
@@ -153,8 +153,18 @@
 								</div>
 							</div>
 
-
 							<div class="row">
+								<div class="form-group col-sm-12" class="form-group"
+									ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required }">
+									<label for="description" class="control-label">* Descripción</label>
+										 <textarea type="text" ng-model="vm.vehicle.description"
+										name="description" id="description" class="form-control"
+										placeholder="Descripción del vehículo" required /> <span
+										ng-show="form.description.$dirty && form.description.$error.required"
+										class="help-block">Es necesario escribir una descripción para el usuario</span>
+								</div>
+								</div>
+								<div class="row">
 								<div class="form-group col-sm-12" class="form-group">
 									<label for="observations" class="control-label">Observaciones</label>
 									<textarea type="text" ng-model="vm.vehicle.observations"

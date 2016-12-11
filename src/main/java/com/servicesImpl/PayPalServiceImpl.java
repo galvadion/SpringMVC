@@ -279,7 +279,6 @@ public class PayPalServiceImpl implements PayPalService {
 				
 				for(PaymentInfoType paymentInfo : paymentInfoList){
 					transaction.setTransactionID(paymentInfo.getTransactionID());
-					System.out.println("PayPalService: TransactionID = " + paymentInfo.getTransactionID());
 				}
 				
 				break;

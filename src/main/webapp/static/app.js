@@ -4,7 +4,7 @@
 
     /***App Module Definition***/
     angular
-        .module('app', ['ngFileUpload','ngRoute', 'ngCookies','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps','isteven-multi-select'])
+        .module('app', ['ngFileUpload','ngRoute', 'ngCookies','angular-confirm','ui.bootstrap','ngDialog','ngAnimate','datatables', 'datatables.buttons','uiGmapgoogle-maps', 'checklist-model', 'isteven-multi-select'])
         .config(config)
         .run(run)
         .run(['$location', '$rootScope', function($location, $rootScope) {
@@ -266,6 +266,12 @@
                 controllerAs: 'vm'
             })
             
+            .when('/payment/booking', {
+            	controller: 'PaymentController',
+            	templateUrl:'payment/booking',
+            	title: 'Rent-UY - Reserva',
+            	controllerAs: 'vm'
+            })
             .when('/report', {
                 controller: 'ReportController',
                 templateUrl: 'report',
@@ -285,6 +291,12 @@
     	$rootScope.roladmin = false;
         $rootScope.rolcemployee = false;
     	$rootScope.rolclient = false;
+    	
+    	$rootScope.modelId;
+    	$rootScope.dateInitial;
+    	$rootScope.dateEnding;
+    	$rootScope.officeInitial;
+    	$rootScope.officeEnding;
     	
         //Session persistance: keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
@@ -396,3 +408,5 @@
     }
 
 })();
+    	
+    	

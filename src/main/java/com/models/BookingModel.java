@@ -2,6 +2,13 @@ package com.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+
+import com.configuration.LocalDateDeserializer;
+import com.configuration.LocalDateSerializer;
+import com.entities.Extras;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class BookingModel implements Serializable{
 	/**
@@ -9,13 +16,17 @@ public class BookingModel implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer idModel;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
 	private LocalDate startDate;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
 	private LocalDate endDate;
 	private Integer originBranchOfficeId;
 	private Integer endBranchOfficeId;
-	private boolean withGps;
 	private boolean withInsurance;
 	private boolean withFullTank;
+	
 	public Integer getIdModel() {
 		return idModel;
 	}
@@ -46,12 +57,6 @@ public class BookingModel implements Serializable{
 	public void setEndBranchOfficeId(Integer endBranchOfficeId) {
 		this.endBranchOfficeId = endBranchOfficeId;
 	}
-	public boolean isWithGps() {
-		return withGps;
-	}
-	public void setWithGps(boolean withGps) {
-		this.withGps = withGps;
-	}
 	public boolean isWithInsurance() {
 		return withInsurance;
 	}
@@ -64,6 +69,7 @@ public class BookingModel implements Serializable{
 	public void setWithFullTank(boolean withFullTank) {
 		this.withFullTank = withFullTank;
 	}
+	
 	
 	
 }

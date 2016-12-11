@@ -152,7 +152,7 @@
 	                    	</div>
 	                    	
 	                    	<div class="col-sm-1">
-	                    		<a href class="btn  btn-orange"><strong>Reservar</strong></a>
+	                    		<a href class="btn  btn-orange" ng-click="reservar(value.id)"><strong>Reservar</strong></a>
 	                    	</div>
 	                    </div>
 	                    

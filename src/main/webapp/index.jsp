@@ -27,6 +27,8 @@
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" type="text/css" href="static/css/isteven-multi-select.css">
         <link rel="stylesheet" type="text/css" href="static/js/chat/comet.chat.css">
+        <link rel="stylesheet" type="text/css" href="static/css/bootstrap-switch.min.css">
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
     </head>
     <body>
@@ -56,6 +58,8 @@
         <script type="text/javascript" src="static/js/ngDialog.js"></script>
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
 		<script type="text/javascript" src="static/js/moment.min.js"> </script>
+		<script type="text/javascript" src="static/js/bootstrap-switch.min.js"></script>
+		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 		<script type="text/javascript" src="static/js/isteven-multi-select.js"> </script>
 		
 		<!--Maps-->
@@ -107,6 +111,7 @@
 		<script type="text/javascript" src="static/js/src/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
 		<script type="text/javascript" src="static/js/src/plugins/buttons/angular-datatables.buttons.js"></script>
 		<script type="text/javascript" src="static/js/src/plugins/select/angular-datatables.select.js"></script>
+		<script type="text/javascript" src="static/js/angular-checklist-model.js"></script>
 
 		<!-- Chat -->
 		<script type="text/javascript" src="static/js/chat/org/cometd.js"></script>
@@ -133,6 +138,7 @@
         <script src="static/services/rent.service.js"></script>
         <script src="static/services/tariff.service.js"></script>
         <script src="static/services/report.service.js"></script>
+        <script src="static/services/payment.service.js"></script>
 
 
         <!--Controllers-->
@@ -150,9 +156,12 @@
         <script src="static/controllers/rent/rent.controller.js"></script>
         <script src="static/controllers/tariff/tariff.controller.js"></script>
         <script src="static/controllers/report/report.controller.js"></script>
+        <script src="static/controllers/payment/payment.controller.js"></script>
+        
+        <script src="static/models/shoppingCart.js"></script>
         
 
-        <div id="wrap">
+        <div id="wrap" class="wrap">
           <div ng-view></div>
         </div>
 

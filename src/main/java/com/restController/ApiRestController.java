@@ -1,6 +1,7 @@
 package com.restController;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ import com.entities.Admin;
 import com.entities.BranchOffice;
 import com.entities.Brand;
 import com.entities.Client;
+import com.entities.Extras;
 import com.entities.Model;
 import com.entities.Promotion;
 import com.entities.User;
@@ -150,10 +152,11 @@ public class ApiRestController {
 		booking.setOriginBranchOfficeId(1);
 		booking.setStartDate(LocalDate.now());
 		booking.setWithFullTank(false);
-		booking.setWithGps(true);
+		//booking.setWithGps(true);
 		booking.setWithInsurance(false);
 		booking.setIdModel(1);
-		bookedService.registerBoot(booking, (Client) userService.get(1));
+		List<Extras> extras = new ArrayList<Extras>();
+ 		bookedService.registerBook(booking, (Client) userService.get(1), "Transaction_ID_test", "PayPal_Payer_ID", extras);
 	}
 
 

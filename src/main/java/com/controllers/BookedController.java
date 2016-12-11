@@ -1,15 +1,21 @@
 package com.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.entities.Client;
+import com.models.BookingModel;
 import com.entities.Booked;
 import com.entities.Vehicle;
 import com.services.BookedService;
@@ -17,12 +23,11 @@ import com.services.BookedService;
 @Controller
 @RequestMapping(value = "booked")
 public class BookedController {
-	
+
 	@Autowired
 	BookedService bookedService;
 	
-	
-
+	static Logger log = Logger.getLogger(PaymentTransactionController.class.getName());
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView getListPage() {

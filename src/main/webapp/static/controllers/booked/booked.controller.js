@@ -35,8 +35,8 @@
 		});
 
 		$scope.checkEndDate = function() {
-			var firstDate = moment(vm.search.beginDate, "DD-MM-YYYY");
-			var lastDate = moment(vm.search.endDate, "DD-MM-YYYY");
+			var firstDate = moment(vm.search.beginDate, "dd/mm/yyyy");
+			var lastDate = moment(vm.search.endDate, "dd/mm/yyyy");
 			var isAfter = firstDate.isAfter(lastDate);
 			if (isAfter) {
 				$scope.endDateError = true;
@@ -236,6 +236,16 @@
         		NProgress.done();
         	});
         };
+        
+        $scope.reservar = function(modelId){
+        	$rootScope.modelId = modelId;
+        	$rootScope.dateInitial = vm.search.beginDate;
+        	$rootScope.dateEnding = vm.search.endDate;
+        	$rootScope.officeInitial = vm.search.officeOriginId;
+        	$rootScope.officeEnding = vm.search.officeEndId;
+        	
+        	$location.path("/payment/booking");
+        }
 
     }
 

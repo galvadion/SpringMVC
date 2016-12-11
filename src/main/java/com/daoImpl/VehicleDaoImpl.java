@@ -26,13 +26,13 @@ public class VehicleDaoImpl extends GenericDaoImpl<Vehicle, Integer> implements 
 	}
 	public Vehicle getVehiculeAvailable(BookingModel model) {
 		
-		Query query=currentSession().createQuery("Select v from Vehicle v join v.model m join v.status s where m.id=:modelId v.unavailable=false and s.id in (Select s.id from StatusBetweenDates s join s.branchOffice b where :beginDate >= s.beginDate and :endDate <= s.endDate and s.status =:status and b.id =:branchId) limit 1");
+		Query query=currentSession().createQuery("Select v from Vehicle v join v.model m join v.status s where m.id=:modelId and v.unavailable=false and s.id in (Select s.id from StatusBetweenDates s join s.branchOffice b where :beginDate >= s.beginDate and :endDate <= s.endDate and s.status =:status and b.id =:branchId)");
 		query.setParameter("modelId", model.getIdModel());
 		query.setParameter("beginDate", model.getStartDate());
 		query.setParameter("endDate", model.getEndDate());
 		query.setParameter("status", Vehicle_Status.Available);
 		query.setParameter("branchId", model.getOriginBranchOfficeId());
-		return (Vehicle) query.getSingleResult();
+		return (Vehicle) query.getResultList().get(0);
 	}
 	@SuppressWarnings("unchecked")
 	public List<Vehicle> getAvailable() {

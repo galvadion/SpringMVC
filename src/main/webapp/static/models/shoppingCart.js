@@ -159,11 +159,16 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
 	    },
 		
 		success:function(response){
-			paypaliframe.contentWindow.paypalBeginTransaction(response.token);
+			if(response.status == 500){
+				alert(response.message);
+			}
+			else{
+				paypaliframe.contentWindow.paypalBeginTransaction(response.token);
+			}
 		},
 		error: function(response){
-			paypal.checkout.closeFlow();
-			alert("Error");
+			$("#paypal-iframe").remove();
+			throw response.responseJSON.message;
 		}
 	})
     
@@ -215,13 +220,6 @@ function getDetails(url){
 		document.body.appendChild(inputToken);
 		document.body.appendChild(inputPayerId);
 		$("#paymentDetails").click();
-		//alert("Token = " + token + " and Payer ID = " + payerId);
-//		var scope = angular.element(document.getElementById('PaymentController')).scope();
-//		scope.$apply(function(){
-//			scope.getDetails(token, payerId);
-//		})
-//		var f = angular.element(document.getElementById('wrap')).scope().getDetails(token, payerId);
-//		f.$apply();
 	}
 	$("#paypal-iframe").remove();
 };
