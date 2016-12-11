@@ -18363,3 +18363,15 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
     margin-top: 20vh;
 }
 
+.bookingModalHeader{
+	background-color: #5cb85c;
+    color:white !important;
+    text-align: center;
+    font-size: 30px;
+}
+
+.bookingModalFooter{
+	background-color: #f9f9f9;
+	color:white !important;
+}
+

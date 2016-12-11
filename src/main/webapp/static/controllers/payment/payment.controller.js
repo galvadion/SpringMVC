@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('PaymentController', PaymentController);
 	
-	PaymentController.$inject = ['$location','$rootScope','$scope', 'PaymentService', '$routeParams'];
+	PaymentController.$inject = ['$location','$rootScope','$scope', 'PaymentService', '$routeParams', 'AuthenticationService'];
 	
-	function PaymentController($location, $rootScope, $scope, PaymentService, $routeParams){
+	function PaymentController($location, $rootScope, $scope, PaymentService, $routeParams, AuthenticationService){
 		
 		var vm = this;
 		
@@ -62,6 +62,7 @@
 						for(var i in extras){
 							$scope.extras.push(new ExtraItems(extras[i].id, extras[i].name, extras[i].price, false));
 						}
+						console.log($scope.model);
 						vm.estado = "booking";
 						//vm.estado = "confirm";
 					}
@@ -73,8 +74,29 @@
 			}
 		}
 		
+		$scope.loginModal = function(){
+			AuthenticationService.ClearCredentials();
+			$("#loginModal").modal();
+		}
+		
 		$scope.volver = function(){
 			$location.path("/search/origin=" + $rootScope.officeInitial + "&destination=" + $rootScope.officeEnding + "&from=" + $rootScope.dateInitial.replace(/(\d{2})[/](\d{2})[/](\d{4})/, "$1-$2-$3") + "&to=" + $rootScope.dateEnding.replace(/(\d{2})[/](\d{2})[/](\d{4})/, "$1-$2-$3"));
+		}
+		
+		$scope.login = function(){
+			AuthenticationService.Login(vm.email, vm.password).then(function (response) {
+				if(response.success) {
+					AuthenticationService.SetCredentials(response.data.id, response.data.email, response.data.name, response.data.rol, response.data.password);
+					$rootScope.doFlashMessage('Bienvenido!','','success');
+					vm.roladmin = $rootScope.roladmin;
+			        vm.rolemployee = $rootScope.rolemployee;
+			        vm.rolclient = $rootScope.rolclient;
+			        $("#loginModal").modal("hide");
+				}
+				else{
+					vm.error = "Usuario o contraseña incorrecta"
+				}
+			})
 		}
 		
 		$scope.addItem = function(id, name, price, checked){

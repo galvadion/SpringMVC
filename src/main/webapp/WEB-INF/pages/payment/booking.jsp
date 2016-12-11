@@ -14,7 +14,8 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-xs-8">
-									<img class="img-responsive" src="images/{{model.image[0]}}" alt="car-picture">
+									<img class="img-responsive" ng-if="!model.images[0]" src="static/images/noimage.png" alt="car-picture">
+									<img class="img-responsive" ng-if="model.images[0]" src="images/{{model.images[0].fileLocation}}" alt="car-picture">
 <!-- 									 <img class="img-responsive" src="https://www.bmw.co.cr/content/dam/bmw/common/all-models/i-series/i8/2014/model-card/BMW-i8_ModelCard.png" alt="car-picture">   -->
 								</div>
 								<div class="col-xs-4">
@@ -107,21 +108,17 @@
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<!-- <div class="panel-heading">
-							<center><h3>Pay with:</h3></center>
-						</div> -->
 						<div class="panel-body">
 							<p class="text-info" ng-show="vm.rolclient">
 								<button id="btnPaypalId"
 				                    class="btn btn-block btn-primary"
 				                    ng-click="cart.checkout('PayPal')"
 				                    ng-disabled="cart.getTotalCount() < 1" >
-				                    <!-- <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" alt="checkout PayPal"/> -->
 				                    <span class="glyphicon glyphicon-ok"></span> Reserva con Paypal 
 				                </button>
 							</p>
 							<p class="text-info" ng-show="!vm.rolclient">
-								<button id="btnLoginToPay" class="btn btn-block btn-success"><span class="glyphicon glyphicon-user"></span> Inicie sesión para reservar</button>
+								<button id="btnLoginToPay" class="btn btn-block btn-success" ng-click="loginModal()"><span class="glyphicon glyphicon-user"></span> Inicie sesión para reservar</button>
 							</p>
 							<p class="text-info">
 								<button class="btn btn-block btn-danger" ng-click="volver()"><i class="glyphicon glyphicon-chevron-left" /> Volver</button>
@@ -196,4 +193,59 @@
 		</div>
 	</div>
 	<input id="paymentDetails" type="button" hidden="true" ng-click="getDetails()"/>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="loginModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header bookingModalHeader" style="padding: 35px 50px;">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4>
+						<span class="glyphicon glyphicon-lock"></span> Login
+					</h4>
+				</div>
+				<div class="modal-body" style="padding: 40px 50px;">
+				
+					<div ng-show="vm.error" class="alert alert-danger  alert-lightred alert-dismissable">{{vm.error}}</div>
+					
+					<form role="form" class="form-validation">
+					
+						<div class="help-block with-errors"></div>
+						<div class="form-group" ng-class="{ 'has-error': (form.email.$dirty && form.email.$error.required ) || form.email.$error.email}">
+							<label for="usrname"	><span 	
+								class="glyphicon glyphicon-user"></span> Username</label> <input
+								type="email" class="form-control" id="email" ng-model="vm.email" name="email"
+								placeholder="Ingresar email" data-error="Formato de e-mail incorrecto" required>
+							<div class="help-block with-errors"></div>
+							<span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email es requirido</span>
+		                	<span ng-show="form.email.$dirty && form.email.$error.email" class="help-block">No es un Email valido</span>
+						</div>
+						
+						<div class="form-group" >
+							<label for="psw"><span
+								class="glyphicon glyphicon-eye-open"></span> Password</label> <input
+								type="password" class="form-control" id="password" ng-model="vm.password" name="password"
+								placeholder="Ingresar contraseña" required>
+								<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Contraseña es requerida</span>
+						</div>
+						
+						<button type="submit" class="btn btn-success btn-block" ng-click="login()">
+							<span class="glyphicon glyphicon-off"></span> Login
+						</button>
+						
+					</form>
+				</div>
+				<div class="modal-footer bookingModalFooter">
+					<button type="submit" class="btn btn-danger pull-left"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove"></span> Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Modal -->
+	
 </section>

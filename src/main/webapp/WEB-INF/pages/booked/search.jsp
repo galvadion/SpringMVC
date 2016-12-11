@@ -6,10 +6,10 @@
     <div class="page page-dashboard">
 
         <div class="pageheader">
-        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>BÃºsqueda</strong></h1>
+        	<h1 class="custom-font" style="margin-top: -10px !important;"><strong>Búsqueda</strong></h1>
             <ol class="breadcrumb">
                 <li><a href="#/home">Inicio</a></li>
-                <li class="breadcrumb-active">BÃºsqueda</li>
+                <li class="breadcrumb-active">Búsqueda</li>
             </ol>
         </div>
 
@@ -64,7 +64,7 @@
 						<br/>
 						
 						<div class="tile-header dvd dvd-btm">
-                            <h1 class="custom-font"><strong>BÃºsqueda </strong> Avanzada</h1>
+                            <h1 class="custom-font"><strong>Búsqueda </strong> Avanzada</h1>
                             <button type="button" class="btn" data-toggle="collapse" data-target="#demo"><span class="glyphicon glyphicon-chevron-down"></span></button>
                         </div>
                         
@@ -110,56 +110,59 @@
                     </div>
                     
                     <br/>
-                    	<h4 class="text-center" ng-if="vm.noResult">No se encontraron vehï¿½culos</h4>
+                    	<h4 class="text-center" ng-if="vm.noResult">No se encontraron vehículos</h4>
 	                    <div ng-repeat="(key, value) in vm.searchResult"  class="row" style="padding: 15px;">
-	                    <div class="col-sm-3">
-							<img ng-if="!value.images[0]" src="static/images/noimage.png" style="height: 150px; max-width: 240px;">
-							<img ng-if="value.images[0]" src="images/{{value.images[0].fileLocation}}" style="height: 150px; max-width: 240px;">
-						</div>
-                    	<div class="col-sm-2">
-                    		<table>
-                    			<tr>
-                    				<td>
-                    					<p>Marca: {{value.brand.name}}</p>
-                    				</td>
-                    			</tr>
-                    			<tr>
-                    				<td>
-                    					<p>Modelo: {{value.name}}</p>
-                    				</td>
-                    			</tr>
-                    			<tr>
-                    				<td>
-                    					<p>AÃ±o: {{value.year}}</p>
-                    				</td>
-                    			</tr>
-                    			<tr>
-                    				<td>
-                    					<p>Categoria: {{value.category.name}}</p>
-                    				</td>
-                    			</tr>
-                    			<tr>
-                    				<td>
-                    					<p>Transmision: {{value.transmission}}</p>
-                    				</td>
-                    			</tr>
-                    			<tr>
-                    				<td>
-                    					<p>Combustible: {{value.fuel.fuelType}}</p>
-                    				</td>
-                    			</tr>
-                    		</table>
-                    	</div>
-                    	
-                    	<div class="col-sm-1">
-                    		<a href class="btn  btn-orange" ng-click="reservar(value.id)"><strong>Reservar</strong></a>
-                    	</div>
-                    </div>
-                    
-                    <hr class="line-dashed line-full"/>
+	                    	<div class="col-sm-3">
+								<img ng-if="!value.images[0]" src="static/images/noimage.png" style="height: 150px; max-width: 240px;">
+								<img ng-if="value.images[0]" src="images/{{value.images[0].fileLocation}}" style="height: 150px; max-width: 240px;">
+	                    	</div>
+	                    	<div class="col-sm-2">
+	                    		<table>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Marca: {{value.brand.name}}</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Modelo: {{value.name}}</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Año: {{value.year}}</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Categoria: {{value.category.name}}</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Transmision: {{value.transmission}}</p>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Combustible: {{value.fuel.fuelType}}</p>
+	                    				</td>
+	                    			</tr>
+	                    		</table>
+	                    	</div>
+	                    	
+	                    	<div class="col-sm-1">
+	                    		<a href class="btn  btn-orange" ng-click="reservar(value.id)"><strong>Reservar</strong></a>
+	                    	</div>
+	                    </div>
+	                    
+	                    <hr class="line-dashed line-full"/>
 
-			</section>
-           </div>
-       </div>
-   </div>
+				</section>
+            </div>
+        </div>
+        
+        
+    </div>
+
 </section>
