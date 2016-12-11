@@ -26,6 +26,7 @@ public class PromotionService{
 	
 	public Promotion create(Promotion promo){
 		promo.setId(UUID.randomUUID().toString());
+		promo.setCreationDate(LocalDate.now());
 		promotionRepository.save(promo);
 		return promo;
 		
@@ -63,5 +64,8 @@ public class PromotionService{
 		return promotionRepository.findAll();
 	}
 	
+	public List<Promotion> getCreatedToday(){
+		return promotionRepository.findByCreationDate(LocalDate.now());
+	}
 	
 }

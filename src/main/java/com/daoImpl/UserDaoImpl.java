@@ -41,5 +41,10 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDa
 		Query query=currentSession().createQuery("from Client where active=true");
 		return query.getResultList();
 	}
+	@Override
+	public List<Client> getClientWithNotifications() {
+		Query query=currentSession().createQuery("from Client where active=true and allowNotification=true");
+		return query.getResultList();
+	}
 	
 }

@@ -14,4 +14,6 @@ public interface UserServices extends GenericService<User,Integer> {
 
 	public List<Client> getAllClients();
 
+	public List<Client> getClientsWithNotifications();
+
 }

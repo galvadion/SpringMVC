@@ -1,5 +1,5 @@
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-	 xmlns:c="http://www.springframework.org/schema/c"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo" xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
@@ -18,80 +18,84 @@
 	<!-- Enable Autowire -->
 	<context:annotation-config />
 	<context:component-scan base-package="com" />
-	<bean name="Properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="locations">
-            <value>classpath*:config.properties</value>
-    </property>
-</bean>
-	<mvc:annotation-driven >
-		<mvc:message-converters>
-			<!-- Use the HibernateAware mapper instead of the default -->
-			<bean
-				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<property name="objectMapper">
-					<bean class="com.configuration.HibernateAwareObjectMapper" />
-				</property>
-			</bean>
-		</mvc:message-converters>
-	</mvc:annotation-driven>
-	<mvc:resources mapping="/resources/**" location="/resources/" />
-	<mvc:resources mapping="/images/**" location="file:${images}"/>
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/springapp" />
-		<property name="username" value="root" />
-		<property name="password" value="admin" />
-	</bean><!-- Session Factory Declaration -->
-	<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:/RentUy" />
-	</bean>
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-    <!-- SMTP settings -->
-        <property name="host" value="smtp.gmail.com" />
-        <property name="port" value="587" />
-    <property name="username" value="info.rentuy" />
-    <property name="password" value="beccocueva2016" />
- 
-    <property name="javaMailProperties">
-        <!-- additional properties specific to JavaMail -->
-        <props>
-            <prop key="mail.transport.protocol">smtp</prop>
-            <prop key="mail.smtp.auth">true</prop>
-            <prop key="mail.smtp.starttls.enable">true</prop>
-        </props>
-    </property>
-</bean>
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource" ref="jndiDataSource" />
-		<property name="packagesToScan" value="com.entities" />
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
-				<prop key="hibernate.default_schema">public</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="format_sql">true</prop>
-				<prop key="use_sql_comments">true</prop>
-			</props>
+	<bean name="Properties"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath*:config.properties</value>
 		</property>
 	</bean>
-	<mvc:resources mapping="/static/**" location="/static/" />
+	<task:annotation-driven />
+		<mvc:annotation-driven>
+			<mvc:message-converters>
+				<!-- Use the HibernateAware mapper instead of the default -->
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+					<property name="objectMapper">
+						<bean class="com.configuration.HibernateAwareObjectMapper" />
+					</property>
+				</bean>
+			</mvc:message-converters>
+		</mvc:annotation-driven>
+		<mvc:resources mapping="/resources/**" location="/resources/" />
+		<mvc:resources mapping="/images/**" location="file:${images}" />
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+			<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+			<property name="url" value="jdbc:mysql://localhost:3306/springapp" />
+			<property name="username" value="root" />
+			<property name="password" value="admin" />
+		</bean><!-- Session Factory Declaration -->
+		<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+			<property name="jndiName" value="java:/RentUy" />
+		</bean>
+		<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+			<!-- SMTP settings -->
+			<property name="host" value="smtp.gmail.com" />
+			<property name="port" value="587" />
+			<property name="username" value="info.rentuy" />
+			<property name="password" value="beccocueva2016" />
 
-	<mvc:default-servlet-handler />
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<!-- Activate Spring Data MongoDB repository support -->
-  	<mongo:repositories base-package="com.repository" />
-  	
-  	<!-- MongoDB host -->
-	<mongo:mongo host="${mongo.host.name}" port="${mongo.host.port}"/>
+			<property name="javaMailProperties">
+				<!-- additional properties specific to JavaMail -->
+				<props>
+					<prop key="mail.transport.protocol">smtp</prop>
+					<prop key="mail.smtp.auth">true</prop>
+					<prop key="mail.smtp.starttls.enable">true</prop>
+					<prop key="mail.smtp.sendpartial">true</prop>
+				</props>
+			</property>
+		</bean>
+		<bean id="sessionFactory"
+			class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+			<property name="dataSource" ref="jndiDataSource" />
+			<property name="packagesToScan" value="com.entities" />
+			<property name="hibernateProperties">
+				<props>
+					<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+					<prop key="hibernate.default_schema">public</prop>
+					<prop key="hibernate.hbm2ddl.auto">update</prop>
+					<prop key="format_sql">true</prop>
+					<prop key="use_sql_comments">true</prop>
+				</props>
+			</property>
+		</bean>
+		<mvc:resources mapping="/static/**" location="/static/" />
 
-	<!-- Template for performing MongoDB operations -->
-  	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate" 
-  			c:mongo-ref="mongo" c:databaseName="${mongo.db.name}"/>
+		<mvc:default-servlet-handler />
+		<tx:annotation-driven transaction-manager="transactionManager" />
+		<bean id="transactionManager"
+			class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<!-- Activate Spring Data MongoDB repository support -->
+		<mongo:repositories base-package="com.repository" />
+
+		<!-- MongoDB host -->
+		<mongo:mongo host="${mongo.host.name}" port="${mongo.host.port}" />
+
+		<!-- Template for performing MongoDB operations -->
+		<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"
+			c:mongo-ref="mongo" c:databaseName="${mongo.db.name}" />
+		<bean id="MailingTask" class="com.Tasks.Task"></bean>
 </beans>

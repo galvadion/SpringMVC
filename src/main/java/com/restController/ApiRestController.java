@@ -100,7 +100,7 @@ public class ApiRestController {
 		return map;
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/login", method = RequestMethod.POST)
 	public ResponseEntity<LogInResonseBody> logInUser(@RequestBody LogInRequestBody users,    UriComponentsBuilder ucBuilder){
 		User user= userService.validateLogin(users.getEmail(), users.getPassword());
 		LogInResonseBody response = new LogInResonseBody();

@@ -40,6 +40,10 @@ public class Promotion implements Serializable{
 	@JsonSerialize(using = LocalDateSerializer.class)  
 	@Column(name= "last_promoton_date")
 	private LocalDate lastPromotionDate;
+	
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)  
+	private LocalDate creationDate;
 
 	private String promotionCode;
 	
@@ -141,6 +145,14 @@ public class Promotion implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public LocalDate getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(LocalDate creationDate) {
+		this.creationDate = creationDate;
 	}
 	
 	

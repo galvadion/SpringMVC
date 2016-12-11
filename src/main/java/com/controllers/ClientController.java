@@ -3,6 +3,10 @@ package com.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.entities.Client;
 import com.entities.User;
 import com.services.UserServices;
+import com.servicesImpl.MailAuxiliarService;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 
 @Controller
@@ -25,6 +34,9 @@ public class ClientController {
 
 	@Autowired(required = true)
 	private UserServices userServices;
+	
+	@Resource(name="MailAuxiliar")
+	MailAuxiliarService mailSender;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView getListPage() {
@@ -48,6 +60,9 @@ public class ClientController {
 	public ResponseEntity<Object> getSaved(@RequestBody Client users) {
 		System.out.println(users);
 		try {
+			users.setActive(false);
+	        // sends the e-mail
+	        mailSender.sendMailWithHtmlText("", users.getEmail(), "Bienvenido a Rent-UY");
 			userServices.saveOrUpdate(users);
 			return ResponseEntity.ok((Object) users);
 		} catch (Exception e) {

@@ -13,4 +13,6 @@ public interface UserDao extends GenericDao<User, Integer>{
 	public List<Employee> getAllEmployees();
 
 	public List<Client> getAllClients();
+
+	public List<Client> getClientWithNotifications();
 }

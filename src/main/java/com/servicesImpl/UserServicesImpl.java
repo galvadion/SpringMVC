@@ -48,5 +48,11 @@ public class UserServicesImpl extends GenericServiceImpl<User, Integer> implemen
 		return userDao.getAllClients();
 	}
 
+	@Override
+	public List<Client> getClientsWithNotifications() {
+		// TODO Auto-generated method stub
+		return userDao.getClientWithNotifications();
+	}
+
 	
 }
