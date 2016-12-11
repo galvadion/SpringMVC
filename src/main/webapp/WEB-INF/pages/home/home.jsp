@@ -168,9 +168,30 @@
 
 		<a id="chatBtn" href ng-click="initChat()" ng-disabled="chat" ng-if="!vm.roladmin" class="btn  btn-primary" style="position: fixed; bottom: 0; right: 0; z-index: 100; margin-right: 10px;">
 			<p ng-if="!chat">Iniciar chat</p>
-			<p ng-if="chat">Solicitud iniciada..</p>
+			<p ng-if="chat">Chat iniciado..</p>
 		</a>
-		<!--div id="members"></div-->
+
+		<div class="row" ng-if="chat && vm.rolemployee">
+			<div class="col-md-12">
+
+				<section class="tile">
+
+					<!-- tile header -->
+					<div class="tile-header dvd dvd-btm">
+						<h1 class="custom-font">
+							<strong>Empleados </strong>en línea
+						</h1>
+					</div>
+					<!-- /tile header -->
+
+					<!-- tile body -->
+					<div class="tile-body table-custom">
+						<div id="members"></div>
+					</div>
+
+				</section>
+			</div>
+		</div>
 
 	</div>
 

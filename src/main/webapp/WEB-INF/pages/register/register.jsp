@@ -60,6 +60,13 @@
 		
 		            </div>
 		            
+		            <div class="form-group" ng-class="{ 'has-error': form.document.$dirty && form.document.$error.required }">
+		
+		                <input type="text" name="document" class="form-control underline-input" placeholder="Cédula o nro. de pasaporte" ng-model="vm.user.document" required />
+		
+		                <span ng-show="form.document.$dirty && form.document.$error.required" class="help-block">Documento es requerido</span>
+		
+		            </div>
 		            
 		            <div class="form-group">
 						<div class="input-group date" id="birthDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">

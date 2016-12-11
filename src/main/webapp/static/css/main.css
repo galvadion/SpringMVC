@@ -18224,7 +18224,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 
 .slyder {
 	margin-top: -15px;
-	max-height: 400px;
+	max-height: 470px;
 }
 
 .carousel-inner div img{
@@ -18233,7 +18233,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 	background-repeat: no-repeat;
 	background-size: cover;
 	width: 100%;
-	max-height: 400px;
+	max-height: 470px;
 }
 
 #mapa {
@@ -18324,10 +18324,13 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 	background-color: #3B5998 !important;
 }
 
-.dropdown-menu {
+.dropdown-menu li {
 	background-color: #FFFFFF !important;
 }
 
+.dropdown-menu li :hover {
+	background-color: #DDDDDD !important;
+}
 .fullSection{
 	height: 85vh;
 	padding:0;

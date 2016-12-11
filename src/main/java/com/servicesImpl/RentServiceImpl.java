@@ -47,6 +47,10 @@ public class RentServiceImpl {
 		return promo;
 		
 	}
+	
+	public Rent get(String id){
+		return rentDao.findById(id);
+	}
 
 	public void confirmRent(Booked book) {
 		Rent rent=new Rent();

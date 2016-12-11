@@ -18,6 +18,7 @@
         vm.allOffices = [];
         vm.newpassword = "";
         vm.location = "";
+        vm.newPasswordFlag = false;
         
         var localDate = new Date();
 		localDate = localDate.getFullYear() + '/' + (localDate.getMonth() + 1)
@@ -103,6 +104,7 @@
         	UserService.GetUserById(id).then(function (response) {
         		if(response.success){
         			vm.user = response.data;
+        			vm.newpassword = vm.user.password;
         		}
         		NProgress.done();
         	});
@@ -163,6 +165,17 @@
 	        		NProgress.done();
 	        	});
         	}
+        	else if(vm.location[1] == "profile"){
+        		UserService.InsertClient(vm.user).then(function (response) {
+	        		if(response.success){
+	        			$rootScope.doFlashMessage("Datos guardados correctamente",'','success');
+	        		}
+	        		else{
+	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+	        		}
+	        		NProgress.done();
+	        	});
+        	}
         };
         
         $scope.deleteUser = function (id) {
@@ -194,6 +207,9 @@
             }).then(function (value) {}, function (reason) {});
         };
 
+        $scope.checkPaswords = function(){
+        	vm.newPasswordFlag = true;
+        }
         
     }
 
