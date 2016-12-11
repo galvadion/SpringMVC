@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.validation.ConstraintViolation;
@@ -26,7 +25,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.entities.Booked;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.controllers.LoginController.LogInRequestBody;
+import com.controllers.LoginController.LogInResonseBody;
+import com.entities.Admin;
 import com.entities.BranchOffice;
 import com.entities.Brand;
 import com.entities.Client;
@@ -40,7 +43,6 @@ import com.services.BranchOfficeService;
 import com.services.BrandService;
 import com.services.ExtrasService;
 import com.services.ModelService;
-import com.services.RentService;
 import com.services.UserServices;
 import com.servicesImpl.PromotionService;
 
@@ -97,6 +99,28 @@ public class ApiRestController {
 		map.put("models", modelService.getModelsBetweenFilter(filter));
 		return map;
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ResponseEntity<LogInResonseBody> logInUser(@RequestBody LogInRequestBody users,    UriComponentsBuilder ucBuilder){
+		User user= userService.validateLogin(users.getEmail(), users.getPassword());
+		LogInResonseBody response = new LogInResonseBody();
+		if(user != null){
+			response.setEmail(user.getEmail());
+			response.setId(user.getId());
+			response.setName(user.getName());
+			response.setPasssword(user.getPassword());
+			if(user.getClass() == Client.class){
+				response.setRol("Client");
+			}else if ( user.getClass() == Admin.class) {
+				response.setRol("Admin");
+			}else{
+				response.setRol("Employee");
+			}			
+			return new ResponseEntity<LogInResonseBody>(response,HttpStatus.OK);
+		}else{
+			return new ResponseEntity<LogInResonseBody>(response,HttpStatus.CONFLICT);
+		}
+	} 
 	
 	@RequestMapping(value = "/api/allExtras", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getExtras(){

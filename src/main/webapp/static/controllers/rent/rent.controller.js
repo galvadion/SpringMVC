@@ -80,13 +80,10 @@
 		function initController() {
 			NProgress.start();
 			vm.location = $location.path().split('/',3);
-			if(vm.location[2] == "confirm"){
+			if(vm.location[2] == "confirm" || vm.location[2] == "return" ){
 				getBookedById($routeParams.id);
 				
-			}else if( vm.location[2] == "return"){
-				getBookedById($routeParams.id);
-				getRentById(vm.booked.rent);
-			}
+			} 
 			NProgress.done();
 		}
 
@@ -107,6 +104,9 @@
 				if(response.success){  
 					vm.booked = response.data;
 					vm.rent.booked_id=vm.booked.id;
+					if( vm.location[2] == "return"){
+						getRentById(vm.booked.rent);
+					}
 				}
 				else{
 					vm.booked = [];
@@ -120,7 +120,6 @@
 			RentService.GetRentById(id).then(function (response) {
 				if(response.success){  
 					vm.rent = response.data;
-					console.log(vm.rent)
 				}
 				else{
 					vm.booked = [];
@@ -133,6 +132,21 @@
 		$scope.confirmRent = function() {
 			NProgress.start();
 			RentService.InsertRent(vm.rent).then(function (response) {
+				if(response.success){
+					getAllRents();
+					$rootScope.doFlashMessage("Se ha confirmado correctamente con éxito",'','success');
+					$scope.cleanInput();
+				}
+				else{
+					$rootScope.doFlashMessage("Error al confirmar",'','error');
+				}
+				NProgress.done();
+			});
+		};
+		
+		$scope.confirmReturn = function() {
+			NProgress.start();
+			RentService.confirmReturn(vm.rent).then(function (response) {
 				if(response.success){
 					getAllRents();
 					$rootScope.doFlashMessage("Se ha confirmado correctamente con éxito",'','success');

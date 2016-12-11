@@ -149,7 +149,7 @@
 							
 							<div class="row">
 								<div class="form-group text-right" style="padding: 15px;">
-									<button class="btn btn-orange pull-right" ng-click="confirmRent()" ng-disabled="!vm.rent.driversList[0]"><strong>Confirmar retiro de vehiculo</strong></button>
+									<button class="btn btn-orange pull-right" ng-click="confirmRent()"><strong>Confirmar retiro de vehiculo</strong></button>
 								</div>
 							</div>
 						</div>

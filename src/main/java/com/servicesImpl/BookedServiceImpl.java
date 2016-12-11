@@ -111,4 +111,16 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		return bookedDao.getReturned(branch,date);
 	}
 
+	@Override
+	public List<Booked> getReturnedToday(LocalDate date) {
+		// TODO Auto-generated method stub
+		return bookedDao.getReturned(date);
+	}
+	
+	@Override
+	public List<Booked> getDeliveredByDay(LocalDate date) {
+		// TODO Auto-generated method stub
+		return bookedDao.getDelivered(date);
+	}
+
 }

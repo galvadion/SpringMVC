@@ -54,11 +54,17 @@
 												{{value.vehicle.model.name}}</p>
 										</td>
 									</tr>
+									<tr ng-show="vm.roladmin">
+										<td>
+											<p>Retiran en: {{value.originOffice.city}}
+										</td>
+									</tr>
 									<tr>
 										<td>
 											<p>Entrega en: {{value.endOffice.city}}</p>
 										</td>
 									</tr>
+									
 									<tr>
 										<td>
 											<p>Cliente: {{value.client.name}}
@@ -128,12 +134,18 @@
 												{{value.client.lastName}}</p>
 										</td>
 									</tr>
+									<tr ng-show="vm.roladmin">
+										<td>
+											<p>Devuelve en: {{value.endOffice.city}}
+										</td>
+									</tr>
 								</table>
 							</div>
 
 							<div class="col-sm-1">
-								<a href="#/rent/return/{{value.id}}" class="btn  btn-orange"><strong>Gestionar
+								<a ng-if="!value.returnDate" href="#/rent/return/{{value.id}}" class="btn  btn-orange"><strong>Gestionar
 										devolucion</strong></a>
+										<a ng-if="value.returnDate">Ya fue devuelto</a>
 							</div>
 						</div>
 

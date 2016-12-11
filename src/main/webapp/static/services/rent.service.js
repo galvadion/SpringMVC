@@ -14,6 +14,7 @@
         service.GetRentById = GetRentById;
         service.InsertRent = InsertRent;
         service.DeleteRent = DeleteRent;
+        service.confirmReturn=confirmReturn;
         
         
         return service;
@@ -31,6 +32,10 @@
         
         function InsertRent(rent) {
             return $http.post('/SpringMVC/rent/confirmRent',rent).then(handleSuccess, handleError);
+        }
+        
+        function confirmReturn(rent) {
+            return $http.post('/SpringMVC/rent/confirmReturn',rent).then(handleSuccess, handleError);
         }
         
         function DeleteRent(id) {

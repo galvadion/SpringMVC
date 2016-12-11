@@ -20,11 +20,10 @@
 			<div class="col-md-12">
 
 				<section class="tile">
+					<div class="tile-body">
+						<!-- /tile header -->
 
-					<!-- /tile header -->
-
-					<!-- tile body -->
-					<div class="tile-header dvd dvd-btm row">
+						<!-- tile body -->
 						<div class="row">
 							<div class="col-sm-6">
 								<table>
@@ -95,43 +94,72 @@
 
 							</div>
 						</div>
+
+						<hr class="line-dashed line-full" />
+
+
 						<div class="row">
-							<div class="form-horizontal" role="form">
-								<div class="form-group">
-									<label class="control-label col-sm-1" for="text"><strong>Detalle:</strong></label>
-									<div class="col-sm-5">
-										<input type="text" class="form-control" id='codigo' ng-model="vm.detail.detail"
-											placeholder="Ingrese el detalle">
-									</div>
-									<label class="control-label col-sm-1" for="text"><strong>Precio:</strong></label>
-									<div class="col-sm-2">
-										<input type="number" class="form-control" id='monto' ng-model="vm.detail.amount"
-											placeholder="Precio" value="0">
-									</div>
-									<div class="col-sm-3">
-										<button class="btn btn-success pull-right" id="addFine"
-											onclick="addFine()">Agregar multa de existir</button>
+							<div class="form-group col-sm-6">
+								<label class="control-label" for="text"><strong>Detalle:</strong></label>
+
+								<input type="text" class="form-control" id='codigo'
+									ng-model="vm.detail.detail" placeholder="Ingrese el detalle">
+							</div>
+							<div class="form-group col-sm-6">
+								<label class="control-label col-sm-1" for="text"><strong>Precio:</strong></label>
+
+								<input type="number" class="form-control" id='monto'
+									ng-model="vm.detail.amount" placeholder="Precio" value="0">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group text-left" style="padding: 15px;">
+								<button class="btn btn-success pull-left" id="addFine"
+									ng-click="addFine()"
+									ng-disabled="!vm.detail.amount || !vm.detail.detail">Agregar
+									concepto de recargo</button>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<div class="row">
+					<div class="col-md-12">
+
+						<section class="tile">
+
+							<!-- tile header -->
+							<div class="tile-header dvd dvd-btm">
+								<h1 class="custom-font">
+									<strong>Conceptos de recargo </strong>
+								</h1>
+							</div>
+							<!-- /tile header -->
+
+							<!-- tile body -->
+							<div class="tile-body table-custom">
+								<div class="row" id="drivers">
+									<h4 style="margin-left: 15px; color: #449D44"
+										ng-repeat="(key,value) in vm.rent.rentLine">{{value.detail}}
+										- {{value.amount}}</h4>
+								</div>
+
+								<div class="row">
+									<div class="form-group text-right" style="padding: 15px;">
+										<button class="btn btn-orange pull-right"
+											ng-click="confirmReturn()" >
+											<strong ng-show="!vm.rent.rentLine[0]">Confirmar devolucion</strong>
+											<strong ng-show="vm.rent.rentLine[0]">Realizar cobro</strong>
+										</button>
 									</div>
 								</div>
 							</div>
-						</div>
-							<div id="fines">
-				<p ng-repeat="(key,value) in vm.rent.rentLines">{{value.detail}}
-					{{value.amount}}</p>
-			</div>
-			<button ng-click="doReturn()" class="btn  btn-orange">
-				<strong>Ir a devolucion de vehiculo</strong>
-			</button>
-							
-						
+
+						</section>
 					</div>
-
-				</section>
+				</div>
 			</div>
-
-			<!-- /row -->
 		</div>
 
 	</div>
-
-</section>
+	</section>

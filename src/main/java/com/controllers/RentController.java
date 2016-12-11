@@ -75,7 +75,13 @@ public class RentController {
 		booked.setRent(rent.getId());
 		bookedServices.saveOrUpdate(booked);
 		return ResponseEntity.ok((Object)"It has been confirmed");
-		
+	}
+	
+	@RequestMapping(value = "/confirmRturn", method = RequestMethod.POST)
+	private ResponseEntity<Object> confirmationReturn(@RequestBody Rent rent){
+		rent.setReturnDate(LocalDate.now());
+		rent = rentServices.create(rent);
+		return ResponseEntity.ok((Object)"It has been confirmed");
 	}
 	
 	@RequestMapping(value = "/getbyid", method = RequestMethod.GET)
