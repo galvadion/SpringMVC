@@ -1,8 +1,9 @@
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-	 xmlns:c="http://www.springframework.org/schema/c"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo" xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:sec="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 	http://www.springframework.org/schema/tx 
@@ -14,16 +15,19 @@
 	http://www.springframework.org/schema/data/mongo
     http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
 	http://www.springframework.org/schema/task
-       http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+    http://www.springframework.org/schema/task/spring-task-4.0.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-4.1.xsd">
 	<!-- Enable Autowire -->
 	<context:annotation-config />
 	<context:component-scan base-package="com" />
-	<bean name="Properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="locations">
-            <value>classpath*:config.properties</value>
-    </property>
-</bean>
-	<mvc:annotation-driven >
+	<bean name="Properties"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath*:config.properties</value>
+		</property>
+	</bean>
+	<mvc:annotation-driven>
 		<mvc:message-converters>
 			<!-- Use the HibernateAware mapper instead of the default -->
 			<bean
@@ -35,7 +39,7 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	<mvc:resources mapping="/images/**" location="file:${images}"/>
+	<mvc:resources mapping="/images/**" location="file:${images}" />
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/springapp" />
@@ -46,21 +50,21 @@
 		<property name="jndiName" value="java:/Proyecto-Desa" />
 	</bean>
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-    <!-- SMTP settings -->
-        <property name="host" value="smtp.gmail.com" />
-        <property name="port" value="587" />
-    <property name="username" value="info.rentuy" />
-    <property name="password" value="beccocueva2016" />
- 
-    <property name="javaMailProperties">
-        <!-- additional properties specific to JavaMail -->
-        <props>
-            <prop key="mail.transport.protocol">smtp</prop>
-            <prop key="mail.smtp.auth">true</prop>
-            <prop key="mail.smtp.starttls.enable">true</prop>
-        </props>
-    </property>
-</bean>
+		<!-- SMTP settings -->
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="info.rentuy" />
+		<property name="password" value="beccocueva2016" />
+
+		<property name="javaMailProperties">
+			<!-- additional properties specific to JavaMail -->
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="jndiDataSource" />
@@ -86,12 +90,43 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<!-- Activate Spring Data MongoDB repository support -->
-  	<mongo:repositories base-package="com.repository" />
-  	
-  	<!-- MongoDB host -->
-	<mongo:mongo host="${mongo.host.name}" port="${mongo.host.port}"/>
+	<mongo:repositories base-package="com.repository" />
+
+	<!-- MongoDB host -->
+	<mongo:mongo host="${mongo.host.name}" port="${mongo.host.port}" />
 
 	<!-- Template for performing MongoDB operations -->
-  	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate" 
-  			c:mongo-ref="mongo" c:databaseName="${mongo.db.name}"/>
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"
+		c:mongo-ref="mongo" c:databaseName="${mongo.db.name}" />
+		
+	<!-- Rest authentication entry point configuration -->
+    <sec:http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint">
+<!--     	<sec:intercept-url pattern="/**" access="permitAll" /> -->
+        <sec:intercept-url pattern="/**" />
+        <sec:form-login authentication-success-handler-ref="mySuccessHandler"
+           				authentication-failure-handler-ref="myFailureHandler" />
+ 		<sec:csrf disabled="true"/>
+        <sec:logout />
+    </sec:http>
+    <!-- Connect the custom authentication success handler -->
+    <bean id="mySuccessHandler" class="security.RestAuthenticationSuccessHandler" />
+    <!-- Using default failure handler -->
+    <bean id="myFailureHandler"
+        class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" />
+    <bean id="restAuthenticationEntryPoint" class="security.RestAuthenticationEntryPoint" />
+ 
+    <!-- Authentication manager -->
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider>
+            <sec:user-service>
+                <sec:user name="temporary" password="temporary" authorities="ROLE_ADMIN" />
+                <sec:user name="user" password="userPass" authorities="ROLE_USER" />
+            </sec:user-service>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+ 
+    <!-- Enable the annotations for defining the secure role -->
+    <sec:global-method-security secured-annotations="enabled" />
+    
+    
 </beans>

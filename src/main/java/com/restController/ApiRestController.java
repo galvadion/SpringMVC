@@ -21,6 +21,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -85,6 +86,7 @@ public class ApiRestController {
 		return userService.getAll();
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/api/allModels", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getModelos() {
 		SearchFilter filter = new SearchFilter();
