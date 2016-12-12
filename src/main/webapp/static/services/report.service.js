@@ -12,6 +12,7 @@
 
         service.getReturnedToday = getReturnedToday;
         service.getPickedToday = getPickedToday;
+        service.getBetweenDates = getBetweenDates;
         
         
         return service;
@@ -25,6 +26,10 @@
         
         function getPickedToday(date) {
             return $http.get('/SpringMVC/report/getpickup?date='+date).then(handleSuccess, handleError);
+        }
+        
+        function getBetweenDates(search){
+        	return $http.post('/SpringMVC/report/getBookedBetweenDates',search).then(handleSuccess, handleError);
         }
         
 

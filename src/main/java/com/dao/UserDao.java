@@ -15,4 +15,6 @@ public interface UserDao extends GenericDao<User, Integer>{
 	public List<Client> getAllClients();
 
 	public List<Client> getClientWithNotifications();
+
+	public Client getByDocument(String document);
 }

@@ -1,29 +1,22 @@
 package com.models;
 
-import com.entities.BranchOffice;
-import com.entities.Vehicle;
+import com.entities.Booked;
+import com.entities.Rent;
 
 public class PickedModel {
-	Vehicle vehicle;
-	BranchOffice boo;
-	BranchOffice boe;
-	public Vehicle getVehicle() {
-		return vehicle;
+	private Rent rent;
+	private Booked booked;
+	public Rent getRent() {
+		return rent;
 	}
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
+	public void setRent(Rent rent) {
+		this.rent = rent;
 	}
-	public BranchOffice getBoo() {
-		return boo;
+	public Booked getBooked() {
+		return booked;
 	}
-	public void setBoo(BranchOffice boo) {
-		this.boo = boo;
-	}
-	public BranchOffice getBoe() {
-		return boe;
-	}
-	public void setBoe(BranchOffice boe) {
-		this.boe = boe;
+	public void setBooked(Booked booked) {
+		this.booked = booked;
 	}
 	
 	

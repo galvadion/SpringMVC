@@ -7,8 +7,6 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,8 +62,8 @@ public class PromotionService{
 		return promotionRepository.findAll();
 	}
 	
-	public List<Promotion> getCreatedToday(){
-		return promotionRepository.findByCreationDate(LocalDate.now());
+	public List<Promotion> getCreatedYesterday(){
+		return promotionRepository.findByCreationDate(LocalDate.now().plusDays(-1));
 	}
 	
 }

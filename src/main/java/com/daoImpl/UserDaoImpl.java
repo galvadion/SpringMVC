@@ -26,7 +26,7 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDa
 	}
 
 	public User getUserByName(String username) {
-		Query query=currentSession().createQuery("from User where email = :username");
+		Query query=currentSession().createQuery("from User where email = :username and active=true");
 		query.setParameter("username", username);
 		User user=(User) query.getSingleResult();
 		return user;
@@ -45,6 +45,13 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDa
 	public List<Client> getClientWithNotifications() {
 		Query query=currentSession().createQuery("from Client where active=true and allowNotification=true");
 		return query.getResultList();
+	}
+	@Override
+	public Client getByDocument(String document) {
+		Query query=currentSession().createQuery("from User where document = :document");
+		query.setParameter("document", document);
+		Client user=(Client) query.getSingleResult();
+		return user;
 	}
 	
 }

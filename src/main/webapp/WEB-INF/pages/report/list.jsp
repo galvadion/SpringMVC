@@ -14,6 +14,83 @@
 				<li class="breadcrumb-active">Actividades</li>
 			</ol>
 		</div>
+		
+		<div ng-show="vm.roladmin" class="row">
+			<div class="col-md-12">
+				<section class="tile">
+
+					<div class="tile-header dvd dvd-btm" id="searchResult">
+						<div class="text-center">
+							<h1 class="custom-font">
+								<strong>Buscar entre fechas </strong>
+							</h1>
+						</div>
+						<br>
+						<div class="row">
+							<div class="form-group customDatePickers col-sm-4">
+								<div class="input-group date" id="beginDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
+									<label for="beginDate" class="control-label">Fecha inicial</label>
+									<input class="form-control" size="16" type="text" name="beginDate" placeholder="DD/MM/YYYY" ng-model="vm.search.beginDate" readonly required>
+									<span class="input-group-addon customAddonSize">
+									<span class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+							<div class="form-group customDatePickers col-sm-4">
+								<div class="input-group date" id="endDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
+									<label for="endDate" class="control-label">Fecha final</label>
+									<input class="form-control" size="16" type="text" name="endDate" placeholder="DD/MM/YYYY" ng-model="vm.search.endDate" readonly  required>
+									<span class="input-group-addon customAddonSize">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+							<div class="form-group text-right" style="margin-right: 15px;">
+								<button ng-click="getBetweenDates()" class="btn  btn-orange">Buscar ahora</button>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row" ng-repeat="(key, value) in vm.resultList">
+						<div class="row" style="padding: 15px;">
+							<div class="col-sm-6">
+								<table>
+									<tr>
+										<td>
+											<p>Vehiculo: {{value.booked.vehicle.licensePlate}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Modelo:{{value.booked.vehicle.model.brand.name}}
+												{{value.booked.vehicle.model.name}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Retirado en: {{value.booked.originOffice.city}} el día {{value.rent.deliveryDate}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Entrega en: {{value.booked.endOffice.city}} el día {{value.rent.returnDate}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Cliente: {{value.booked.client.name}}
+												{{value.booked.client.lastName}}</p>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+
+						<hr class="line-dashed line-full" />
+					</div>
+				</section>
+			</div>
+		</div>
 
 		<div class="row">
 			<div class="col-md-6">

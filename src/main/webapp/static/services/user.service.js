@@ -16,6 +16,7 @@
         
         service.GetAllClients = GetAllClients;
         service.InsertClient = InsertClient;
+        service.GetByDocument = GetByDocument;
         
         service.GetAllEmployees = GetAllEmployees;
         service.InsertEmployee = InsertEmployee;
@@ -47,6 +48,9 @@
             return $http.post('/SpringMVC/client/insert', client).then(handleSuccess, handleError);
         }
         
+        function GetByDocument(id) {
+            return $http.get('/SpringMVC/client/getbydocument?id=' + id).then(handleSuccess, handleError);
+        }
 
         //Employee functions
         

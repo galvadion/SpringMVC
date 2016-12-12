@@ -106,6 +106,7 @@
 					vm.rent.booked_id=vm.booked.id;
 					if( vm.location[2] == "return"){
 						getRentById(vm.booked.rent);
+						vm.rent.rentLine=[];
 					}
 				}
 				else{

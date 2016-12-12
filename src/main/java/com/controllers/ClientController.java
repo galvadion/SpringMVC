@@ -3,14 +3,11 @@ package com.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,8 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -55,17 +51,31 @@ public class ClientController {
 		ModelAndView view = new ModelAndView("user/form");
 		return view;
 	}
+	
+	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
+	public ModelAndView getConfirmPage() {
+		ModelAndView view = new ModelAndView("user/confirm");
+		return view;
+	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public ResponseEntity<Object> getSaved(@RequestBody Client users) {
+	public ResponseEntity<Object> getSaved(@RequestBody Client users,HttpServletRequest request) {
 		System.out.println(users);
 		try {
-			users.setActive(false);
+			if(users.getId() == null){
+				users.setActive(false);
+				userServices.saveOrUpdate(users);
+				mailSender.sendMailWithHtmlText("<p>Bienvenido "+users.getName() + " "+users.getLastName() +"!</p><br>"
+		        		+ "<p>Nos complace mucho que haya escodigo nuestra plataforma para alquilar vehiculos. Por favor para continuar haga click <a href='https://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath() +"/#/client/confirm/"+users.getDocument()+"' >aqui</a> y asi activar su cuenta </p>", users.getEmail(), "Bienvenido a Rent-UY");
+			}else{
+				userServices.saveOrUpdate(users);
+			}
+			
 	        // sends the e-mail
-	        mailSender.sendMailWithHtmlText("", users.getEmail(), "Bienvenido a Rent-UY");
-			userServices.saveOrUpdate(users);
+			
 			return ResponseEntity.ok((Object) users);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body((Object) "There has been an error");
 		}
 
@@ -110,5 +120,10 @@ public class ClientController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 		
+	}
+	
+	@RequestMapping(value="/getbydocument", method=RequestMethod.GET)
+	public ResponseEntity<Object> getByDocument(@RequestParam("id") String document){
+		return ResponseEntity.ok((Object) userServices.getByDocument(document));
 	}
 }

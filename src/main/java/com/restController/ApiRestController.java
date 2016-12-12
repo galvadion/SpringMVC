@@ -36,7 +36,6 @@ import com.entities.Brand;
 import com.entities.Client;
 import com.entities.Extras;
 import com.entities.Model;
-import com.entities.Promotion;
 import com.entities.User;
 import com.models.BookingModel;
 import com.models.SearchFilter;
@@ -47,6 +46,7 @@ import com.services.ExtrasService;
 import com.services.ModelService;
 import com.services.UserServices;
 import com.servicesImpl.PromotionService;
+import com.servicesImpl.RentServiceImpl;
 
 @RestController
 public class ApiRestController {
@@ -71,6 +71,9 @@ public class ApiRestController {
 	
 	@Autowired
 	BranchOfficeService branchOfficeService;
+	
+	@Autowired
+	RentServiceImpl rentService;
 
 	private static Validator validator;
 
@@ -132,15 +135,20 @@ public class ApiRestController {
 		return map;
 	}
 	
-	@RequestMapping(value = "/api/promotion",method =RequestMethod.GET)
-	public void createPromo(){
-		Promotion promo=new Promotion();
-		promo.setBeginPromotionDate(LocalDate.now());
-		promo.setDescriptionText("Esta promo es valida de hoy a ma");promo.setLastPromotionDate(LocalDate.now().plusDays(10));
-		promo.setPercentage(40);
-		promo.setPromotionCode("ASD4521");
-		promo.setModels(modelService.getAll());
-		promotionService.create(promo);
+	@RequestMapping(value = "/api/rents",method =RequestMethod.GET)
+	public @ResponseBody Map<String, Object> createPromo(){
+		try{
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("extras", rentService.getBetweenDates(LocalDate.now().plusDays(-10), LocalDate.now().plusDays(+20)));
+			map.put("status", "200");
+			return map;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+		
+		
 	}
 
 	@RequestMapping(value = "/api/book", method = RequestMethod.POST)

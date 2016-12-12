@@ -2,21 +2,31 @@ package com.models;
 
 import java.time.LocalDate;
 
+import com.configuration.LocalDateDeserializer;
+import com.configuration.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class ReportSearch {
-	private LocalDate initialDate;
-	private LocalDate finalDate;
-	public LocalDate getInitialDate() {
-		return initialDate;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate beginDate;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate endDate;
+	public LocalDate getBeginDate() {
+		return beginDate;
 	}
-	public void setInitialDate(LocalDate initialDate) {
-		this.initialDate = initialDate;
+	public void setBeginDate(LocalDate beginDate) {
+		this.beginDate = beginDate;
 	}
-	public LocalDate getFinalDate() {
-		return finalDate;
+	public LocalDate getEndDate() {
+		return endDate;
 	}
-	public void setFinalDate(LocalDate finalDate) {
-		this.finalDate = finalDate;
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
 	}
+	
 	
 	
 }

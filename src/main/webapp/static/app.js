@@ -112,6 +112,13 @@
                 controllerAs: 'vm'
             })
             
+            .when('/client/confirm/:id', {
+                controller: 'UserController',
+                templateUrl: 'client/confirm',
+                title: 'Rent-UY - Confirmar correo',
+                controllerAs: 'vm'
+            })
+            
             .when('/client/edit/:id', {
                 controller: 'UserController',
                 templateUrl: 'client/edit',

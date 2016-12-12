@@ -93,7 +93,12 @@
 	            	getAllOffices();
 	            }
 	            else if(vm.location[1] == "client"){
-	            	getAllClients();
+	            	if(vm.location[2] == "confirm"){
+	            		getByDocument($routeParams.id);
+	            	}else{
+	            		getAllClients();
+	            	}
+	            	
 	            }
             }
 
@@ -105,6 +110,25 @@
         		if(response.success){
         			vm.user = response.data;
         			vm.newpassword = vm.user.password;
+        		}
+        		NProgress.done();
+        	});
+        }
+        
+        function getByDocument(id){
+        	UserService.GetByDocument(id).then(function (response) {
+        		if(response.success){
+        			vm.user = response.data;
+        			vm.user.active=true;
+        			UserService.InsertClient(vm.user).then(function (response) {
+    	        		if(response.success){
+    	        			
+    	        		}
+    	        		else{
+    	        			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+    	        		}
+    	        		NProgress.done();
+    	        	});
         		}
         		NProgress.done();
         	});

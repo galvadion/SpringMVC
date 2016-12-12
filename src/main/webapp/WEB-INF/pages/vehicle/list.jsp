@@ -45,7 +45,8 @@
                                 <tbody>
                                     <tr ng-repeat="(key, value) in vm.allVehicles">
                                     	<td>
-                                            {{value.licensePlate}}                                             
+                                            <a ng-href="#/vehicle/details/{{value.id}}" title="Detalles">{{value.licensePlate}}
+                                            </a>                                           
                                         </td>
                                         <td>
                                             {{value.model.brand.name}}                                             

@@ -15,6 +15,8 @@
         vm.rolclient = $rootScope.rolclient;
         vm.pickedToday = [];
         vm.returnedToday =[];
+        vm.resultList=[];
+        vm.search={};
         
         vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
         .withPaginationType('simple_numbers')
@@ -39,6 +41,17 @@
                 "previous":   "Anterior"
             },
         });
+        
+
+		$('.date').datetimepicker({
+			language : 'es',
+			weekStart : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0
+		});
 
         vm.DTColumnDefs = [
             DTColumnDefBuilder.newColumnDef(1).notSortable(),
@@ -94,16 +107,31 @@
         }
         
         $scope.pickedup = function(date){
+        	var aux=date;
         	getPickedToday(formatDate(date));$scope.hoy=formatDate(date);
         	$scope.yesterdayPick.setDate(date.getDate()-1);
-        	$scope.tomorrowPick.setDate(date.getDate()+1);
+        	$scope.tomorrowPick.setDate(aux.getDate()+1);
         }
         
         $scope.returned = function(date){
+        	var aux=date;
         	getReturnedToday(formatDate(date));$scope.hoyRet=formatDate(date);
         	$scope.yesterdayReturn.setDate(date.getDate()-1);
-        	$scope.tomorrowReturn.setDate(date.getDate()+1);
+        	$scope.tomorrowReturn.setDate(aux.getDate()+1);
         }
+        
+        $scope.getBetweenDates = function (){
+        	ReportService.getBetweenDates(vm.search).then(function (response) {
+        		if(response.success){
+        			vm.resultList = response.data;
+        		}
+        		else{
+        			vm.resultList = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        
         
         
         

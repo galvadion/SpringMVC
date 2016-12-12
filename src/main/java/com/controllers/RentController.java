@@ -2,6 +2,7 @@ package com.controllers;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,6 @@ import com.entities.Booked;
 import com.entities.Client;
 import com.entities.Rent;
 import com.services.BookedService;
-import com.services.RentService;
 import com.services.UserServices;
 import com.servicesImpl.RentServiceImpl;
 
@@ -71,13 +71,14 @@ public class RentController {
 		Booked booked = bookedServices.get(rent.getBooked_id());
 		System.out.println(rent);
 		rent.setDeliveryDate(LocalDate.now());
+		rent.setId(UUID.randomUUID().toString());
 		rent = rentServices.create(rent);
 		booked.setRent(rent.getId());
 		bookedServices.saveOrUpdate(booked);
 		return ResponseEntity.ok((Object)"It has been confirmed");
 	}
 	
-	@RequestMapping(value = "/confirmRturn", method = RequestMethod.POST)
+	@RequestMapping(value = "/confirmReturn", method = RequestMethod.POST)
 	private ResponseEntity<Object> confirmationReturn(@RequestBody Rent rent){
 		rent.setReturnDate(LocalDate.now());
 		rent = rentServices.create(rent);

@@ -54,5 +54,11 @@ public class UserServicesImpl extends GenericServiceImpl<User, Integer> implemen
 		return userDao.getClientWithNotifications();
 	}
 
+	@Override
+	public Client getByDocument(String document) {
+		// TODO Auto-generated method stub
+		return userDao.getByDocument(document);
+	}
+
 	
 }
