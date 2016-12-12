@@ -19,6 +19,7 @@
         vm.searchResult = [];
         vm.allOffices = [];
         vm.noResult = true;
+        vm.promo={};
         
         var localDate = new Date();
 		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
@@ -182,6 +183,8 @@
 				NProgress.done();
 			});
 		}
+        
+        
         
         function getAllBookeds(){
         	BookedService.GetAllBookeds().then(function (response) {

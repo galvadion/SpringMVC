@@ -177,6 +177,14 @@ public class BranchOffice implements Serializable{
 		this.employee = employee;
 	}
 
+	@Override
+	public String toString() {
+		return "BranchOffice [id=" + id + ", name=" + name + ", location=" + location + ", city=" + city + ", address="
+				+ address + ", closed=" + closed + ", apertureHour=" + apertureHour + ", closingHour=" + closingHour
+				+ ", BookedEndsLists=" + BookedEndsLists + ", BookedOriginsLists=" + BookedOriginsLists + ", vehicles="
+				+ vehicles + ", employee=" + employee + ", statusDates=" + statusDates + "]";
+	}
+
 	
 	
 }
