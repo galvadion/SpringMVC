@@ -324,10 +324,22 @@
 
         //Session security: redirect to login page if not logged in and trying to access a restricted page
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var restrictedPage = $location.path();
-            var loggedIn = $rootScope.globals.currentUser;
-            if(restrictedPage.indexOf('/profile') == 0 && !loggedIn) {
-                //$location.path('/login');
+            var currentPage = $location.path().split('/',3);
+            if($rootScope.globals.currentUser){
+	            var loggedRol = $rootScope.globals.currentUser.rol;
+	            
+	            if(loggedRol == "Admin"){
+	            	
+	            }
+	            if(loggedRol == "Employee"){
+	            	
+	            }
+	            if(loggedRol == "Client"){
+	            	
+	            }
+            }
+            else{
+            	//Usuario no logeado
             }
         });
 
@@ -384,7 +396,7 @@
         	$location.path('/home');
         	setTimeout(function(){
                 $window.location.reload();
-        	},3000);
+        	},1000);
         }
         
         $rootScope.chat = false;
