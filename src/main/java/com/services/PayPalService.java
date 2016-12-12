@@ -3,6 +3,9 @@ package com.services;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import com.models.PayPalTransaction;
 import com.models.TransactionItem;
 
@@ -13,7 +16,7 @@ public interface PayPalService  {
 	 * @return Token from PayPal for application user client use
 	 * @throws Exception 
 	 */
-	Map<String, String> beginTransaction(List<TransactionItem> items) throws Exception;
+	Map<String, String> beginTransaction(List<TransactionItem> items,HttpServletRequest request) throws Exception;
 	
 	/**
 	 * Get payment details made by application customer

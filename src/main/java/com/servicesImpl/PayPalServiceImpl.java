@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -48,7 +51,7 @@ public class PayPalServiceImpl implements PayPalService {
 
 	static Logger log = Logger.getLogger(PayPalServiceImpl.class.getName());
 
-	public Map<String, String> beginTransaction(List<TransactionItem> items) throws Exception{
+	public Map<String, String> beginTransaction(List<TransactionItem> items,HttpServletRequest server) throws Exception{
 
 		try{
 
@@ -78,13 +81,15 @@ public class PayPalServiceImpl implements PayPalService {
 			orderTotal.setCurrencyID(CurrencyCodeType.fromValue("USD"));
 			orderTotal.setValue(String.valueOf(total));
 			paymentDetails.setOrderTotal(orderTotal);
+			System.out.println();
 			paymentDetails.setPaymentAction(PaymentActionCodeType.fromValue("Sale"));
 			List<PaymentDetailsType> paymentDetailsList = new ArrayList<PaymentDetailsType>();
 			paymentDetailsList.add(paymentDetails);
 
 			SetExpressCheckoutRequestDetailsType setExpressCheckoutRequestDetails  = new SetExpressCheckoutRequestDetailsType();
-			setExpressCheckoutRequestDetails .setReturnURL(env.getProperty("PayPalReturnUrl"));
-			setExpressCheckoutRequestDetails .setCancelURL(env.getProperty("PayPalCancelUrl"));
+			System.out.println("https://"+server.getServerName()+":"+server.getServerPort()+server.getContextPath());
+			setExpressCheckoutRequestDetails .setReturnURL("https://"+server.getServerName()+":"+server.getServerPort()+server.getContextPath()+env.getProperty("PayPalReturnUrl"));
+			setExpressCheckoutRequestDetails .setCancelURL("https://"+server.getServerName()+":"+server.getServerPort()+server.getContextPath()+env.getProperty("PayPalCancelUrl"));
 
 			setExpressCheckoutRequestDetails .setPaymentDetails(paymentDetailsList);
 

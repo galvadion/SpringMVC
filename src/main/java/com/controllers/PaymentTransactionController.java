@@ -1,10 +1,13 @@
 package com.controllers;
 
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +29,12 @@ import com.models.PayPalTransaction;
 import com.models.Reservation;
 import com.models.TransactionItem;
 import com.services.BookedService;
+import com.services.BranchOfficeService;
 import com.services.ExtrasService;
 import com.services.ModelService;
 import com.services.PayPalService;
 import com.services.UserServices;
+import com.servicesImpl.MailAuxiliarService;
 
 @Controller
 @RequestMapping(value="payment")
@@ -39,6 +44,9 @@ public class PaymentTransactionController {
 
 	@Resource(name="PayPalServiceImpl")
 	PayPalService paypalService;
+	
+	@Resource(name="MailAuxiliar")
+	MailAuxiliarService mailAuxiliar;
 	
 	@Autowired
 	ModelService modelService;
@@ -51,9 +59,15 @@ public class PaymentTransactionController {
 	
 	@Autowired
 	ExtrasService extrasService;
+	
+	@Autowired
+	HttpSession httpSession;
+	
+	@Autowired
+	BranchOfficeService officeService;
 
 	@RequestMapping(value="/start-paypal",method =RequestMethod.POST)
-	public ResponseEntity<Map<String, Object>> paypalPaymentBegin(@RequestBody List<TransactionItem> itemsList){
+	public ResponseEntity<Map<String, Object>> paypalPaymentBegin(@RequestBody List<TransactionItem> itemsList,HttpServletRequest request){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 //		map.put("status", "500");
@@ -66,8 +80,7 @@ public class PaymentTransactionController {
 				throw new Exception("Items list from client is empty.");
 			}
 			validateItemList(itemsList);
-
-			Map<String, String> response = paypalService.beginTransaction(itemsList);
+			Map<String, String> response = paypalService.beginTransaction(itemsList,request);
 			
 			switch (response.get("ack")) {
 			case "success" :
@@ -150,15 +163,15 @@ public class PaymentTransactionController {
 			String itemTotal = reservation.getItemTotal();
 			String orderTotal = reservation.getOrderTotal();
 			BookingModel bookingCar = reservation.getBookingModel();
-			int clientId = reservation.getClientId();
 			List<Extras> extras = reservation.getExtras();
 			PayPalTransaction transaction = paypalService.confirmTransaction(token, PayerID, itemTotal, orderTotal);
 			switch(transaction.getAck()){
 			case "SUCCESS":
 				String transactionId = transaction.getTransactionID();
-				Client client = (Client)userService.get(clientId);
+				Client client = (Client)userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
 				bookedService.registerBook(bookingCar, client, transactionId, transaction.getPayerPayPalID(), extras);
-				
+				DateTimeFormatter format=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				mailAuxiliar.sendMailWithHtmlText("<p>Se ha confirmado su reserva!</p><br><p>Lo esperamos el dia "+bookingCar.getStartDate().format(format)+" en nuestra sucursal de "+officeService.get(bookingCar.getOriginBranchOfficeId()).getCity() +" para que pueda retirar su vehiculo y empezar su viaje.</p><br><p>Gracias por su preferencia, un saludo del personal de Rent-Uy</p>", client.getEmail(), "Confirmacion de reserva");
 				return ResponseEntity.ok("Transaction complete!");
 				
 			case "FAILURE":
