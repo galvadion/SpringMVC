@@ -14,6 +14,7 @@
         service.InsertBooked = InsertBooked;
         service.DeleteBooked = DeleteBooked;
         service.GetBookedById = GetBookedById;
+        service.ValidatePromotion=ValidatePromotion;
         
         
         return service;
@@ -35,6 +36,10 @@
         
         function DeleteBooked(id) {
             return $http.delete('/SpringMVC/booked/delete', id).then(handleSuccess, handleError);
+        }
+        
+        function ValidatePromotion(id) {
+            return $http.post('/SpringMVC/promotion/validatecode',id).then(handleSuccess, handleError);
         }
 
         

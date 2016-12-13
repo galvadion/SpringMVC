@@ -19,6 +19,8 @@ public class Reservation implements Serializable{
 	
 	private String orderTotal;
 	
+	private String promotionCode;
+	
 	private int clientId;
 	
 	private List<Extras> extras;
@@ -75,6 +77,18 @@ public class Reservation implements Serializable{
 	}
 	public void setExtas(List<Extras> extas) {
 		this.extras = extas;
+	}
+
+	public String getPromotionCode() {
+		return promotionCode;
+	}
+
+	public void setPromotionCode(String promotionCode) {
+		this.promotionCode = promotionCode;
+	}
+
+	public void setExtras(List<Extras> extras) {
+		this.extras = extras;
 	}
 	
 }

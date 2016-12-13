@@ -98,6 +98,14 @@
 									<div class="col-xs-3">$ {{item.price * item.quantity}}</div>
 								</div>
 							</div>
+							<br><br>
+							<div ng-if="vm.rolclient && !vm.isPromotion"  class="form-inline">
+								<label for="name" class="col-xs-offset-1 col-xs-4">Codigo promocional</label>
+                            	<input type="text" name="promoCode" id="promoCode" class="col-xs-4" ng-model="vm.promo.promotionCode" placeholder="">
+								<div class="col-xs-3" style="margin-right: 15px;">
+									<button ng-click="validatePromotion()" class="btn  btn-orange">Validar</button>
+								</div>
+							</div>
 						</div>
 						<div class="panel-footer">
 							<div class="row">

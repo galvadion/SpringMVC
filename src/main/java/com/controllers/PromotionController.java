@@ -1,8 +1,11 @@
 package com.controllers;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -17,8 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.entities.BranchOffice;
+import com.entities.Client;
 import com.entities.Model;
 import com.entities.Promotion;
+import com.models.PromoValidation;
+import com.services.BranchOfficeService;
+import com.services.UserServices;
 import com.servicesImpl.PromotionService;
 
 @Controller
@@ -27,6 +35,15 @@ public class PromotionController {
 
 	@Autowired
 	PromotionService promotionService;
+	
+	@Autowired
+	BranchOfficeService branchService;
+	
+	@Autowired
+	UserServices userService;
+	
+	@Autowired
+	HttpSession httpSession;
 	
 	private static Validator validator;
 
@@ -82,5 +99,72 @@ public class PromotionController {
 		}
 		
 	}
-
+	
+	
+	@RequestMapping(value = "/validatecode", method = RequestMethod.POST)
+	public ResponseEntity<PromoResponse> validatePromo(@RequestBody PromoValidation model) {
+		Promotion promo=promotionService.getPromotionByCode(model.getPromotionCode());
+		Client client=(Client)userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
+		boolean modelValid=false,officeValid=false,dateValid=false,userValid=true;
+		try{
+			for(Client cli:promo.getClients()){
+				if(cli.getId().equals(client.getId())) userValid=false;
+			}
+		}catch(NullPointerException e){
+			userValid=true;
+		}try{
+			for(Model mod:promo.getModels()){
+				System.out.println(mod);
+				if(mod.getId().equals(model.getModel().getId())){
+					modelValid=true;
+				}
+			}
+		}catch(NullPointerException e){
+			 modelValid=true;
+		}try{
+			for(BranchOffice office:promo.getOffices()){
+				if(office.getId().equals(model.getOrigin())) officeValid=true;
+			}
+		}catch(NullPointerException e){
+			officeValid=true;
+		}
+		if(model.getOriginDate().isAfter(promo.getBeginPromotionDate())){
+			dateValid=true;
+		}
+		PromoResponse response=new PromoResponse();
+		response.setValid(modelValid && officeValid && dateValid && userValid);
+		response.setPercentage(promo.getPercentage());
+		response.setPromotionId(promo.getId());
+		return ResponseEntity.ok(response);
+	}
+	
+	public static class PromoResponse implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6061590258295939206L;
+		private boolean valid;
+		private String promotionId;
+		private Float percentage;
+		public boolean isValid() {
+			return valid;
+		}
+		public void setValid(boolean valid) {
+			this.valid = valid;
+		}
+		public String getPromotionId() {
+			return promotionId;
+		}
+		public void setPromotionId(String promotionId) {
+			this.promotionId = promotionId;
+		}
+		public Float getPercentage() {
+			return percentage;
+		}
+		public void setPercentage(Float percentage) {
+			this.percentage = percentage;
+		}
+		
+	}
 }
+

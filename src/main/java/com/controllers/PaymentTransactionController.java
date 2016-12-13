@@ -1,6 +1,7 @@
 package com.controllers;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.entities.Client;
 import com.entities.Extras;
 import com.entities.Model;
+import com.entities.Promotion;
 import com.models.BookingModel;
 import com.models.ModelAndExtras;
 import com.models.PayPalTransaction;
@@ -35,6 +37,7 @@ import com.services.ModelService;
 import com.services.PayPalService;
 import com.services.UserServices;
 import com.servicesImpl.MailAuxiliarService;
+import com.servicesImpl.PromotionService;
 
 @Controller
 @RequestMapping(value="payment")
@@ -59,6 +62,9 @@ public class PaymentTransactionController {
 	
 	@Autowired
 	ExtrasService extrasService;
+	
+	@Autowired
+	PromotionService promotionService;
 	
 	@Autowired
 	HttpSession httpSession;
@@ -157,7 +163,7 @@ public class PaymentTransactionController {
 	@RequestMapping(value="/confirm-transaction", method=RequestMethod.POST)
 	public ResponseEntity<String> confirmTransaction(@RequestBody Reservation reservation){
 		try{
-			
+			String promotionCode = reservation.getPromotionCode();
 			String token = reservation.getToken();
 			String PayerID = reservation.getPayerId();
 			String itemTotal = reservation.getItemTotal();
@@ -169,6 +175,17 @@ public class PaymentTransactionController {
 			case "SUCCESS":
 				String transactionId = transaction.getTransactionID();
 				Client client = (Client)userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
+				if(!promotionCode.equals("")){
+					Promotion promo=promotionService.getPromotionByCode(promotionCode);
+					try{
+						promo.getClients().add(client);
+					}catch(Exception e){
+						List<Client> clients=new ArrayList<>();
+						clients.add(client);
+						promo.setClients(clients);
+					}
+					promotionService.create(promo);
+				}
 				bookedService.registerBook(bookingCar, client, transactionId, transaction.getPayerPayPalID(), extras);
 				DateTimeFormatter format=DateTimeFormatter.ofPattern("dd/MM/yyyy");
 				mailAuxiliar.sendMailWithHtmlText("<p>Se ha confirmado su reserva!</p><br><p>Lo esperamos el dia "+bookingCar.getStartDate().format(format)+" en nuestra sucursal de "+officeService.get(bookingCar.getOriginBranchOfficeId()).getCity() +" para que pueda retirar su vehiculo y empezar su viaje.</p><br><p>Gracias por su preferencia, un saludo del personal de Rent-Uy</p>", client.getEmail(), "Confirmacion de reserva");

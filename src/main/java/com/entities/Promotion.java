@@ -152,6 +152,14 @@ public class Promotion implements Serializable{
 	public void setCreationDate(LocalDate creationDate) {
 		this.creationDate = creationDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Promotion [id=" + id + ", beginPromotionDate=" + beginPromotionDate + ", lastPromotionDate="
+				+ lastPromotionDate + ", creationDate=" + creationDate + ", promotionCode=" + promotionCode
+				+ ", percentage=" + percentage + ", bookedList=" + bookedList + ", descriptionText=" + descriptionText
+				+ ", models=" + models + ", offices=" + offices + ", clients=" + clients + "]";
+	}
 	
 	
 }

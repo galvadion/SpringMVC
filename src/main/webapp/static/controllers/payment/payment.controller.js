@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('PaymentController', PaymentController);
 	
-	PaymentController.$inject = ['$location','$rootScope','$scope', 'PaymentService', '$routeParams', 'AuthenticationService'];
+	PaymentController.$inject = ['$location','$rootScope','$scope', 'PaymentService', '$routeParams', 'AuthenticationService','BookedService'];
 	
-	function PaymentController($location, $rootScope, $scope, PaymentService, $routeParams, AuthenticationService){
+	function PaymentController($location, $rootScope, $scope, PaymentService, $routeParams, AuthenticationService,BookedService){
 		
 		var vm = this;
 		
@@ -27,7 +27,11 @@
 		vm.babySeat1 = 0;
 		vm.babySeat2 = 0;
 		vm.babySeat3 = 0;
+		vm.percentage=0;
+		vm.promotionCode="";
 		vm.bookingDays = 0;
+		vm.discount = 0;
+		vm.isPromotion=false;
 		
 		$scope.model;
 		$scope.insurancePrice;
@@ -74,6 +78,34 @@
 			}
 		}
 		
+		$scope.validatePromotion = function(){
+        	vm.promo.model=$scope.model;
+        	vm.promo.origin=$rootScope.officeInitial;
+        	vm.promo.destiny=$rootScope.officeEnding;
+        	vm.promo.originDate=vm.initDate.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$1/$2/$3");
+        	BookedService.ValidatePromotion(vm.promo).then(function (response) {
+        		if(response.success){
+	        		vm.isPromotion=response.data.valid;	
+	        		if(!vm.isPromotion){
+	        			$rootScope.doFlash("Esta promocion no es valida en estas condiciones", "", "error", 6000);
+	        		}else{
+	        			vm.percentage=response.data.percentage;
+	        			vm.promotionCode=response.data.promotionCode;
+	        			vm.discount += $scope.model.category.basePrice*vm.bookingDays*(vm.percentage/100);
+	        			for(var i in vm.items){
+	        				vm.discount+=i.price*(vm.percentage/100);
+	        			}
+	        			$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", -vm.discount, 1);
+	        		}
+        		}
+        		else{
+        		//	vm.allBookeds = [];
+        			console.log("invalido")
+        		}
+        		NProgress.done();
+        	});
+        }
+		
 		$scope.loginModal = function(){
 			AuthenticationService.ClearCredentials();
 			$("#loginModal").modal();
@@ -108,10 +140,21 @@
 				quantity = vm.bookingDays;
 			}
 			if(checked){
+				
 				$scope.cart.addItem(id, name, price, quantity);
+				if(vm.isPromotion){
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", vm.discount, -1);
+					vm.discount +=price*quantity*(vm.percentage/100);
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%",-vm.discount, 1);
+				}
 			}
 			else{
 				$scope.cart.addItem(id, name, price, -1 * quantity);
+				if(vm.isPromotion){
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", vm.discount , -1);
+					vm.discount -=price*quantity*(vm.percentage/100);
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%",-vm.discount , 1);
+				}
 			}
 		}
 		
@@ -130,7 +173,7 @@
 					
 				}
 				else{
-					$rootScope.doFlash(response.data, "", "error", 6);
+					$rootScope.doFlash(response.data, "", "error", 6000);
 				}
 			})
 			NProgress.done();
@@ -160,6 +203,7 @@
 					"itemTotal" : vm.itemTotal,
 					"orderTotal" : vm.orderTotal,
 					'extras' : selectedExtras,
+					'promotionCode' : vm.promotionCode,
 					"clientId" : $rootScope.globals.currentUser.id
 			}
 			PaymentService.ConfirmPayment(data).then(function(response){
@@ -167,7 +211,7 @@
 					vm.estado = "confirm";
 				}
 				else{
-					$rootScope.doFlash(response.data, "", "error", 6);
+					$rootScope.doFlash(response.data, "", "error", 6000);
 				}
 			})
 			NProgress.done();
