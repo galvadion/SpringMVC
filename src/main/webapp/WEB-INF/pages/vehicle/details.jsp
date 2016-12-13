@@ -63,10 +63,21 @@
 								</div>
 							</div>
 						</div>
-							
-						<hr class="line-dashed line-full"/>
-						<br/>
+					
+					</div>
 
+				</section>
+				
+				<br/>
+
+				<section class="tile">
+					<div class="tile-header dvd dvd-btm" id="searchResult">
+                        <h1 class="custom-font"><strong>Mantenimiento </strong></h1>
+                    </div>
+
+                    <br/>
+					
+					<div class="tile-body">
 						<form form-on-change="checkFields()" name='form' class="" role="form">
 							<div class="row">
 								<div class="form-group customDatePickers col-sm-6">
@@ -106,10 +117,9 @@
 								</div>
 							</div>
 						</form>
-					
 					</div>
-
 				</section>
+				
 			</div>
 			<!-- /row -->
 		</div>

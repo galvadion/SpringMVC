@@ -73,7 +73,7 @@
         function initController() {
             NProgress.start();
             vm.location = $location.path().split('/',3);
-            if(vm.location[2] == "edit" || vm.location[2] == "details"){
+            if(vm.location[2] == "edit"){
                 getAllBrands();
                 getAllOffices();
                 getVehicleById($routeParams.id);
@@ -83,6 +83,9 @@
             	getAllBrands();
             	getAllOffices();
             }
+            else if(vm.location[2] == "details"){
+                getVehicleById($routeParams.id);
+        	}
             else{
             	getAllVehicles();
             }
