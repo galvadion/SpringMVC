@@ -83,6 +83,9 @@
                 getFuelTypes();
                 getCategories();
             }
+            else if(vm.location[2] == "properties"){
+            	getModelById($routeParams.id);
+            }
             else{
             	getAllModels();
             }

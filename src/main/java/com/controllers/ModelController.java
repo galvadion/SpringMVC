@@ -52,6 +52,12 @@ public class ModelController {
 		ModelAndView view = new ModelAndView("model/list");
 		return view;
 	}
+	
+	@RequestMapping(value = "/properties", method = RequestMethod.GET)
+	public ModelAndView getPropertiesPage() {
+		ModelAndView view = new ModelAndView("model/properties");
+		return view;
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView getCreatePage() {

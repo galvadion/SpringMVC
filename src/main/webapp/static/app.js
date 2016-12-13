@@ -139,6 +139,13 @@
                 title: 'Rent-UY - Modelos',
                 controllerAs: 'vm'
             })
+            
+            .when('/model/properties/:id', {
+                controller: 'ModelController',
+                templateUrl: 'model/properties',
+                title: 'Rent-UY - Propiedades de Modelo',
+                controllerAs: 'vm'
+            })
 
             .when('/model/create', {
                 controller: 'ModelController',
@@ -396,7 +403,7 @@
         	$location.path('/home');
         	setTimeout(function(){
                 $window.location.reload();
-        	},1000);
+        	},600);
         }
         
         $rootScope.chat = false;

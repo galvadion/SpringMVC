@@ -28,7 +28,7 @@
 							      <li ng-show="!vm.roladmin" ng-class=getClass('search') class=""><a href="#/search"><span class="nav-custom-font">Buscar</span></a></li>
 							      <li ng-show="vm.roladmin" ng-class=getClass('brand') class=""><a href="#/brand"><span class="nav-custom-font">Marcas</span></a></li>
 							      <li ng-class=getClass('model') class=""><a href="#/model"><span class="nav-custom-font">Modelos</span></a></li>
-							      <li ng-show="vm.roladmin" ng-class=getClass('vehicle') class=""><a href="#/vehicle"><span class="nav-custom-font">Vehículos</span></a></li>
+							      <li ng-show="vm.roladmin || vm.rolemployee" ng-class=getClass('vehicle') class=""><a href="#/vehicle"><span class="nav-custom-font">Vehículos</span></a></li>
 							      <li ng-class=getClass('branchoffice') class=""><a href="#/branchoffice"><span class="nav-custom-font">Sucursales</span></a></li>
 							      <li ng-show="vm.roladmin" ng-class=getClass('employee') class=""><a href="#/employee"><span class="nav-custom-font">Empleados</span></a></li>
 							      <li ng-show="vm.roladmin || vm.rolemployee" ng-class=getClass('client') class=""><a href="#/client"><span class="nav-custom-font">Clientes</span></a></li>

@@ -21,7 +21,7 @@
             		<!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                     	<h2 class="custom-font"><strong>Gestion:</strong></h2>
-                        <a href="#/vehicle/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Vehículo</a>
+                        <a ng-show="vm.roladmin" href="#/vehicle/create" class="btn btn-orange btn-rounded mb-10 right" style="margin: 0 2px 0 2px;">Nuevo Vehículo</a>
                     </div>
                     <!-- /tile header -->
 
@@ -62,12 +62,15 @@
                                         </td>
                                         <td class="text-center plus"></td>
                                         <td class="text-center plus">
-                                             <a ng-href="#/vehicle/edit/{{value.id}}" title="Editar">
+                                             <a ng-href="#/vehicle/edit/{{value.id}}" title="Editar" ng-show="vm.roladmin">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
+                                             </a>
+                                             <a ng-href="#/vehicle/details/{{value.id}}" title="Ver" ng-show="vm.rolemployee">
+                                             	<i class="fa fa-eye"></i><br><small>Ver</small>
                                              </a>
                                         </td>
                                         <td class="text-center delete">
-                                            <a doing-action="" href ng-click="deleteVehicle(value,$index)" confirm-if="checked" confirm="Esta seguro, eliminar vehículo id {{value.id}} ?" title="Eliminar">
+                                            <a doing-action="" href ng-click="deleteVehicle(value,$index)" confirm-if="checked" confirm="Esta seguro, eliminar vehículo id {{value.id}} ?" title="Eliminar" ng-show="vm.roladmin">
                                                 <i class="fa fa-times"></i><br />
                                                 <small>Eliminar</small>
                                             </a>

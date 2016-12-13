@@ -97,17 +97,17 @@
 					<div class="tile-header dvd dvd-btm">
 						<div class="row" ng-repeat="(key, value) in vm.allModels">
 							<div class="text-center">
-								<h2>{{value.brand.name}} {{value.name}} {{value.year}}</h2>
+								<h1>{{value.brand.name}} {{value.name}} {{value.year}}</h1>
 							</div>
-							<div class="row" style="padding: 15px;">
-							<div class="col-sm-4">
-								<div class="col-sm-4">
-									<img ng-if="!value.images[0]" src="static/images/noimage.png" style="height: 150px; max-width: 240px;">
-									<img ng-if="value.images[0]" src="images/{{value.images[0].fileLocation}}" style="height: 150px; max-width: 240px;">
+							<br/>
+							<div class="row" style="padding: 20px;">
+
+								<div class="col-sm-4 text-center">
+									<img ng-if="!value.images[0]" src="static/images/noimage.png" style="height: 150px; max-width: 240px;" class="text-center">
+									<img ng-if="value.images[0]" src="images/{{value.images[0].fileLocation}}" style="height: 150px; max-width: 240px; margin: auto;" class="text-center">
 								</div>
-								</div>
-								<div class="col-sm-4">
-									<table>
+								<div class="col-sm-3">
+									<table style="margin: auto;">
 										<tr>
 											<td>
 												<p>Categoria: {{value.category.name}}</p>
@@ -130,8 +130,8 @@
 										</tr>
 									</table>
 								</div>
-								<div class="col-sm-4">
-									<table>
+								<div class="col-sm-3">
+									<table style="margin: auto;">
 										<tr>
 											<td>
 												<p>Valijas: {{value.luggage}}</p>
@@ -157,8 +157,11 @@
 										</tr>
 									</table>
 								</div>
+								<div class="col-sm-2 text-center">
+									<a href="#/model/properties/{{value.id}}" class="btn  btn-orange" style="margin-top: 20px;">Ver detalles</a>
+								</div>
 							</div>
-							<div class="row" style="padding: 15px;">
+							<div class="row" style="padding: 15px;" style="background-color: #EDEDED; max-width: 90%; margin: auto;">
 								<p style="margin-left: 10px;"><b>Descripción:</b> {{value.description}}</p>
 							</div>
 							
