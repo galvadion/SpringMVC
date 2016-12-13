@@ -27,16 +27,16 @@
 						<div class="col-md-12">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<div class="row"><center><h3 class="custom-font">{{vm.requestModel.brand.name}} {{vm.requestModel.name}}</h3></center></div>
+									<div class="row"><center><h1 class="custom-font">{{vm.requestModel.brand.name}} {{vm.requestModel.name}}</h1></center></div>
 								</div>
 								<div class="panel-body">
 									<div class="row">
-										<div class="col-md-8">
+										<div class="col-md-8" style="margin: auto;">
 											<img class="img-responsive" ng-if="!vm.requestModel.images[0]" src="static/images/noimage.png" alt="car-picture" style="max-width: 70%; margin: auto;">
 											<img class="img-responsive" ng-if="vm.requestModel.images[0]" src="images/{{vm.requestModel.images[0].fileLocation}}" alt="car-picture" style="max-width: 70%; margin: auto;">
 											<br/>
 										</div>
-										<div class="col-md-4" style="">
+										<div class="col-md-4" style="margin: auto; font-size: 13px">
 											<div class="row">
 												<label>Categoría: {{vm.requestModel.category.name}}</label>
 											</div>
@@ -65,13 +65,13 @@
 									</div>
 									<br/><br/>
 									<div class="row">
-										<div class="col-md-8">
+										<div class="col-md-8" style="margin: auto;">
 											<img class="img-responsive" ng-if="vm.requestModel.images[1]" src="images/{{vm.requestModel.images[1].fileLocation}}" alt="car-picture" style="max-width: 70%; margin: auto;">
 										</div>
 									</div>
 									<br/>
 									<div class="row">
-										<div class="col-md-8">
+										<div class="col-md-8" style="margin: auto;">
 											<img class="img-responsive" ng-if="vm.requestModel.images[2]" src="images/{{vm.requestModel.images[2].fileLocation}}" alt="car-picture" style="max-width: 70%; margin: auto;">
 										</div>
 									</div>

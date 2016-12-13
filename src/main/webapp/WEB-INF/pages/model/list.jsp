@@ -97,7 +97,7 @@
 					<div class="tile-header dvd dvd-btm">
 						<div class="row" ng-repeat="(key, value) in vm.allModels">
 							<div class="text-center">
-								<h1>{{value.brand.name}} {{value.name}} {{value.year}}</h1>
+								<h1 style="font-size: 25px"><b>{{value.brand.name}} {{value.name}} {{value.year}}</b></h1>
 							</div>
 							<br/>
 							<div class="row" style="padding: 20px;">
@@ -107,7 +107,7 @@
 									<img ng-if="value.images[0]" src="images/{{value.images[0].fileLocation}}" style="height: 150px; max-width: 240px; margin: auto;" class="text-center">
 								</div>
 								<div class="col-sm-3">
-									<table style="margin: auto;">
+									<table style="margin: auto; font-size: 13px">
 										<tr>
 											<td>
 												<p>Categoria: {{value.category.name}}</p>
@@ -131,7 +131,7 @@
 									</table>
 								</div>
 								<div class="col-sm-3">
-									<table style="margin: auto;">
+									<table style="margin: auto; font-size: 13px">
 										<tr>
 											<td>
 												<p>Valijas: {{value.luggage}}</p>
@@ -158,15 +158,15 @@
 									</table>
 								</div>
 								<div class="col-sm-2 text-center">
-									<a href="#/model/properties/{{value.id}}" class="btn  btn-orange" style="margin-top: 20px;">Ver detalles</a>
+									<a href="#/model/properties/{{value.id}}" class="btn  btn-orange" style="margin-top: 20px; height: 30px; border-radius: 3px; border-color: #FFFFF"><b>Ver detalles</b></a>
 								</div>
 							</div>
-							<div class="row" style="padding: 15px;" style="background-color: #EDEDED; max-width: 90%; margin: auto;">
-								<p style="margin-left: 10px;"><b>Descripción:</b> {{value.description}}</p>
+							<div class="row modelDesc">
+								<p style="margin-left: 10px; font-size: 15px"><b>Descripción:</b> {{value.description}}</p>
 							</div>
 							
 							<hr class="line-dashed line-full"/>
-							
+							<br/>
 						</div>
 					</div>
 				</section>
