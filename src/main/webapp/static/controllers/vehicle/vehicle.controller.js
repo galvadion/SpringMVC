@@ -83,6 +83,9 @@
             	getAllBrands();
             	getAllOffices();
             }
+            else if(vm.location[2] == "details"){
+            	getVehicleById($routeParams.id);
+            }
             else{
             	getAllVehicles();
             }

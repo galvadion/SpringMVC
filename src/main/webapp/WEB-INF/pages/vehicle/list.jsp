@@ -60,13 +60,14 @@
                                         <td>
                                             {{value.licensePlateExpirationDate}}
                                         </td>
-                                        <td class="text-center plus"></td>
+                                        <td class="text-center plus">
+                                        	<a ng-href="#/vehicle/details/{{value.id}}" title="Detalles">
+                                             	<i class="fa fa-eye"></i><br><small>Detalles</small>
+                                             </a>
+                                        </td>
                                         <td class="text-center plus">
                                              <a ng-href="#/vehicle/edit/{{value.id}}" title="Editar" ng-show="vm.roladmin">
                                              	<i class="fa fa-pencil"></i><br><small>Editar</small>
-                                             </a>
-                                             <a ng-href="#/vehicle/details/{{value.id}}" title="Ver" ng-show="vm.rolemployee">
-                                             	<i class="fa fa-eye"></i><br><small>Ver</small>
                                              </a>
                                         </td>
                                         <td class="text-center delete">

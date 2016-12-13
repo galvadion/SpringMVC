@@ -182,6 +182,13 @@
                 controllerAs: 'vm'
             })
             
+            .when('/vehicle/details/:id', {
+                controller: 'VehicleController',
+                templateUrl: 'vehicle/details',
+                title: 'Rent-UY - Detalles de Vehículo',
+                controllerAs: 'vm'
+            })
+            
             .when('/branchoffice', {
                 controller: 'BranchofficeController',
                 templateUrl: 'branchoffice',
