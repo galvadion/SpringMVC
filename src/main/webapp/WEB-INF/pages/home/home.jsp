@@ -124,20 +124,17 @@
 
 		<br />
 
-		<div class="row">
+		<!--div class="row">
 			<div class="col-md-12">
 
 				<section class="tile">
 
-					<!-- tile header -->
 					<div class="tile-header dvd dvd-btm">
 						<h1 class="custom-font">
 							<strong>Listado </strong>de promociones
 						</h1>
 					</div>
-					<!-- /tile header -->
 
-					<!-- tile body -->
 					<div class="tile-body table-custom">
 
 						<div class="table-responsive">
@@ -162,9 +159,9 @@
 
 				</section>
 			</div>
-			<!-- /row -->
 
-		</div>
+
+		</div-->
 
 		<a id="chatBtn" href ng-click="initChat()" ng-disabled="chat" ng-if="!vm.roladmin" class="btn  btn-primary" style="position: fixed; bottom: 0; right: 0; z-index: 100; margin-right: 10px;">
 			<p ng-if="!chat">Iniciar chat</p>

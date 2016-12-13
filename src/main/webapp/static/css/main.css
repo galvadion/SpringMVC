@@ -18383,3 +18383,9 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 	max-width: 90%;
 	margin: auto;
 }
+
+.vehicleDesc {
+	background-color: #EDEDED;
+	padding: 15px;
+	margin: auto;
+}
