@@ -21,10 +21,10 @@
         vm.noResult = true;
         vm.promo={};
         
-        var localDate = new Date();
-		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
-				+ '-' + localDate.getDate();
-		$('.date').datetimepicker({
+        var today = new Date();
+        today = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+		
+        $('#beginDate').datetimepicker({
 			language : 'es',
 			weekStart : 1,
 			autoclose : 1,
@@ -32,7 +32,21 @@
 			startView : 2,
 			minView : 2,
 			forceParse : 0,
-			startDate : localDate
+			startDate : today
+		});
+		
+        var tomorrow = new Date();
+        tomorrow = (tomorrow.getDate() + 1) + '/' + (tomorrow.getMonth() + 1) + '/' + tomorrow.getFullYear();
+
+		$('#endDate').datetimepicker({
+			language : 'es',
+			weekStart : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0,
+			startDate : tomorrow
 		});
 
 		$scope.checkEndDate = function() {
@@ -134,26 +148,14 @@
             		$scope.searchModels(vm.search);
             	}
             	else{
-            		var defaultSearch = {};
-            		var today = new Date();
-                    var dd = today.getDate();
-                    var mm = today.getMonth()+1; //January is 0!
-                    var yyyy = today.getFullYear();
-                    if(dd<10){
-                        dd='0'+dd
-                    } 
-                    if(mm<10){
-                        mm='0'+mm
-                    } 
-                    var today = dd+'/'+mm+'/'+yyyy;
-                    defaultSearch.officeOriginId = '3';
-            		defaultSearch.officeEndId = '3';
-            		defaultSearch.beginDate = today;
-            		defaultSearch.endDate = today;
-            		defaultSearch.airConditioner = true;
-            		defaultSearch.passangers = 0;
-            		defaultSearch.luggage = 0;
-            		$scope.searchModels(defaultSearch);
+            		vm.search.officeOriginId = 1;
+                    vm.search.officeEndId = 1;
+                    vm.search.beginDate = today;
+                    vm.search.endDate = tomorrow;
+                    vm.search.airConditioner = true;
+                    vm.search.passangers = 0;
+                    vm.search.luggage = 0;
+            		$scope.searchModels(vm.search);
             		
             	}
             }

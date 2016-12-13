@@ -18238,7 +18238,6 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 
 #mapa {
 	height: 500px;
-	background-image: url("../images/map.png");
 }
 
 .paging_simple_numbers {
@@ -18338,7 +18337,8 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 
 #paymentBookingSection{
-	background : url(https://buidln.clipdealer.com/001/528/628//previews/2--1528628-commerce%20soft%20white%20background%20greeting%20intro.jpg) no-repeat left top fixed; 
+	background : url("../images/nico1.jpg") no-repeat left top fixed; 
+    
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -18346,7 +18346,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 
 #paymentDetailsSection{
-	background : url(https://www.jaggedpeak.com/MerchantUploads/edgeJaggedPeakCorp/jaggedpeak-video-poster-girl.jpg) no-repeat; /* left top fixed; */
+	background : url("../images/nico2.jpg") no-repeat; /* left top fixed; */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -18354,7 +18354,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 
 #paymentConfirmSection{
-	background : url(http://ecolodriver.com/wp-content/uploads/2014/04/Achat-de-voiture.jpg) no-repeat; /* left top fixed; */
+	background : url("../images/nico3.jpg") no-repeat; /* left top fixed; */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -18367,7 +18367,6 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 
 .bookingModalHeader{
-	background-color: #5cb85c;
     color:white !important;
     text-align: center;
     font-size: 30px;

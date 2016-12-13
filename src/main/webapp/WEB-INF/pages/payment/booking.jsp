@@ -210,38 +210,33 @@
 			<div class="modal-content">
 				<div class="modal-header bookingModalHeader" style="padding: 35px 50px;">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4>
-						<span class="glyphicon glyphicon-lock"></span> Login
-					</h4>
+					<h1 class="logo"><img src="static/images/logo.png" alt="Rent-UY" ></h1>
+		        	<h3 class="text-light text-primary ">Ingresar</h3>
 				</div>
-				<div class="modal-body" style="padding: 40px 50px;">
+				<div class="modal-body page-login" style="padding: 40px 50px;">
 				
 					<div ng-show="vm.error" class="alert alert-danger  alert-lightred alert-dismissable">{{vm.error}}</div>
 					
 					<form role="form" class="form-validation">
-					
-						<div class="help-block with-errors"></div>
+						
 						<div class="form-group" ng-class="{ 'has-error': (form.email.$dirty && form.email.$error.required ) || form.email.$error.email}">
-							<label for="usrname"	><span 	
-								class="glyphicon glyphicon-user"></span> Username</label> <input
-								type="email" class="form-control" id="email" ng-model="vm.email" name="email"
-								placeholder="Ingresar email" data-error="Formato de e-mail incorrecto" required>
-							<div class="help-block with-errors"></div>
-							<span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email es requirido</span>
-		                	<span ng-show="form.email.$dirty && form.email.$error.email" class="help-block">No es un Email valido</span>
-						</div>
-						
-						<div class="form-group" >
-							<label for="psw"><span
-								class="glyphicon glyphicon-eye-open"></span> Password</label> <input
-								type="password" class="form-control" id="password" ng-model="vm.password" name="password"
-								placeholder="Ingresar contraseña" required>
-								<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Contraseña es requerida</span>
-						</div>
-						
-						<button type="submit" class="btn btn-success btn-block" ng-click="login()">
-							<span class="glyphicon glyphicon-off"></span> Login
-						</button>
+			                <input type="email" class="form-control" name="email" id="email" class="form-control" ng-model="vm.email" placeholder="Email" required>
+			                <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email es requirido</span>
+			                <span ng-show="form.email.$dirty && form.email.$error.email" class="help-block">No es un Email valido</span>
+			            </div>
+			
+			            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+			                <input type="password" name="password" id="password" class="form-control underline-input" ng-model="vm.password" placeholder="Contraseña" required />
+			                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Contraseña es requerida</span>
+			            </div>
+			
+			            <div class="text-left">
+			                <button type="submit" ng-click="login()" ng-disabled="form.$invalid" class="btn btn-blue b-0 br-2 mr-5">Ingresar</button>
+			            </div>
+			            <div class="form-group text-left">
+			                <label class="checkbox checkbox-custom-alt checkbox-custom-sm inline-block"><input type="checkbox"><i></i> Recuerdame</label>
+			                <a href="#/forgot" class="pull-right mt-10">Recuperar contraseña</a>
+			            </div>
 						
 					</form>
 				</div>
