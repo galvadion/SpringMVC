@@ -23,4 +23,6 @@ public interface BookedService extends GenericService<Booked,Integer> {
 	
 	public List<Booked> getDeliveredByDay(LocalDate date);
 
+	public List<Booked> getByClient(Client client);
+
 }

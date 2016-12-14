@@ -74,4 +74,10 @@ public class BookedDaoImpl extends GenericDaoImpl<Booked, Integer> implements Bo
 		return query.getResultList();
 	}
 	
+	public List<Booked> getBookedByClientList(Client user) {
+		Query query=currentSession().createQuery("from Booked where client =:client ");
+		query.setParameter("client", user);
+		return  query.getResultList();
+	}
+	
 }

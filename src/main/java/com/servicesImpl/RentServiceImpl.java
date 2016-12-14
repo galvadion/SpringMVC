@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.entities.Booked;
-
+import com.entities.Client;
 import com.entities.Rent;
 import com.repository.RentRepository;
 
@@ -62,6 +62,13 @@ public class RentServiceImpl {
 		// TODO Auto-generated method stub
 		return rentDao.findAll(Query.query(Criteria.where("deliveryDate").gte(initialDate).and("returnDate").lte(finalDate)));
 	}
+
+	public List<Rent> getAll() {
+		// TODO Auto-generated method stub
+		return rentDao.findAll();
+	}
+
+
 
 	
 }

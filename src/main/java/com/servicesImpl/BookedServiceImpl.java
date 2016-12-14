@@ -128,4 +128,10 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		return bookedDao.getDelivered(date);
 	}
 
+	@Override
+	public List<Booked> getByClient(Client client) {
+		// TODO Auto-generated method stub
+		return bookedDao.getBookedByClientList(client);
+	}
+
 }
