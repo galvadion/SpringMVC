@@ -117,7 +117,7 @@
 							<div class="row">
 								<div class="form-group col-sm-12" class="form-group">
 									<label for="descriptionText" class="control-label">Descripcion</label>
-									<textarea type="text" ng-model="vm.descriptionText"
+									<textarea type="text" ng-model="vm.promotion.descriptionText"
 										name="descriptionText" id="descriptionText" class="form-control"/>
 								</div>
 							</div>

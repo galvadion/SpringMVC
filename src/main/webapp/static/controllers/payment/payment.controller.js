@@ -87,7 +87,7 @@
         		if(response.success){
 	        		vm.isPromotion=response.data.valid;	
 	        		if(!vm.isPromotion){
-	        			$rootScope.doFlash("Esta promocion no es valida en estas condiciones", "", "error", 6000);
+	        			$rootScope.doFlashMessage("Esta promocion no es valida en estas condiciones", "", "error", 6000);
 	        		}else{
 	        			vm.percentage=response.data.percentage;
 	        			vm.promotionCode=response.data.promotionCode;
@@ -173,7 +173,7 @@
 					
 				}
 				else{
-					$rootScope.doFlash(response.data, "", "error", 6000);
+					$rootScope.doFlashMessage(response.data, "", "error", 6000);
 				}
 			})
 			NProgress.done();
@@ -203,7 +203,7 @@
 					"itemTotal" : vm.itemTotal,
 					"orderTotal" : vm.orderTotal,
 					'extras' : selectedExtras,
-					'promotionCode' : vm.promotionCode,
+					"promotionCode" : vm.promotionCode,
 					"clientId" : $rootScope.globals.currentUser.id
 			}
 			PaymentService.ConfirmPayment(data).then(function(response){
@@ -211,7 +211,7 @@
 					vm.estado = "confirm";
 				}
 				else{
-					$rootScope.doFlash(response.data, "", "error", 6000);
+					$rootScope.doFlashMessage(response.data, "", "error", 6000);
 				}
 			})
 			NProgress.done();

@@ -27,7 +27,7 @@
                     $rootScope.doFlashMessage('Bienvenido!','/home','success');
                     $location.path('/home');
                 } else {
-                    $rootScope.doFlashMessage('Error, por favor intente nuevamente','','error');
+                    $rootScope.doFlashMessage(response.data.name,'','error');
                 }
                 NProgress.done();
             });

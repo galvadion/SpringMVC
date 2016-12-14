@@ -50,7 +50,7 @@
            UserService.InsertClient(vm.user)
 	            .then(function (response) {
 	            	if (response.success) {
-	                    $rootScope.doFlashMessage('Cliente creado con éxito','/login','success',5000);
+	                    $rootScope.doFlashMessage('Cliente creado con éxito, se le ha enviado un correo para validar su cuenta. Siga los pasos para poder ingresar al sistema','/login','success',5000);
 	                } else {
 	                    $rootScope.doFlashMessage('Email ya en uso, reingrese e intente nuevamente','','error',1000);
 	                }

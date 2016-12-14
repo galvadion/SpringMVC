@@ -17,5 +17,7 @@ public interface UserServices extends GenericService<User,Integer> {
 	public List<Client> getClientsWithNotifications();
 
 	public Client getByDocument(String document);
+	
+	public String recoverPassword(String email);
 
 }

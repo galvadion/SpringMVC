@@ -106,9 +106,10 @@ public class PromotionController {
 		Promotion promo=promotionService.getPromotionByCode(model.getPromotionCode());
 		Client client=(Client)userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
 		boolean modelValid=false,officeValid=false,dateValid=false,userValid=true;
+		String messageError="";
 		try{
 			for(Client cli:promo.getClients()){
-				if(cli.getId().equals(client.getId())) userValid=false;
+				if(cli.getId().equals(client.getId())){ userValid=false;messageError="Usted ya ha utilizado este codigo";}
 			}
 		}catch(NullPointerException e){
 			userValid=true;
@@ -130,11 +131,15 @@ public class PromotionController {
 		}
 		if(model.getOriginDate().isAfter(promo.getBeginPromotionDate())){
 			dateValid=true;
+		}else{
+			messageError="Su reserva arranca fuera de las fechas de su reserva";
 		}
 		PromoResponse response=new PromoResponse();
 		response.setValid(modelValid && officeValid && dateValid && userValid);
 		response.setPercentage(promo.getPercentage());
 		response.setPromotionId(promo.getId());
+		response.setPromotionCode(promo.getPromotionCode());
+		response.setValidationMessage(messageError);
 		return ResponseEntity.ok(response);
 	}
 	
@@ -146,6 +151,8 @@ public class PromotionController {
 		private boolean valid;
 		private String promotionId;
 		private Float percentage;
+		private String validationMessage;
+		private String promotionCode;
 		public boolean isValid() {
 			return valid;
 		}
@@ -164,6 +171,19 @@ public class PromotionController {
 		public void setPercentage(Float percentage) {
 			this.percentage = percentage;
 		}
+		public String getValidationMessage() {
+			return validationMessage;
+		}
+		public void setValidationMessage(String validationMessage) {
+			this.validationMessage = validationMessage;
+		}
+		public String getPromotionCode() {
+			return promotionCode;
+		}
+		public void setPromotionCode(String promotionCode) {
+			this.promotionCode = promotionCode;
+		}
+		
 		
 	}
 }
