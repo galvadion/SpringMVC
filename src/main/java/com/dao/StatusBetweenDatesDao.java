@@ -19,9 +19,11 @@ public interface StatusBetweenDatesDao extends GenericDao<StatusBetweenDates, In
 	 * @endDate the last Date of the booking
 	 *
 	 */
-	public void editStatusAtBooking(Vehicle vehicle,LocalDate initialDate,LocalDate endDate,BranchOffice finalBranchOffice);
+	public void editStatusAtBooking(Vehicle vehicle,LocalDate initialDate,LocalDate endDate,BranchOffice finalBranchOffice,BranchOffice endBO);
 
 	public StatusBetweenDates getActualStatus(Vehicle vehicle,LocalDate date);
 
-	public List<StatusBetweenDates> getNextStatus(Vehicle vehicle);
+	public List<StatusBetweenDates> getNextStatus(Vehicle vehicle,LocalDate date);
+
+	public List<StatusBetweenDates> getStatusList(Vehicle byId);
 }

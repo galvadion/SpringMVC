@@ -114,12 +114,12 @@
         	var mgsError = "";
         	
         	if(vm.promotion.id){
-        		mgsSuccess = "Marca editada con éxito";
+        		mgsSuccess = "Promocion modificada con éxito";
         		mgsError = "Error al editar marca";
         		
         	}
         	else{
-        		mgsSuccess = "Marca creada con éxito";
+        		mgsSuccess = "Promocion creada con éxito";
         		mgsError = "Marca ya existente";
         	}
         	

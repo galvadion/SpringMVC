@@ -1,5 +1,6 @@
 package com.servicesImpl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,12 +55,12 @@ public class VehicleServiceImpl extends GenericServiceImpl<Vehicle, Integer> imp
 		return vehicleDao.getReturnedToday(bo);
 	}
 
-	public void abortNewEvents(Vehicle vehicle) {
-		List<StatusBetweenDates> nextStatus = statusDao.getNextStatus(vehicle);
+	public void abortNewEvents(Vehicle vehicle,LocalDate firstDate) {
+		List<StatusBetweenDates> nextStatus = statusDao.getNextStatus(vehicle,firstDate);
 		for (StatusBetweenDates status : nextStatus) {
 			statusDao.delete(status);
 		}
-		List<Booked> nextBooked = bookedDao.getNextBooked(vehicle);
+		List<Booked> nextBooked = bookedDao.getNextBooked(vehicle,firstDate);
 		for (Booked book : nextBooked) {
 			BookingModel bm = new BookingModel();
 			bm.setEndBranchOfficeId(book.getEndOffice().getId());

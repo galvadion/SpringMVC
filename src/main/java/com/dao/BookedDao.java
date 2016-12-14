@@ -12,7 +12,7 @@ public interface BookedDao extends GenericDao<Booked, Integer> {
 
 	public Booked getBookedByClient(Client user);
 
-	public List<Booked> getNextBooked(Vehicle vehicle);
+	public List<Booked> getNextBooked(Vehicle vehicle,LocalDate date);
 
 	public List<Booked> getDelivered(BranchOffice branch, LocalDate date);
 

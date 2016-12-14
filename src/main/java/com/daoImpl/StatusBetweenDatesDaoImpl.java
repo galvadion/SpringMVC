@@ -32,7 +32,7 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 	}
 
 	
-	public void editStatusAtBooking(Vehicle vehicle, LocalDate initialDate, LocalDate endDate,BranchOffice finalBranchOffice) {
+	public void editStatusAtBooking(Vehicle vehicle, LocalDate initialDate, LocalDate endDate,BranchOffice finalBranchOffice,BranchOffice originBO) {
 		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicle =:vehicule and :beginDate >= s.beginDate and :endDate <= s.endDate");
 		query.setParameter("beginDate", initialDate);
 		query.setParameter("endDate", endDate);
@@ -44,9 +44,10 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		booked.setBeginDate(initialDate);
 		LocalDate finalDate=endDate.plusDays(5);
 		booked.setEndDate(finalDate);
-		booked.setStatus(Vehicle_Status.Unavailable);
+		booked.setStatus(Vehicle_Status.Booked);
 		booked.setVehicle(vehicle);
-		booked.setBranchOffice(finalBranchOffice);
+		booked.setBranchOfficeEnd(finalBranchOffice);
+		booked.setBranchOffice(originBO);
 		this.saveOrUpdate(booked);
 		StatusBetweenDates newDisponibility=new StatusBetweenDates();
 		newDisponibility.setBeginDate(finalDate);
@@ -59,17 +60,26 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 
 	
 	public StatusBetweenDates getActualStatus(Vehicle vehicle,LocalDate date){
-		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicle =:vehicule and :date between s.beginDate and s.endDate");
+		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicle =:vehicle and :date between s.beginDate and s.endDate");
 		query.setParameter("date", date);
-		query.setParameter("vehicule", vehicle);
+		query.setParameter("vehicle", vehicle);
 		return (StatusBetweenDates) query.getSingleResult();
 		
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<StatusBetweenDates> getNextStatus(Vehicle vehicle) {
-		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicle =:vehicle and s.beginDate > CURRENT_DATE");
-		query.setParameter("vehicule", vehicle);
+	public List<StatusBetweenDates> getNextStatus(Vehicle vehicle,LocalDate date) {
+		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicle =:vehicle and s.beginDate > :date");
+		query.setParameter("vehicle", vehicle);
+		query.setParameter("date",date);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<StatusBetweenDates> getStatusList(Vehicle byId) {
+		Query query=currentSession().createQuery("Select s from StatusBetweenDates s where s.vehicle =:vehicle and s.status != :status");
+		query.setParameter("vehicle", byId);
+		query.setParameter("status", Vehicle_Status.Available);
 		return query.getResultList();
 	}
 

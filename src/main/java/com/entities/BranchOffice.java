@@ -65,6 +65,9 @@ public class BranchOffice implements Serializable{
 
 	@OneToMany(mappedBy="branchOffice")
 	private List<StatusBetweenDates> statusDates;
+	
+	@OneToMany(mappedBy="branchOfficeEnd")
+	private List<StatusBetweenDates> statusDatesEnd;
 
 	
 	public List<Vehicle> getVehicles() {

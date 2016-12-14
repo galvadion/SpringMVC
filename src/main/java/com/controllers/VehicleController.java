@@ -111,10 +111,11 @@ public class VehicleController {
 	@RequestMapping(value = "/maintenance", method = RequestMethod.POST)
 	public ResponseEntity<Object> sendToMaintenance(@RequestBody MaintenanceModel requestModel){
 		Vehicle vehicle=vehicleService.get(requestModel.getVehicleId());
-		vehicleService.abortNewEvents(vehicle);
 		StatusBetweenDates current=statusService.getCurrentStatus(vehicle,requestModel.getFirstDate());
 		current.setEndDate(requestModel.getFirstDate());
 		statusService.saveOrUpdate(current);
+		vehicleService.abortNewEvents(vehicle,requestModel.getFirstDate());
+		
 		//Creates the status in the unavailable date
 		StatusBetweenDates unavailability=new StatusBetweenDates();
 		unavailability.setBeginDate(requestModel.getFirstDate());
@@ -149,7 +150,7 @@ public class VehicleController {
 	public ResponseEntity<Object> delete(String id) {
 		Vehicle vehicle=vehicleService.get(Integer.parseInt(id));
 		vehicle.setUnavailable(true);
-		vehicleService.abortNewEvents(vehicle);
+		vehicleService.abortNewEvents(vehicle,LocalDate.now());
 		
 		return ResponseEntity.ok((Object)"It has been removed");
 	}
@@ -168,6 +169,10 @@ public class VehicleController {
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
-		
+	}
+	
+	@RequestMapping(value = "/getstatus",method = RequestMethod.GET)
+	public ResponseEntity<List<StatusBetweenDates>> getStatusOfId(@RequestParam("id") Integer id){
+		return ResponseEntity.ok(statusService.getStatusOfVehicle(id));
 	}
 }

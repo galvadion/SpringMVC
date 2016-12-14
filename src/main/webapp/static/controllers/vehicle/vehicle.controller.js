@@ -23,6 +23,8 @@
         vm.brand = {};
         vm.vehicle.model = {};
         vm.vehicle.model.brand = {};
+        vm.vehicleStatus =[];
+        vm.maintenance={};
         
 		var localDate = new Date();
 		localDate = localDate.getFullYear() + '-' + (localDate.getMonth() + 1)
@@ -85,6 +87,7 @@
             }
             else if(vm.location[2] == "details"){
                 getVehicleById($routeParams.id);
+                getStatusById($routeParams.id);
         	}
             else{
             	getAllVehicles();
@@ -142,6 +145,20 @@
         	});
         }
         
+        $scope.sendMaintenance = function(){
+        	NProgress.start();
+        	vm.maintenance.vehicleId=vm.vehicle.id;
+        	VehicleService.sendMaintenance(vm.maintenance).then(function (response) {
+	    		if(response.success){
+	    			$rootScope.doFlashMessage("Se ha registrado el mantenimiento",'','success');
+	    			getStatusById($routeParams.id);
+	    		}
+	    		else{
+	    			$rootScope.doFlashMessage("Error, intente nuevamente",'','error');
+	    		}
+	    	});
+        }
+        
         $scope.saveVehicle = function() {
         	NProgress.start();
         	VehicleService.InsertVehicle(vm.vehicle).then(function (response) {
@@ -153,6 +170,14 @@
 	    		}
 	    	});
         };
+        
+        function getStatusById(id){
+        	VehicleService.getStatusById(id).then(function (response){
+        		if(response.success){
+        			vm.vehicleStatus=response.data;
+        		}
+        	})
+        }
         
         function getVehicleById(id){
         	VehicleService.GetVehicleById(id).then(function (response) {
