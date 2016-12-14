@@ -80,13 +80,13 @@ public class ApiRestController {
 		validator = factory.getValidator();
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/api/allUsers", method = RequestMethod.GET)
 	public List<User> getPage() {
 
 		return userService.getAll();
 	}
 
-	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/api/allModels", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getModelos() {
 		SearchFilter filter = new SearchFilter();
@@ -104,7 +104,7 @@ public class ApiRestController {
 		return map;
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/login", method = RequestMethod.POST)
 	public ResponseEntity<LogInResonseBody> logInUser(@RequestBody LogInRequestBody users,    UriComponentsBuilder ucBuilder){
 		User user= userService.validateLogin(users.getEmail(), users.getPassword());
 		LogInResonseBody response = new LogInResonseBody();

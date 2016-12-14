@@ -3,7 +3,7 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
-	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 	http://www.springframework.org/schema/tx 
@@ -99,34 +99,84 @@
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"
 		c:mongo-ref="mongo" c:databaseName="${mongo.db.name}" />
 		
+	<!-- SPRING SECURITY -->
 	<!-- Rest authentication entry point configuration -->
-    <sec:http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint">
+    <security:http 	create-session="stateless"
+    				use-expressions="true" 
+    				entry-point-ref="restAuthenticationEntryPoint"
+    				authentication-manager-ref="authenticationManager">
 <!--     	<sec:intercept-url pattern="/**" access="permitAll" /> -->
-        <sec:intercept-url pattern="/**" />
-        <sec:form-login authentication-success-handler-ref="mySuccessHandler"
-           				authentication-failure-handler-ref="myFailureHandler" />
- 		<sec:csrf disabled="true"/>
-        <sec:logout />
-    </sec:http>
+        <security:intercept-url pattern="/**" requires-channel="https" />
+        <security:http-basic />
+ 		<security:csrf disabled="true"/>
+        <security:logout />
+        <security:port-mappings>
+			<security:port-mapping http="8080" https="8443"/>
+		</security:port-mappings>
+    </security:http>
+    
     <!-- Connect the custom authentication success handler -->
     <bean id="mySuccessHandler" class="security.RestAuthenticationSuccessHandler" />
     <!-- Using default failure handler -->
-    <bean id="myFailureHandler"
-        class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" />
+    <bean id="myFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" />
     <bean id="restAuthenticationEntryPoint" class="security.RestAuthenticationEntryPoint" />
- 
+    
+    <bean id="springSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+		<security:filter-chain-map request-matcher="ant">
+	    	<security:filter-chain filters="persistencefilter,authenticationfilter" pattern="/nico/login"/>
+ 		</security:filter-chain-map>
+	</bean>
+	
+	<bean id="persistencefilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter" />
+	
+	<bean id="authenticationfilter" class="security.AuthenticationFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="authenticationSuccessHandler" ref="mySuccessHandler" />
+		<property name="passwordParameter" value="password" />
+		<property name="usernameParameter" value="email" />
+		<property name="postOnly" value="false" />
+	</bean>
+	
+<!-- 	<bean id="basicAuthenticationFilter"   class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter"> -->
+<!-- 	    <property name="authenticationManager" ref="authenticationManager"/>  -->
+<!-- 	    <property name="authenticationEntryPoint" ref="restAuthenticationEntryPoint"/>  -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="httpRequestAccessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased"> -->
+<!-- 	    <property name="allowIfAllAbstainDecisions" value="false"/> -->
+<!-- 	    <property name="decisionVoters"> -->
+<!-- 	        <list> -->
+<!-- 	            <ref bean="roleVoter"/> -->
+<!-- 	        </list> -->
+<!-- 	    </property> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="restfilter" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor" > -->
+<!-- 		<property name="authenticationManager" ref="authenticationManager" /> -->
+<!-- 		<property name="accessDecisionManager" ref="httpRequestAccessDecisionManager" /> -->
+<!-- 		<property name="securityMetadataSource"> -->
+<!-- 			<security:filter-security-metadata-source> -->
+<!-- 				<security:intercept-url pattern="/api/**" access="ROLE_USER"/> -->
+<!-- 			</security:filter-security-metadata-source> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	
+	<bean id="userServicesImpl" class="com.servicesImpl.UserServicesImpl"></bean>
+
     <!-- Authentication manager -->
-    <sec:authentication-manager alias="authenticationManager">
-        <sec:authentication-provider>
-            <sec:user-service>
-                <sec:user name="temporary" password="temporary" authorities="ROLE_ADMIN" />
-                <sec:user name="user" password="userPass" authorities="ROLE_USER" />
-            </sec:user-service>
-        </sec:authentication-provider>
-    </sec:authentication-manager>
+    <security:authentication-manager alias="authenticationManager">
+    	<security:authentication-provider user-service-ref="userServicesImpl">
+    	</security:authentication-provider>
+<!--         <security:authentication-provider> -->
+<!--             <security:user-service> -->
+<!--                 <security:user name="temporary" password="temporary" authorities="ROLE_ADMIN" /> -->
+<!--                 <security:user name="user" password="userPass" authorities="ROLE_USER" /> -->
+<!--             </security:user-service> -->
+<!--         </security:authentication-provider> -->
+    </security:authentication-manager>
  
     <!-- Enable the annotations for defining the secure role -->
-    <sec:global-method-security secured-annotations="enabled" />
+    <security:global-method-security secured-annotations="enabled" />
     
     
 </beans>

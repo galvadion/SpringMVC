@@ -35,6 +35,9 @@ public class User {
 	
 	@Column(name = "password", nullable=false)
 	private String password;
+	
+	@Column(name="dtype")
+	private String rol;
 
 	public Integer getId() {
 		return id;
@@ -99,6 +102,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
 	@Override
