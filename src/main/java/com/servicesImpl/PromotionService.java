@@ -23,8 +23,7 @@ public class PromotionService{
 	
 	
 	public Promotion create(Promotion promo){
-		promo.setId(UUID.randomUUID().toString());
-		promo.setCreationDate(LocalDate.now());
+
 		promotionRepository.save(promo);
 		return promo;
 		
@@ -40,8 +39,8 @@ public class PromotionService{
 	
 	public boolean checkIfUsedPromotion(String id,int client_id){
 		Promotion promo=getPromotionByCode(id);
-		for(Client cli : promo.getClients()){
-			if(cli.getId().equals(client_id)){
+		for(Integer cli : promo.getClients_id()){
+			if(cli.equals(client_id)){
 				return true;
 			}
 		}

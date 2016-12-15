@@ -1,8 +1,11 @@
 package com.controllers;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
@@ -80,6 +83,10 @@ public class PromotionController {
 					.body((Object) constraintViolations.iterator().next().getMessage());
 		} else {
 			try {
+				List<Integer> clients_id=new ArrayList<>();
+				model.setClients_id(clients_id);
+				model.setId(UUID.randomUUID().toString());
+				model.setCreationDate(LocalDate.now());
 				promotionService.create(model);
 				return ResponseEntity.ok((Object) model);
 			} catch (Exception e) {
@@ -107,8 +114,8 @@ public class PromotionController {
 		boolean modelValid=false,officeValid=false,dateValid=false,userValid=true;
 		String messageError="";
 		try{
-			for(Client cli:promo.getClients()){
-				if(cli.getId().equals(client.getId())){ userValid=false;messageError="Usted ya ha utilizado este codigo";}
+			for(Integer cli:promo.getClients_id()){
+				if(cli.equals(client.getId())){ userValid=false;messageError="Usted ya ha utilizado este codigo";}
 			}
 		}catch(NullPointerException e){
 			userValid=true;
@@ -118,17 +125,18 @@ public class PromotionController {
 				if(mod.getId().equals(model.getModel().getId())){
 					modelValid=true;
 				}
-			}
+			}if(promo.getModels().size()==0) modelValid=true;
 		}catch(NullPointerException e){
 			 modelValid=true;
 		}try{
 			for(BranchOffice office:promo.getOffices()){
 				if(office.getId().equals(model.getOrigin())) officeValid=true;
 			}
+			if(promo.getOffices().size()==0) officeValid=true;
 		}catch(NullPointerException e){
 			officeValid=true;
 		}
-		if(model.getOriginDate().isAfter(promo.getBeginPromotionDate())){
+		if(model.getOriginDate().isAfter(promo.getBeginPromotionDate()) || model.getOriginDate().isEqual(promo.getBeginPromotionDate())){
 			dateValid=true;
 		}else{
 			messageError="Su reserva arranca fuera de las fechas de su reserva";

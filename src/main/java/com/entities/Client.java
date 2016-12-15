@@ -65,8 +65,7 @@ public class Client extends User implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Client [birthDate=" + birthDate + ", licenseExpirationDate=" + licenseExpirationDate + ", booked="
-				+ booked + "]";
+		return "Client [birthDate=" + birthDate + ", licenseExpirationDate=" + licenseExpirationDate + "]";
 	}
 	public boolean isAllowNotification() {
 		return allowNotification;

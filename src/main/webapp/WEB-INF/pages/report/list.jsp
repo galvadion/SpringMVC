@@ -220,9 +220,11 @@
 							</div>
 
 							<div class="col-sm-1">
-								<a ng-if="!value.returnDate" href="#/rent/return/{{value.id}}" class="btn  btn-orange"><strong>Gestionar
+								<a ng-if="!value.returned" href="#/rent/return/{{value.id}}" class="btn  btn-orange"><strong>Gestionar
 										devolucion</strong></a>
-										<a ng-if="value.returnDate">Ya fue devuelto</a>
+										<a ng-if="value.returned">Ya fue devuelto</a>
+										<a ng-if="!value.rent" href="">
+								<strong>Aun no ha sido retirado</strong></a>
 							</div>
 						</div>
 

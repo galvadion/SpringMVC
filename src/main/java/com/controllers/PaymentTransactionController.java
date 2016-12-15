@@ -177,14 +177,20 @@ public class PaymentTransactionController {
 				Client client = (Client)userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
 				if(!promotionCode.equals("")){
 					Promotion promo=promotionService.getPromotionByCode(promotionCode);
+					System.out.println(promo);
 					try{
-						promo.getClients().add(client);
+						promo.getClients_id().add(Integer.parseInt(httpSession.getAttribute("user").toString()));
 					}catch(Exception e){
-						List<Client> clients=new ArrayList<>();
-						clients.add(client);
-						promo.setClients(clients);
+						List<Integer> clients=new ArrayList<>();
+						clients.add(Integer.parseInt(httpSession.getAttribute("user").toString()));
+						promo.setClients_id(clients);
 					}
-					promotionService.create(promo);
+					try{
+						System.out.println(promo);
+						promotionService.create(promo);
+					}catch(Exception e){
+						
+					}
 				}
 				bookedService.registerBook(bookingCar, client, transactionId, transaction.getPayerPayPalID(), extras);
 				DateTimeFormatter format=DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -203,7 +209,7 @@ public class PaymentTransactionController {
 			
 		}
 		catch(Exception ex){
-			log.error(ex.getStackTrace());
+			ex.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
 		}
 	}
