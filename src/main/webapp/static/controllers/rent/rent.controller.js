@@ -45,8 +45,9 @@
 			},
 		});
 		
-		var localDate = new Date();
-        localDate = (localDate.getFullYear()-18) + '-' + (localDate.getMonth() + 1) + '-' +  localDate.getDate();
+		var today = new Date();
+        today = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()-18;
+		
 		
         $('#birthDate').datetimepicker({
         	language:  'es',
@@ -56,7 +57,7 @@
         	startView: 2,
         	minView: 2,
         	forceParse: 0,
-        	endDate: localDate
+        	endDate: today
         });
         
         $('#licenseExpirationDate').datetimepicker({
