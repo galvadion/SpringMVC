@@ -7,7 +7,7 @@
 
 		<div class="pageheader">
 			<h1 class="custom-font" style="margin-top: -10px !important;">
-				<strong>Reservas </strong> Detalles
+				<strong>Detalles </strong> de Reserva
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#/home">Dashboard</a></li>
@@ -25,44 +25,46 @@
 					<div class="tile-body">
 
 						<div class="row vehicleDesc">
-							<h2>Detalles del vehículo</h2>
+							<h2><u>Detalles generales</u></h2>
 							
 							<br/>
 							<div class="col-md-4" style="margin-left: 20px; font-size: 15px">
 								<div class="row">
-									<label><b>Matrícula:</b> {{vm.booked.vehicle.licensePlate}}</label>
+									<label><b>Número de transacción:</b> {{vm.booked.transactionNr}}</label>
 								</div>
 								<div class="row">
-									<label><b>Sucursal actual:</b> {{vm.booked.branchOffice.name}}</label>
+									<label><b>Fecha de transacción:</b> {{vm.booked.transactionDate}}</label>
 								</div>
 								<div class="row">
-									<label><b>Marca:</b> {{vm.booked.model.brand.name}}</label>
+									<label><b>Monto inicial:</b> US$ {{vm.booked.initialAmount}}</label>
 								</div>
 								<div class="row">
-									<label><b>Modelo:</b> {{vm.booked.model.name}}</label>
+									<label><b>Fecha de inicio:</b> {{vm.booked.beginbookedDate}}</label>
 								</div>
 								<div class="row">
-									<label><b>Vencimiento de patente:</b> {{vm.booked.licensePlateExpirationDate}}</label>
-								</div>
-								<div class="row">
-									<label><b>Número de motor:</b> {{vm.booked.motorNr}}</label>
+									<label><b>Fecha de fin:</b> {{vm.booked.lastbookedDate}}</label>
 								</div>
 							</div>
 							<div class="col-md-4" style="margin-left: 15px; font-size: 15px">
 								<div class="row">
-									<label><b>Número de chasis:</b> {{vm.booked.chasisNr}}</label>
+									<label><b>Código de promoción:</b> {{vm.booked.promotionCode_id}}</label>
 								</div>
 								<div class="row">
-									<label><b>Kilómetros ya recorridos:</b> {{vm.booked.kilometers}}</label>
+									<label>
+										<b>Devuelto:</b>
+										<i ng-if="vm.booked.returned" class="fa fa-check" style="color: green"> <p class="custom-font" style="display: inline;">Si</p></i>
+                                        <i ng-if="!vm.booked.returned" class="fa fa-close" style="color: red"> <p class="custom-font" style="display: inline;">No</p></i>
+									</label>
 								</div>
 								<div class="row">
-									<label><b>Color:</b> {{vm.booked.color}}</label>
+									<label>
+										<b>Cancelado:</b>
+										<i ng-if="vm.booked.canceled" class="fa fa-check" style="color: green"> <p class="custom-font" style="display: inline;">Si</p></i>
+                                        <i ng-if="!vm.booked.canceled" class="fa fa-close" style="color: red"> <p class="custom-font" style="display: inline;">No</p></i>
+									</label>
 								</div>
-								<div class="row">
-									<label><b>Descripción:</b> {{vm.booked.model.description}}</label>
-								</div>
-								<div class="row">
-									<label><b>Observaciones:</b> {{vm.booked.observations}}</label>
+								<div class="row" ng-if="!vm.booked.canceled">
+									<button class="btn btn-orange" ng-click="cancelBooking(vm.booked.id)">Cancelar reserva</button> <small class="custom-font" style="display: inline;"> (Se aplicaran cargos)</small>
 								</div>
 							</div>
 						</div>
@@ -70,7 +72,7 @@
 						<br/>
 						
 						<div class="row vehicleDesc">
-							<h2>Detalles generales</h2>
+							<h2><u>Detalles del vehículo</u></h2>
 							
 							<br/>
 							<div class="col-md-4" style="margin-left: 20px; font-size: 15px">
@@ -78,36 +80,66 @@
 									<label><b>Matrícula:</b> {{vm.booked.vehicle.licensePlate}}</label>
 								</div>
 								<div class="row">
-									<label><b>Sucursal actual:</b> {{vm.booked.branchOffice.name}}</label>
+									<label><b>Marca:</b> {{vm.booked.vehicle.model.brand.name}}</label>
 								</div>
 								<div class="row">
-									<label><b>Marca:</b> {{vm.booked.model.brand.name}}</label>
+									<label><b>Modelo:</b> {{vm.booked.vehicle.model.name}}</label>
 								</div>
 								<div class="row">
-									<label><b>Modelo:</b> {{vm.booked.model.name}}</label>
-								</div>
-								<div class="row">
-									<label><b>Vencimiento de patente:</b> {{vm.booked.licensePlateExpirationDate}}</label>
-								</div>
-								<div class="row">
-									<label><b>Número de motor:</b> {{vm.booked.motorNr}}</label>
+									<label><b>Descripción:</b> {{vm.booked.vehicle.model.description}}</label>
 								</div>
 							</div>
 							<div class="col-md-4" style="margin-left: 15px; font-size: 15px">
 								<div class="row">
-									<label><b>Número de chasis:</b> {{vm.booked.chasisNr}}</label>
+									<label><b>Seguro pago: </b>
+										<p ng-if="vm.booked.withInsurance" class="custom-font" style="display: inline;">Si</p>
+										<p ng-if="!vm.booked.withInsurance" class="custom-font" style="display: inline;">No</p>
+									</label>
 								</div>
 								<div class="row">
-									<label><b>Kilómetros ya recorridos:</b> {{vm.booked.kilometers}}</label>
+									<label><b>Tanque lleno: </b>
+										<p ng-if="vm.booked.withFullTank" class="custom-font" style="display: inline;">Si</p>
+										<p ng-if="!vm.booked.withFullTank" class="custom-font" style="display: inline;">No</p>
+									</label>
 								</div>
 								<div class="row">
-									<label><b>Color:</b> {{vm.booked.color}}</label>
+									<label><b>Extras:</b> {{vm.booked.extrasList}}</label>
+								</div>
+							</div>
+						</div>
+						
+						<br/>
+						
+						<div class="row vehicleDesc">
+							<h2><u>Detalles de sucursales de retiro/entrega</u></h2>
+							
+							<br/>
+							<div class="col-md-4" style="margin-left: 20px; font-size: 15px">
+								<div class="row">
+									<label><b>Oficina de origen:</b> {{vm.booked.originOffice.name}}</label>
 								</div>
 								<div class="row">
-									<label><b>Descripción:</b> {{vm.booked.model.description}}</label>
+									<label><b>Dirección:</b> {{vm.booked.originOffice.address}}</label>
 								</div>
 								<div class="row">
-									<label><b>Observaciones:</b> {{vm.booked.observations}}</label>
+									<label><b>Ciudad:</b> {{vm.booked.originOffice.city}}</label>
+								</div>
+								<div class="row">
+									<label><b>Horario:</b> De {{vm.booked.originOffice.apertureHour}} hrs. a {{vm.booked.originOffice.closingHour}} hrs.</label>
+								</div>
+							</div>
+							<div class="col-md-4" style="margin-left: 15px; font-size: 15px">
+								<div class="row">
+									<label><b>Oficina de destino:</b> {{vm.booked.endOffice.name}}</label>
+								</div>
+								<div class="row">
+									<label><b>Dirección:</b> {{vm.booked.endOffice.address}}</label>
+								</div>
+								<div class="row">
+									<label><b>Ciudad:</b> {{vm.booked.endOffice.city}}</label>
+								</div>
+								<div class="row">
+									<label><b>Horario:</b> De {{vm.booked.endOffice.apertureHour}} hrs. a {{vm.booked.endOffice.closingHour}} hrs.</label>
 								</div>
 							</div>
 						</div>

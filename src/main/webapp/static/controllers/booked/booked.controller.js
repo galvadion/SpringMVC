@@ -290,6 +290,10 @@
         	
         	$location.path("/payment/booking");
         }
+        
+        $scope.cancelBooking = function(id){
+        	alert('You shall not pass !!');
+        }
 
     }
 
