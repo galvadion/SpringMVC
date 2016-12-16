@@ -11,9 +11,10 @@
         var service = {};
 
         service.GetAllBookeds = GetAllBookeds;
+        service.GetBookedsByClient = GetBookedsByClient;
+        service.GetBookedById = GetBookedById;
         service.InsertBooked = InsertBooked;
         service.DeleteBooked = DeleteBooked;
-        service.GetBookedById = GetBookedById;
         service.ValidatePromotion=ValidatePromotion;
         
         
@@ -24,6 +25,10 @@
         
         function GetAllBookeds() {
             return $http.get('/SpringMVC/booked/getall').then(handleSuccess, handleError);
+        }
+        
+        function GetBookedsByClient(id) {
+        	return $http.get('/SpringMVC/booked/getallbyuser?id=' + id).then(handleSuccess, handleError);
         }
         
         function GetBookedById(id) {

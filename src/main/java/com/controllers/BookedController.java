@@ -64,6 +64,12 @@ public class BookedController {
 		return view;
 	}
 	
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public ModelAndView getDetailsPage() {
+		ModelAndView view = new ModelAndView("booked/details");
+		return view;
+	}
+	
 	@RequestMapping(value = "/getbyid", method = RequestMethod.GET)
 	public ResponseEntity<Booked> getbyid(@RequestParam("id") Integer id) { 
 		if (bookedService.get(id) != null) {
@@ -80,7 +86,7 @@ public class BookedController {
 	
 	@RequestMapping(value = "/getallbyuser", method = RequestMethod.GET)
 	public ResponseEntity<List<Booked>> getallbyYser() {
-		Client client=(Client) userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
+		Client client=(Client) userService.get(Integer.parseInt(httpSession.getAttribute("id").toString()));
 			return ResponseEntity.ok(bookedService.getByClient(client));
 	}
 

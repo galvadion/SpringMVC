@@ -91,10 +91,16 @@
         });
 
         vm.DTColumnDefs = [
-            DTColumnDefBuilder.newColumnDef(1).notSortable(),
-            DTColumnDefBuilder.newColumnDef(2).notSortable(),
-            DTColumnDefBuilder.newColumnDef(3).notSortable(),
+            DTColumnDefBuilder.newColumnDef(9).notSortable(),
+            DTColumnDefBuilder.newColumnDef(10).notSortable(),
+            DTColumnDefBuilder.newColumnDef(11).notSortable(),
         ];
+        
+        vm.DTColumnDefsClient = [
+           DTColumnDefBuilder.newColumnDef(11).notSortable(),
+           DTColumnDefBuilder.newColumnDef(12).notSortable(),
+           DTColumnDefBuilder.newColumnDef(13).notSortable(),
+       ];
         
         $scope.searchModels = function(searchObject) {
         	NProgress.start();
@@ -166,8 +172,17 @@
             	vm.user.id = null;
                 vm.user.active = true;
             }
+            else if(vm.location[2] == "details"){
+        		getBookedById($routeParams.id);
+        	}
             else{
-            	getAllBookeds();
+            	if(vm.roladmin || vm.rolemployee){
+            		getAllBookeds();
+            	}
+            	else if(vm.rolclient){
+            		getBookedsByClient();
+            	}
+            	
             }
             
             NProgress.done();
@@ -195,6 +210,30 @@
         		}
         		else{
         			vm.allBookeds = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        
+        function getBookedsByClient(){
+        	BookedService.GetBookedsByClient($rootScope.globals.currentUser.id).then(function (response) {
+        		if(response.success){
+        			vm.allBookeds = response.data;
+        		}
+        		else{
+        			vm.allBookeds = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+        
+        function getBookedById(){
+        	BookedService.GetBookedById($routeParams.id).then(function (response) {
+        		if(response.success){
+        			vm.booked = response.data;
+        		}
+        		else{
+        			vm.booked = {};
         		}
         		NProgress.done();
         	});

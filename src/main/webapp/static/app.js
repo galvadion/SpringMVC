@@ -280,6 +280,13 @@
                 controllerAs: 'vm'
             })
             
+            .when('/booked/details/:id', {
+                controller: 'BookedController',
+                templateUrl: 'booked/details',
+                title: 'Rent-UY - Detalles de Reserva',
+                controllerAs: 'vm'
+            })
+            
             .when('/search/origin=:origin&destination=:destination&from=:from&to=:to', {
                 controller: 'BookedController',
                 templateUrl: 'booked/search',
