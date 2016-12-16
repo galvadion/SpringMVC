@@ -36,9 +36,10 @@ public class BookedDaoImpl extends GenericDaoImpl<Booked, Integer> implements Bo
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Booked> getNextBooked(Vehicle vehicle) {
-		Query query=currentSession().createQuery("from Booked where vehicle =:vehicle and beginbookedDate>CURRENT_DATE and canceled=false");
+	public List<Booked> getNextBooked(Vehicle vehicle,LocalDate firstDate) {
+		Query query=currentSession().createQuery("from Booked where vehicle =:vehicle and beginbookedDate>:Date and canceled=false");
 		query.setParameter("vehicle", vehicle);
+		query.setParameter("Date", firstDate);
 		return query.getResultList();
 	}
 
@@ -71,6 +72,12 @@ public class BookedDaoImpl extends GenericDaoImpl<Booked, Integer> implements Bo
 		Query query=currentSession().createQuery("from Booked where beginbookedDate=:date and canceled=false");
 		query.setParameter("date",date);
 		return query.getResultList();
+	}
+	
+	public List<Booked> getBookedByClientList(Client user) {
+		Query query=currentSession().createQuery("from Booked where client =:client ");
+		query.setParameter("client", user);
+		return  query.getResultList();
 	}
 	
 }

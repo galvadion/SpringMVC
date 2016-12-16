@@ -30,7 +30,7 @@
 									<label><b>Matrícula:</b> {{vm.vehicle.licensePlate}}</label>
 								</div>
 								<div class="row">
-									<label><b>Sucursal de origen:</b> {{vm.vehicle.branchOffice.name}}</label>
+									<label><b>Sucursal actual:</b> {{vm.vehicle.branchOffice.name}}</label>
 								</div>
 								<div class="row">
 									<label><b>Marca:</b> {{vm.vehicle.model.brand.name}}</label>
@@ -56,7 +56,7 @@
 									<label><b>Color:</b> {{vm.vehicle.color}}</label>
 								</div>
 								<div class="row">
-									<label><b>Descripción:</b> {{vm.vehicle.description}}</label>
+									<label><b>Descripción:</b> {{vm.vehicle.model.description}}</label>
 								</div>
 								<div class="row">
 									<label><b>Observaciones:</b> {{vm.vehicle.observations}}</label>
@@ -72,37 +72,36 @@
 
 				<section class="tile">
 					<div class="tile-header dvd dvd-btm" id="searchResult">
-                        <h1 class="custom-font"><strong>Mantenimiento </strong></h1>
+                        <h1 class="custom-font"><strong>Enviar a mantenimiento </strong></h1>
+                        <button type="button" class="btn" data-toggle="collapse" data-target="#demo"><span class="glyphicon glyphicon-chevron-down"></span></button>
                     </div>
-
-                    <br/>
-					
+					<div class="row collapse" style="padding: 0 10px 0 10px;" id="demo">
 					<div class="tile-body">
 						<form form-on-change="checkFields()" name='form' class="" role="form">
 							<div class="row">
 								<div class="form-group customDatePickers col-sm-6">
 									<div class="input-group date" id="date1" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
-										<label for="date1" class="control-label">Fecha 1</label> <input class="form-control" size="16" type="text" name="date1" placeholder="DD/MM/YYYY" ng-model="vm.date1" ng-change="checkDetailsExpirationDate()" readonly required>
+										<label for="date1" class="control-label">Fecha de inicio</label> <input class="form-control" size="16" type="text" name="date1" placeholder="DD/MM/YYYY" ng-model="vm.maintenance.firstDate" ng-change="checkDetailsExpirationDate()" readonly required>
 										<span
 											class="input-group-addon customAddonSize"> <span
 											class="glyphicon glyphicon-calendar"></span>
 										</span>
 									</div>
 									<span ng-show="licensePlateExpirationDateError" class="help-block" style="color: red">
-										Fecha 1 debe ser anterior a la de fecha 2
+										Fecha de inicio debe ser anterior a la de fecha de finalizacion
 									</span>
 								</div>
 								
 								<div class="form-group customDatePickers col-sm-6">
 									<div class="input-group date" id="date2" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
-										<label for="date2" class="control-label">Fecha 2</label> <input class="form-control" size="16" type="text" name="date2" placeholder="DD/MM/YYYY" ng-model="vm.date2" ng-change="checkDetailsExpirationDate()" readonly required>
+										<label for="date2" class="control-label">Fecha de finalizacion</label> <input class="form-control" size="16" type="text" name="date2" placeholder="DD/MM/YYYY" ng-model="vm.maintenance.endDate" ng-change="checkDetailsExpirationDate()" readonly required>
 										<span
 											class="input-group-addon customAddonSize"> <span
 											class="glyphicon glyphicon-calendar"></span>
 										</span>
 									</div>
 									<span ng-show="licensePlateExpirationDateError" class="help-block" style="color: red">
-										Fecha 2 debe ser posterior a la de fecha 1
+										Fecha de inicio debe ser anterior a la de fecha de finalizacion
 									</span>
 								</div>
 							</div>
@@ -113,13 +112,31 @@
 								<!-- Buttons -->
 								<div class="form-group text-right" style="margin-right: 15px;">
 									<a href="#/vehicle" class="btn btn-lightred">Cancelar</a>
-									<button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange" ng-click="">Guardar</button>
+									<button type="submit" id="submit" ng-disabled="form.$invalid" class="btn  btn-orange" ng-click="sendMaintenance()">Guardar</button>
 								</div>
 							</div>
 						</form>
 					</div>
+					</div>
 				</section>
-				
+				<section class="tile">
+					<div class="tile-header dvd dvd-btm" id="searchResult">
+                        <h1 class="custom-font"><strong>Historial del vehiculo </strong></h1>
+                        <button type="button" class="btn" data-toggle="collapse" data-target="#demoHistory"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                    </div>
+                    <div class="row collapse" style="padding: 0 10px 0 10px;" id="demoHistory">
+						<div class="tile-body">
+							<table class="dataTable"class="table table-bordered">
+								<thead><th>Fecha de inicio</th><th>Fecha de finalizacion</th><th>Estado</th><th>Sucursal de origen</th><th>Sucursal de destino</th></thead>
+								<tbody>
+									<tr ng-repeat="(key,value) in vm.vehicleStatus">
+										<td>{{value.beginDate}}</td><td>{{value.endDate}}</td><td>{{value.status}}</td><td>{{value.branchOffice.city}}</td><td>{{value.branchOfficeEnd.city}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</section>
 			</div>
 			<!-- /row -->
 		</div>

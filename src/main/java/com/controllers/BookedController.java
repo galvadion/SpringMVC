@@ -1,7 +1,10 @@
 package com.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Client;
+import com.entities.Employee;
 import com.models.BookingModel;
 import com.entities.Booked;
 import com.entities.Vehicle;
 import com.services.BookedService;
+import com.services.UserServices;
 
 @Controller
 @RequestMapping(value = "booked")
@@ -26,6 +31,12 @@ public class BookedController {
 
 	@Autowired
 	BookedService bookedService;
+	
+	@Autowired
+	UserServices userService;
+	
+	@Autowired
+	private HttpSession httpSession;
 	
 	static Logger log = Logger.getLogger(PaymentTransactionController.class.getName());
 
@@ -60,7 +71,17 @@ public class BookedController {
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
-		
+	}
+	
+	@RequestMapping(value = "/getall", method = RequestMethod.GET)
+	public ResponseEntity<List<Booked>> getall() { 	
+			return ResponseEntity.ok(bookedService.getAll());
+	}
+	
+	@RequestMapping(value = "/getallbyuser", method = RequestMethod.GET)
+	public ResponseEntity<List<Booked>> getallbyYser() {
+		Client client=(Client) userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
+			return ResponseEntity.ok(bookedService.getByClient(client));
 	}
 
 }

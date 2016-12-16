@@ -59,7 +59,7 @@
 							<div ng-repeat="extra in extras">
 								<div class="row">
 									<div class = "col-xs-offset-1 col-xs-9">
-										<label>{{extra.name}} ($ {{extra.price}} per day)</label>
+										<label>{{extra.name}} ($ {{extra.price}} por dia)</label>
 									</div>
 									<div class="col-xs-2">
 										<input type="checkbox" checklist-model="extra.checked" checklist-value="extra" ng-change="addItem((-1) * {{extra.id}}, '{{extra.name}}', {{extra.price}}, checked)" data-toggle="toggle">
@@ -68,7 +68,7 @@
 							</div>
 							<div class="row">
 								<div class = "col-xs-offset-1 col-xs-9">
-									<label>Seguro ($ {{insurancePrice}} per day)</label>
+									<label>Seguro ($ {{insurancePrice}} por day)</label>
 								</div>
 								<div class = "col-xs-2">
 									<input type="checkbox" ng-model="vm.insuranceCheck" ng-change="addItem('Insurance', 'Insurance', {{insurancePrice}}, vm.insuranceCheck)" data-toggle="toggle">
@@ -101,7 +101,7 @@
 							<br><br>
 							<div ng-if="vm.rolclient && !vm.isPromotion"  class="form-inline">
 								<label for="name" class="col-xs-offset-1 col-xs-4">Codigo promocional</label>
-                            	<input type="text" name="promoCode" id="promoCode" class="col-xs-4" ng-model="vm.promo.promotionCode" placeholder="">
+                            	<input type="text" name="promoCode" id="promoCode" class="col-xs-3" ng-model="vm.promo.promotionCode" placeholder="">
 								<div class="col-xs-3" style="margin-right: 15px;">
 									<button ng-click="validatePromotion()" class="btn  btn-orange">Validar</button>
 								</div>

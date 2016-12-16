@@ -1,6 +1,7 @@
 package com.servicesImpl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,13 +43,19 @@ public class StatusBetweenDatesServiceImpl extends GenericServiceImpl<StatusBetw
 
 	public void editStatusAtBooked(BookingModel model) {
 		// TODO Auto-generated method stub
-		statusBetweenDatesDao.editStatusAtBooking(vehicleDao.getVehiculeAvailable(model), model.getStartDate(), model.getEndDate(), branchOfficeDao.getById(model.getOriginBranchOfficeId()));
+		statusBetweenDatesDao.editStatusAtBooking(vehicleDao.getVehiculeAvailable(model), model.getStartDate(), model.getEndDate(), branchOfficeDao.getById(model.getEndBranchOfficeId()),branchOfficeDao.getById(model.getOriginBranchOfficeId()));
 	}
 
 
 	public StatusBetweenDates getCurrentStatus(Vehicle vehicle, LocalDate firstDate) {
-		
 		return statusBetweenDatesDao.getActualStatus(vehicle, firstDate);
+	}
+
+
+	@Override
+	public List<StatusBetweenDates> getStatusOfVehicle(Integer id) {
+		
+		return statusBetweenDatesDao.getStatusList(vehicleDao.getById(id));
 	}
 
 

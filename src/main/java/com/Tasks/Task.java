@@ -37,24 +37,31 @@ public class Task {
 	 * /X means "every X"
 	* ?
 	 */
-	@Scheduled(cron="0 30 7 * * ?")
+	@Scheduled(cron="0 40 19 * * ?")
 	public void sendPromotions()
 	{
 		List<Promotion> promotions=promoService.getCreatedYesterday();
 		List<Client> clients=userService.getClientsWithNotifications();
 		if(!clients.isEmpty() && !promotions.isEmpty()){
 			if(promotions.size()>1){
+				String promotionText="";
+				for(Promotion promo: promotions){
+					promotionText +="<p>Con el código "+ promo.getPromotionCode() +", "+promo.getDescriptionText()+"</p>";
+				}
+				
 				for(Client client:clients){
 					mailSender.sendMailWithHtmlText(""
-							+ "<p> Buenas! "+client.getName() +"</p><br>"
+							+ "<p> Buenas "+client.getName() +"!</p><br>"
+									+ "<p>Nos complace anunciarle que hemos lanzado las siguientes promociones, no se las pierda!</p><br>" +promotionText +
+									"<br><p> Que esperas? Reserva tu vehiculo ahora. Utiliza estos codigos </p>"
 							, client.getEmail(), "No te pierdas estas ofertas de RENTUY");
 				}
 			}else{
 				for(Client client:clients){
 					mailSender.sendMailWithHtmlText(""
-							+ "<p> Buenas! "+client.getName() +"</p><br>"
+							+ "<p> Buenas "+client.getName() +"!</p><br>"
 							+ "<p>Tenemos una maravillosa oferta para usted, si introduce el codigo "+ promotions.get(0).getPromotionCode()+ " al momento de reservar su vehiculo,"
-							+ " obtendra un fabuloso descuento del "+ String.format("%.0f", promotions.get(0).getPercentage()) + "% </p><br>"
+							+ promotions.get(0).getDescriptionText()+" </p><br>"
 							+ "<p>Que esperas, no te lo pierdas!!  </p>", client.getEmail(), "No te pierdas esta oferta de RENTUY");
 				}
 			}

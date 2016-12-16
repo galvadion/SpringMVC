@@ -3,6 +3,11 @@ package com.models;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.configuration.LocalDateDeserializer;
+import com.configuration.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class MaintenanceModel implements Serializable{
 	/**
 	 * 
@@ -10,7 +15,11 @@ public class MaintenanceModel implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer vehicleId;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
 	private LocalDate firstDate;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
 	private LocalDate endDate;
 	public Integer getVehicleId() {
 		return vehicleId;

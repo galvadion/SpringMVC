@@ -1,6 +1,7 @@
 package com.services;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.entities.StatusBetweenDates;
 import com.entities.Vehicle;
@@ -10,4 +11,6 @@ public interface StatusBetweenDatesService extends GenericService<StatusBetweenD
 	public void editStatusAtBooked(BookingModel model);
 
 	public StatusBetweenDates getCurrentStatus(Vehicle vehicle, LocalDate firstDate);
+
+	public List<StatusBetweenDates> getStatusOfVehicle(Integer id);
 }

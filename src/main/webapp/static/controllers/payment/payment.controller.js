@@ -45,6 +45,7 @@
 		function initController(){
 			NProgress.start();
 			getModelCarDetails($rootScope.modelId);
+			
 			NProgress.done();
 		}
 		
@@ -57,6 +58,9 @@
 				vm.endDate = $rootScope.dateEnding;
 				PaymentService.GetModelDetails(id).then(function(response){
 					if(response.success){
+						vm.items = [];
+						vm.itemTotal=0;
+						vm.orderTotal=0;
 						$scope.model = response.data.model;
 						$scope.insurancePrice = $scope.model.insurance;
 						$scope.fulltankPrice = $scope.model.fullTank;
@@ -71,7 +75,7 @@
 						//vm.estado = "confirm";
 					}
 					else{
-						$rootScope.doFlash(response.data, "", "error", 6);
+						$rootScope.doFlashMessage(response.data, "", "error", 60000);
 					}
 			
 				})
@@ -87,7 +91,7 @@
         		if(response.success){
 	        		vm.isPromotion=response.data.valid;	
 	        		if(!vm.isPromotion){
-	        			$rootScope.doFlash("Esta promocion no es valida en estas condiciones", "", "error", 6000);
+	        			$rootScope.doFlashMessage("Esta promocion no es valida en estas condiciones", "", "error", 6000);
 	        		}else{
 	        			vm.percentage=response.data.percentage;
 	        			vm.promotionCode=response.data.promotionCode;
@@ -95,7 +99,7 @@
 	        			for(var i in vm.items){
 	        				vm.discount+=i.price*(vm.percentage/100);
 	        			}
-	        			$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", -vm.discount, 1);
+	        			$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", -vm.discount.toFixed(2), 1);
 	        		}
         		}
         		else{
@@ -143,17 +147,17 @@
 				
 				$scope.cart.addItem(id, name, price, quantity);
 				if(vm.isPromotion){
-					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", vm.discount, -1);
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", vm.discount.toFixed(2), -1);
 					vm.discount +=price*quantity*(vm.percentage/100);
-					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%",-vm.discount, 1);
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%",-vm.discount.toFixed(2), 1);
 				}
 			}
 			else{
 				$scope.cart.addItem(id, name, price, -1 * quantity);
 				if(vm.isPromotion){
-					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", vm.discount , -1);
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", vm.discount.toFixed(2) , -1);
 					vm.discount -=price*quantity*(vm.percentage/100);
-					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%",-vm.discount , 1);
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%",-vm.discount.toFixed(2) , 1);
 				}
 			}
 		}
@@ -173,7 +177,7 @@
 					
 				}
 				else{
-					$rootScope.doFlash(response.data, "", "error", 6000);
+					$rootScope.doFlashMessage(response.data, "", "error", 6000);
 				}
 			})
 			NProgress.done();
@@ -203,7 +207,7 @@
 					"itemTotal" : vm.itemTotal,
 					"orderTotal" : vm.orderTotal,
 					'extras' : selectedExtras,
-					'promotionCode' : vm.promotionCode,
+					"promotionCode" : vm.promotionCode,
 					"clientId" : $rootScope.globals.currentUser.id
 			}
 			PaymentService.ConfirmPayment(data).then(function(response){
@@ -211,7 +215,7 @@
 					vm.estado = "confirm";
 				}
 				else{
-					$rootScope.doFlash(response.data, "", "error", 6000);
+					$rootScope.doFlashMessage(response.data, "", "error", 6000);
 				}
 			})
 			NProgress.done();

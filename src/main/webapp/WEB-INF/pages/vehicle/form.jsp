@@ -65,7 +65,7 @@
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.brand.$dirty && form.brand.$error.required }">
 									<label for="brand" class="control-label">* Marca</label> <select
-										ng-model="vm.vehicle.model.brand.id" name="brand" id="brand"
+										ng-model="vm.brand.id" name="brand" id="brand"
 										ng-change="getModelsByBrand()"
 										ng-options="item.id as item.name for item in vm.allBrands"
 										class="form-control" required>
@@ -153,17 +153,6 @@
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="form-group col-sm-12" class="form-group"
-									ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required }">
-									<label for="description" class="control-label">* Descripción</label>
-										 <textarea type="text" ng-model="vm.vehicle.description"
-										name="description" id="description" class="form-control"
-										placeholder="Descripción del vehículo" required /> <span
-										ng-show="form.description.$dirty && form.description.$error.required"
-										class="help-block">Es necesario escribir una descripción para el usuario</span>
-								</div>
-								</div>
 								<div class="row">
 								<div class="form-group col-sm-12" class="form-group">
 									<label for="observations" class="control-label">Observaciones</label>

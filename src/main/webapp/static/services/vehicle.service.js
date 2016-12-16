@@ -15,6 +15,8 @@
         service.InsertVehicle = InsertVehicle;
         service.DeleteVehicle = DeleteVehicle;
         service.DeleteImage = DeleteImage;
+        service.getStatusById=getStatusById;
+        service.sendMaintenance=sendMaintenance;
         
         
         return service;
@@ -30,9 +32,17 @@
             return $http.get('/SpringMVC/vehicle/getbyid?id=' + id).then(handleSuccess, handleError('Error getting vehicle by id'));
         }
         
+        function getStatusById(id) {
+            return $http.get('/SpringMVC/vehicle/getstatus?id=' + id).then(handleSuccess, handleError('Error getting status list by id'));
+        }
+        
         function InsertVehicle(vehicle) {
         	vehicle.licensePlateExpirationDate = vehicle.licensePlateExpirationDate.replace(/-/g , "/");
             return $http.post('/SpringMVC/vehicle/insert', vehicle).then(handleSuccess, handleError('Error creating vehicle'));
+        }
+        
+        function sendMaintenance(vehicle) {
+            return $http.post('/SpringMVC/vehicle/maintenance', vehicle).then(handleSuccess, handleError('Error creating vehicle'));
         }
         
         function DeleteVehicle(id) {

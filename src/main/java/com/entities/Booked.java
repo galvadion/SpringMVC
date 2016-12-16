@@ -46,6 +46,7 @@ public class Booked implements Serializable{
 	@Column(name= "last_booked_date")
 	private LocalDate lastbookedDate;
 	
+	private boolean returned=false;
 	
 	private String promotionCode_id;
 	
@@ -237,6 +238,14 @@ public class Booked implements Serializable{
 
 	public void setPromotionCode_id(String promotionCode_id) {
 		this.promotionCode_id = promotionCode_id;
+	}
+
+	public boolean isReturned() {
+		return returned;
+	}
+
+	public void setReturned(boolean returned) {
+		this.returned = returned;
 	}
 	
 	

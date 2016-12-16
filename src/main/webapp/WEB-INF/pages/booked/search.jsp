@@ -43,7 +43,7 @@
 
 							<div class="form-group customDatePickers col-sm-6">
 								<div class="input-group date" id="endDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
-									<label for="endDate" class="control-label">Fecha de entrega</label>
+									<label for="endDate" class="control-label">Fecha de devolucion</label>
 									<input class="form-control" size="16" type="text" name="endDate" placeholder="DD/MM/YYYY" ng-model="vm.search.endDate" ng-change="checkEndDate()" readonly required>
 									<span class="input-group-addon customAddonSize">
 										<span class="glyphicon glyphicon-calendar"></span>
@@ -53,7 +53,7 @@
 							</div>
 
 							<div class="form-group col-sm-6" class="form-group" ng-class="{ 'has-error': form.officeEndId.$dirty && form.officeEndId.$error.required }">
-								<label for="officeEndId" class="control-label">Sucursal de entrega</label>
+								<label for="officeEndId" class="control-label">Sucursal de devolucion</label>
 									<select ng-options="item.id as item.name for item in vm.allOffices" ng-model="vm.search.officeEndId" name="officeEndId" id="officeEndId" class="form-control" required>
 										<option value="">Seleccione sucursal</option>
 									</select>
@@ -112,18 +112,16 @@
                     <br/>
                     	<h4 class="text-center" ng-if="vm.noResult">No se encontraron vehículos</h4>
 	                    <div ng-repeat="(key, value) in vm.searchResult"  class="row" style="padding: 15px;">
-	                    	<div class="col-sm-4">
+	                    	<div class="col-sm-6">
 								<img ng-if="!value.images[0]" src="static/images/noimage.png" style="height: 150px; max-width: 240px;">
 								<img ng-if="value.images[0]" src="images/{{value.images[0].fileLocation}}" style="height: 150px; max-width: 240px;">
 	                    	</div>
-	                    	<div class="col-sm-2">
-	                    		<table>
+	                    	<div class="col-sm-6">
+	                    		<table class="table borderless">
 	                    			<tr>
 	                    				<td>
 	                    					<p>Marca: {{value.brand.name}}</p>
 	                    				</td>
-	                    			</tr>
-	                    			<tr>
 	                    				<td>
 	                    					<p>Modelo: {{value.name}}</p>
 	                    				</td>
@@ -132,8 +130,6 @@
 	                    				<td>
 	                    					<p>Año: {{value.year}}</p>
 	                    				</td>
-	                    			</tr>
-	                    			<tr>
 	                    				<td>
 	                    					<p>Categoria: {{value.category.name}}</p>
 	                    				</td>
@@ -142,17 +138,24 @@
 	                    				<td>
 	                    					<p>Transmision: {{value.transmission}}</p>
 	                    				</td>
-	                    			</tr>
-	                    			<tr>
 	                    				<td>
 	                    					<p>Combustible: {{value.fuel.fuelType}}</p>
 	                    				</td>
 	                    			</tr>
+	                    			<tr>
+	                    				<td>
+	                    					<p>Pasajeros: {{value.passangers}}</p>
+	                    				</td>
+	                    				<td>
+	                    					<p>Valijas: {{value.luggage}}</p>
+	                    				</td>
+	                    			</tr>
+
 	                    		</table>
 	                    	</div>
 	                    	
-	                    	<div class="col-sm-1">
-	                    		<a href class="btn  btn-orange" ng-click="reservar(value.id)"><strong>Reservar</strong></a>
+	                    	<div class="col-sm-12">
+	                    		<a href class="btn  btn-orange pull-right" ng-click="reservar(value.id)"><strong>Reservar</strong></a>
 	                    	</div>
 	                    </div>
 	                    

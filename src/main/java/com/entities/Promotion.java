@@ -47,8 +47,6 @@ public class Promotion implements Serializable{
 	
 	private float percentage;
 	
-	@OneToMany(mappedBy="promotionCode")
-	private List<Booked> bookedList;
 	
 	private String descriptionText;
 
@@ -56,14 +54,13 @@ public class Promotion implements Serializable{
 		return promotionCode;
 	}
 	
-	
 	private List<Model> models;
 	
 	
 	private List<BranchOffice> offices;
 	
 	
-	private List<Client> clients;
+	private List<Integer> clients_id;
 
 	public void setPromotionCode(String promotionCode) {
 		this.promotionCode = promotionCode;
@@ -109,14 +106,6 @@ public class Promotion implements Serializable{
 		this.lastPromotionDate = lastPromotionDate;
 	}
 
-	public List<Booked> getBookedList() {
-		return bookedList;
-	}
-
-	public void setBookedList(List<Booked> bookedList) {
-		this.bookedList = bookedList;
-	}
-
 	public List<Model> getModels() {
 		return models;
 	}
@@ -131,14 +120,6 @@ public class Promotion implements Serializable{
 
 	public void setOffices(List<BranchOffice> offices) {
 		this.offices = offices;
-	}
-
-	public List<Client> getClients() {
-		return clients;
-	}
-
-	public void setClients(List<Client> clients) {
-		this.clients = clients;
 	}
 
 	public static long getSerialversionuid() {
@@ -157,8 +138,16 @@ public class Promotion implements Serializable{
 	public String toString() {
 		return "Promotion [id=" + id + ", beginPromotionDate=" + beginPromotionDate + ", lastPromotionDate="
 				+ lastPromotionDate + ", creationDate=" + creationDate + ", promotionCode=" + promotionCode
-				+ ", percentage=" + percentage + ", bookedList=" + bookedList + ", descriptionText=" + descriptionText
-				+ ", models=" + models + ", offices=" + offices + ", clients=" + clients + "]";
+				+ ", percentage=" + percentage + ", " + ", descriptionText=" + descriptionText
+				+ ", models=" + models + ", offices=" + offices + ", clients=" + clients_id + "]";
+	}
+
+	public List<Integer> getClients_id() {
+		return clients_id;
+	}
+
+	public void setClients_id(List<Integer> clients_id) {
+		this.clients_id = clients_id;
 	}
 	
 	

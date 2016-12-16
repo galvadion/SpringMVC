@@ -2,6 +2,7 @@ package com.controllers;
 
 import java.io.Serializable;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -18,6 +20,7 @@ import com.entities.Admin;
 import com.entities.Client;
 import com.entities.User;
 import com.services.UserServices;
+import com.servicesImpl.MailAuxiliarService;
 
 
 @Controller
@@ -26,6 +29,9 @@ public class LoginController {
 
 	@Autowired
 	UserServices userService;
+	
+	@Resource(name="MailAuxiliar")
+	MailAuxiliarService mailAuxiliar;
 	
 	@Autowired
 	 private HttpSession httpSession;
@@ -59,23 +65,39 @@ public class LoginController {
 		User user= userService.validateLogin(users.getEmail(), users.getPassword());
 		LogInResonseBody response = new LogInResonseBody();
 		if(user != null){
-			response.setEmail(user.getEmail());
-			response.setId(user.getId());
-			response.setName(user.getName());
-			response.setPasssword(user.getPassword());
-			if(user.getClass() == Client.class){
-				response.setRol("Client");
-			}else if ( user.getClass() == Admin.class) {
-				response.setRol("Admin");
+			if (!user.isActive()){
+				response.setName("Esta cuenta no se encuentra validada. Si aun no ha recibido el correo, puede elegir para enviarlo nuevamente");
+				return new ResponseEntity<LogInResonseBody>(response,HttpStatus.CONFLICT);
 			}else{
-				response.setRol("Employee");
+				response.setEmail(user.getEmail());
+				response.setId(user.getId());
+				response.setName(user.getName());
+				response.setPasssword(user.getPassword());
+				if(user.getClass() == Client.class){
+					response.setRol("Client");
+				}else if ( user.getClass() == Admin.class) {
+					response.setRol("Admin");
+				}else{
+					response.setRol("Employee");
+				}
+				httpSession.setAttribute("user", user.getId());
+				
+				return new ResponseEntity<LogInResonseBody>(response,HttpStatus.OK);
 			}
-			httpSession.setAttribute("user", user.getId());
 			
-			return new ResponseEntity<LogInResonseBody>(response,HttpStatus.OK);
 		}else{
+			response.setName("No existe el usuario o a introducido una contraseña incorrecta, intente nuevamente por favor");
 			return new ResponseEntity<LogInResonseBody>(response,HttpStatus.CONFLICT);
 		}
+	}
+	
+	@RequestMapping(value= "/recoverpassword",method =RequestMethod.GET)
+	public ModelAndView recoverPassword(@RequestParam("email") String email){
+		
+		String password=userService.recoverPassword(email);
+		mailAuxiliar.sendMailWithHtmlText("<p>Buenas!</p><br><p>Se le ha generado una nueva contraseña para que pueda ingresar a nuestro sistema.</p><br><p>Ingrese con su correo habitual y la contraseña "+password+", luego cambiela para asegurar su cuenta.</p><br><p>Saludos del personal de Rent-UY</p>", email, "Restablecer contraseña");
+		ModelAndView view=new ModelAndView("login/login");
+		return view;
 	}
 	
 	@RequestMapping(value="/validate",method =RequestMethod.GET)
@@ -123,12 +145,20 @@ public class LoginController {
 	}
 	
 	public static class LogInResonseBody{
-		Integer id;
-		String name;
-		String rol;
-		String passsword;
-		String email;
+		private Integer id;
+		private String name;
+		private String rol;
+		private String passsword;
+		private String email;
+		private String message;
 		
+		private String getMessage(){
+			return message;
+		}
+		
+		private void setMessage(String message){
+			this.message=message;
+		}
 		
 		public Integer getId() {
 			return id;

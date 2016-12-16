@@ -14,6 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.configuration.LocalDateDeserializer;
+import com.configuration.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.models.Vehicle_Status;
 
 @Entity
@@ -36,9 +40,13 @@ public class StatusBetweenDates implements Serializable{
 	@Column(name = "id")
 	private Integer id;
 	
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
 	@Column(name= "begin_date")
 	private LocalDate beginDate;
 	
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
 	@Column(name= "end_date")
 	private LocalDate endDate;
 	
@@ -52,6 +60,10 @@ public class StatusBetweenDates implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="branch_office_id", nullable=false)
 	private BranchOffice branchOffice;
+	
+	@ManyToOne
+	@JoinColumn(name="branch_office_end", nullable=false)
+	private BranchOffice branchOfficeEnd;
 	
 
 
@@ -103,5 +115,17 @@ public class StatusBetweenDates implements Serializable{
 		this.branchOffice = branchOffice;
 	}
 
+	public BranchOffice getBranchOfficeEnd() {
+		return branchOfficeEnd;
+	}
+
+	public void setBranchOfficeEnd(BranchOffice branchOfficeEnd) {
+		this.branchOfficeEnd = branchOfficeEnd;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	
 }

@@ -92,9 +92,10 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		booked.setExtrasList(extras);
 		booked.setInitialAmount(initialAmount);
 		booked.setClient(client);
+		vehicle.setBranchOffice(finalBO);
 		//Missing booked set client waiting for Oauth implementation
 		bookedDao.saveOrUpdate(booked);
-		statusBetweenDao.editStatusAtBooking(vehicle, model.getStartDate(), model.getEndDate(), finalBO);
+		statusBetweenDao.editStatusAtBooking(vehicle, model.getStartDate(), model.getEndDate(), finalBO,originBO);
 		
 	}
 
@@ -125,6 +126,12 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 	public List<Booked> getDeliveredByDay(LocalDate date) {
 		// TODO Auto-generated method stub
 		return bookedDao.getDelivered(date);
+	}
+
+	@Override
+	public List<Booked> getByClient(Client client) {
+		// TODO Auto-generated method stub
+		return bookedDao.getBookedByClientList(client);
 	}
 
 }

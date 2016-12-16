@@ -16,6 +16,8 @@ public class PromoValidation {
 	@JsonDeserialize(using = LocalDateDeserializer.class)  
 	@JsonSerialize(using = LocalDateSerializer.class) 
 	private LocalDate originDate;
+	
+
 	public String getPromotionCode() {
 		return promotionCode;
 	}
@@ -46,5 +48,6 @@ public class PromoValidation {
 	public void setOriginDate(LocalDate originDate) {
 		this.originDate = originDate;
 	}
+
 	
 }
