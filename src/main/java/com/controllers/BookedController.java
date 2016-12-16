@@ -86,7 +86,7 @@ public class BookedController {
 	
 	@RequestMapping(value = "/getallbyuser", method = RequestMethod.GET)
 	public ResponseEntity<List<Booked>> getallbyYser() {
-		Client client=(Client) userService.get(Integer.parseInt(httpSession.getAttribute("id").toString()));
+		Client client=(Client) userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
 			return ResponseEntity.ok(bookedService.getByClient(client));
 	}
 
