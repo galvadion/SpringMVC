@@ -90,11 +90,11 @@
 
 								<div class="form-group customDatePickers col-sm-6">
 									<div class="input-group date" id="licensePlateExpirationDate"
-										data-date="" data-date-format="dd-mm-yyyy"
-										data-link-field="dtp_input2" data-link-format="dd-mm-yyyy">
+										data-date="" data-date-format="dd/mm/yyyy"
+										data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
 										<label for="licensePlateExpirationDate" class="control-label">Vencimiento
 											de patente</label> <input class="form-control" size="16" type="text"
-											name="licensePlateExpirationDate" placeholder="DD-MM-YYYY"
+											name="licensePlateExpirationDate" placeholder="DD/MM/YYYY"
 											ng-model="vm.vehicle.licensePlateExpirationDate"
 											ng-change="checklicensePlateExpirationDate()" readonly
 											required> <span
