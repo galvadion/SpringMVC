@@ -252,6 +252,13 @@
                 controllerAs: 'vm'
             })
             
+            .when('/rent/details/:id', {
+                controller: 'RentController',
+                templateUrl: 'rent/details',
+                title: 'Rent-UY - Detalles de alquiler',
+                controllerAs: 'vm'
+            })
+            
             .when('/booked', {
                 controller: 'BookedController',
                 templateUrl: 'booked',

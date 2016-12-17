@@ -84,7 +84,19 @@
 			if(vm.location[2] == "confirm" || vm.location[2] == "return" ){
 				getBookedById($routeParams.id);
 				
-			} 
+			}
+			else if(vm.location[2] == "details"){
+        		getRentById($routeParams.id);
+        	}
+			else{
+            	if(vm.roladmin || vm.rolemployee){
+            		getAllRents();
+            	}
+            	else if(vm.rolclient){
+            		getRentsByClient();
+            	}
+            	
+            }
 			NProgress.done();
 		}
 
@@ -100,6 +112,18 @@
 			});
 		}
 
+		function getRentsByClient(){
+			RentService.GetRentsByClient($rootScope.globals.currentUser.id).then(function (response) {
+        		if(response.success){
+        			vm.allRents = response.data;
+        		}
+        		else{
+        			vm.allRents = [];
+        		}
+        		NProgress.done();
+        	});
+        }
+		
 		function getBookedById(id){
 			BookedService.GetBookedById(id).then(function (response) {
 				if(response.success){  

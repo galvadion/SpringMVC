@@ -47,6 +47,12 @@ public class RentController {
 		ModelAndView view = new ModelAndView("rent/list");
 		return view;
 	}
+	
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public ModelAndView getDetailsPage() {
+		ModelAndView view = new ModelAndView("rent/details");
+		return view;
+	}
 
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public ModelAndView getViewPage() {
@@ -110,7 +116,7 @@ public class RentController {
 	}
 	@RequestMapping(value = "/getbyclient", method = RequestMethod.GET)
 	public ResponseEntity<List<Rent>> getByClient() { 
-		Client client=(Client) userServices.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
+		Client client=(Client) userServices.get(Integer.parseInt(httpSession.getAttribute("id").toString()));
 		List<Booked> booked=bookedServices.getByClient(client);
 		List<Rent> result=new ArrayList<>();
 		for(Booked book:booked){
