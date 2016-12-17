@@ -3502,7 +3502,7 @@ html.boxed-layout .appWrapper.header-fixed.aside-static #header {
   font-weight: 500;
   position: relative;
   display: block;
-  padding: 25px 15px;
+  padding: 20px 15px;
 }
 
 #navigation > li > a > .badge {
@@ -18177,7 +18177,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
   font-weight: 500;
   position: relative;
   display: block;
-  padding: 25px 15px;
+  padding: 20px 15px;
 }
 
 .nav-navigation > li > a > .badge {
@@ -18201,7 +18201,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 
 .nav-custom-font {
 	font-weight: 500 !important;
-    font-size: 20px !important;
+    font-size: 19px !important;
     color: #4371A4;
 }
 
@@ -18233,7 +18233,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 	background-repeat: no-repeat;
 	background-size: cover;
 	width: 100%;
-	max-height: 470px;
+	max-height: 280px;
 }
 
 #mapa {
@@ -18245,7 +18245,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 
 .angular-google-map-container {
-	height: 400px;
+	height: 320px;
 }
 
 .customDatePickers {
@@ -18263,7 +18263,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 
 .home-tile {
-	height: 400px;
+	height: 320px;
 }
 
 @media screen and (max-width: 760px) {

@@ -3,7 +3,7 @@
 <section id="content">
 
 
-	<div class="page page-dashboard">
+	<div class="page page-dashboard" style="margin-top: -20px;">
 
 		<div class="row">
 			<div class="col-md-12">
@@ -53,7 +53,6 @@
 					<br/>
 					<h3 class="text-center">Encuentra tu vehículo</h3>
 					<br/>
-					<br/>
 					<form name='form' class="" role="form" ng-submit="searchModels()">
 
 						<div class="row" style="padding: 0 10px 0 10px;">
@@ -98,7 +97,7 @@
 							</div>
 						</div>
 
-						<br /> <br />
+						<br />
 
 						<!-- Buttons -->
 						<div class="form-group text-right" style="margin-right: 15px;">

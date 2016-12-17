@@ -17,13 +17,13 @@
 								
 							  <!-- Branding -->
 				              <a class="brand navbar-brand" ng-href="#/home" style="margin-left:5px !important;margin-right:25px !important;">
-				              	<img src="static/images/logo-wide-transparent.png">
+				              	<img src="static/images/logo-wide-transparent.png" style="height: 29px;">
 				              </a>
 				              <!-- Branding end -->
 
 						    </div>
 						    <div class="collapse navbar-collapse" id="myNavbar">
-							    <ul class="nav navbar-nav nav-navigation" id="">
+							    <ul class="nav navbar-nav nav-navigation" id="headerOptions">
 							      <li ng-class=getClass('home') class=""><a href="#/home"><span class="nav-custom-font">Inicio</span></a></li>
 							      <li ng-show="!vm.roladmin" ng-class=getClass('search') class=""><a href="#/search"><span class="nav-custom-font">Buscar</span></a></li>
 							      <li ng-show="vm.roladmin" ng-class=getClass('brand') class=""><a href="#/brand"><span class="nav-custom-font">Marcas</span></a></li>
