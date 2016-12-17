@@ -3,7 +3,7 @@
 <section id="content">
 
 
-	<div class="page page-dashboard" style="margin-top: -20px;">
+	<div class="page page-dashboard" style="margin-top: -20px;" ng-if="!vm.roladmin && !vm.rolemployee">
 
 		<div class="row">
 			<div class="col-md-12">
@@ -97,7 +97,7 @@
 							</div>
 						</div>
 
-						<br />
+						<br /><br />
 
 						<!-- Buttons -->
 						<div class="form-group text-right" style="margin-right: 15px;">
@@ -162,11 +162,18 @@
 
 		</div-->
 
-		<a id="chatBtn" href="" ng-click="initChat()" ng-disabled="chat" ng-if="!vm.roladmin" class="btn  btn-primary" style="position: fixed; bottom: 0; right: 0; z-index: 100; margin-right: 10px;">
-			<p ng-if="!chat">Iniciar chat</p>
-			<p ng-if="chat">Chat iniciado..</p>
-		</a>
+	</div>
 
+	<div class="page page-dashboard" style="margin-top: -20px;" ng-if="vm.roladmin || vm.rolemployee">
+
+		<div class="row">
+			<div class="col-md-12">
+				<section class="tile home-tile">
+					<h1>Admin y employee ven esto</h1>
+				</section>
+			</div>
+		</div>
+		
 		<div class="row" ng-if="chat && vm.rolemployee">
 			<div class="col-md-12">
 
@@ -188,7 +195,10 @@
 				</section>
 			</div>
 		</div>
-
 	</div>
 
+	<a id="chatBtn" href="" ng-click="initChat()" ng-disabled="chat" ng-if="!vm.roladmin" class="btn  btn-primary" style="position: fixed; bottom: 0; right: 0; z-index: 100; margin-right: 10px;">
+		<p ng-if="!chat">Iniciar chat</p>
+		<p ng-if="chat">Chat iniciado..</p>
+	</a>
 </section>
