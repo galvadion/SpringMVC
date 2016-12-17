@@ -3,7 +3,7 @@
 <section id="content">
 
 
-	<div class="page page-dashboard" style="margin-top: -20px;" ng-if="!vm.roladmin && !vm.rolemployee">
+	<div class="page page-dashboard" style="margin-top: -20px;" ng-if="!vm.roladmin">
 
 		<div class="row">
 			<div class="col-md-12">
@@ -158,22 +158,10 @@
 
 				</section>
 			</div>
-
-
-		</div-->
-
-	</div>
-
-	<div class="page page-dashboard" style="margin-top: -20px;" ng-if="vm.roladmin || vm.rolemployee">
-
-		<div class="row">
-			<div class="col-md-12">
-				<section class="tile home-tile">
-					<h1>Admin y employee ven esto</h1>
-				</section>
-			</div>
 		</div>
 		
+		<br/-->
+
 		<div class="row" ng-if="chat && vm.rolemployee">
 			<div class="col-md-12">
 
@@ -192,6 +180,131 @@
 						<div id="members"></div>
 					</div>
 
+				</section>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="page page-dashboard" style="margin-top: -20px;" ng-if="vm.roladmin">
+
+		<!--div class="row">
+			<div class="col-md-12">
+				<section class="tile">
+					<div class="tile-body table-custom">
+						
+					</div>
+				</section>
+			</div>
+		</div-->
+		
+		<div class="row">
+			<div class="col-md-12">
+				<section class="tile">
+					<!-- tile header -->
+					<div class="tile-header dvd dvd-btm">
+						<h1 class="custom-font">
+							<strong>Panel </strong> de gestión rápido
+							<button type="button" class="btn" data-toggle="collapse" data-target="#gestion"><span class="glyphicon glyphicon-chevron-down"></span></button>
+						</h1>
+					</div>
+					<!-- /tile header -->
+
+					<!-- tile body -->
+					<div class="tile-body table-custom collapse in" style="padding: 15px; margin-left: 15px;" id="gestion">
+					
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/brand"><h4><i class="fa fa-list"></i> Listado de marcas</h4></a>
+								</div>
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/brand"><h4><i class="fa fa-arrows"> Crear marca</i></h4></a>
+								</div>
+							</div>
+							
+							<div class="col-sm-4">
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/model"><h4><i class="fa fa-list"></i> Listado de modelos</h4></a>
+								</div>
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/model/create"><h4><i class="fa fa-bus"></i> Crear modelo</h4></a>
+								</div>
+							</div>
+							
+							<div class="col-sm-4">
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/vehicle"><h4><i class="fa fa-list"></i> Listado de vehículos</h4></a>
+								</div>
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/vehicle/create"><h4><i class="fa fa-car"></i> Crear vehículo</h4></a>
+								</div>
+							</div>
+						</div>
+						
+						<hr class="line-dashed line-full"/>
+						
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/branchoffice"><h4><i class="fa fa-list"></i> Listado de sucursales</h4></a>
+								</div>
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/branchoffice/create"><h4><i class="fa fa-building-o"></i> Crear sucursal</h4></a>
+								</div>
+							</div>
+							
+							<div class="col-sm-4">
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/employee"><h4><i class="fa fa-list"></i> Listado de empleados</h4></a>
+								</div>
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/employee/create"><h4><i class="fa fa-male"></i> Crear empleado</h4></a>
+								</div>
+							</div>
+							
+							<div class="col-sm-4">
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/client"><h4><i class="fa fa-list"></i> Listado de clientes</h4></a>
+								</div>
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/client/create"><h4><i class="fa fa-user"></i> Crear cliente</h4></a>
+								</div>
+							</div>
+						</div>
+						
+						<hr class="line-dashed line-full"/>
+						
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/tariff"><h4><i class="fa fa-list"></i> Listado de tarifas</h4></a>
+								</div>
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/tariff"><h4><i class="fa fa-money"></i> Crear tarifa</h4></a>
+								</div>
+							</div>
+							
+							<div class="col-sm-4">
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/promotion"><h4><i class="fa fa-list"></i> Listado de promociones</h4></a>
+								</div>
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/promotion/create"><h4><i class="fa fa-hashtag"></i> Crear promoción</h4></a>
+								</div>
+							</div>
+							
+							<div class="col-sm-4">
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/booked"><h4><i class="fa fa-list"></i> Listado de reservas</h4></a>
+								</div>
+								<div class="row">
+									<a class="" style="cursor: pointer; text-decoration: none; color: #616F77;" href="#/rent"><h4><i class="fa fa-list"></i> Listado de alquileres</h4></a>
+								</div>
+							</div>
+						</div>
+						
+					</div>
 				</section>
 			</div>
 		</div>

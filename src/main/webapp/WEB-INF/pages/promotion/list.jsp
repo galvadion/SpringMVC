@@ -7,11 +7,11 @@
 
 		<div class="pageheader">
 			<h1 class="custom-font" style="margin-top: -10px !important;">
-				<strong>Ofertas </strong> Listado
+				<strong>Promociones </strong> Listado
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#/home">Inicio</a></li>
-				<li class="breadcrumb-active">Ofertas</li>
+				<li class="breadcrumb-active">Promociones</li>
 			</ol>
 		</div>
 
@@ -27,7 +27,7 @@
 						</h2>
 						<a href="#/promotion/create"
 							class="btn btn-orange btn-rounded mb-10 right"
-							style="margin: 0 2px 0 2px;">Nueva Oferta</a>
+							style="margin: 0 2px 0 2px;">Nueva Promoción</a>
 					</div>
 					<!-- /tile header -->
 
