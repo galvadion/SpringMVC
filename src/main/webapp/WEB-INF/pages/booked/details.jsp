@@ -20,13 +20,14 @@
 			<div class="col-md-12">
 
 				<section class="tile">
-
 					<!-- tile body -->
 					<div class="tile-body">
 
-						<div class="row vehicleDesc">
-							<h2><u>Detalles generales</u></h2>
-							
+						<div class="tile-header dvd dvd-btm">
+	                        <h1 class="custom-font"><strong>Detalles generales</strong></h1>
+	                        <button type="button" class="btn" data-toggle="collapse" data-target="#details1"><span class="glyphicon glyphicon-chevron-down"></span></button>
+	                    </div>
+						<div class="row collapse in" style="padding: 0 10px 0 10px;" id="details1">
 							<br/>
 							<div class="col-md-4" style="margin-left: 20px; font-size: 15px">
 								<div class="row">
@@ -68,51 +69,65 @@
 								</div>
 							</div>
 						</div>
-						
-						<br/>
-						
-						<div class="row vehicleDesc">
-							<h2><u>Detalles del vehículo</u></h2>
-							
+					</div>
+				</section>
+				
+				<section class="tile">
+					<!-- tile body -->
+					<div class="tile-body">
+
+						<div class="tile-header dvd dvd-btm">
+	                        <h1 class="custom-font"><strong>Detalles del vehículo</strong></h1>
+	                        <button type="button" class="btn" data-toggle="collapse" data-target="#details2"><span class="glyphicon glyphicon-chevron-down"></span></button>
+	                    </div>
+						<div class="row collapse" style="padding: 0 10px 0 10px;" id="details2">
 							<br/>
-							<div class="col-md-4" style="margin-left: 20px; font-size: 15px">
-								<div class="row">
-									<label><b>Matrícula:</b> {{vm.booked.vehicle.licensePlate}}</label>
+							<div class="row" style="margin-left: 20px;">
+								<div class="col-md-4" style="font-size: 15px">
+									<div class="row">
+										<label><b>Matrícula:</b> {{vm.booked.vehicle.licensePlate}}</label>
+									</div>
+									<div class="row">
+										<label><b>Marca:</b> {{vm.booked.vehicle.model.brand.name}}</label>
+									</div>
+									<div class="row">
+										<label><b>Modelo:</b> {{vm.booked.vehicle.model.name}}</label>
+									</div>
 								</div>
-								<div class="row">
-									<label><b>Marca:</b> {{vm.booked.vehicle.model.brand.name}}</label>
-								</div>
-								<div class="row">
-									<label><b>Modelo:</b> {{vm.booked.vehicle.model.name}}</label>
-								</div>
-								<div class="row">
-									<label><b>Descripción:</b> {{vm.booked.vehicle.model.description}}</label>
+								<div class="col-md-4" style="font-size: 15px">
+									<div class="row">
+										<label><b>Seguro pago: </b>
+											<p ng-if="vm.booked.withInsurance" class="custom-font" style="display: inline;">Si</p>
+											<p ng-if="!vm.booked.withInsurance" class="custom-font" style="display: inline;">No</p>
+										</label>
+									</div>
+									<div class="row">
+										<label><b>Tanque lleno: </b>
+											<p ng-if="vm.booked.withFullTank" class="custom-font" style="display: inline;">Si</p>
+											<p ng-if="!vm.booked.withFullTank" class="custom-font" style="display: inline;">No</p>
+										</label>
+									</div>
+									<div class="row">
+										<label><b>Extras:</b> {{vm.booked.extrasList}}</label>
+									</div>
 								</div>
 							</div>
-							<div class="col-md-4" style="margin-left: 15px; font-size: 15px">
-								<div class="row">
-									<label><b>Seguro pago: </b>
-										<p ng-if="vm.booked.withInsurance" class="custom-font" style="display: inline;">Si</p>
-										<p ng-if="!vm.booked.withInsurance" class="custom-font" style="display: inline;">No</p>
-									</label>
-								</div>
-								<div class="row">
-									<label><b>Tanque lleno: </b>
-										<p ng-if="vm.booked.withFullTank" class="custom-font" style="display: inline;">Si</p>
-										<p ng-if="!vm.booked.withFullTank" class="custom-font" style="display: inline;">No</p>
-									</label>
-								</div>
-								<div class="row">
-									<label><b>Extras:</b> {{vm.booked.extrasList}}</label>
-								</div>
+							<div class="row" style="width: 90%; margin: 5px; margin-left: 20px;">
+								<label><b>Descripción:</b> {{vm.booked.vehicle.model.description}}</label>
 							</div>
 						</div>
-						
-						<br/>
-						
-						<div class="row vehicleDesc">
-							<h2><u>Detalles de sucursales de retiro/entrega</u></h2>
-							
+					</div>
+				</section>
+				
+				<section class="tile">
+					<!-- tile body -->
+					<div class="tile-body">
+
+						<div class="tile-header dvd dvd-btm">
+	                        <h1 class="custom-font"><strong>Detalles de sucursales de retiro/entrega</strong></h1>
+	                        <button type="button" class="btn" data-toggle="collapse" data-target="#details3"><span class="glyphicon glyphicon-chevron-down"></span></button>
+	                    </div>
+						<div class="row collapse" style="padding: 0 10px 0 10px;" id="details3">
 							<br/>
 							<div class="col-md-4" style="margin-left: 20px; font-size: 15px">
 								<div class="row">
@@ -143,11 +158,8 @@
 								</div>
 							</div>
 						</div>
-					
 					</div>
-
 				</section>
-				
 				
 			</div>
 			<!-- /row -->
