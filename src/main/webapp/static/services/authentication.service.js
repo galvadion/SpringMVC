@@ -57,6 +57,7 @@
         // private functions
 
         function handleSuccess(data) {
+        	$http.defaults.headers.common['Authorization'] = 'Basic ';
         	var response = {};
         	response.success = true;
     		response.data = data.data;
@@ -64,6 +65,7 @@
         }
         
         function handleError(data) {
+        	$http.defaults.headers.common['Authorization'] = 'Basic ';
         	var response = {};
     		response.success = false;
     		response.data = data.data;

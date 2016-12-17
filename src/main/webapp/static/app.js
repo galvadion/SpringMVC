@@ -19,8 +19,10 @@
 
     /***Routes Definitions***/
 
-    config.$inject = ['$routeProvider', '$locationProvider'];
-    function config($routeProvider, $locationProvider) {
+    config.$inject = ['$routeProvider', '$locationProvider', '$httpProvider'];
+    function config($routeProvider, $locationProvider, $httpProvider) {
+    	
+    	$httpProvider.defaults.withCredentials = true;
     	
     	$routeProvider
             .when('/home', {

@@ -74,9 +74,12 @@ public class UserServicesImpl extends GenericServiceImpl<User, Integer> implemen
 	
 	private Set<GrantedAuthority> getAuthorities(User user){  
 		String rol = user.getRol();
-        String userRol = "ROLE_ADMIN";
-        if(rol.equals("Client")){
-        	userRol = "ROLE_USER";
+        String userRol = "ROLE_USER";
+        if(rol.equals("Admin")){
+        	userRol = "ROLE_ADMIN";
+        }
+        else if(rol.equals("Employee")){
+        	userRol = "ROLE_EMPLOYEE";
         }
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userRol);  

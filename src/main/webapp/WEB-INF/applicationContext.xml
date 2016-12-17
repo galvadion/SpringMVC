@@ -107,7 +107,11 @@
     				authentication-manager-ref="authenticationManager">
 <!--     	<sec:intercept-url pattern="/**" access="permitAll" /> -->
         <security:intercept-url pattern="/**" requires-channel="https" />
-        <security:http-basic />
+<!--         <security:http-basic /> -->
+		<security:remember-me key="digite_la_clave"
+								user-service-ref="userServicesImpl"
+								use-secure-cookie="true"
+								token-validity-seconds="3600"/>
  		<security:csrf disabled="true"/>
         <security:logout />
         <security:port-mappings>
