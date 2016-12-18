@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<section class="tile" ng-show="vm.roladmin">
+				<section class="tile">
 
 					<!-- tile header -->
 					<div class="tile-header dvd dvd-btm">
@@ -71,76 +71,6 @@
 						</div>
 					</div>
 
-				</section>
-				<section class="tile" ng-show="!vm.roladmin">
-					<div class="tile-header dvd dvd-btm">
-						<div class="row" ng-repeat="(key, value) in vm.allModels">
-							<div class="text-center">
-								<h2>{{value.brand.name}} {{value.name}} {{value.year}}</h2>
-							</div>
-							<div class="row" style="padding: 15px;">
-							<div class="col-sm-4">
-								<div class="col-sm-4" ng-repeat="(keyI, valueI) in value.images">
-									<img src="images/{{valueI.fileLocation}}"
-										style="height: 150px; max-width: 240px;">
-								</div>
-								</div>
-								<div class="col-sm-4">
-									<table>
-										<tr>
-											<td>
-												<p>Segmento: {{value.category.name}}</p>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<p>Combustible: {{value.fuel.fuelType}}</p>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<p>Cilindradas: {{value.cylinders}}</p>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<p>Pasajeros: {{value.passangers}}</p>
-											</td>
-										</tr>
-									</table>
-								</div>
-								<div class="col-sm-4">
-									<table>
-										<tr>
-											<td>
-												<p>Valijas: {{value.luggage}}</p>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Aire acondicionado:
-												<p ng-if="value.airConditioner">Tiene</p>
-												<p ng-if="!value.airConditioner">No tiene</p>
-												
-
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Transimision:
-												<p ng-if="value.transmission == 'M'">Manual</p>
-												<p ng-if="value.transmission == 'A'">Automática</p>
-												
-
-											</td>
-										</tr>
-									</table>
-								</div>
-							</div>
-							<div class="row" style="padding: 15px;">
-								{{value.description}}</div>
-						</div>
-					</div>
 				</section>
 			</div>
 			<!-- /row -->
