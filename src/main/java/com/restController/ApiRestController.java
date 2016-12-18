@@ -1,7 +1,6 @@
 package com.restController;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +38,7 @@ import com.entities.Extras;
 import com.entities.Model;
 import com.entities.User;
 import com.models.BookingModel;
+import com.models.Reservation;
 import com.models.SearchFilter;
 import com.services.BookedService;
 import com.services.BranchOfficeService;
@@ -50,6 +51,8 @@ import com.servicesImpl.RentServiceImpl;
 
 @RestController
 public class ApiRestController {
+	
+	static Logger log = Logger.getLogger(ApiRestController.class.getName());
 
 	@Autowired
 	UserServices userService;
@@ -152,19 +155,18 @@ public class ApiRestController {
 	}
 
 	@RequestMapping(value = "/api/book", method = RequestMethod.POST)
-	public void bookVehicule() {
-		BookingModel booking = new BookingModel();
-		booking.setEndBranchOfficeId(2);
-		LocalDate finalDate = LocalDate.now().plusDays(2);
-		booking.setEndDate(finalDate);
-		booking.setOriginBranchOfficeId(1);
-		booking.setStartDate(LocalDate.now());
-		booking.setWithFullTank(false);
-		//booking.setWithGps(true);
-		booking.setWithInsurance(false);
-		booking.setIdModel(1);
-		List<Extras> extras = new ArrayList<Extras>();
- 		bookedService.registerBook(booking, (Client) userService.get(1), "Transaction_ID_test", "PayPal_Payer_ID", extras);
+	public void bookVehicule(@RequestBody Reservation reservation) {
+		try{
+			BookingModel booking = reservation.getBookingModel();
+			String token = reservation.getToken(); //token es en realidad el transaction ID
+			String PayerID = reservation.getPayerId();
+			List<Extras> extras = reservation.getExtras();
+	 		bookedService.registerBook(booking, (Client) userService.get(reservation.getClientId()), token, PayerID, extras);
+		}
+		catch(Exception ex){
+			log.error(ex);
+			throw ex;
+		}
 	}
 
 

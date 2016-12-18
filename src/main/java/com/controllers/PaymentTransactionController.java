@@ -208,7 +208,7 @@ public class PaymentTransactionController {
 			
 		}
 		catch(Exception ex){
-			ex.printStackTrace();
+			log.error(ex);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
 		}
 	}
