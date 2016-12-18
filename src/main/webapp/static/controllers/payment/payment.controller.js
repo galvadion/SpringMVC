@@ -72,6 +72,7 @@
 							$scope.extras.push(new ExtraItems(extras[i].id, extras[i].name, extras[i].price, false));
 						}
 						console.log($scope.model);
+						ToogleCheck();
 						vm.estado = "booking";
 //						vm.estado = "details";
 					}
@@ -234,6 +235,10 @@
 		this.checked = checked;
 	}
 	
-	
+	function ToogleCheck(){
+		$(document).ready(function(){
+			$(".toggleCheck").bootstrapToggle();
+		})
+	}
 	
 })();
