@@ -17,6 +17,7 @@
         service.GetAllClients = GetAllClients;
         service.InsertClient = InsertClient;
         service.GetByDocument = GetByDocument;
+        service.ValidateUser= ValidateUser;
         
         service.GetAllEmployees = GetAllEmployees;
         service.InsertEmployee = InsertEmployee;
@@ -50,6 +51,10 @@
         
         function GetByDocument(id) {
             return $http.get('/SpringMVC/client/getbydocument?id=' + id).then(handleSuccess, handleError);
+        }
+        
+        function ValidateUser(id) {
+            return $http.get('/SpringMVC/login/recoverpassword?email=' + id).then(handleSuccess, handleError);
         }
 
         //Employee functions
