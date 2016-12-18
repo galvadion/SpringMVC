@@ -103,9 +103,13 @@ public class RentController {
 	}
 
 	@RequestMapping(value = "/getbyid", method = RequestMethod.GET)
-	public ResponseEntity<Rent> getbyid(@RequestParam("id") String id) { 
+	public ResponseEntity<RentResponse> getbyid(@RequestParam("id") String id) { 
 		if (rentServices.get(id) != null) {
-			return ResponseEntity.ok(rentServices.get(id));
+			Rent rent=rentServices.get(id);
+			RentResponse response=new RentResponse();
+			response.setRent(rent);
+			response.setBook(bookedServices.get(rent.getBooked_id()));
+			return ResponseEntity.ok(response);
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}

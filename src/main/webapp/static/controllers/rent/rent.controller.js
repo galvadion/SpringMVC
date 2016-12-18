@@ -160,7 +160,7 @@
 			RentService.InsertRent(vm.rent).then(function (response) {
 				if(response.success){
 					getAllRents();
-					$rootScope.doFlashMessage("Se ha confirmado correctamente con éxito",'/details/'+vm.rent.id,'success');
+					$rootScope.doFlashMessage("Se ha confirmado correctamente con éxito",'#/rent/details/'+vm.rent.id,'success');
 					$scope.cleanInput();
 				}
 				else{
@@ -175,7 +175,7 @@
 			RentService.confirmReturn(vm.rent).then(function (response) {
 				if(response.success){
 					getAllRents();
-					$rootScope.doFlashMessage("Se ha confirmado correctamente con éxito",'/details/'+vm.rent.id,'success');
+					$rootScope.doFlashMessage("Se ha confirmado correctamente con éxito",'#/rent/details/'+vm.rent.id,'success');
 					$scope.cleanInput();
 				}
 				else{
