@@ -67,6 +67,10 @@ public class RentServiceImpl {
 		// TODO Auto-generated method stub
 		return rentDao.findAll();
 	}
+	
+	public List<Rent> getRentsByClient(int clientid){
+		return rentDao.findByClientId(clientid);
+	}
 
 
 

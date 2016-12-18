@@ -33,7 +33,6 @@
                                         <th>Oficina de origen</th>
                                         <th>Oficina de destino</th>
                                         <th>Devuelto</th>
-                                        <th>Cancelado</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>
@@ -42,34 +41,34 @@
                                 <tbody>
                                     <tr ng-repeat="(key, value) in vm.allRents">
                                     	<td>
-                                            {{value.transactionNr}}
+                                            {{value.book.transactionNr}}
                                         </td>
                                         <td>
-                                            {{value.client.email}}
+                                            {{value.book.client.email}}
                                         </td>
                                         <td>
-                                            {{value.vehicle.licensePlate}}
+                                            {{value.book.vehicle.licensePlate}}
                                         </td>
                                         <td>
-                                            {{value.beginbookedDate}}
+                                            {{value.rent.deliveryDate}}
+                                        </td>
+                                        <td ng-if="value.book.returned">
+                                            {{value.rent.returnDate}}
+                                        </td>
+                                        <td ng-if="!value.book.returned">
+                                            {{value.book.lastbookedDate}}
                                         </td>
                                         <td>
-                                            {{value.lastbookedDate}}
+                                            {{value.book.originOffice.city}}
                                         </td>
                                         <td>
-                                            {{value.originOffice.name}}
-                                        </td>
-                                        <td>
-                                            {{value.endOffice.name}}
+                                            {{value.book.endOffice.city}}
                                         </td>
                                         <td class="text-center plus">
-                                            <i ng-if="value.returned" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
-                                            <i ng-if="!value.returned" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
+                                            <i ng-if="value.book.returned" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
+                                            <i ng-if="!value.book.returned" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
                                         </td>
-                                        <td class="text-center plus">
-                                            <i ng-if="value.canceled" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
-                                            <i ng-if="!value.canceled" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
-                                        </td>
+                                       
                                         <td class="text-center plus"></td>
                                         <td class="text-center plus">
                                              <a ng-href="#/rent/details/{{value.id}}" title="Ver detalles">
@@ -95,57 +94,44 @@
                                    <tr>
                                    		<th>Número de transacción</th>
                                         <th>Vehículo</th>
-                                        <th>Marca</th>
-                                        <th>Modelo</th>
                                         <th>Fecha de inicio</th>
                                         <th>Fecha de fin</th>
                                         <th>Oficina de origen</th>
                                         <th>Oficina de destino</th>
-                                        <th>Pago inicial</th>
                                         <th>Devuelto</th>
-                                        <th>Cancelado</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="(key, value) in vm.allBookeds">
+                                    <tr ng-repeat="(key, value) in vm.allRents">
                                     	<td>
-                                            {{value.transactionNr}}
+                                            {{value.book.transactionNr}}
                                         </td>
                                         <td>
-                                            {{value.vehicle.licensePlate}}
+                                            {{value.book.vehicle.licensePlate}}
                                         </td>
                                         <td>
-                                            {{value.vehicle.model.brand.name}}
+                                            {{value.rent.deliveryDate}}
+                                        </td>
+                                        <td ng-if="value.book.returned">
+                                            {{value.rent.returnDate}}
+                                        </td>
+                                        <td ng-if="!value.book.returned">
+                                            {{value.book.lastbookedDate}}
                                         </td>
                                         <td>
-                                            {{value.vehicle.model.name}}
+                                            {{value.book.originOffice.city}}
                                         </td>
                                         <td>
-                                            {{value.beginbookedDate}}
-                                        </td>
-                                        <td>
-                                            {{value.lastbookedDate}}
-                                        </td>
-                                        <td>
-                                            {{value.originOffice.name}}
-                                        </td>
-                                        <td>
-                                            {{value.endOffice.name}}
-                                        </td>
-                                        <td>
-                                            US$<b>{{value.initialAmount}}</b>
+                                            {{value.book.endOffice.city}}
                                         </td>
                                         <td class="text-center plus">
-                                            <i ng-if="value.returned" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
-                                            <i ng-if="!value.returned" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
+                                            <i ng-if="value.book.returned" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
+                                            <i ng-if="!value.book.returned" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
                                         </td>
-                                        <td class="text-center plus">
-                                            <i ng-if="value.canceled" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
-                                            <i ng-if="!value.canceled" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
-                                        </td>
+                                       
                                         <td class="text-center plus"></td>
                                         <td class="text-center plus">
                                              <a ng-href="#/rent/details/{{value.id}}" title="Ver detalles">

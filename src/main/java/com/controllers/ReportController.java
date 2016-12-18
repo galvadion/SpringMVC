@@ -87,7 +87,6 @@ public class ReportController {
 		try{
 			Employee employee=(Employee) userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
 			BranchOffice branch=(employee.getBranchOffice());
-			System.out.println(branch);
 			return ResponseEntity.ok(bookedService.getReturnedToday(branch, date));
 		}catch(Exception e){
 			return ResponseEntity.ok(bookedService.getReturnedToday(date));	

@@ -2,6 +2,7 @@ package com.servicesImpl;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,10 +98,6 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		booked.setInitialAmount(initialAmount);
 		booked.setClient(client);
 		vehicle.setBranchOffice(finalBO);
-		for(Extras extra : extras){
-			extra.getUsedIn().add(booked);
-			extrasDao.saveOrUpdate(extra);
-		}
 		//Missing booked set client waiting for Oauth implementation
 		bookedDao.saveOrUpdate(booked);
 		statusBetweenDao.editStatusAtBooking(vehicle, model.getStartDate(), model.getEndDate(), finalBO,originBO);

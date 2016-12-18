@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.entities.Booked;
 import com.entities.Client;
 import com.entities.Rent;
+import com.models.RentResponse;
 import com.services.BookedService;
 import com.services.UserServices;
 import com.servicesImpl.RentServiceImpl;
@@ -102,30 +103,40 @@ public class RentController {
 	}
 
 	@RequestMapping(value = "/getbyid", method = RequestMethod.GET)
-	public ResponseEntity<Rent> getbyid(@RequestParam("id") String id) { 
+	public ResponseEntity<RentResponse> getbyid(@RequestParam("id") String id) { 
 		if (rentServices.get(id) != null) {
-			return ResponseEntity.ok(rentServices.get(id));
+			Rent rent=rentServices.get(id);
+			RentResponse response=new RentResponse();
+			response.setRent(rent);
+			response.setBook(bookedServices.get(rent.getBooked_id()));
+			return ResponseEntity.ok(response);
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 	}
 
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
-	public ResponseEntity<List<Rent>> getall() { 
-		return ResponseEntity.ok(rentServices.getAll());
+	public ResponseEntity<List<RentResponse>> getall() { 
+		List<RentResponse> result=new ArrayList<>();
+		List<Rent> rentList=rentServices.getAll();
+		for(Rent rent:rentList){
+			RentResponse respuesta=new RentResponse();
+			respuesta.setRent(rent);
+			respuesta.setBook(bookedServices.get(rent.getBooked_id()));
+			result.add(respuesta);
+		}
+		
+		return ResponseEntity.ok(result);
 	}
 	@RequestMapping(value = "/getbyclient", method = RequestMethod.GET)
-	public ResponseEntity<List<Rent>> getByClient() { 
-		Client client=(Client) userServices.get(Integer.parseInt(httpSession.getAttribute("id").toString()));
-		List<Booked> booked=bookedServices.getByClient(client);
-		List<Rent> result=new ArrayList<>();
-		for(Booked book:booked){
-			try{
-				Rent rent=rentServices.get(book.getRent());
-				result.add(rent);
-			}catch(Exception e){
-
-			}
+	public ResponseEntity<List<RentResponse>> getByClient() { 
+		List<RentResponse> result=new ArrayList<>();
+		List<Rent> rentList=rentServices.getRentsByClient(Integer.parseInt(httpSession.getAttribute("user").toString()));
+		for(Rent rent:rentList){
+			RentResponse respuesta=new RentResponse();
+			respuesta.setRent(rent);
+			respuesta.setBook(bookedServices.get(rent.getBooked_id()));
+			result.add(respuesta);
 		}
 		return ResponseEntity.ok(result);
 	}

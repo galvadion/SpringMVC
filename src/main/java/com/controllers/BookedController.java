@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Hibernate;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -73,6 +74,8 @@ public class BookedController {
 	@RequestMapping(value = "/getbyid", method = RequestMethod.GET)
 	public ResponseEntity<Booked> getbyid(@RequestParam("id") Integer id) { 
 		if (bookedService.get(id) != null) {
+			Booked book=bookedService.get(id);
+			Hibernate.initialize(book.getExtrasList());
 			return ResponseEntity.ok(bookedService.get(id));
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);

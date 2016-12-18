@@ -158,16 +158,69 @@
 			</div>
 		</div>
 
-		<div class="row" ng-if="!vm.roladmin">
+		<div class="row" ng-show="!vm.roladmin">
 			<div class="col-md-6">
-				<section class="tile home-tile scroll-tile" ng-if="vm.rolemployee">
+				<section class="tile home-tile scroll-tile" ng-show="vm.rolemployee">
 					<br/>
-					<h3 class="text-center">Alquileres para hoy</h3>
-					<br/>
-					Aca va un listado con los alquileres de hoy
+					<h3 class="text-center">Alquileres para {{hoy}}</h3>
+					<br>
+						<button class="btn btn-blue" ng-click='pickedup(yesterdayPick)' style="height:40px;">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><b> Ver
+							día anterior</b>
+						</button>
+						<button class="pull-right btn btn-blue"
+							ng-click='pickedup(tomorrowPick)' style="height:40px;">
+							<b>Ver día después </b><span class="glyphicon glyphicon-chevron-right"
+								aria-hidden="true"></span>
+						</button>
+						<div class="row" ng-repeat="(key, value) in vm.pickedToday">
+						<div class="row" style="padding: 15px;">
+							<div class="col-sm-8">
+								<table>
+									<tr>
+										<td>
+											<p>Vehiculo: {{value.vehicle.licensePlate}}</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Modelo:{{value.vehicle.model.brand.name}}
+												{{value.vehicle.model.name}}</p>
+										</td>
+									</tr>
+									<tr ng-show="vm.roladmin">
+										<td>
+											<p>Retiran en: {{value.originOffice.city}}
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p>Entrega en: {{value.endOffice.city}}</p>
+										</td>
+									</tr>
+									
+									<tr>
+										<td>
+											<p>Cliente: {{value.client.name}}
+												{{value.client.lastName}}</p>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+							<div class="col-sm-1">
+								<a ng-show="!value.rent" href="#/rent/confirm/{{value.id}}" class="btn  btn-orange">
+								<strong>Gestionar
+										entrega</strong></a>
+										<a ng-if="value.rent"><strong>Ya fue entregado</strong></a>
+							</div>
+						</div>
+
+						<hr class="line-dashed line-full" />
+					</div>
 				</section>
 				
-				<section class="tile home-tile" ng-if="!vm.rolemployee">
+				<section class="tile home-tile" ng-show="!vm.rolemployee">
 					<br/>
 					<h3 class="text-center">Encuentra tu vehículo</h3>
 					<br/>
@@ -226,7 +279,7 @@
 				</section>
 			</div>
 
-			<div class="col-md-6" ng-if="!vm.roladmin">
+			<div class="col-md-6" ng-show="!vm.roladmin">
 				<section class="tile text-center">
 					<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options"> 
 						<ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" title="m.title" click="onClick">
@@ -280,7 +333,7 @@
 		
 		<br/-->
 
-		<div class="row" ng-if="chat && vm.rolemployee">
+		<div class="row" ng-show="chat && vm.rolemployee">
 			<div class="col-md-12">
 
 				<section class="tile">
@@ -305,7 +358,7 @@
 	</div>
 
 	<a id="chatBtn" href="" ng-click="initChat()" ng-disabled="chat" ng-if="!vm.roladmin" class="btn  btn-primary" style="position: fixed; bottom: 0; right: 0; z-index: 100; margin-right: 10px;">
-		<p ng-if="!chat">Iniciar chat</p>
-		<p ng-if="chat">Chat iniciado..</p>
+		<p ng-show="!chat">Iniciar chat</p>
+		<p ng-show="chat">Chat iniciado..</p>
 	</a>
 </section>

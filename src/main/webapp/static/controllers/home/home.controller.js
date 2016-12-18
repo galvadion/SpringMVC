@@ -4,10 +4,10 @@
 	angular.module('app').controller('HomeController', HomeController);
 
 	HomeController.$inject = [ '$location', 'UserService', '$rootScope',
-			'$scope', '$timeout', 'SessionService', 'BranchofficeService' ];
+			'$scope', '$timeout', 'SessionService', 'BranchofficeService','ReportService' ];
 
 	function HomeController($location, UserService, $rootScope, $scope,
-			$timeout, SessionService, BranchofficeService) {
+			$timeout, SessionService, BranchofficeService,ReportService) {
 
 		var vm = this;
 		vm.roladmin = $rootScope.roladmin;
@@ -15,6 +15,7 @@
         vm.rolclient = $rootScope.rolclient;
 		vm.allOffices = [];
 		vm.search = {};
+		vm.pickedToday = [];
 		
 
 		var localDate = new Date();
@@ -74,12 +75,42 @@
 			NProgress.start();
 			getAllOffers();
 			getAllOffices();
+			var localDate = new Date();
+            getPickedToday(formatDate(localDate));
+            $scope.tomorrowPick=new Date();
+			$scope.yesterdayPick =new Date();
+			$scope.tomorrowPick.setDate(localDate.getDate()+1);
+            $scope.yesterdayPick.setDate(localDate.getDate()-1);
+            $scope.hoy="hoy";
 			NProgress.done();
 		}
 
 		function getAllOffers() {
 
 		}
+		
+	       $scope.pickedup = function(date){
+	        	var aux=date;
+	        	console.log(date)
+	        	console.log(aux)
+	        	getPickedToday(formatDate(date));$scope.hoy=formatDate(date);
+	        	$scope.yesterdayPick.setDate(date.getDate()-1);
+	        	$scope.tomorrowPick.setDate(aux.getDate()+1);
+	        	console.log(date.getDate()-1)
+	        	console.log(aux.getDate()+1)
+	        }
+	       
+	       function getPickedToday(date){
+	        	ReportService.getPickedToday(date).then(function (response) {
+	        		if(response.success){
+	        			vm.pickedToday = response.data;
+	        		}
+	        		else{
+	        			vm.pickedToday = [];
+	        		}
+	        		NProgress.done();
+	        	});
+	        }
 
 		function getAllOffices() {
 			BranchofficeService.GetAllBranchoffices().then(function(response) {
@@ -104,6 +135,17 @@
 				NProgress.done();
 			});
 		}
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
 	}
 
 })();
