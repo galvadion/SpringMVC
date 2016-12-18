@@ -7,11 +7,11 @@
 
 		<div class="pageheader">
 			<h1 class="custom-font" style="margin-top: -10px !important;">
-				<strong>Actividades</strong>
+				<strong>Reportes</strong>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#/home">Inicio</a></li>
-				<li class="breadcrumb-active">Actividades</li>
+				<li class="breadcrumb-active">Reportes</li>
 			</ol>
 		</div>
 		
@@ -27,7 +27,7 @@
 						</div>
 						<br>
 						<div class="row">
-							<div class="form-group customDatePickers col-sm-4">
+							<div class="form-group customDatePickers col-sm-6">
 								<div class="input-group date" id="beginDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
 									<label for="beginDate" class="control-label">Fecha inicial</label>
 									<input class="form-control" size="16" type="text" name="beginDate" placeholder="DD/MM/YYYY" ng-model="vm.search.beginDate" readonly required>
@@ -35,7 +35,7 @@
 									<span class="glyphicon glyphicon-calendar"></span></span>
 								</div>
 							</div>
-							<div class="form-group customDatePickers col-sm-4">
+							<div class="form-group customDatePickers col-sm-6">
 								<div class="input-group date" id="endDate" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="dd/mm/yyyy">
 									<label for="endDate" class="control-label">Fecha final</label>
 									<input class="form-control" size="16" type="text" name="endDate" placeholder="DD/MM/YYYY" ng-model="vm.search.endDate" readonly  required>
@@ -45,7 +45,7 @@
 								</div>
 							</div>
 							<div class="form-group text-right" style="margin-right: 15px;">
-								<button ng-click="getBetweenDates()" class="btn  btn-orange">Buscar ahora</button>
+								<button ng-click="getBetweenDates()" class="btn  btn-orange" style="width: 140px; height: 40px;"><b>Buscar ahora</b></button>
 							</div>
 						</div>
 					</div>
@@ -103,13 +103,13 @@
 							</h1>
 						</div>
 						<br>
-						<button class="btn btn-blue" ng-click='pickedup(yesterdayPick)'>
-							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Ver
-							dia anterior
+						<button class="btn btn-blue" ng-click='pickedup(yesterdayPick)' style="height:40px;">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><b> Ver
+							día anterior</b>
 						</button>
 						<button class="pull-right btn btn-blue"
-							ng-click='pickedup(tomorrowPick)'>
-							Ver dia despues<span class="glyphicon glyphicon-chevron-right"
+							ng-click='pickedup(tomorrowPick)' style="height:40px;">
+							<b>Ver día después </b><span class="glyphicon glyphicon-chevron-right"
 								aria-hidden="true"></span>
 						</button>
 					</div>
@@ -176,13 +176,13 @@
 							</h1>
 						</div>
 						<br>
-						<button class="btn btn-blue" ng-click='returned(yesterdayReturn)'>
-							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Ver
-							dia anterior
+						<button class="btn btn-blue" ng-click='returned(yesterdayReturn)' style="height:40px;">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><b> Ver
+							día anterior</b>
 						</button>
 						<button class="pull-right btn btn-blue"
-							ng-click='returned(tomorrowReturn)'>
-							Ver dia despues<span class="glyphicon glyphicon-chevron-right"
+							ng-click='returned(tomorrowReturn)' style="height:40px;">
+							<b>Ver día después</b><span class="glyphicon glyphicon-chevron-right"
 								aria-hidden="true"></span>
 						</button>
 					</div>

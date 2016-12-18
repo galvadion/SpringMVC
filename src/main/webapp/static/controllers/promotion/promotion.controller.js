@@ -57,9 +57,9 @@
 		});
 
         vm.DTColumnDefs = [
-            DTColumnDefBuilder.newColumnDef(1).notSortable(),
-            DTColumnDefBuilder.newColumnDef(2).notSortable(),
-            DTColumnDefBuilder.newColumnDef(3).notSortable(),
+            DTColumnDefBuilder.newColumnDef(4).notSortable(),
+            DTColumnDefBuilder.newColumnDef(5).notSortable(),
+            DTColumnDefBuilder.newColumnDef(6).notSortable(),
         ];
         
         initController();
