@@ -36,4 +36,13 @@ public interface PayPalService  {
 	 * @throws Exception
 	 */
 	PayPalTransaction confirmTransaction(String token, String payerId, String itemTotal, String orderTotal) throws Exception;
+	
+	/**
+	 * Refunds amount to client done in transactionID
+	 * @param transactionID
+	 * @param amount
+	 * @return
+	 * @throws Exception
+	 */
+	boolean RefundTransaction(String transactionID, String amount) throws Exception;
 }

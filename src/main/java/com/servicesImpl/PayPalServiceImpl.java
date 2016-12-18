@@ -27,6 +27,9 @@ import urn.ebay.api.PayPalAPI.PayPalAPIInterfaceServiceService;
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutReq;
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutRequestType;
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutResponseType;
+import urn.ebay.api.PayPalAPI.RefundTransactionReq;
+import urn.ebay.api.PayPalAPI.RefundTransactionRequestType;
+import urn.ebay.api.PayPalAPI.RefundTransactionResponseType;
 import urn.ebay.apis.CoreComponentTypes.BasicAmountType;
 import urn.ebay.apis.eBLBaseComponents.AckCodeType;
 import urn.ebay.apis.eBLBaseComponents.CurrencyCodeType;
@@ -39,6 +42,7 @@ import urn.ebay.apis.eBLBaseComponents.PaymentActionCodeType;
 import urn.ebay.apis.eBLBaseComponents.PaymentDetailsItemType;
 import urn.ebay.apis.eBLBaseComponents.PaymentDetailsType;
 import urn.ebay.apis.eBLBaseComponents.PaymentInfoType;
+import urn.ebay.apis.eBLBaseComponents.RefundType;
 import urn.ebay.apis.eBLBaseComponents.SetExpressCheckoutRequestDetailsType;
 
 @Component("PayPalServiceImpl")
@@ -80,13 +84,11 @@ public class PayPalServiceImpl implements PayPalService {
 			orderTotal.setCurrencyID(CurrencyCodeType.fromValue("USD"));
 			orderTotal.setValue(String.valueOf(total));
 			paymentDetails.setOrderTotal(orderTotal);
-			System.out.println();
 			paymentDetails.setPaymentAction(PaymentActionCodeType.fromValue("Sale"));
 			List<PaymentDetailsType> paymentDetailsList = new ArrayList<PaymentDetailsType>();
 			paymentDetailsList.add(paymentDetails);
 
 			SetExpressCheckoutRequestDetailsType setExpressCheckoutRequestDetails  = new SetExpressCheckoutRequestDetailsType();
-			System.out.println("https://"+server.getServerName()+":"+server.getServerPort()+server.getContextPath());
 			setExpressCheckoutRequestDetails .setReturnURL("https://"+server.getServerName()+":"+server.getServerPort()+server.getContextPath()+env.getProperty("PayPalReturnUrl"));
 			setExpressCheckoutRequestDetails .setCancelURL("https://"+server.getServerName()+":"+server.getServerPort()+server.getContextPath()+env.getProperty("PayPalCancelUrl"));
 
@@ -308,6 +310,55 @@ public class PayPalServiceImpl implements PayPalService {
 		catch(Exception ex){
 			log.error(ex);
 			throw new Exception(ex.getMessage());
+		}
+	}
+	
+	public boolean RefundTransaction(String transactionID, String amount) throws Exception{
+		try {
+			RefundTransactionRequestType refundReqType = new RefundTransactionRequestType();
+			BasicAmountType amountType = new BasicAmountType();
+			amountType.setValue(Double.toString(Integer.parseInt(amount) * 0.75));
+			refundReqType.setTransactionID(transactionID);
+			refundReqType.setRefundType(RefundType.PARTIAL);
+			refundReqType.setVersion("204.0");
+			refundReqType.setAmount(amountType);
+			refundReqType.setRefundAdvice(true);
+			RefundTransactionReq refTransReq = new RefundTransactionReq();
+			refTransReq.setRefundTransactionRequest(refundReqType);
+
+			Map<String, String> sdkConfig = new HashMap<String, String>();
+			sdkConfig.put("mode", "sandbox");
+			sdkConfig.put("acct1.UserName", env.getProperty("PayPalUser"));
+			sdkConfig.put("acct1.Password", env.getProperty("PayPalPass"));
+			sdkConfig.put("acct1.Signature", env.getProperty("PayPalSignature"));
+
+			PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(sdkConfig);
+			RefundTransactionResponseType refundTransResponseType = service.refundTransaction(refTransReq);
+			AckCodeType ack = refundTransResponseType.getAck();
+			switch(ack.name()){
+				case "SUCCESS" :
+					log.info(ack.toString() + " : " + refundTransResponseType.getRefundTransactionID());
+					return true;
+				case "FAILURE" :
+					String errors = "";
+					for(ErrorType errorList : refundTransResponseType.getErrors()){
+						if(errors.equals("")){
+							errors = "Short Message: " + errorList.getShortMessage();
+							errors += " - Long Message: " + errorList.getLongMessage();
+						}
+						else{
+							errors += " - " + errorList.getLongMessage();
+						}
+					}
+					log.error(ack.toString() + " - " + errors);
+					throw new Exception(errors);
+				default :
+					log.error(ack.toString());
+					return false;
+			}
+		} catch (Exception ex) {
+			log.error(ex.getMessage());
+			throw ex;
 		}
 	}
 
