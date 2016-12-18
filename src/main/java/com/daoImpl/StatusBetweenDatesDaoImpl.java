@@ -53,6 +53,7 @@ public class StatusBetweenDatesDaoImpl extends GenericDaoImpl<StatusBetweenDates
 		newDisponibility.setBeginDate(finalDate);
 		newDisponibility.setEndDate(finalDate.plusYears(10));
 		newDisponibility.setBranchOffice(finalBranchOffice);
+		newDisponibility.setBranchOfficeEnd(finalBranchOffice);
 		newDisponibility.setStatus(Vehicle_Status.Available);
 		newDisponibility.setVehicle(vehicle);
 		this.saveOrUpdate(newDisponibility);

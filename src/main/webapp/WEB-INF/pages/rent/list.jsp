@@ -71,7 +71,7 @@
                                        
                                         <td class="text-center plus"></td>
                                         <td class="text-center plus">
-                                             <a ng-href="#/rent/details/{{value.id}}" title="Ver detalles">
+                                             <a ng-href="#/rent/details/{{value.rent.id}}" title="Ver detalles">
                                              	<i class="fa fa-eye"></i><br><small>Ver detalles</small>
                                              </a>
                                         </td>

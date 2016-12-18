@@ -85,7 +85,14 @@ public class RentController {
 		Booked booked = bookedServices.get(rent.getBooked_id());
 		System.out.println(rent);
 		rent.setDeliveryDate(LocalDate.now());
-		rent.setId(UUID.randomUUID().toString());
+		rent.setId(UUID.randomUUID().toString()); 
+		try {
+			rent.getTransactionNr();
+			rent.setTransactionDate(LocalDate.now());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		rent.setClientId(booked.getClient().getId());
 		rent = rentServices.create(rent);
 		booked.setRent(rent.getId());
 		bookedServices.saveOrUpdate(booked);

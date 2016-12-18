@@ -45,7 +45,7 @@
 			<property name="password" value="admin" />
 		</bean><!-- Session Factory Declaration -->
 		<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-			<property name="jndiName" value="java:/Proyecto-Desa" />
+			<property name="jndiName" value="java:/RemoteTest" />
 		</bean>
 		<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 			<!-- SMTP settings -->

@@ -161,7 +161,7 @@ public class ApiRestController {
 			String token = reservation.getToken(); //token es en realidad el transaction ID
 			String PayerID = reservation.getPayerId();
 			List<Extras> extras = reservation.getExtras();
-	 		bookedService.registerBook(booking, (Client) userService.get(reservation.getClientId()), token, PayerID, extras);
+	 		bookedService.registerBook(booking, (Client) userService.get(reservation.getClientId()), token, PayerID, extras,reservation.getPromotionCode());
 		}
 		catch(Exception ex){
 			log.error(ex);

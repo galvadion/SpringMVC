@@ -5,6 +5,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.PropertySource;
@@ -24,9 +26,11 @@ import com.entities.BranchOffice;
 import com.entities.Client;
 import com.entities.Extras;
 import com.entities.Model;
+import com.entities.Promotion;
 import com.entities.StatusBetweenDates;
 import com.entities.Vehicle;
 import com.models.BookingModel;
+import com.repository.PromotionRepository;
 import com.services.BookedService;
 
 @Service
@@ -45,6 +49,9 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 	
 	@Autowired
 	Environment env;
+	
+	@Resource(name="PromotionRepository")
+	 PromotionRepository promotionRepository;
 
 	
     @Autowired
@@ -63,7 +70,7 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-	public void registerBook(BookingModel model,Client client, String transactionId, String payerId, List<Extras> extras) {
+	public void registerBook(BookingModel model,Client client, String transactionId, String payerId, List<Extras> extras,String promoCode) {
 		Vehicle vehicle=vehicleDao.getVehiculeAvailable(model);
 		BranchOffice originBO=branchOfficeDao.getById(model.getOriginBranchOfficeId());
 		BranchOffice finalBO=branchOfficeDao.getById(model.getEndBranchOfficeId());
@@ -78,6 +85,7 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		booked.setEndOffice(finalBO);
 		booked.setTransactionNr(transactionId);
 		booked.setPayerId(payerId);
+		booked.setPromotionCode_id(promoCode);
 		Model vehiculeModel=vehicle.getModel();
 		float gpsByDay=0,insuranceByDay=0;
 		if(model.isWithInsurance()){
@@ -93,6 +101,12 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		}
 		if (model.isWithFullTank()) {
 			initialAmount += vehiculeModel.getFullTank();
+		}
+		try {
+			Promotion promo=promotionRepository.findByPromotionCode(promoCode);
+			initialAmount =initialAmount- initialAmount*(promo.getPercentage()/100);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		booked.setExtrasList(extras);
 		booked.setInitialAmount(initialAmount);

@@ -146,6 +146,10 @@
 
 								<div class="row">
 									<div class="form-group text-right" style="padding: 15px;">
+									<div ng-show="vm.rent.rentLine[0]">
+									<label for="name" class="col-xs-offset-1 col-xs-4">Numero de factura in-situ</label>
+                            		<input type="text" name="promoCode" id="promoCode" class="col-xs-3" ng-model="vm.rent.transactionNr" placeholder="">
+										</div>
 										<button class="btn btn-orange pull-right"
 											ng-click="confirmReturn()" >
 											<strong ng-show="!vm.rent.rentLine[0]">Confirmar devolucion</strong>

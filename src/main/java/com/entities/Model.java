@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 @Entity
 public class Model implements Serializable {
@@ -39,6 +40,7 @@ public class Model implements Serializable {
 	private String name;
 
 	@ManyToOne
+	@DBRef
 	@JoinColumn(name = "brand_id", nullable = false)
 	private Brand brand;
 	

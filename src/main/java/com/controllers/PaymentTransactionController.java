@@ -188,11 +188,12 @@ public class PaymentTransactionController {
 					try{
 						System.out.println(promo);
 						promotionService.create(promo);
+					
 					}catch(Exception e){
 						
 					}
 				}
-				bookedService.registerBook(bookingCar, client, transactionId, transaction.getPayerPayPalID(), extras);
+				bookedService.registerBook(bookingCar, client, transactionId, transaction.getPayerPayPalID(), extras,promotionCode);
 				DateTimeFormatter format=DateTimeFormatter.ofPattern("dd/MM/yyyy");
 				mailAuxiliar.sendMailWithHtmlText("<p>Se ha confirmado su reserva!</p><br><p>Lo esperamos el dia "+bookingCar.getStartDate().format(format)+" en nuestra sucursal de "+officeService.get(bookingCar.getOriginBranchOfficeId()).getCity() +" para que pueda retirar su vehiculo y empezar su viaje.</p><br><p>Gracias por su preferencia, un saludo del personal de Rent-Uy</p>", client.getEmail(), "Confirmacion de reserva");
 				return ResponseEntity.ok("Transaction complete!");

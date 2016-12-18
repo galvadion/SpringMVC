@@ -14,7 +14,7 @@
 					  <ol class="carousel-indicators">
 					    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 					    <li data-target="#myCarousel" data-slide-to="1"></li>
-<!-- 					    <li data-target="#myCarousel" data-slide-to="2"></li> -->
+ 					    <li data-target="#myCarousel" data-slide-to="2"></li> 
 					  </ol>
 					
 					  <!-- Wrapper for slides -->
@@ -27,9 +27,9 @@
 					      <img src="static/images/slyder1.png" alt="">
 					    </div>
 					
-<!-- 					    <div class="item"> -->
-<!-- 					      <img src="static/images/slyder3.jpg" alt=""> -->
-<!-- 					    </div> -->
+					    <div class="item"> 
+					      <img src="static/images/slyder3.png" alt=""> 
+ 					    </div> 
 					  </div>
 					
 					  <!-- Left and right controls -->

@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import com.configuration.LocalTimeDeserializer;
 import com.configuration.LocalTimeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -52,20 +54,21 @@ public class BranchOffice implements Serializable{
 	private LocalTime closingHour;
 	
 	@OneToMany(mappedBy="originOffice")
+	@DBRef
 	private List<Booked> BookedEndsLists;
-	
+	@DBRef
 	@OneToMany(mappedBy="endOffice")
 	private List<Booked> BookedOriginsLists;
-	
+	@DBRef
 	@OneToMany(mappedBy="branchOffice")
 	private List<Vehicle> vehicles;
-	
+	@DBRef
 	@OneToMany(mappedBy="branchOffice")
 	private List<Employee> employee;
-
+	@DBRef
 	@OneToMany(mappedBy="branchOffice")
 	private List<StatusBetweenDates> statusDates;
-	
+	@DBRef
 	@OneToMany(mappedBy="branchOfficeEnd")
 	private List<StatusBetweenDates> statusDatesEnd;
 

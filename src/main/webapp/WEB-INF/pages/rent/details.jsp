@@ -64,9 +64,7 @@
                                         <i ng-if="!vm.booked.canceled" class="fa fa-close" style="color: red"> <p class="custom-font" style="display: inline;">No</p></i>
 									</label>
 								</div>
-								<div class="row" ng-if="!vm.booked.canceled">
-									<button class="btn btn-orange" ng-click="cancelBooking(vm.booked.id)">Cancelar reserva</button> <small class="custom-font" style="display: inline;"> (Se aplicaran cargos)</small>
-								</div>
+								
 							</div>
 						</div>
 					</div>

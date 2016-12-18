@@ -49,26 +49,16 @@
         today = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()-18;
 		
 		
-        $('#birthDate').datetimepicker({
-        	language:  'es',
-            weekStart: 1,
-        	autoclose: 1,
-        	todayHighlight: 1,
-        	startView: 2,
-        	minView: 2,
-        	forceParse: 0,
-        	endDate: today
-        });
-        
-        $('#licenseExpirationDate').datetimepicker({
-        	language:  'es',
-            weekStart: 1,
-        	autoclose: 1,
-        	todayHighlight: 1,
-        	startView: 2,
-        	minView: 2,
-        	forceParse: 0
-        });
+        $('.date').datetimepicker({
+			language : 'es',
+			weekStart : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0,
+			startDate : today
+		});
 
 		vm.DTColumnDefs = [
 		                   DTColumnDefBuilder.newColumnDef(9).notSortable(),
@@ -131,7 +121,7 @@
 					vm.rent.booked_id=vm.booked.id;
 					if( vm.location[2] == "return"){
 						getRentById(vm.booked.rent);
-						vm.rent.rentLine=[];
+						
 					}
 				}
 				else{
@@ -145,7 +135,7 @@
 		function getRentById(id){
 			RentService.GetRentById(id).then(function (response) {
 				if(response.success){  
-					vm.rent = response.data;
+					vm.rent = response.data.rent;
 				}
 				else{
 					vm.booked = [];
@@ -160,7 +150,7 @@
 			RentService.InsertRent(vm.rent).then(function (response) {
 				if(response.success){
 					getAllRents();
-					$rootScope.doFlashMessage("Se ha confirmado correctamente con éxito",'#/rent/details/'+vm.rent.id,'success');
+					$rootScope.doFlashMessage("Se ha confirmado correctamente con éxito",'#/rent/details/'+vm.booked.id,'success');
 					$scope.cleanInput();
 				}
 				else{

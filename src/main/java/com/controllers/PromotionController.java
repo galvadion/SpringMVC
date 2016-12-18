@@ -13,6 +13,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,8 @@ import com.servicesImpl.PromotionService;
 @Controller
 @RequestMapping(value = "promotion")
 public class PromotionController {
+	
+	private static final Logger logger = Logger.getLogger(PromotionController.class);
 
 	@Autowired
 	PromotionService promotionService;
@@ -115,7 +118,8 @@ public class PromotionController {
 		String messageError="";
 		try{
 			for(Integer cli:promo.getClients_id()){
-				if(cli.equals(client.getId())){ userValid=false;messageError="Usted ya ha utilizado este codigo";}
+				if(cli.equals(client.getId())){ 
+					userValid=false;messageError="Usted ya ha utilizado este codigo";}
 			}
 		}catch(NullPointerException e){
 			userValid=true;
