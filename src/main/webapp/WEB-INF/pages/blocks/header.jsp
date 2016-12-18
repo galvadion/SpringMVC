@@ -25,7 +25,7 @@
 						    <div class="collapse navbar-collapse" id="myNavbar">
 							    <ul class="nav navbar-nav nav-navigation" id="headerOptions">
 							      <li ng-class=getClass('home') class=""><a href="#/home"><span class="nav-custom-font">Inicio</span></a></li>
-							      <li ng-show="!vm.roladmin" ng-class=getClass('search') class=""><a href="#/search"><span class="nav-custom-font">Buscar</span></a></li>
+							      <li ng-show="!vm.roladmin && !vm.rolemployee" ng-class=getClass('search') class=""><a href="#/search"><span class="nav-custom-font">Buscar</span></a></li>
 							      <li ng-show="vm.roladmin" ng-class=getClass('brand') class=""><a href="#/brand"><span class="nav-custom-font">Marcas</span></a></li>
 							      <li ng-class=getClass('model') class=""><a href="#/model"><span class="nav-custom-font">Modelos</span></a></li>
 							      <li ng-show="vm.roladmin || vm.rolemployee" ng-class=getClass('vehicle') class=""><a href="#/vehicle"><span class="nav-custom-font">Vehículos</span></a></li>
@@ -33,7 +33,7 @@
 							      <li ng-show="vm.roladmin" ng-class=getClass('employee') class=""><a href="#/employee"><span class="nav-custom-font">Empleados</span></a></li>
 							      <li ng-show="vm.roladmin || vm.rolemployee" ng-class=getClass('client') class=""><a href="#/client"><span class="nav-custom-font">Clientes</span></a></li>
 							      <li ng-show="vm.roladmin" ng-class=getClass('tariff') class=""><a href="#/tariff"><span class="nav-custom-font">Tarifas</span></a></li>
-							      <li ng-show="vm.roladmin || vm.rolemployee" ng-class=getClass('promotion') class=""><a href="#/promotion"><span class="nav-custom-font">Promociones</span></a></li>
+							      <li ng-show="vm.roladmin" ng-class=getClass('promotion') class=""><a href="#/promotion"><span class="nav-custom-font">Promociones</span></a></li>
 							      <li ng-show="vm.roladmin || vm.rolemployee" ng-class=getClass('booked') class=""><a href="#/booked"><span class="nav-custom-font">Reservas</span></a></li>
 							      <li ng-show="vm.roladmin || vm.rolemployee" ng-class=getClass('rent') class=""><a href="#/rent"><span class="nav-custom-font">Alquileres</span></a></li>
 							      <li ng-show="vm.rolemployee" ng-class=getClass('report') class=""><a href="#/report"><span class="nav-custom-font">Actividades</span></a></li>

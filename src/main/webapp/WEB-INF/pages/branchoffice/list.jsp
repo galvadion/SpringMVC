@@ -90,7 +90,7 @@
             		<div class="row">
             			<div class="col-md-3" ng-repeat="(key, value) in vm.allBranchoffices" style="margin: 15px;">
             				<h2>{{value.name}}</h2>
-            				<p>Ciudad {{value.city}}</p>
+            				<p>Ciudad: {{value.city}}</p>
             				<p>Horario de {{value.apertureHour}} a {{value.closingHour}}</p>
             				<p>{{value.address}}</p>
             			</div>

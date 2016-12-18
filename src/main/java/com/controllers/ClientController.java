@@ -1,5 +1,6 @@
 package com.controllers;
 
+import org.hibernate.internal.ExceptionConverterImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.entities.Client;
 import com.entities.User;
+import com.models.ErrorResponse;
 import com.services.UserServices;
 import com.servicesImpl.MailAuxiliarService;
 
@@ -73,10 +75,20 @@ public class ClientController {
 			
 	        // sends the e-mail
 			
-			return ResponseEntity.ok((Object) users);
+			return ResponseEntity.ok(users);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body((Object) "There has been an error");
+			try{
+				userServices.getByDocument(users.getDocument());
+				
+			}catch(Exception ex){
+				ErrorResponse response=new ErrorResponse();
+				response.setMessage("Ya existe un usuario registrado con ese correo");
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+			}
+			ErrorResponse response=new ErrorResponse();
+			response.setMessage("Ya existe un usuario registrado con ese numero de documento");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
 		}
 
 	}

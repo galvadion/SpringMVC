@@ -100,6 +100,7 @@ public class VehicleController {
 				availability.setVehicle(requestModel);
 				availability.setStatus(Vehicle_Status.Available);
 				availability.setBranchOffice(branchService.get(requestModel.getBranchOffice().getId()));
+				availability.setBranchOfficeEnd(branchService.get(requestModel.getBranchOffice().getId()));
 				statusService.saveOrUpdate(availability);
 				return ResponseEntity.ok((Object) requestModel);
 			} catch (Exception e) {

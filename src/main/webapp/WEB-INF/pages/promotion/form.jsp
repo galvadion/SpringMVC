@@ -39,7 +39,7 @@
 									<div class="input-group date" id="beginDate" data-date=""
 										data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
 										data-link-format="dd/mm/yyyy">
-										<label for="beginDate" class="control-label">Fecha de
+										<label for="beginDate" class="control-label">* Fecha de
 											inicio</label> <input class="form-control" size="16" type="text"
 											name="beginDate" placeholder="DD/MM/YYYY"
 											ng-model="vm.promotion.beginPromotionDate" readonly required> <span
@@ -51,7 +51,7 @@
 									<div class="input-group date" id="endDate" data-date=""
 										data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
 										data-link-format="dd/mm/yyyy">
-										<label for="beginDate" class="control-label">Fecha de
+										<label for="beginDate" class="control-label">* Fecha de
 											finalizacion</label> <input class="form-control" size="16"
 											type="text" name="beginDate" placeholder="DD/MM/YYYY"
 											ng-model="vm.promotion.lastPromotionDate" readonly required> <span
@@ -61,24 +61,26 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="form-group col-sm-6" class="form-group"
+								<div class="form-group col-sm-5" class="form-group"
 									ng-class="{ 'has-error': form.promotionCode.$dirty && form.promotionCode.$error.required }">
 									<label for="promotionCode" class="control-label">*
-										Codigo de promocion</label> <input type="text"
+										Código de promoción</label> <input type="text"
 										ng-model="vm.promotion.promotionCode" name="promotionCode"
 										id="promotionCode" class="form-control"
 										placeholder="Codigo de promocion" required> <span
 										ng-show="form.promotionCode.$dirty && form.promotionCode.$error.required"
-										class="help-block">Es necesario ingresar un codigo de
-										promocion</span>
-									<div class="btn btn-blue" ng-click="generateText()">Generar</div>
+										class="help-block">Es necesario ingresar un código de
+										promoción</span>
+								</div>
+								<div class="col-sm-1">
+									<div class="btn btn-blue" ng-click="generateText()" style="margin-top:25px; width: 110px;">Generar</div>
 								</div>
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.percentage.$dirty && form.percentage.$error.required }">
 									<label for="percentage" class="control-label">*
-										Porcentaje</label> <input type="number" ng-model="vm.promotion.percentage"
+										Porcentaje de descuento %</label> <input type="number" ng-model="vm.promotion.percentage"
 										name="percentage" id="percentage" class="form-control"
-										placeholder="percentage" required> <span
+										placeholder="Porcentaje %" min="0" required> <span
 										ng-show="form.percentage.$dirty && form.percentage.$error.required"
 										class="help-block">Es necesario ingresar un valor para
 										el percentage de descuento</span>
@@ -87,7 +89,7 @@
 							<div class="row">
 							<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.model.$dirty && form.model.$error.required }">
-									<label for="model" class="control-label">Modelos con descuentos</label> <isteven-multi-select    
+									<label for="model" class="control-label">Modelos con descuento</label><br/><isteven-multi-select    
     input-model="vm.allModels"    
     output-model="vm.promotion.models"
     button-label="name year"
@@ -96,11 +98,11 @@
 >
 </isteven-multi-select> <span
 										ng-show="form.model.$dirty && form.model.$error.required"
-										class="help-block">Modelo es requerida</span>
+										class="help-block">Modelo es requerido</span>
 								</div>
 							<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.branchOffice.$dirty && form.branchOffice.$error.required }">
-									<label for="model" class="control-label">Sucursales con descuentos</label><isteven-multi-select    
+									<label for="model" class="control-label">Sucursales con descuento</label><br/><isteven-multi-select    
     input-model="vm.allOffices"    
     output-model="vm.promotion.offices"
     button-label="name"
@@ -115,16 +117,18 @@
 
 
 							<div class="row">
-								<div class="form-group col-sm-12" class="form-group">
-									<label for="descriptionText" class="control-label">Descripcion</label>
-									<textarea type="text" ng-model="vm.promotion.descriptionText"
-										name="descriptionText" id="descriptionText" class="form-control"/>
+								<div class="col-sm-12">
+									<div class="form-group" style="padding: 15px;">
+										<label for="descriptionText" class="control-label">Descripción</label>
+										<textarea type="text" ng-model="vm.promotion.descriptionText"
+											name="descriptionText" id="descriptionText" class="form-control" placeholder="Descripción"/>
+									</div>
 								</div>
 							</div>
 
 							<!-- Buttons -->
 
-							<div class="form-group text-right">
+							<div class="form-group text-right" style="margin-right:15px;">
 								<a href="#/vehicle" class="btn btn-lightred">Cancelar</a>
 								<button type="submit" id="submit" ng-disabled="form.$invalid"
 									class="btn  btn-orange">Crear</button>

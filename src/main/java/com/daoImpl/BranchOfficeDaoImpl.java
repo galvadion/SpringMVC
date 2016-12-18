@@ -25,7 +25,7 @@ public class BranchOfficeDaoImpl extends GenericDaoImpl<BranchOffice, Integer> i
 	}
 
 	public boolean expectingArrivals(BranchOffice branch) {
-		Query query=currentSession().createQuery("select v from B where client =:client and :today between beginbookedDate and lastbookedDate and canceled=false");
+		Query query=currentSession().createQuery("select v from BranchOffice v where client =:client and :today between beginbookedDate and lastbookedDate and canceled=false");
 		query.setParameter("branch", branch);
 		query.setParameter("today",LocalDate.now());
 		return false;
