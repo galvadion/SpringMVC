@@ -18233,7 +18233,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 	background-repeat: no-repeat;
 	background-size: cover;
 	width: 100%;
-	max-height: 280px;
+	max-height: 360px;
 }
 
 #mapa {
@@ -18245,7 +18245,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 
 .angular-google-map-container {
-	height: 320px;
+	height: 380px;
 }
 
 .customDatePickers {
@@ -18263,7 +18263,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 
 .home-tile {
-	height: 320px;
+	height: 380px;
 }
 
 @media screen and (max-width: 760px) {

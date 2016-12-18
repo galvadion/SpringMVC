@@ -17,6 +17,7 @@ import com.dao.StatusBetweenDatesDao;
 import com.dao.VehicleDao;
 import com.dao.BookedDao;
 import com.dao.BranchOfficeDao;
+import com.dao.ExtrasDao;
 import com.entities.Booked;
 import com.entities.BranchOffice;
 import com.entities.Client;
@@ -35,6 +36,7 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 	private VehicleDao vehicleDao;
 	private BranchOfficeDao branchOfficeDao;
 	private StatusBetweenDatesDao statusBetweenDao;
+	private ExtrasDao extrasDao;
 	
 	public BookedServiceImpl(){
 		
@@ -49,12 +51,14 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
             @Qualifier("bookedDaoImpl") GenericDao<Booked, Integer> genericDao,
             @Qualifier("branchOfficeDaoImpl") GenericDao<BranchOffice, Integer> genericDao3,
             @Qualifier("vehicleDaoImpl") GenericDao<Vehicle, Integer> genericDao2,
-            @Qualifier("statusBetweenDatesDaoImpl") GenericDao<StatusBetweenDates, Integer> genericDao4) {
+            @Qualifier("statusBetweenDatesDaoImpl") GenericDao<StatusBetweenDates, Integer> genericDao4,
+            @Qualifier("extrasDaoImpl") GenericDao<Extras,Integer> genericDao5) {
         super(genericDao);
         this.bookedDao = (BookedDao) genericDao;
         this.vehicleDao= (VehicleDao) genericDao2;
         this.branchOfficeDao= (BranchOfficeDao) genericDao3;
         this.statusBetweenDao = (StatusBetweenDatesDao) genericDao4;
+        this.extrasDao =(ExtrasDao) genericDao5;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -93,6 +97,10 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		booked.setInitialAmount(initialAmount);
 		booked.setClient(client);
 		vehicle.setBranchOffice(finalBO);
+		for(Extras extra : extras){
+			extra.getUsedIn().add(booked);
+			extrasDao.saveOrUpdate(extra);
+		}
 		//Missing booked set client waiting for Oauth implementation
 		bookedDao.saveOrUpdate(booked);
 		statusBetweenDao.editStatusAtBooking(vehicle, model.getStartDate(), model.getEndDate(), finalBO,originBO);

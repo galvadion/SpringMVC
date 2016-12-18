@@ -15,7 +15,7 @@
 		
 		        <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
 		
-		        <form name="form" ng-submit="vm.register()" role="form" class="form-validation mt-20">
+		        <form ng-show="!vm.registered" name="form" ng-submit="vm.register()" role="form" class="form-validation mt-20">
 		
 		            <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
 						<label for="name" class="control-label" style="float: left !important;">Nombre:</label>
@@ -126,6 +126,10 @@
 		                    <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />  
 		            </div>
 		        </form>
+		        
+		        <div ng-show="vm.registered">
+		        Cliente creado con éxito, se le ha enviado un correo para validar su cuenta. Siga los pasos para poder ingresar al sistema
+		        </div>
 		        
 		        <div class="lt wrap-reset mt-10">
 		        	<a href="#/login" class="b-0 text-uppercase">Atras</a>

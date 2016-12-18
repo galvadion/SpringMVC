@@ -9,6 +9,8 @@
     function RegisterController(UserService, $location, $rootScope, FlashService, $scope, AuthenticationService) {
         var vm = this;
         vm.register = register;
+		vm.registered=false;
+
 
         var localDate = new Date();
         localDate = (localDate.getFullYear()-18) + '-' + (localDate.getMonth() + 1) + '-' +  localDate.getDate();
@@ -50,9 +52,9 @@
            UserService.InsertClient(vm.user)
 	            .then(function (response) {
 	            	if (response.success) {
-	                    $rootScope.doFlashMessage('Cliente creado con éxito, se le ha enviado un correo para validar su cuenta. Siga los pasos para poder ingresar al sistema','/login','success',5000);
+	            		vm.registered=true;
 	                } else {
-	                    $rootScope.doFlashMessage('Email ya en uso, reingrese e intente nuevamente','','error',1000);
+	                    $rootScope.doFlashMessage(response.data.message,'','error',6000);
 	                }
 	            NProgress.done();
 	        });

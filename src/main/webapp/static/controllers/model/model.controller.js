@@ -158,6 +158,10 @@
         	vm.cylinders.push({'value':1600});
         	vm.cylinders.push({'value':1800});
         	vm.cylinders.push({'value':2000});
+        	vm.cylinders.push({'value':2200});
+        	vm.cylinders.push({'value':2400});
+        	vm.cylinders.push({'value':2600});
+        	vm.cylinders.push({'value':2800});
         }
         function getCategories(){
         	TariffService.getAllCategories().then(function (response) {

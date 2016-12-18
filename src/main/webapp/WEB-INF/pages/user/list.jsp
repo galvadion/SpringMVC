@@ -45,7 +45,7 @@
                                         <th>E-mail</th>
                                         <th>Dirección</th>
                                         <th>Teléfono</th>
-                                        <th><span ng-if="vm.location[1] == 'client'">Nacimiento</span></th>
+                                        <th><span ng-if="vm.location[1] == 'client'">Nacimiento</span><span ng-if="vm.location[1] == 'employee'">Sucursal</span></th>
                                         <th><span ng-if="vm.location[1] == 'client'">Expiración de licencia</span></th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
@@ -73,6 +73,7 @@
                                         	<span ng-if="vm.location[1] == 'client'">
                                             	{{value.birthDate}}
                                             </span>
+                                            <span ng-if="vm.location[1] == 'employee'">{{value.branchOffice.city}}</span>
                                         </td>
                                         <td>
                                         	<span ng-if="vm.location[1] == 'client'">

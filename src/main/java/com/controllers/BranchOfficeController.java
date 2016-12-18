@@ -81,7 +81,7 @@ public class BranchOfficeController {
 	 */
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
 	public ResponseEntity<List<BranchOffice>> getAll() {
-		List<BranchOffice> list = branchOfficeService.getAll();
+		List<BranchOffice> list = branchOfficeService.getAvailable();
 		List<BranchOffice> result=new ArrayList<BranchOffice>();
 		if (list != null) {
 			for(BranchOffice branch:list){
@@ -109,6 +109,7 @@ public class BranchOfficeController {
 		try {
 			branchOfficeService.closeBranchOffice(entity);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.ok((Object)e.getMessage());
 		}
 		return ResponseEntity.ok((Object)"It has been removed");

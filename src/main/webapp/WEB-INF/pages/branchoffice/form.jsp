@@ -73,7 +73,7 @@
 								<div class="form-group col-sm-6" class="form-group"
 									ng-class="{ 'has-error': form.apertureHour.$dirty && form.apertureHour.$error.required }">
 									<label for="apertureHour" class="control-label">* Hora
-										de apeertura</label> <input type="text" name="apertureHour"
+										de apertura</label> <input type="text" name="apertureHour"
 										id="apertureHour" class="form-control"
 										ng-model="vm.branchoffice.apertureHour" placeholder="hh:mm"
 										required> <span
@@ -94,7 +94,7 @@
 							</div>
 
 							<div class="row">
-								<div class="form-group col-sm-12" class="form-group"
+								<div class="form-group col-sm-12" class="form-group" required
 									ng-class="{ 'has-error': !vm.branchoffice.location}">
 									<label for="location" class="control-label">*
 										Localización</label>
