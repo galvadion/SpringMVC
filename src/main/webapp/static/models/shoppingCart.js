@@ -62,7 +62,7 @@ shoppingCart.prototype.getTotalCount = function (sku) {
 //clear the cart
 shoppingCart.prototype.clearItems = function () {
     this.items = [];
-    this.saveItems();
+    //this.saveItems();
 }
 
 // define checkout parameters
@@ -164,11 +164,12 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
 			}
 			else{
 				paypaliframe.contentWindow.paypalBeginTransaction(response.token);
+				
 			}
 		},
 		error: function(response){
 			$("#paypal-iframe").remove();
-			throw response.responseJSON.message;
+			$("#errorModal").modal();
 		}
 	})
     

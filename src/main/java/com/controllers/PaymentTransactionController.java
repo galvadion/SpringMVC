@@ -76,8 +76,8 @@ public class PaymentTransactionController {
 	public ResponseEntity<Map<String, Object>> paypalPaymentBegin(@RequestBody List<TransactionItem> itemsList,HttpServletRequest request){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("status", "500");
-//		map.put("message", "An error has ocurred");
+//		map.put("STATUS", "500");
+//		map.put("MESSAGE", "AN ERROR HAS OCURRED");
 //		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 
 		try{
@@ -163,49 +163,49 @@ public class PaymentTransactionController {
 	@RequestMapping(value="/confirm-transaction", method=RequestMethod.POST)
 	public ResponseEntity<String> confirmTransaction(@RequestBody Reservation reservation){
 		try{
-			String promotionCode = reservation.getPromotionCode();
-			String token = reservation.getToken();
-			String PayerID = reservation.getPayerId();
-			String itemTotal = reservation.getItemTotal();
-			String orderTotal = reservation.getOrderTotal();
-			BookingModel bookingCar = reservation.getBookingModel();
-			List<Extras> extras = reservation.getExtras();
-			PayPalTransaction transaction = paypalService.confirmTransaction(token, PayerID, itemTotal, orderTotal);
-			switch(transaction.getAck()){
-			case "SUCCESS":
-				String transactionId = transaction.getTransactionID();
-				Client client = (Client)userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
-				if(!promotionCode.equals("")){
-					Promotion promo=promotionService.getPromotionByCode(promotionCode);
-					System.out.println(promo);
-					try{
-						promo.getClients_id().add(Integer.parseInt(httpSession.getAttribute("user").toString()));
-					}catch(Exception e){
-						List<Integer> clients=new ArrayList<>();
-						clients.add(Integer.parseInt(httpSession.getAttribute("user").toString()));
-						promo.setClients_id(clients);
-					}
-					try{
-						System.out.println(promo);
-						promotionService.create(promo);
-					}catch(Exception e){
-						
-					}
-				}
-				bookedService.registerBook(bookingCar, client, transactionId, transaction.getPayerPayPalID(), extras);
-				DateTimeFormatter format=DateTimeFormatter.ofPattern("dd/MM/yyyy");
-				mailAuxiliar.sendMailWithHtmlText("<p>Se ha confirmado su reserva!</p><br><p>Lo esperamos el dia "+bookingCar.getStartDate().format(format)+" en nuestra sucursal de "+officeService.get(bookingCar.getOriginBranchOfficeId()).getCity() +" para que pueda retirar su vehiculo y empezar su viaje.</p><br><p>Gracias por su preferencia, un saludo del personal de Rent-Uy</p>", client.getEmail(), "Confirmacion de reserva");
-				return ResponseEntity.ok("Transaction complete!");
-				
-			case "FAILURE":
-				String error = transaction.getErrorMessage();
-				log.error(error);
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
-				
-			default:
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
-			}
-			
+//			String promotionCode = reservation.getPromotionCode();
+//			String token = reservation.getToken();
+//			String PayerID = reservation.getPayerId();
+//			String itemTotal = reservation.getItemTotal();
+//			String orderTotal = reservation.getOrderTotal();
+//			BookingModel bookingCar = reservation.getBookingModel();
+//			List<Extras> extras = reservation.getExtras();
+//			PayPalTransaction transaction = paypalService.confirmTransaction(token, PayerID, itemTotal, orderTotal);
+//			switch(transaction.getAck()){
+//			case "SUCCESS":
+//				String transactionId = transaction.getTransactionID();
+//				Client client = (Client)userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
+//				if(!promotionCode.equals("")){
+//					Promotion promo=promotionService.getPromotionByCode(promotionCode);
+//					System.out.println(promo);
+//					try{
+//						promo.getClients_id().add(Integer.parseInt(httpSession.getAttribute("user").toString()));
+//					}catch(Exception e){
+//						List<Integer> clients=new ArrayList<>();
+//						clients.add(Integer.parseInt(httpSession.getAttribute("user").toString()));
+//						promo.setClients_id(clients);
+//					}
+//					try{
+//						System.out.println(promo);
+//						promotionService.create(promo);
+//					}catch(Exception e){
+//						
+//					}
+//				}
+//				bookedService.registerBook(bookingCar, client, transactionId, transaction.getPayerPayPalID(), extras);
+//				DateTimeFormatter format=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//				mailAuxiliar.sendMailWithHtmlText("<p>Se ha confirmado su reserva!</p><br><p>Lo esperamos el dia "+bookingCar.getStartDate().format(format)+" en nuestra sucursal de "+officeService.get(bookingCar.getOriginBranchOfficeId()).getCity() +" para que pueda retirar su vehiculo y empezar su viaje.</p><br><p>Gracias por su preferencia, un saludo del personal de Rent-Uy</p>", client.getEmail(), "Confirmacion de reserva");
+//				return ResponseEntity.ok("Transaction complete!");
+//				
+//			case "FAILURE":
+//				String error = transaction.getErrorMessage();
+//				log.error(error);
+//				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
+//				
+//			default:
+//				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
+//			}
+			throw new Exception("GRAN EXCEPCION");
 			
 		}
 		catch(Exception ex){
