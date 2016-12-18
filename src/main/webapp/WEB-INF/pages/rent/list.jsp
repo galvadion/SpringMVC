@@ -33,7 +33,6 @@
                                         <th>Oficina de origen</th>
                                         <th>Oficina de destino</th>
                                         <th>Devuelto</th>
-                                        <th>Cancelado</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>
@@ -69,10 +68,7 @@
                                             <i ng-if="value.book.returned" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
                                             <i ng-if="!value.book.returned" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
                                         </td>
-                                        <td class="text-center plus">
-                                            <i ng-if="value.book.canceled" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
-                                            <i ng-if="!value.book.canceled" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
-                                        </td>
+                                       
                                         <td class="text-center plus"></td>
                                         <td class="text-center plus">
                                              <a ng-href="#/rent/details/{{value.id}}" title="Ver detalles">
@@ -103,7 +99,6 @@
                                         <th>Oficina de origen</th>
                                         <th>Oficina de destino</th>
                                         <th>Devuelto</th>
-                                        <th>Cancelado</th>
                                         <th style="width:20px;"></th>
                                         <th style="width:90px;">Acciones</th>
                                         <th style="width:70px;"></th>
@@ -136,10 +131,7 @@
                                             <i ng-if="value.book.returned" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
                                             <i ng-if="!value.book.returned" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
                                         </td>
-                                        <td class="text-center plus">
-                                            <i ng-if="value.book.canceled" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
-                                            <i ng-if="!value.book.canceled" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
-                                        </td>
+                                       
                                         <td class="text-center plus"></td>
                                         <td class="text-center plus">
                                              <a ng-href="#/rent/details/{{value.id}}" title="Ver detalles">
