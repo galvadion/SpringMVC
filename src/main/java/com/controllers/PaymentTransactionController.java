@@ -76,8 +76,8 @@ public class PaymentTransactionController {
 	public ResponseEntity<Map<String, Object>> paypalPaymentBegin(@RequestBody List<TransactionItem> itemsList,HttpServletRequest request){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("status", "500");
-//		map.put("message", "An error has ocurred");
+//		map.put("STATUS", "500");
+//		map.put("MESSAGE", "AN ERROR HAS OCURRED");
 //		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 
 		try{
@@ -205,7 +205,6 @@ public class PaymentTransactionController {
 			default:
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
 			}
-			
 			
 		}
 		catch(Exception ex){

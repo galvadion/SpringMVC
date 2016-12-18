@@ -41,6 +41,7 @@
 		initController();
 		
 		$scope.cart = PaymentService.cart;
+		$scope.cart.clearItems();
 		
 		function initController(){
 			NProgress.start();
@@ -71,8 +72,9 @@
 							$scope.extras.push(new ExtraItems(extras[i].id, extras[i].name, extras[i].price, false));
 						}
 						console.log($scope.model);
+						ToogleCheck();
 						vm.estado = "booking";
-						//vm.estado = "confirm";
+//						vm.estado = "details";
 					}
 					else{
 						$rootScope.doFlashMessage(response.data, "", "error", 60000);
@@ -177,7 +179,7 @@
 					
 				}
 				else{
-					$rootScope.doFlashMessage(response.data, "", "error", 6000);
+					$("#errorModal").modal();
 				}
 			})
 			NProgress.done();
@@ -215,7 +217,7 @@
 					vm.estado = "confirm";
 				}
 				else{
-					$rootScope.doFlashMessage(response.data, "", "error", 6000);
+					$("#errorModal").modal();
 				}
 			})
 			NProgress.done();
@@ -233,6 +235,10 @@
 		this.checked = checked;
 	}
 	
-	
+	function ToogleCheck(){
+		$(document).ready(function(){
+			$(".toggleCheck").bootstrapToggle();
+		})
+	}
 	
 })();

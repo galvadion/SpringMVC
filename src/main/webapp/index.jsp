@@ -28,7 +28,7 @@
         <link rel="stylesheet" type="text/css" href="static/css/isteven-multi-select.css">
         <link rel="stylesheet" type="text/css" href="static/js/chat/comet.chat.css">
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap-switch.min.css">
-        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" >
 
     </head>
     <body>
@@ -46,9 +46,9 @@
 
 
 		<!--Extensions-->
+		<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="static/js/bootstrap-datetimepicker.min.js"></script>
 		<script type="text/javascript" src="static/js/bootstrap-datetimepicker.es.js"></script>
-		<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="static/js/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="static/js/angular-ui-router.js"></script>
         <script type="text/javascript" src="static/js/vendor/ng-file-upload/ng-file-upload-shim.min.js"></script>
@@ -59,7 +59,7 @@
         <script type="text/javascript" src="static/js/ui-multiselect.js"></script>
 		<script type="text/javascript" src="static/js/moment.min.js"> </script>
 		<script type="text/javascript" src="static/js/bootstrap-switch.min.js"></script>
-		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+		<script type="text/javascript" src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 		<script type="text/javascript" src="static/js/isteven-multi-select.js"> </script>
 		
 		<!--Maps-->
@@ -68,11 +68,6 @@
 		<script type="text/javascript" src="static/js/maps/angular-simple-logger.js"></script>
 		<script type="text/javascript" src="static/js/maps/angular-google-maps.min.js"></script>
 		
-		
-		
-		
-		
-
 		<!-- Data Tablbes -->
 		<script type="text/javascript" src="static/js/vendor/datatables/media/js/jquery.dataTables.js"></script>
 		<script type="text/javascript" src="static/js/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>

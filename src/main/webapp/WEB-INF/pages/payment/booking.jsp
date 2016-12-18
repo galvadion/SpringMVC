@@ -15,8 +15,14 @@
 							<div class="row">
 								<div class="col-xs-8">
 									<img class="img-responsive" ng-if="!model.images[0]" src="static/images/noimage.png" alt="car-picture">
-									<img class="img-responsive" ng-if="model.images[0]" src="images/{{model.images[0].fileLocation}}" alt="car-picture">
-<!-- 									 <img class="img-responsive" src="https://www.bmw.co.cr/content/dam/bmw/common/all-models/i-series/i8/2014/model-card/BMW-i8_ModelCard.png" alt="car-picture">   -->
+<!-- 									<img class="img-responsive" ng-if="model.images[0]" src="images/{{model.images[0].fileLocation}}" alt="car-picture"> -->
+									<div uib-carousel active="active" interval="5000">
+										<div uib-slide ng-repeat="img in model.images track by img.id">
+											<img class="img-responsive" ng-src="images/{{img.fileLocation}}" style="margin:auto">
+											<div class="carousel-caption">
+											</div>
+										</div>
+									</div>
 								</div>
 								<div class="col-xs-4">
 									<div class="row">
@@ -43,6 +49,10 @@
 									<div class="row">
 										<label>Precio por día: $<strong>{{model.category.basePrice}}</strong></label>
 									</div>
+									<br/>
+									<div class="row" style="margin-right: 20px">
+										<label>Descripción: {{model.description}}</label>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -59,10 +69,10 @@
 							<div ng-repeat="extra in extras">
 								<div class="row">
 									<div class = "col-xs-offset-1 col-xs-9">
-										<label>{{extra.name}} ($ {{extra.price}} por dia)</label>
+										<label>{{extra.name}} ($ {{extra.price}} por día)</label>
 									</div>
 									<div class="col-xs-2">
-										<input type="checkbox" checklist-model="extra.checked" checklist-value="extra" ng-change="addItem((-1) * {{extra.id}}, '{{extra.name}}', {{extra.price}}, checked)" data-toggle="toggle">
+										<input class="toggleCheck" type="checkbox" checklist-model="extra.checked" checklist-value="extra" ng-change="addItem((-1) * {{extra.id}}, '{{extra.name}}', {{extra.price}}, checked)" data-toggle="toggle">
 									</div>
 								</div>
 							</div>
@@ -71,7 +81,7 @@
 									<label>Seguro ($ {{insurancePrice}} por day)</label>
 								</div>
 								<div class = "col-xs-2">
-									<input type="checkbox" ng-model="vm.insuranceCheck" ng-change="addItem('Insurance', 'Insurance', {{insurancePrice}}, vm.insuranceCheck)" data-toggle="toggle">
+									<input class="toggleCheck" type="checkbox" ng-model="vm.insuranceCheck" ng-change="addItem('Insurance', 'Insurance', {{insurancePrice}}, vm.insuranceCheck)" data-toggle="toggle">
 								</div>
 							</div>
 							<div class="row">
@@ -79,7 +89,7 @@
 									<label>Devolución con tanque lleno ($ {{fulltankPrice}})</label>
 								</div>
 								<div class = "col-xs-2">
-									<input type="checkbox" ng-model="vm.fulltankCheck" ng-change="addItem('FullTank', 'Full Tank', {{fulltankPrice}}, vm.fulltankCheck)" data-toggle="toggle">
+									<input class="toggleCheck" type="checkbox" ng-model="vm.fulltankCheck" ng-change="addItem('FullTank', 'Full Tank', {{fulltankPrice}}, vm.fulltankCheck)" data-toggle="toggle">
 								</div>
 							</div>
 						</div>
@@ -147,7 +157,7 @@
 			</div>
 			
 			<div ng-switch-when="details" class="row-fluid  fullSection" id="paymentDetailsSection">
-				<div class="col-md-offset-1 col-md-6 col-sm-12">
+				<div class="col-md-offset-1 col-md-6 col-sm-12" style="background-color: rgba(255,255,255,0.7); margin-top: 5vh">
 					<h1>Todo en orden</h1>
 					<h3>Por favor, revisa los detalles de la reserva antes de confirmar</h3>
 					
@@ -173,16 +183,14 @@
 						</div>
 						<br/>
 					</div>
-					<div>
-					<div class="row">
+					<div class="row" style="margin-bottom: 15px">
 						<div class="col-sm-2">
-							<div class="btn btn-info" ng-click="ConfirmBooking()">Confirmar</div>
+							<div class="btn btn-info"  ng-click="ConfirmBooking()">Confirmar</div>
 						</div>
 						<div class="col-sm-2">
-							<div class="btn btn-danger" ng-click="CancelBooking()">Cancelar</div>						
+							<div class="btn btn-danger"ng-click="CancelBooking()">Cancelar</div>						
 						</div>
 					</div>
-				</div>
 				</div>
 			</div>
 			<div ng-switch-when="confirm" class="row-fluid  fullSection" id="paymentConfirmSection">
@@ -203,7 +211,7 @@
 	<input id="paymentDetails" type="button" hidden="true" ng-click="getDetails()"/>
 	
 	<!-- Modal -->
-	<div class="modal fade" id="loginModal" role="dialog">
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
@@ -250,5 +258,29 @@
 		</div>
 	</div>
 	<!-- End Modal -->
+	
+	<!-- Error Modal -->
+	<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" style="display:none">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header bookingModalHeader" style="padding: 35px 50px;">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h1 class="logo"><img src="static/images/logo.png" alt="Rent-UY" ></h1>
+		        	<h3 class="text-light text-danger ">Error</h3>
+				</div>
+				<div class="modal-body" style="padding: 40px 50px;">
+					<center><p>Ha ocurrido un error con PayPal</p></center>
+					<center><p>Por favor, inténtelo de nuevo</p></center>
+				</div>
+				<div class="modal-footer bookingModalFooter">
+					<button type="submit" class="btn btn-danger center-block"
+						data-dismiss="modal">
+						<span class="glyphicon"></span> Aceptar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 </section>

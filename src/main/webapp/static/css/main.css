@@ -18337,7 +18337,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 
 #paymentBookingSection{
-	background : url("../images/nico1.jpg") no-repeat left top fixed; 
+	background : url("../images/IMG_47042.jpg") no-repeat left top fixed; 
     
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -18346,7 +18346,7 @@ table td .statusInvoice small, table td .statusInvoiceOk small{
 }
 
 #paymentDetailsSection{
-	background : url("../images/nico2.jpg") no-repeat; /* left top fixed; */
+	background : url("../images/details.jpg") no-repeat; /* left top fixed; */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
