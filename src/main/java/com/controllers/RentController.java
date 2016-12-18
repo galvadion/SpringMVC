@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.entities.Booked;
 import com.entities.Client;
 import com.entities.Rent;
+import com.models.RentResponse;
 import com.services.BookedService;
 import com.services.UserServices;
 import com.servicesImpl.RentServiceImpl;
@@ -111,21 +112,27 @@ public class RentController {
 	}
 
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
-	public ResponseEntity<List<Rent>> getall() { 
-		return ResponseEntity.ok(rentServices.getAll());
+	public ResponseEntity<List<RentResponse>> getall() { 
+		List<RentResponse> result=new ArrayList<>();
+		List<Rent> rentList=rentServices.getAll();
+		for(Rent rent:rentList){
+			RentResponse respuesta=new RentResponse();
+			respuesta.setRent(rent);
+			respuesta.setBook(bookedServices.get(rent.getBooked_id()));
+			result.add(respuesta);
+		}
+		
+		return ResponseEntity.ok(result);
 	}
 	@RequestMapping(value = "/getbyclient", method = RequestMethod.GET)
-	public ResponseEntity<List<Rent>> getByClient() { 
-		Client client=(Client) userServices.get(Integer.parseInt(httpSession.getAttribute("id").toString()));
-		List<Booked> booked=bookedServices.getByClient(client);
-		List<Rent> result=new ArrayList<>();
-		for(Booked book:booked){
-			try{
-				Rent rent=rentServices.get(book.getRent());
-				result.add(rent);
-			}catch(Exception e){
-
-			}
+	public ResponseEntity<List<RentResponse>> getByClient() { 
+		List<RentResponse> result=new ArrayList<>();
+		List<Rent> rentList=rentServices.getRentsByClient(Integer.parseInt(httpSession.getAttribute("user").toString()));
+		for(Rent rent:rentList){
+			RentResponse respuesta=new RentResponse();
+			respuesta.setRent(rent);
+			respuesta.setBook(bookedServices.get(rent.getBooked_id()));
+			result.add(respuesta);
 		}
 		return ResponseEntity.ok(result);
 	}

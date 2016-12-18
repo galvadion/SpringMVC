@@ -98,9 +98,9 @@ public class Booked implements Serializable{
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "extra_booked", catalog = "public", joinColumns = {
-			@JoinColumn(name = "usedIn", nullable = false, updatable = false) },
+			@JoinColumn(name = "usedin", nullable = false, updatable = true) },
 			inverseJoinColumns = { @JoinColumn(name = "extra_id",
-					nullable = false, updatable = false) })
+					nullable = false, updatable = true) })
 	private List<Extras> extrasList;
 
 	public void setId(Integer id) {

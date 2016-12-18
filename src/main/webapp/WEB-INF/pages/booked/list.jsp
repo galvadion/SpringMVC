@@ -32,6 +32,7 @@
                                         <th>Fecha de fin</th>
                                         <th>Oficina de origen</th>
                                         <th>Oficina de destino</th>
+                                        <th>Retirado</th>
                                         <th>Devuelto</th>
                                         <th>Cancelado</th>
                                         <th style="width:20px;"></th>
@@ -61,6 +62,10 @@
                                         </td>
                                         <td>
                                             {{value.endOffice.name}}
+                                        </td>
+                                        <td class="text-center plus">
+                                            <i ng-if="value.rent" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
+                                            <i ng-if="!value.rent" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
                                         </td>
                                         <td class="text-center plus">
                                             <i ng-if="value.returned" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
@@ -102,6 +107,7 @@
                                         <th>Oficina de origen</th>
                                         <th>Oficina de destino</th>
                                         <th>Pago inicial</th>
+                                        <th>Retirado</th>
                                         <th>Devuelto</th>
                                         <th>Cancelado</th>
                                         <th style="width:20px;"></th>
@@ -137,6 +143,10 @@
                                         </td>
                                         <td>
                                             US$<b>{{value.initialAmount}}</b>
+                                        </td>
+                                        <td class="text-center plus">
+                                            <i ng-if="value.rent" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>
+                                            <i ng-if="!value.rent" class="fa fa-close" style="color: red"> <p class="custom-font">No</p></i>
                                         </td>
                                         <td class="text-center plus">
                                             <i ng-if="value.returned" class="fa fa-check" style="color: green"> <p class="custom-font">Si</p></i>

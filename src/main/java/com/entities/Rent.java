@@ -59,6 +59,8 @@ public class Rent implements Serializable{
 	private List<Drivers> driversList;
 	
     private int booked_id;
+    
+    private int clientId;
 
 	public String getId() {
 		return id;
@@ -161,6 +163,15 @@ public class Rent implements Serializable{
 	public void setDriversList(List<Drivers> driversList) {
 		this.driversList = driversList;
 	}
+
+	public int getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
+	}
+
 
 
 	
