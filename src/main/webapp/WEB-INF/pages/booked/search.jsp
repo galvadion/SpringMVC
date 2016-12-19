@@ -155,7 +155,7 @@
 	                    	</div>
 	                    	
 	                    	<div class="col-sm-12">
-	                    		<a href class="btn  btn-orange pull-right" ng-click="reservar(value.id)"><strong>Reservar</strong></a>
+	                    		<a href class="btn  btn-orange pull-right" ng-click="reservar(value.id)"><strong>Reservar (USD{{value.category.basePrice}} base por dia )</strong></a>
 	                    	</div>
 	                    </div>
 	                    

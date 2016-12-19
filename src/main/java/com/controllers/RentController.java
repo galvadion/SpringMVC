@@ -96,7 +96,7 @@ public class RentController {
 		rent = rentServices.create(rent);
 		booked.setRent(rent.getId());
 		bookedServices.saveOrUpdate(booked);
-		return ResponseEntity.ok((Object)"It has been confirmed");
+		return ResponseEntity.ok(rent);
 	}
 
 	@RequestMapping(value = "/confirmReturn", method = RequestMethod.POST)

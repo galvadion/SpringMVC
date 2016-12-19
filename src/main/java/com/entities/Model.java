@@ -216,13 +216,6 @@ public class Model implements Serializable {
 		return transmission.equals("M") || transmission.equals("A");
 	}
 
-	@Override
-	public String toString() {
-		return "Model [id=" + id + ", name=" + name + ", brand=" + brand + ", fuel=" + fuel + ", category=" + category
-				+ ", year=" + year + ", passangers=" + passangers + ", luggage=" + luggage + ", cylinders=" + cylinders
-				+ ", airConditioner=" + airConditioner + ", vehicles=" + vehicles + ", transmission=" + transmission
-				+ ", insurance=" + insurance + ", fullTank=" + fullTank + "]";
-	}
 
 	public boolean isUnavailable() {
 		return unavailable;
