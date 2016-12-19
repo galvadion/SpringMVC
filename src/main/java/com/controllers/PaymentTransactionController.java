@@ -245,4 +245,15 @@ public class PaymentTransactionController {
 			}
 		}
 	}
+	
+//	@RequestMapping(value="/test", method=RequestMethod.GET)
+//	public String testingRefund(){
+//		try{
+//			paypalService.RefundTransaction("7UP06658GL937201X", "556");
+//			return "ok";
+//		}
+//		catch(Exception ex){
+//			return "fail";
+//		}
+//	}
 }

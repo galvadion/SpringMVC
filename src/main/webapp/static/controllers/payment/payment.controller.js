@@ -71,8 +71,7 @@
 						for(var i in extras){
 							$scope.extras.push(new ExtraItems(extras[i].id, extras[i].name, extras[i].price, false));
 						}
-						console.log($scope.model);
-						ToogleCheck();
+						$(".toggleCheck").bootstrapToggle();
 						vm.estado = "booking";
 //						vm.estado = "details";
 					}
