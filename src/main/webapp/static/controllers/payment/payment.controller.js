@@ -98,7 +98,7 @@
         		if(response.success){
 	        		vm.isPromotion=response.data.valid;	
 	        		if(!vm.isPromotion){
-	        			$rootScope.doFlashMessage(response.data.validationError, "", "error", 6000);
+	        			$rootScope.doFlashMessage(response.data.validationMessage, "", "error", 6000);
 	        		}else{
 	        			vm.percentage=response.data.percentage;
 	        			vm.promotionCode=response.data.promotionCode;
