@@ -20,6 +20,7 @@
 		vm.rent.driversList=[];
 		vm.detail= {};
 		vm.rent.rentLine=[];
+		vm.book ={};
 
 		vm.dtOptions = DTOptionsBuilder.newOptions().withDOM('dfrtip')
 		.withPaginationType('simple_numbers')
@@ -136,6 +137,7 @@
 			RentService.GetRentById(id).then(function (response) {
 				if(response.success){  
 					vm.rent = response.data.rent;
+					vm.book=response.data.book;
 				}
 				else{
 					vm.booked = [];

@@ -73,7 +73,6 @@
 
 		function initController() {
 			NProgress.start();
-			getAllOffers();
 			getAllOffices();
 			var localDate = new Date();
             getPickedToday(formatDate(localDate));
@@ -83,10 +82,6 @@
             $scope.yesterdayPick.setDate(localDate.getDate()-1);
             $scope.hoy="hoy";
 			NProgress.done();
-		}
-
-		function getAllOffers() {
-
 		}
 		
 	       $scope.pickedup = function(date){

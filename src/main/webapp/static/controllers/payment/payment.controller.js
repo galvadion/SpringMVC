@@ -32,6 +32,7 @@
 		vm.bookingDays = 0;
 		vm.discount = 0;
 		vm.isPromotion=false;
+		vm.modelPrice=0;
 		
 		$scope.model;
 		$scope.insurancePrice;
@@ -64,9 +65,14 @@
 						vm.orderTotal=0;
 						$scope.model = response.data.model;
 						$scope.insurancePrice = $scope.model.insurance;
-						$scope.fulltankPrice = $scope.model.fullTank;
 						vm.bookingDays = Math.round(((new Date(vm.endDate.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$2/$1/$3")).getTime()) - (new Date(vm.initDate.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$2/$1/$3")).getTime()))/(1000*60*60*24));
-						$scope.cart.addItem($scope.model.id, $scope.model.brand.name + " " + $scope.model.name, $scope.model.category.basePrice, vm.bookingDays);
+						$scope.fulltankPrice = -($scope.model.fuel.fuelPrice * vm.bookingDays);
+						if(vm.bookingDays>1){
+							vm.modelPrice= ($scope.model.category.basePrice+$scope.model.fuel.fuelPrice )*0.80;
+						}else{
+							vm.modelPrice=$scope.model.category.basePrice+$scope.model.fuel.fuelPrice;
+						}
+						$scope.cart.addItem($scope.model.id, $scope.model.brand.name + " " + $scope.model.name, vm.modelPrice, vm.bookingDays);
 						var extras = response.data.extras;
 						for(var i in extras){
 							$scope.extras.push(new ExtraItems(extras[i].id, extras[i].name, extras[i].price, false));

@@ -71,7 +71,6 @@ public class ReportController {
 	@RequestMapping(value = "/getpickup", method = RequestMethod.GET)
 	public ResponseEntity<List<Booked>> getpickedupToday(@RequestParam("date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 		try{
-			System.out.println(date);
 			Employee employee=(Employee) userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
 			BranchOffice branch=(employee.getBranchOffice());
 			return ResponseEntity.ok(bookedService.getBookedByDayAndOffice(branch, date));
