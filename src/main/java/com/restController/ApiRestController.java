@@ -1,11 +1,13 @@
 package com.restController;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.validation.ConstraintViolation;
@@ -30,14 +32,17 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.controllers.LoginController.LogInRequestBody;
 import com.controllers.LoginController.LogInResonseBody;
+import com.controllers.PromotionController.PromoResponse;
 import com.entities.Admin;
 import com.entities.BranchOffice;
 import com.entities.Brand;
 import com.entities.Client;
 import com.entities.Extras;
 import com.entities.Model;
+import com.entities.Promotion;
 import com.entities.User;
 import com.models.BookingModel;
+import com.models.PromoValidation;
 import com.models.Reservation;
 import com.models.SearchFilter;
 import com.services.BookedService;
@@ -46,6 +51,7 @@ import com.services.BrandService;
 import com.services.ExtrasService;
 import com.services.ModelService;
 import com.services.UserServices;
+import com.servicesImpl.MailAuxiliarService;
 import com.servicesImpl.PromotionService;
 import com.servicesImpl.RentServiceImpl;
 
@@ -59,7 +65,13 @@ public class ApiRestController {
 
 	@Autowired
 	ModelService modelService;
+	
+	@Autowired
+	BranchOfficeService officeService;
 
+	@Resource(name="MailAuxiliar")
+	MailAuxiliarService mailAuxiliar;
+	
 	@Autowired
 	BookedService bookedService;
 	
@@ -149,10 +161,44 @@ public class ApiRestController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return null;
-		
-		
+		return null;	
 	}
+	
+	@RequestMapping(value = "/api/validatepromo", method = RequestMethod.POST)
+	public ResponseEntity<PromoResponse> ValidatePromo(@RequestBody PromoValidation model){
+		Promotion promo=promotionService.getPromotionByCode(model.getPromotionCode());
+		boolean modelValid=false,officeValid=false,dateValid=false,userValid=true;
+		String messageError="";
+		try{
+			for(Model mod:promo.getModels()){
+				System.out.println(mod);
+				if(mod.getId().equals(model.getModel().getId())){
+					modelValid=true;
+				}
+			}if(promo.getModels().size()==0) modelValid=true;
+		}catch(NullPointerException e){
+			 modelValid=true;
+		}try{
+			for(BranchOffice office:promo.getOffices()){
+				if(office.getId().equals(model.getOrigin())) officeValid=true;
+			}
+			if(promo.getOffices().size()==0) officeValid=true;
+		}catch(NullPointerException e){
+			officeValid=true;
+		}
+		if(model.getOriginDate().isAfter(promo.getBeginPromotionDate()) || model.getOriginDate().isEqual(promo.getBeginPromotionDate())){
+			dateValid=true;
+		}else{
+			messageError="Su reserva arranca fuera de las fechas de su reserva";
+		}
+		PromoResponse response=new PromoResponse();
+		response.setValid(modelValid && officeValid && dateValid && userValid);
+		response.setPercentage(promo.getPercentage());
+		response.setPromotionId(promo.getId());
+		response.setPromotionCode(promo.getPromotionCode());
+		response.setValidationMessage(messageError);
+		return ResponseEntity.ok(response);
+	} 
 
 	@RequestMapping(value = "/api/book", method = RequestMethod.POST)
 	public void bookVehicule(@RequestBody Reservation reservation) {
@@ -161,7 +207,12 @@ public class ApiRestController {
 			String token = reservation.getToken(); //token es en realidad el transaction ID
 			String PayerID = reservation.getPayerId();
 			List<Extras> extras = reservation.getExtras();
-	 		bookedService.registerBook(booking, (Client) userService.get(reservation.getClientId()), token, PayerID, extras,reservation.getPromotionCode());
+			Client client=(Client) userService.get(reservation.getClientId());
+			DateTimeFormatter format=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+			mailAuxiliar.sendMailWithHtmlText("<p>Se ha confirmado su reserva!</p><br><p>Lo esperamos el dia "+reservation.getBookingModel().getStartDate().format(format)+" en nuestra sucursal de "+officeService.get(reservation.getBookingModel().getOriginBranchOfficeId()).getCity() +" para que pueda retirar su vehiculo y empezar su viaje.</p><br><p>Gracias por su preferencia, un saludo del personal de Rent-Uy</p>", client.getEmail(), "Confirmacion de reserva");
+
+	 		bookedService.registerBook(booking, client, token, PayerID, extras,reservation.getPromotionCode());
 		}
 		catch(Exception ex){
 			log.error(ex);

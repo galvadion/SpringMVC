@@ -100,22 +100,19 @@
 									</div>
 								</div>
 								<div class="col-md-4" style="font-size: 15px">
+								<div class="row">
+									<label><b>Extras:</b></label>
+								</div>
+								<div ng-repeat="(key,value) in vm.rent.rentLine">
 									<div class="row">
-										<label><b>Seguro pago: </b>
-											<p ng-if="vm.booked.withInsurance" class="custom-font" style="display: inline;">Si</p>
-											<p ng-if="!vm.booked.withInsurance" class="custom-font" style="display: inline;">No</p>
-										</label>
+										<label><b>Detalle:</b>{{value.detail}}</label>
 									</div>
 									<div class="row">
-										<label><b>Tanque lleno: </b>
-											<p ng-if="vm.booked.withFullTank" class="custom-font" style="display: inline;">Si</p>
-											<p ng-if="!vm.booked.withFullTank" class="custom-font" style="display: inline;">No</p>
-										</label>
-									</div>
-									<div class="row">
-										<label><b>Extras:</b> {{vm.booked.extrasList}}</label>
+										<label><b>Precio:</b>{{value.amount}}</label>
 									</div>
 								</div>
+								</div>
+								
 							</div>
 						</div>
 					</div>
