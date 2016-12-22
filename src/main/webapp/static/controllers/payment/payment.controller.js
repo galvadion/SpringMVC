@@ -68,11 +68,13 @@
 						vm.bookingDays = Math.round(((new Date(vm.endDate.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$2/$1/$3")).getTime()) - (new Date(vm.initDate.replace( /(\d{2})[/](\d{2})[/](\d{4})/, "$2/$1/$3")).getTime()))/(1000*60*60*24));
 						$scope.fulltankPrice = -($scope.model.fuel.fuelPrice * vm.bookingDays);
 						if(vm.bookingDays>1){
-							vm.modelPrice= ($scope.model.category.basePrice+$scope.model.fuel.fuelPrice )*0.80;
+							vm.modelPrice= (($scope.model.category.basePrice+$scope.model.fuel.fuelPrice )*0.80);
 						}else{
 							vm.modelPrice=$scope.model.category.basePrice+$scope.model.fuel.fuelPrice;
 						}
-						$scope.cart.addItem($scope.model.id, $scope.model.brand.name + " " + $scope.model.name, vm.modelPrice, vm.bookingDays);
+						var price=vm.modelPrice.toFixed(2);
+						console.log(price);
+						$scope.cart.addItem($scope.model.id, $scope.model.brand.name + " " + $scope.model.name, roundToTwo(price), vm.bookingDays);
 						var extras = response.data.extras;
 						for(var i in extras){
 							$scope.extras.push(new ExtraItems(extras[i].id, extras[i].name, extras[i].price, false));
@@ -106,7 +108,7 @@
 	        			for(var i in vm.items){
 	        				vm.discount+=i.price*(vm.percentage/100);
 	        			}
-	        			$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", -vm.discount.toFixed(2), 1);
+	        			$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", roundToTwo(-vm.discount), 1);
 	        		}
         		}
         		else{
@@ -146,25 +148,26 @@
 			var quantity = 0;
 			if(id == "FullTank"){
 				quantity = 1;
+				price  = price*0.8;
 			}
 			else{
 				quantity = vm.bookingDays;
 			}
 			if(checked){
 				
-				$scope.cart.addItem(id, name, price, quantity);
+				$scope.cart.addItem(id, name, roundToTwo(price), quantity);
 				if(vm.isPromotion){
-					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", vm.discount.toFixed(2), -1);
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", roundToTwo(vm.discount), -1);
 					vm.discount +=price*quantity*(vm.percentage/100);
-					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%",-vm.discount.toFixed(2), 1);
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%",roundToTwo(-vm.discount), 1);
 				}
 			}
 			else{
-				$scope.cart.addItem(id, name, price, -1 * quantity);
+				$scope.cart.addItem(id, name, roundToTwo(price), -1 * quantity);
 				if(vm.isPromotion){
-					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", vm.discount.toFixed(2) , -1);
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%", roundToTwo(vm.discount) , -1);
 					vm.discount -=price*quantity*(vm.percentage/100);
-					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%",-vm.discount.toFixed(2) , 1);
+					$scope.cart.addItem("discount", "Descuento del "+vm.percentage + "%",roundToTwo(-vm.discount) , 1);
 				}
 			}
 		}
@@ -181,7 +184,6 @@
 					$("#token").remove();
 					$("#payerId").remove();
 					vm.estado = "details";
-					
 				}
 				else{
 					$("#errorModal").modal();
@@ -224,8 +226,9 @@
 				else{
 					$("#errorModal").modal();
 				}
+				NProgress.done();
 			})
-			NProgress.done();
+			
 		}
 		
 		$scope.CancelBooking = function(){
@@ -244,6 +247,10 @@
 		$(document).ready(function(){
 			$(".toggleCheck").bootstrapToggle();
 		})
+	}
+	
+	function roundToTwo(num) {    
+	    return +(Math.round(num + "e+2")  + "e-2");
 	}
 	
 })();

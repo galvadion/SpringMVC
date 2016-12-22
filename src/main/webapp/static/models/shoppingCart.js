@@ -29,7 +29,7 @@ shoppingCart.prototype.addItem = function (sku, name, price, quantity) {
 
         // new item, add now
         if (!found) {
-            var item = new cartItem(sku, name, price, quantity);
+            var item = new cartItem(sku, name, roundToTwo(price), quantity);
             this.items.push(item);
         }
     }
@@ -44,7 +44,7 @@ shoppingCart.prototype.getTotalPrice = function (sku) {
             total += this.toNumber(item.quantity * item.price);
         }
     }
-    return total;
+    return  roundToTwo(total);
 }
 
 // get the total price for all items currently in the cart
@@ -132,7 +132,7 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
     
     for(var i = 0; i < this.items.length; i++){
     	var item = this.items[i];
-    	var TransactionItem = {'name' : item.name, 'amount' : item.price.toFixed(2), 'quantity' : item.quantity};
+    	var TransactionItem = {'name' : item.name, 'amount' :  roundToTwo(item.price), 'quantity' : item.quantity};
     	datos.push(TransactionItem);
     }
 
@@ -222,6 +222,9 @@ function getDetails(url){
 		document.body.appendChild(inputPayerId);
 		$("#paymentDetails").click();
 	}
+	else{
+		$("#errorModal").modal();
+	}
 	$("#paypal-iframe").remove();
 };
 
@@ -242,4 +245,8 @@ function cartItem(sku, name, price, quantity) {
 	 this.name = name;
 	 this.price = price * 1;
 	 this.quantity = quantity * 1;
+}
+
+function roundToTwo(num) {    
+    return +(Math.round(num + "e+2")  + "e-2");
 }

@@ -70,7 +70,7 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-	public void registerBook(BookingModel model,Client client, String transactionId, String payerId, List<Extras> extras,String promoCode) {
+	public void registerBook(BookingModel model,Client client, String transactionId, String payerId, List<Extras> extras,String promoCode,float initialAmount) {
 		Vehicle vehicle=vehicleDao.getVehiculeAvailable(model);
 		BranchOffice originBO=branchOfficeDao.getById(model.getOriginBranchOfficeId());
 		BranchOffice finalBO=branchOfficeDao.getById(model.getEndBranchOfficeId());
@@ -87,27 +87,6 @@ public class BookedServiceImpl extends GenericServiceImpl<Booked, Integer> imple
 		booked.setPayerId(payerId);
 		booked.setPromotionCode_id(promoCode);
 		Model vehiculeModel=vehicle.getModel();
-		float gpsByDay=0,insuranceByDay=0;
-		if(model.isWithInsurance()){
-			insuranceByDay=vehiculeModel.getInsurance();
-		}
-		float initialAmount = vehiculeModel.getCategory().getBasePrice() + gpsByDay + insuranceByDay;
-		for(Extras extra : extras){
-			initialAmount += extra.getPrice();
-		}
-		long days = model.getStartDate().until(model.getEndDate(), ChronoUnit.DAYS);
-		if (days > 1) {
-			initialAmount = (float) ((initialAmount * days) * (0.8));
-		}
-		if (model.isWithFullTank()) {
-			initialAmount += vehiculeModel.getFullTank();
-		}
-		try {
-			Promotion promo=promotionRepository.findByPromotionCode(promoCode);
-			initialAmount =initialAmount- initialAmount*(promo.getPercentage()/100);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
 		booked.setExtrasList(extras);
 		booked.setInitialAmount(initialAmount);
 		booked.setClient(client);

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.controllers.PromotionController.PromoResponse;
 import com.entities.BranchOffice;
 import com.entities.Client;
 import com.entities.Model;
@@ -35,49 +36,49 @@ import com.servicesImpl.PromotionService;
 @Controller
 @RequestMapping(value = "promotion")
 public class PromotionController {
-	
+
 	private static final Logger logger = Logger.getLogger(PromotionController.class);
 
 	@Autowired
 	PromotionService promotionService;
-	
+
 	@Autowired
 	BranchOfficeService branchService;
-	
+
 	@Autowired
 	UserServices userService;
-	
+
 	@Autowired
 	HttpSession httpSession;
-	
+
 	private static Validator validator;
 
 	public static void setUpValidator() {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 	}
-	
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView getListPage() {
 		ModelAndView view = new ModelAndView("promotion/list");
 		return view;
 	}
-	
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView getCreatePage() {
 		ModelAndView view = new ModelAndView("promotion/form");
 		return view;
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView getEditPage() {
 		ModelAndView view = new ModelAndView("promotion/form");
 		return view;
 	}
-	
+
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<Object> getSaved(@RequestBody Promotion model) {
-		
+
 		System.out.println(model);
 		setUpValidator();
 		Set<ConstraintViolation<Promotion>> constraintViolations = validator.validate(model);
@@ -86,7 +87,7 @@ public class PromotionController {
 					.body((Object) constraintViolations.iterator().next().getMessage());
 		} else {
 			try {
-				List<Integer> clients_id=new ArrayList<>();
+				List<Integer> clients_id = new ArrayList<>();
 				model.setClients_id(clients_id);
 				model.setId(UUID.randomUUID().toString());
 				model.setCreationDate(LocalDate.now());
@@ -97,7 +98,7 @@ public class PromotionController {
 			}
 		}
 	}
-	
+
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
 	public ResponseEntity<List<Promotion>> getAll() {
 		List<Promotion> list = promotionService.getAll();
@@ -106,55 +107,70 @@ public class PromotionController {
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/validatecode", method = RequestMethod.POST)
 	public ResponseEntity<PromoResponse> validatePromo(@RequestBody PromoValidation model) {
-		Promotion promo=promotionService.getPromotionByCode(model.getPromotionCode());
-		Client client=(Client)userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
-		boolean modelValid=false,officeValid=false,dateValid=false,userValid=true;
-		String messageError="";
-		try{
-			for(Integer cli:promo.getClients_id()){
-				if(cli.equals(client.getId())){ 
-					userValid=false;messageError="Usted ya ha utilizado este codigo";}
-			}
-		}catch(NullPointerException e){
-			userValid=true;
-		}try{
-			for(Model mod:promo.getModels()){
-				System.out.println(mod);
-				if(mod.getId().equals(model.getModel().getId())){
-					modelValid=true;
+		try {
+			Promotion promo = promotionService.getPromotionByCode(model.getPromotionCode());
+			Client client = (Client) userService.get(Integer.parseInt(httpSession.getAttribute("user").toString()));
+			boolean modelValid = false, officeValid = false, dateValid = false, userValid = true;
+			String messageError = "";
+			try {
+				for (Integer cli : promo.getClients_id()) {
+					if (cli.equals(client.getId())) {
+						userValid = false;
+						messageError = "Usted ya ha utilizado este codigo";
+					}
 				}
-			}if(promo.getModels().size()==0) modelValid=true;
-		}catch(NullPointerException e){
-			 modelValid=true;
-		}try{
-			for(BranchOffice office:promo.getOffices()){
-				if(office.getId().equals(model.getOrigin())) officeValid=true;
+			} catch (NullPointerException e) {
+				userValid = true;
 			}
-			if(promo.getOffices().size()==0) officeValid=true;
-		}catch(NullPointerException e){
-			officeValid=true;
+			try {
+				for (Model mod : promo.getModels()) {
+					System.out.println(mod);
+					if (mod.getId().equals(model.getModel().getId())) {
+						modelValid = true;
+					}
+				}
+				if (promo.getModels().size() == 0)
+					modelValid = true;
+			} catch (NullPointerException e) {
+				modelValid = true;
+			}
+			try {
+				for (BranchOffice office : promo.getOffices()) {
+					if (office.getId().equals(model.getOrigin()))
+						officeValid = true;
+				}
+				if (promo.getOffices().size() == 0)
+					officeValid = true;
+			} catch (NullPointerException e) {
+				officeValid = true;
+			}
+			if (model.getOriginDate().isAfter(promo.getBeginPromotionDate())
+					|| model.getOriginDate().isEqual(promo.getBeginPromotionDate())) {
+				dateValid = true;
+			} else {
+				messageError = "Su reserva arranca fuera de las fechas de su reserva";
+			}
+			PromoResponse response = new PromoResponse();
+			response.setValid(modelValid && officeValid && dateValid && userValid);
+			response.setPercentage(promo.getPercentage());
+			response.setPromotionId(promo.getId());
+			response.setPromotionCode(promo.getPromotionCode());
+			response.setValidationMessage(messageError);
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			PromoResponse response = new PromoResponse();
+			response.setValid(false);
+			response.setValidationMessage("No existe esa promo");
+			return ResponseEntity.ok(response);
 		}
-		if(model.getOriginDate().isAfter(promo.getBeginPromotionDate()) || model.getOriginDate().isEqual(promo.getBeginPromotionDate())){
-			dateValid=true;
-		}else{
-			messageError="Su reserva arranca fuera de las fechas de su reserva";
-		}
-		PromoResponse response=new PromoResponse();
-		response.setValid(modelValid && officeValid && dateValid && userValid);
-		response.setPercentage(promo.getPercentage());
-		response.setPromotionId(promo.getId());
-		response.setPromotionCode(promo.getPromotionCode());
-		response.setValidationMessage(messageError);
-		return ResponseEntity.ok(response);
 	}
-	
-	public static class PromoResponse implements Serializable{
+
+	public static class PromoResponse implements Serializable {
 		/**
 		 * 
 		 */
@@ -164,38 +180,46 @@ public class PromotionController {
 		private Float percentage;
 		private String validationMessage;
 		private String promotionCode;
+
 		public boolean isValid() {
 			return valid;
 		}
+
 		public void setValid(boolean valid) {
 			this.valid = valid;
 		}
+
 		public String getPromotionId() {
 			return promotionId;
 		}
+
 		public void setPromotionId(String promotionId) {
 			this.promotionId = promotionId;
 		}
+
 		public Float getPercentage() {
 			return percentage;
 		}
+
 		public void setPercentage(Float percentage) {
 			this.percentage = percentage;
 		}
+
 		public String getValidationMessage() {
 			return validationMessage;
 		}
+
 		public void setValidationMessage(String validationMessage) {
 			this.validationMessage = validationMessage;
 		}
+
 		public String getPromotionCode() {
 			return promotionCode;
 		}
+
 		public void setPromotionCode(String promotionCode) {
 			this.promotionCode = promotionCode;
 		}
-		
-		
+
 	}
 }
-

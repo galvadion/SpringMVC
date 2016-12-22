@@ -81,7 +81,7 @@
 									<label>Seguro ($ {{insurancePrice}} por day)</label>
 								</div>
 								<div class = "col-xs-2">
-									<input class="toggleCheck" type="checkbox" ng-model="vm.insuranceCheck" ng-change="addItem('Insurance', 'Insurance', {{insurancePrice}}, vm.insuranceCheck)" data-toggle="toggle">
+									<input class="toggleCheck" type="checkbox" ng-model="vm.insuranceCheck" ng-change="addItem('Insurance', 'Seguro', {{insurancePrice}}, vm.insuranceCheck)" data-toggle="toggle">
 								</div>
 							</div>
 							<div class="row">
@@ -89,7 +89,7 @@
 									<label>Devolución con tanque lleno ($ {{fulltankPrice}})</label>
 								</div>
 								<div class = "col-xs-2">
-									<input class="toggleCheck" type="checkbox" ng-model="vm.fulltankCheck" ng-change="addItem('FullTank', 'Full Tank', {{fulltankPrice}}, vm.fulltankCheck)" data-toggle="toggle">
+									<input class="toggleCheck" type="checkbox" ng-model="vm.fulltankCheck" ng-change="addItem('FullTank', 'Tanque lleno', {{fulltankPrice}}, vm.fulltankCheck)" data-toggle="toggle">
 								</div>
 							</div>
 						</div>

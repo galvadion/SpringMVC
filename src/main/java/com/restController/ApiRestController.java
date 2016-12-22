@@ -166,6 +166,9 @@ public class ApiRestController {
 	
 	@RequestMapping(value = "/api/validatepromo", method = RequestMethod.POST)
 	public ResponseEntity<PromoResponse> ValidatePromo(@RequestBody PromoValidation model){
+		try {
+			
+		
 		Promotion promo=promotionService.getPromotionByCode(model.getPromotionCode());
 		boolean modelValid=false,officeValid=false,dateValid=false,userValid=true;
 		String messageError="";
@@ -198,6 +201,12 @@ public class ApiRestController {
 		response.setPromotionCode(promo.getPromotionCode());
 		response.setValidationMessage(messageError);
 		return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			PromoResponse response=new PromoResponse();
+			response.setValid(false);
+			response.setValidationMessage("No existe esa promo");
+			return ResponseEntity.ok(response);
+		}
 	} 
 
 	@RequestMapping(value = "/api/book", method = RequestMethod.POST)
@@ -212,7 +221,7 @@ public class ApiRestController {
 
 			mailAuxiliar.sendMailWithHtmlText("<p>Se ha confirmado su reserva!</p><br><p>Lo esperamos el dia "+reservation.getBookingModel().getStartDate().format(format)+" en nuestra sucursal de "+officeService.get(reservation.getBookingModel().getOriginBranchOfficeId()).getCity() +" para que pueda retirar su vehiculo y empezar su viaje.</p><br><p>Gracias por su preferencia, un saludo del personal de Rent-Uy</p>", client.getEmail(), "Confirmacion de reserva");
 
-	 		bookedService.registerBook(booking, client, token, PayerID, extras,reservation.getPromotionCode());
+	 		bookedService.registerBook(booking, client, token, PayerID, extras,reservation.getPromotionCode(),Float.parseFloat(reservation.getItemTotal()));
 		}
 		catch(Exception ex){
 			log.error(ex);

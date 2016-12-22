@@ -11,7 +11,7 @@ import com.entities.Extras;
 import com.models.BookingModel;
 
 public interface BookedService extends GenericService<Booked,Integer> {
-	public void registerBook(BookingModel model,Client client, String transactionId, String payerId, List<Extras> extras,String promotionCode);
+	public void registerBook(BookingModel model,Client client, String transactionId, String payerId, List<Extras> extras,String promotionCode, float f);
 
 	public Booked getBookedByClient(Client user);
 	
